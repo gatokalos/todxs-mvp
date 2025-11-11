@@ -1,0 +1,160 @@
+/* ======= Layout base ======= */
+.dash {
+  --violeta-900:#1f1633;
+  --violeta-800:#2a1d47;
+  --violeta-700:#3a2761;
+  --violeta-600:#4a327d;
+  --lila-200:#e7defa;
+  --acento:#ffd08a;
+  --ok:#7fd27f;
+  --danger:#ff7f7f;
+
+  color: #efeafc;
+  font-family: "Nunito", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  padding: 32px clamp(16px, 3vw, 48px);
+  background:
+    radial-gradient(1200px 600px at 10% -20%, rgba(255,255,255,0.06), transparent 60%),
+    radial-gradient(800px 600px at 110% 20%, rgba(255,255,255,0.04), transparent 60%),
+    linear-gradient(180deg, var(--violeta-800), var(--violeta-900));
+  min-height: 100dvh;
+}
+
+.dash__header {
+  max-width: 1200px;
+  margin: 0 auto 24px;
+}
+.dash__header h1 {
+  font-weight: 800;
+  letter-spacing: .5px;
+  margin: 0 0 6px;
+}
+.dash__header p {
+  color: #cdbff1;
+  margin: 0;
+}
+
+/* ======= Masonry fluido ======= */
+.dash__masonry {
+  max-width: 1200px;
+  margin: 24px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
+.dash__error {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: rgba(255, 109, 109, 0.12);
+  border: 1px solid rgba(255, 109, 109, 0.32);
+  color: #ffe2e2;
+}
+
+/* ======= Tarjeta ======= */
+.wg {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: rgba(35, 25, 55, 0.72);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.25), inset 0 0 1px rgba(255,255,255,0.2);
+  backdrop-filter: blur(6px);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  padding: 16px;
+}
+.wg:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+  border-color: rgba(255,255,255,0.18);
+}
+.wg--live { border-color: rgba(255, 208, 138, 0.45); }
+
+.wg__head { display: flex; gap: 12px; align-items: center; margin-bottom: 10px; }
+.wg__avatar { width: 44px; height: 44px; border-radius: 50%; background:#2f2450; padding:6px; }
+.wg__title { margin: 0; font-weight: 800; }
+.wg__subtitle { color:#d8ccff; opacity:.85; }
+
+.wg__body { color:#efeafc; opacity:.95; line-height: 1.55; flex: 1; }
+.wg__body p { margin: 10px 0 0; }
+
+.wg__meta { margin-top: 10px; font-size:.85rem; color:#cdbff1; opacity:.85; }
+
+.wg__actions {
+  display:flex; gap:10px; flex-wrap:wrap;
+  margin-top: 12px; padding-top: 10px;
+  border-top: 1px dashed rgba(255,255,255,0.14); /* pleca minimalista */
+}
+
+/* ======= Botones ======= */
+.btn {
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+}
+.btn:hover { transform: translateY(-1px); border-color: rgba(255,255,255,0.35);}
+.btn:active { transform: translateY(0); }
+
+.btn--ok { background: linear-gradient(180deg, #90e39a, #5fbf69); border-color: rgba(0,0,0,0.15); color:#152617; }
+.btn--danger { background: linear-gradient(180deg, #ffa0a0, #ff7f7f); border-color: rgba(0,0,0,0.15); color:#3a0b0b; }
+.btn--ghost { background: rgba(255,255,255,0.06); }
+
+.dash__footer { max-width: 1200px; margin: 16px auto 40px; text-align: center; }
+.dash__back { composes: btn; }
+
+.dash__selector-btn {
+  position: fixed;
+  top: clamp(12px, 3vh, 32px);
+  right: clamp(12px, 3vw, 32px);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(17, 8, 30, 0.65);
+  backdrop-filter: blur(8px);
+  color: #fdf8ff;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  z-index: 12;
+  transition: box-shadow 0.25s ease, filter 0.25s ease, border-color 0.25s ease;
+}
+
+.dash__selector-btn img {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.45));
+}
+
+.dash__selector-btn:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 12px 24px rgba(8, 2, 20, 0.45);
+  filter: brightness(1.08);
+}
+
+@media (max-width: 640px) {
+  .dash__selector-btn {
+    gap: 0.4rem;
+    padding: 0.45rem 1rem;
+  }
+
+  .dash__selector-btn span {
+    font-size: 0.85rem;
+  }
+
+  .dash__selector-btn img {
+    width: 26px;
+    height: 26px;
+  }
+}

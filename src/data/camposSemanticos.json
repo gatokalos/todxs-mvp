@@ -1,0 +1,59 @@
+{
+  "la-maestra": {
+    "nombreVisible": "La Maestra",
+    "fraseBase": "Colegatos, aquí los temas para su Ensayo Final...",
+    "icono": "/assets/maestra_carita.svg",
+    "prefijos": {
+      "X": "Colegato 1: Yo escojo ",
+      "O": "Colegato 2: Y yo... "
+    },
+    "sufijo": ".",
+    "tablero": [
+      {
+        "posicion": "superior-izquierda",
+        "X": ["derechos universales", "igualdad de género", "refugiados climáticos"],
+        "O": ["moda del K-pop", "realities de cocina", "los memes"]
+      },
+      {
+        "posicion": "superior-centro",
+        "X": ["el arte como protesta", "derechos humanos", "educación ambiental"],
+        "O": ["el Tótem", "los audios del grupo", "TikTok"]
+      },
+      {
+        "posicion": "superior-derecha",
+        "X": ["resistencia civil", "justicia social", "política indígena"],
+        "O": ["mi ex", "reinas del drag", "el snack más sabroso"]
+      },
+      {
+        "posicion": "centro-izquierda",
+        "X": ["seguridad alimentaria", "pobreza infantil", "salud mental en aulas"],
+        "O": ["la escuela del futuro", "tareas inteligentes", "cuadernos mágicos"]
+      },
+      {
+        "posicion": "centro",
+        "X": ["crisis hídrica", "energías limpias", "clima y biodiversidad"],
+        "O": ["vida gamer", "mi tía influencer", "apps que salvan vidas"]
+      },
+      {
+        "posicion": "centro-derecha",
+        "X": ["investigación académica", "tecnología para el bien común", "memoria histórica"],
+        "O": ["cine rosa", "música retro", "el chisme escolar"]
+      },
+      {
+        "posicion": "inferior-izquierda",
+        "X": ["mujeres en la ciencia", "ética profesional", "innovación educativa"],
+        "O": ["la moda en las aulas", "bromas virales", "juegos de escape"]
+      },
+      {
+        "posicion": "inferior-centro",
+        "X": ["autonomía universitaria", "abuso de poder", "sistemas de evaluación"],
+        "O": ["clases en línea", "ausencias justificadas", "la vida desde Zoom"]
+      },
+      {
+        "posicion": "inferior-derecha",
+        "X": ["trabajo colaborativo", "deberes sociales", "educación rural"],
+        "O": ["series que salvan", "playlist para estudiar", "manuales de TikTok"]
+      }
+    ]
+  }
+}

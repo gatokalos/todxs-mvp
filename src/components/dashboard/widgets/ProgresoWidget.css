@@ -1,0 +1,87 @@
+.progreso-widget__body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.progreso-widget__section h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.progreso-widget__section p {
+  margin: 4px 0 0;
+  color: #cdbff1;
+  font-size: 0.9rem;
+}
+
+.progreso-widget__bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.progreso-widget__bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progreso-widget__bar-label {
+  min-width: 86px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.progreso-widget__track {
+  flex: 1;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  position: relative;
+}
+
+.progreso-widget__fill {
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.35s ease;
+}
+
+.progreso-widget__fill--personal {
+  background: linear-gradient(90deg, #ffd08a, #f59e0b);
+}
+
+.progreso-widget__fill--colectivo {
+  background: linear-gradient(90deg, #8b5cf6, #6366f1);
+}
+
+.progreso-widget__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #d4c4f6;
+  border-top: 1px dashed rgba(255, 255, 255, 0.16);
+  padding-top: 12px;
+}
+
+.progreso-widget__admin {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 10px 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+}
+
+.progreso-widget__admin code {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.75rem;
+}

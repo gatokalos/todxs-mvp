@@ -1,0 +1,211 @@
+.actividad-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.actividad-widget--wide {
+  width: 100%;
+}
+
+@media (min-width: 1100px) {
+  .actividad-widget--wide {
+    grid-column: span 2;
+  }
+}
+
+.actividad-widget__head {
+  align-items: flex-start;
+}
+
+.actividad-widget__avatar {
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.05));
+}
+
+.actividad-widget__body {
+  display: grid;
+  gap: 18px;
+}
+
+@media (min-width: 760px) {
+  .actividad-widget__body {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+.actividad-widget__section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 14px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.actividad-widget__section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.actividad-widget__section-head h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.actividad-widget__section-head span {
+  font-size: 0.85rem;
+  color: #d4c4f6;
+}
+
+.actividad-widget__scroll {
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.actividad-widget__scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.actividad-widget__scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+}
+
+.actividad-widget__empty {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #d4c4f6;
+  font-style: italic;
+}
+
+.actividad-widget__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.actividad-widget__list--grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .actividad-widget__list--grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+}
+
+.actividad-widget__card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(28, 20, 46, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.actividad-widget__card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(33, 24, 52, 0.95);
+}
+
+.actividad-widget__card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.82rem;
+  color: #d4c4f6;
+}
+
+.actividad-widget__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-weight: 600;
+}
+
+.actividad-widget__chip--blog {
+  background: rgba(255, 208, 138, 0.18);
+  color: #ffd08a;
+}
+
+.actividad-widget__chip-icon {
+  font-size: 1rem;
+}
+
+.actividad-widget__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f9f5ff;
+}
+
+.actividad-widget__content {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.6;
+}
+
+.actividad-widget__footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.actividad-widget__vote {
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  padding: 6px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.actividad-widget__vote:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.actividad-widget__vote:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+.actividad-widget__link {
+  color: #ffd08a;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.actividad-widget__link:hover {
+  color: #ffecbf;
+}
+
+.actividad-widget__meta {
+  font-size: 0.85rem;
+  color: #d4c4f6;
+  text-align: right;
+}

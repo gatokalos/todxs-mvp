@@ -1,0 +1,272 @@
+/* Lienzo general: no cambia tu fondo ni cortinas */
+.character-selector {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;   /* centramos el wrap */
+  align-items: flex-start;
+  background: radial-gradient(1180px 900px at 50% 20%, #d67bb6ff 0%, #b2aacdff 65%, #2b292aff 100%);
+}
+
+/* === Contenedor que “encoge” al tamaño del IMG === */
+.building-wrap {
+  position: relative;
+  height: 100%;              /* 100% del alto del lienzo */
+  display: inline-block;     /* clave: ancho = ancho real del IMG */
+  --building-width: auto;
+}
+
+/* El edificio define el alto; el ancho sale de su ratio natural */
+.character-selector__building {
+  display: block;
+  height: 100%;
+  width: auto;
+  pointer-events: none;
+}
+
+/* Capa pegada 1:1 al edificio. Ahora width/height = edificio */
+.characters-layer {
+  position: absolute;
+  inset: 0;                  /* top/right/bottom/left: 0 */
+}
+
+.character-selector__loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 12px 18px;
+  background: rgba(15, 10, 35, 0.8);
+  color: #f4f1ff;
+  border-radius: 14px;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  z-index: 2;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+
+/* Tus stickers en % ahora SIEMPRE son relativas al edificio */
+.character-selector__slot {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  --sticker-width: clamp(120px, 13vw, 170px);
+}
+
+.character-selector__slot:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+}
+
+.character-selector__sticker {
+  width: var(--sticker-width);
+  height: auto;
+  max-width: 140px;   /* 🔒 nunca más grande que esto */
+  min-width: 70px;    /* 🔒 opcional, para que no se haga demasiado chico */
+  position: relative;
+  display: inline-block;
+  transform: none;              /* 👈 estado inicial */
+  transition: transform 0.3s ease; /* 👈 transición suave */
+}
+
+
+.character-selector__slot.is-hover .character-selector__sticker,
+.character-selector__sticker.is-hover {
+  transform: scale(1.75);
+}
+
+@keyframes pulseGlow {
+  0%, 100% { filter: drop-shadow(0 0 2px rgba(244, 136, 136, 0.76)); }
+  50% { filter: drop-shadow(0 0 6px rgba(255,255,255,0.8)); }
+}
+
+
+.character-selector__slot.is-locked .character-selector__sticker {
+  filter: grayscale(0.4) drop-shadow(0 6px 10px rgba(0,0,0,.25));
+  opacity: 0.85;
+}
+
+.character-selector__lock {
+  position: absolute;
+  bottom: 8px;
+  transform: translateY(100%);
+  background: rgba(10, 6, 24, 0.82);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.35);
+}
+
+.character-selector__badge {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  background: #fff5c2;
+  color: #1f163f;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 10px rgba(255, 210, 90, 0.3);
+}
+
+
+.character-selector__host {
+  position: absolute;
+  transform: translate(-50%, -90%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 3;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.character-selector__host-img {
+  width: clamp(90px, 13vw, 200px);
+  height: auto;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+  zindex: 100000;
+  transition: transform 0.2s ease;
+}
+
+.character-selector__host:focus-visible .character-selector__host-img,
+.character-selector__host:hover .character-selector__host-img {
+  transform: translateY(-4px) scale(1.04);
+}
+
+/* Pop-in al entrar */
+@keyframes bubble-pop-in {
+  0%   { opacity: 0; transform: translate(-50%, 15px) scale(0.6); }
+  70%  { opacity: 1; transform: translate(-50%, -2px) scale(1.05); }
+  100% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+}
+
+/* Fade-out lento al salir */
+@keyframes bubble-fade-out {
+  from { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  to   { opacity: 0; transform: translate(-50%, -5px) scale(0.95); }
+}
+
+
+.cs-speech-bubble {
+  position: absolute;
+  left: 44%;
+  bottom: calc(80% + 12px);
+  transform: translateX(-50%);
+  width: 500px;
+  height: auto;
+  padding: 14px 18px;
+  background: linear-gradient(180deg, #393939ff 0%, #000000ff 100%);
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(255, 251, 251, 0.5);
+  animation: bubble-pop-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1002;
+}
+
+
+/* Clase extra cuando quieras cerrarlo */
+.cs-speech-bubble.is-closing {
+  animation: bubble-fade-out 0.8s ease forwards;
+}
+
+.cs-speech-bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%;                 /* colita hacia abajo */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 10px 8px 0 8px;
+  border-style: solid;
+  border-color: #000000ff transparent transparent transparent;
+}
+
+@keyframes bubble-bounce {
+  0%   { opacity: 0; transform: translate(-50%, 15px) scale(0.9); }
+  70%  { opacity: 1; transform: translate(-50%, -2px) scale(1.03); }
+  100% { transform: translate(-50%, 0) scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .character-selector__sticker {
+    width: clamp(70px, calc(var(--sticker-width, 110px) * 0.85), 160px);
+  }
+}
+
+
+.character-selector__host {
+  position: absolute;
+  bottom: 0;                  /* siempre pegado al piso del edificio */
+  left: 50%;                  /* centrado */
+  transform: translateX(-50%); /* corrige el centrado */
+  width: 20%;                 /* escala proporcional al edificio */
+  height: auto;
+  z-index: 11;
+}
+
+.character-selector__host-img {
+  width: 220%;   /* se adapta al host */
+  height: auto;
+  display: block;
+}
+
+/* Cola más errática */
+.tail-svg {
+  position: absolute;
+  top: 35%;                /* nace desde el gato */
+  left: 200%;              /* ajusta salida hacia la puerta lateral */
+  width: 150%;
+  height: auto;
+  z-index: 10;
+  transform-origin: top center; /* el punto donde se dobla */
+  animation: tail-chaotic 4.2s ease-in-out infinite;
+  animation-delay: 2s;      /* ⏱️ espera 2 segundos antes de arrancar */
+}
+
+@keyframes tail-chaotic {
+  0% {
+    transform: rotate(8deg) skewY(0deg) scaleX(1);
+  }
+  12% {
+    transform: rotate(14deg) skewY(-3deg) scaleX(1.1);
+  }
+  27% {
+    transform: rotate(3deg) skewY(2deg) scaleX(0.92);
+  }
+  41% {
+    transform: rotate(-6deg) skewY(-4deg) scaleX(1.08);
+  }
+  58% {
+    transform: rotate(10deg) skewY(1deg) scaleX(1.02);
+  }
+  73% {
+    transform: rotate(-12deg) skewY(3deg) scaleX(0.97);
+  }
+  87% {
+    transform: rotate(5deg) skewY(-2deg) scaleX(1.05);
+  }
+  100% {
+    transform: rotate(8deg) skewY(0deg) scaleX(1);
+  }
+}

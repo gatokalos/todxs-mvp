@@ -1,0 +1,96 @@
+.splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #9a9a9aff; /* fondo más elegante */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-family: "Arial Black", sans-serif;
+  padding: 1rem;
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.splash-screen.fade-out {
+  opacity: 0;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 1.5rem;
+}
+
+.splash-text {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}
+
+button {
+  margin-bottom: 1rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #ffffffff;
+  color: #000;
+  cursor: pointer;.splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #999; /* 👈 gris original */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-family: "Arial Black", sans-serif;
+  padding: 1rem;
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.splash-screen.fade-out {
+  opacity: 0;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 1.5rem;
+}
+
+.splash-text {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}
+
+/* Botones claros visibles */
+button {
+  margin-bottom: 1rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  border: 1px solid #000;
+  border-radius: 4px;
+  background: #fff; /* 👈 blanco */
+  color: #ffffffff;      /* 👈 texto negro */
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}

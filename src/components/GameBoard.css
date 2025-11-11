@@ -1,0 +1,592 @@
+/* ===== Reset mínimo ===== */
+html, body, #root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: #282828ff;
+}
+
+.tablero {
+width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 60px;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+}
+
+.hub-botones {
+  position: absolute;
+  right: clamp(24px, 6vw, 80px);
+  bottom: clamp(24px, 8vh, 90px);
+  display: flex;
+  gap: 12px;
+  background: rgba(10, 10, 15, 0.6);
+  padding: 10px 14px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 20;
+  align-items: center;
+}
+
+.btn-icono.oculto {
+  visibility: hidden; /* oculta pero mantiene el hueco */
+}
+
+@media (max-width: 768px) {
+  .tablero {
+    flex-direction: column-reverse;
+  }
+}
+
+.overlay-block {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Frase + botones: ocupa aprox 35% del alto */
+.tablero-frases {
+  position: relative;          /* 👈 ancla para el hub */
+  flex: 0 0 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.frase-construida {
+  position: relative;  /* necesario si quieres anclar elementos hijos */
+  text-align: left;
+  font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+  font-size: clamp(20px, 3.5vmin, 28px);
+  font-weight: bold;
+  color: #fff;
+  line-height: 1.6;
+  white-space: pre-line;
+  max-width: 555px;
+  margin: 0 auto;
+}
+
+
+
+.hub-botones:empty {
+  visibility: hidden; /* si no hay botones, el espacio queda invisible */
+}
+
+/* Tablero: ocupa aprox 65% del alto */
+.tablero-cuadricula {
+  flex: 0 0 65%;
+  display: flex;
+  justify-content: center;
+  align-items: center;   /* cuadrícula centrada */
+  position: relative; /* clave para posicionar hijos absolutos */
+}
+
+
+/* Contenedor de frase */
+.frase-contenedor {
+  position: relative;
+  width: min(92vw, 720px);
+  margin: 0 auto;          /* centrado */
+  padding-bottom: 48px;    /* aire para que el HUB tenga espacio */
+  box-sizing: border-box;
+}
+
+
+
+/* Estilo de iconos circulares */
+.btn-icono {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: #bbb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.btn-icono:hover {
+  transform: scale(1.1);
+  background: #eee;
+}
+
+.alternativas-panel {
+  position: absolute;
+  bottom: calc(100% + 18px);
+  right: 0;
+  width: clamp(240px, 60vw, 320px);
+  padding: 14px 16px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(2, 2, 6, 0.95);
+  color: #f6f6f6;
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.55);
+}
+
+.alternativas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.alternativas-close {
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.alternativas-subtitle {
+  font-size: 0.8rem;
+  margin: 0 0 8px;
+  color: #cdd;
+}
+
+.alternativas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 220px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+}
+
+.alternativa-chip {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 6px 12px;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+}
+
+.alternativa-chip.seleccionada {
+  border-color: #00ffc8;
+  background: rgba(0, 255, 200, 0.25);
+  color: #041b17;
+}
+
+.alternativas-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.alternativas-actions button {
+  flex: 1;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.alternativa-confirmar {
+  background: #00ffc8;
+  color: #041b17;
+}
+
+.alternativa-cancelar {
+  background: rgba(255, 255, 255, 0.15);
+  color: #f6f6f6;
+}
+
+/* ===== Tablero (9 casillas) ===== */
+.cuadricula {
+  --board: 90%; /* se ajusta dentro de su 65% */
+  width: var(--board);
+  height: var(--board);
+  max-width: 600px;
+  max-height: 600px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1.3fr 1fr 1fr;
+  gap: clamp(6px, 2vmin, 16px);
+}
+/* ===== Casillas ===== */
+.casilla {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.16s ease;
+  overflow: visible;
+}
+.casilla:hover { transform: scale(1.04); }
+.casilla.jugada { background: none !important; }
+
+/* Esferas */
+.esfera {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Marcas X y O */
+.marca-x,
+.marca-o {
+  font-size: clamp(24px, 6vmin, 48px);
+  font-weight: bold;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Garras (fila 1) */
+.cuadricula .casilla:nth-child(-n+3) {
+  border-radius: 0;
+  background: none;
+  aspect-ratio: auto;
+}
+.garra-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Esferas (filas 2 y 3) */
+.cuadricula .casilla:nth-child(n+4) {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+}
+
+
+/* ===== Botones “Se va / Se queda” ===== */
+.botones {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 24px;
+}
+.btn-seva,
+.btn-sequeda {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-seva:hover,
+.btn-sequeda:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* === JUGADA: ocultar figura base y mostrar marca === */
+.casilla.ocupada .esfera,
+.casilla.ocupada .garra-img {
+  display: none !important;
+}
+
+.casilla.deshabilitada {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.marca {
+  font-size: clamp(24px, 6vmin, 48px);
+  font-weight: bold;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.casilla.garra .marca {
+  top: auto;
+  height: 72%;
+  bottom: 0;
+}
+
+/* 🎨 Colores por fila */
+.cuadricula .casilla:nth-child(4),
+.cuadricula .casilla:nth-child(5),
+.cuadricula .casilla:nth-child(6) {
+  color: #f59cb5;
+}
+.cuadricula .casilla:nth-child(7),
+.cuadricula .casilla:nth-child(8),
+.cuadricula .casilla:nth-child(9) {
+  color: #f6a269;
+}
+
+.acciones-personaje {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px; /* o alineado al lado, según diseño */
+}
+
+.btn-circular {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-circular:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+.btn-seva {
+  background: #e74c3c; /* rojo */
+}
+
+.btn-sequeda {
+  background: #2ecc71; /* verde */
+}
+
+
+.typewriter .cursor {
+  display: inline-block;
+  margin-left: 2px;
+  width: 1ch;
+  animation: blink 1s infinite;
+  color: #00ffc8; /* ✨ puedes usar el color de tu logo */
+  font-weight: bold;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+.transicion-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+  z-index: 50;
+  animation: fadeInOut 1.6s ease-in-out forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* === Transición tipo blur oscuro con fade === */
+.gameboard-transition-blur {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.transition-overlay {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(16px) brightness(0.3);
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  opacity: 0;
+  animation: fadeOverlay 1s ease forwards;
+}
+
+.transition-text-container {
+  position: relative;
+  z-index: 1000;
+  text-align: center;
+  color: #f9f9f9;
+  max-width: 80%;
+  padding: 2rem;
+  animation: fadeInText 1.2s ease forwards;
+}
+
+.transition-text {
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+  font-family: "Georgia", serif;
+}
+
+.transition-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 220px;
+  height: 220px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12), transparent 70%);
+  filter: blur(20px);
+  animation: pulseGlow 3s ease-in-out infinite;
+  z-index: -1;
+}
+
+/* === Animaciones === */
+@keyframes fadeOverlay {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInText {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+}
+
+@keyframes gameboard-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* === Modal final de Gatología === */
+.gatologia-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 8, 15, 0.8);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  animation: fadeIn 0.4s ease;
+}
+
+.gatologia-modal {
+  background: #1c1625;
+  color: #e0d8f5;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.4);
+  padding: 2rem 2.4rem;
+  max-width: 480px;
+  width: 90%;
+  text-align: center;
+  font-family: 'Inter', system-ui, sans-serif;
+  animation: scaleIn 0.35s ease;
+}
+
+.gatologia-modal h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #e0d8f5;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.gatologia-destacada {
+  color: #c09eff;
+  font-weight: 600;
+}
+
+.gatologia-titulo {
+  font-style: italic;
+  color: #c7b5f3;
+  margin-bottom: 1.5rem;
+}
+
+.gatologia-botones {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.gatologia-botones button {
+  background: transparent;
+  border: 1px solid rgba(192, 158, 255, 0.4);
+  color: #c09eff;
+  font-size: 0.9rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.gatologia-botones button:hover {
+  background: rgba(192, 158, 255, 0.15);
+  border-color: rgba(192, 158, 255, 0.6);
+  color: #e8dbff;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

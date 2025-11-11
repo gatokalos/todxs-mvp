@@ -1,0 +1,51 @@
+.glitch-curtain {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: black;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+/* === Secuencia === */
+
+/* 1. glitch-transp */
+.layer.transp.transp {
+  opacity: 1;
+}
+.layer.transp.fijo,
+.layer.transp.curtainGlitch,
+.layer.transp.curtainPlain {
+  opacity: 0;
+}
+
+/* 2. glitch-fijo */
+.layer.fijo.fijo {
+  opacity: 1;
+}
+.layer.fijo.curtainGlitch,
+.layer.fijo.curtainPlain {
+  opacity: 0;
+}
+
+/* 3. curtain-glitch */
+.layer.curtainGlitch.curtainGlitch {
+  opacity: 1;
+}
+.layer.curtainGlitch.curtainPlain {
+  opacity: 0;
+}
+
+/* 4. curtain-plain */
+.layer.curtainPlain.curtainPlain {
+  opacity: 1;
+}

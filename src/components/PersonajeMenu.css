@@ -1,0 +1,126 @@
+.personaje-menu {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 20;
+}
+
+.personaje-icono {
+  width: 200px;
+  height: 120px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.personaje-icono:hover {
+  transform: scale(1.1);
+}
+
+.personaje-dropdown {
+  position: absolute;
+  top: 70px;
+  right: 0;
+  background: rgba(20, 20, 20, 0.95);
+  color: #fff;
+  padding: 12px;
+  border-radius: 12px;
+  min-width: 200px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.personaje-dropdown h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.personaje-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.personaje-dropdown li {
+  padding: 6px 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.personaje-dropdown li:last-child {
+  border-bottom: none;
+}
+
+.personaje-dropdown .placeholder {
+  font-style: italic;
+  color: #aaa;
+}
+
+.personaje-dropdown__link {
+  margin-top: 12px;
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: transparent;
+  color: #f7f7f7;
+  font-size: 14px;
+  font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.personaje-dropdown__link:hover,
+.personaje-dropdown__link:focus-visible {
+  background: rgba(236, 72, 153, 0.25);
+  color: #fff;
+  transform: translateY(-1px);
+  outline: none;
+}
+
+/* Para que el mensaje no tape al dropdown */
+.personaje-mensaje {
+  top: -10px;        /* súbelo un poco */
+  right: 100px;      /* aléjalo más de la carita */
+  background: #fff;
+  color: #000;
+  padding: 10px 14px;
+  border-radius: 12px;
+  max-width: 260px;  /* un poco más ancho */
+  font-size: 15px;   /* más legible */
+  line-height: 1.5;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  z-index: 200;      /* siempre arriba */
+  animation: fadeIn 0.3s ease-in-out, fadeOut 0.3s ease-in-out 4s forwards;
+}
+
+/* Ajuste de la flechita del globo */
+.personaje-mensaje::after {
+  top: 18px;
+  right: -12px; /* desplaza la punta */
+  border-width: 7px;
+  border-color: transparent transparent transparent #fff;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; transform: translateY(-4px); }
+}
+
+.modal-panel {
+  z-index: 9999 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}

@@ -1,0 +1,39 @@
+.huella-widget__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.huella-widget__stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.huella-widget__label {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.huella-widget__value {
+  font-size: 1.4rem;
+}
+
+.huella-widget__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: #d4c4f6;
+  border-top: 1px dashed rgba(255, 255, 255, 0.14);
+  padding-top: 10px;
+}
+
+.huella-widget__meta code {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.78rem;
+}

@@ -1,0 +1,36 @@
+.curtain-transition {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: visible;
+}
+
+.curtain-stage {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  z-index: 1;
+}
+
+.curtain-panel {
+  position: fixed;
+  top: -2vh; /* siempre pegada arriba */
+  width: 50%;
+  height: 102vh; /* 1% extra para cubrir gaps */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom center;
+  z-index: 9;
+}
+
+/* Cortina izquierda con tu PNG */
+.curtain-panel--left {
+  left: 0;
+  background-image: url("/assets/curtain-left.svg");
+}
+
+/* Cortina derecha con tu PNG */
+.curtain-panel--right {
+  right: 0;
+  background-image: url("/assets/curtain-right.svg");
+}

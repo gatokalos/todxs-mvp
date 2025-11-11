@@ -1,0 +1,119 @@
+.dashboard-gato {
+  /* --- Estructura base --- */
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4rem;
+
+  /* --- Fondo y tipografía --- */
+  background: radial-gradient(circle at top left, #1a142b 0%, #241d3b 100%);
+  color: #e6e0ff;
+  font-family: "Nunito", sans-serif;
+
+  /* --- Márgenes interiores --- */
+  padding: 4vh 6vw;
+
+  /* --- Scroll funcional --- */
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* --- Suaviza desplazamiento --- */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  /* --- Previene cortes visuales --- */
+  box-sizing: border-box;
+}
+
+/* === HEADER === */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.dashboard-header h1 {
+  font-size: 2.4rem;
+  background: linear-gradient(90deg, #e3d0ff, #b094ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* === CONTENIDO PRINCIPAL === */
+.dashboard-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
+
+  position: relative;
+  height: auto;
+  min-height: 100vh;
+  overflow: visible;
+  z-index: 1;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* === RESPONSIVE === */
+
+/* 🔹 Tablets (≤1024px) */
+@media (max-width: 1024px) {
+  .dashboard-gato {
+    padding: 3vh 4vw;
+    gap: 3rem;
+  }
+
+  .dashboard-header h1 {
+    font-size: 2rem;
+  }
+
+  .dashboard-content {
+    gap: 1.5rem;
+  }
+}
+
+/* 🔹 Móviles (≤768px) */
+@media (max-width: 768px) {
+  .dashboard-gato {
+    padding: 2.5vh 4vw;
+    gap: 2.4rem;
+    background: radial-gradient(circle at center, #20173a 0%, #2b224d 100%);
+  }
+
+  .dashboard-header {
+    margin-bottom: 2rem;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .dashboard-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.8rem;
+    min-height: auto; /* evita exceso de espacio */
+  }
+}
+
+/* 🔹 Teléfonos pequeños (≤480px) */
+@media (max-width: 480px) {
+  .dashboard-gato {
+    padding: 2vh 5vw;
+    gap: 2rem;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .dashboard-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.2rem;
+  }
+}

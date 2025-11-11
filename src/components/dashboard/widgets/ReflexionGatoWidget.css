@@ -1,0 +1,33 @@
+.reflexion-gato-widget__body {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  padding: 16px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reflexion-gato-widget__body h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.reflexion-gato-widget__body p {
+  margin: 0;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.reflexion-gato-widget__status {
+  margin: 0;
+  color: #d4c4f6;
+  font-style: italic;
+}
+
+.reflexion-gato-widget__error {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #ffb4b4;
+}

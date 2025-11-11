@@ -1,0 +1,16 @@
+.typewriter {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.cursor {
+  display: inline-block;
+  width: 1ch;
+  animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
