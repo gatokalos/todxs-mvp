@@ -22,21 +22,38 @@ width: 100vw;
 
 .hub-botones {
   position: absolute;
-  right: clamp(24px, 6vw, 80px);
-  bottom: clamp(24px, 8vh, 90px);
+  right: clamp(8px, 2vw, 24px);
+  bottom: clamp(8px, 2vw, 24px);
   display: flex;
-  gap: 12px;
-  background: rgba(10, 10, 15, 0.6);
-  padding: 10px 14px;
-  border-radius: 999px;
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 20;
+  flex-direction: column;
   align-items: center;
+  gap: 10px;
+  z-index: 20;
 }
 
 .btn-icono.oculto {
   visibility: hidden; /* oculta pero mantiene el hueco */
+}
+
+.btn-icono {
+  width: 56px;
+  height: 56px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.btn-icono img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45));
+}
+
+.btn-icono:hover {
+  transform: translateY(-2px) scale(1.05);
 }
 
 @media (max-width: 768px) {
@@ -44,6 +61,7 @@ width: 100vw;
     flex-direction: column-reverse;
   }
 }
+
 
 .overlay-block {
   position: absolute;
@@ -80,6 +98,10 @@ width: 100vw;
   margin: 0 auto;
 }
 
+.frase-construida.frase-resetting {
+  animation: fraseResetFade 0.6s ease forwards;
+}
+
 
 
 .hub-botones:empty {
@@ -94,6 +116,26 @@ width: 100vw;
   align-items: center;   /* cuadrícula centrada */
   position: relative; /* clave para posicionar hijos absolutos */
 }
+
+.cuadricula.board-hidden {
+  opacity: 0;
+  transform: scale(0.98);
+  pointer-events: none;
+}
+
+.cuadricula.board-entry .casilla {
+  animation: boardEntryBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.cuadricula.board-entry .casilla:nth-child(1) { animation-delay: 0.05s; }
+.cuadricula.board-entry .casilla:nth-child(2) { animation-delay: 0.1s; }
+.cuadricula.board-entry .casilla:nth-child(3) { animation-delay: 0.15s; }
+.cuadricula.board-entry .casilla:nth-child(4) { animation-delay: 0.2s; }
+.cuadricula.board-entry .casilla:nth-child(5) { animation-delay: 0.25s; }
+.cuadricula.board-entry .casilla:nth-child(6) { animation-delay: 0.3s; }
+.cuadricula.board-entry .casilla:nth-child(7) { animation-delay: 0.35s; }
+.cuadricula.board-entry .casilla:nth-child(8) { animation-delay: 0.4s; }
+.cuadricula.board-entry .casilla:nth-child(9) { animation-delay: 0.45s; }
 
 
 /* Contenedor de frase */
@@ -127,17 +169,19 @@ width: 100vw;
 }
 
 .alternativas-panel {
-  position: absolute;
-  bottom: calc(100% + 18px);
-  right: 0;
-  width: clamp(240px, 60vw, 320px);
-  padding: 14px 16px 16px;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(2, 2, 6, 0.95);
-  color: #f6f6f6;
-  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.55);
+    position: absolute;
+    top: -190%;
+    right: calc(100% + 16px);
+    width: 22vw;
+    padding: 14px 16px 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgb(26 114 232);
+    color: #f6f6f6;
+    box-shadow: 0 18px 32px rgba(0, 0, 0, 0.55);
+    transform: translateY(-50%);
 }
+
 
 .alternativas-header {
   display: flex;
@@ -315,18 +359,98 @@ width: 100vw;
   font-size: clamp(24px, 6vmin, 48px);
   font-weight: bold;
   color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
 .casilla.garra .marca {
-  top: auto;
-  height: 72%;
-  bottom: 0;
+  top: 64%;
+  transform: translate(-50%, -52%);
+}
+
+.cuadricula .casilla:nth-child(-n+3) .marca {
+  transform: translate(-50%, -45%);
+}
+
+/* === Cursor fantasma de O === */
+.casilla.ghosting {
+  box-shadow: 0 0 0 2px rgba(0, 255, 200, 0.18), 0 0 22px rgba(0, 255, 200, 0.28);
+  transform: translateY(-2px);
+}
+
+.casilla.ghosting .garra-img,
+.casilla.ghosting .esfera {
+  filter: drop-shadow(0 0 14px rgba(0, 255, 200, 0.32));
+}
+
+.ghost-cursor {
+  position: absolute;
+  width: 52%;
+  height: 52%;
+  border-radius: 50%;
+  border: 1px dashed rgba(126, 255, 232, 0.85);
+  box-shadow:
+    0 0 0 1px rgba(0, 255, 200, 0.35),
+    0 0 18px rgba(0, 255, 200, 0.35),
+    0 10px 18px rgba(0, 0, 0, 0.35);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  animation: ghostPulse 0.9s ease-in-out infinite, ghostDrift 2.3s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+
+.casilla.garra .ghost-cursor {
+  border-radius: 16px;
+}
+
+.ghost-cursor__spark {
+  width: 26%;
+  height: 26%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(126, 255, 232, 0.9) 0%, rgba(126, 255, 232, 0.36) 60%, transparent 80%);
+  box-shadow: 0 0 18px rgba(126, 255, 232, 0.9);
+  animation: ghostSpark 1.35s ease-in-out infinite;
+}
+
+/* Indicador de turno O */
+.turno-chip {
+  position: absolute;
+  top: clamp(10px, 3vh, 24px);
+  left: clamp(10px, 3vw, 26px);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(6, 18, 22, 0.7);
+  border: 1px solid rgba(0, 255, 200, 0.35);
+  border-radius: 12px;
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(14px);
+  color: #caffe8;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  z-index: 26;
+}
+
+.turno-chip--o {
+  animation: chipFloat 1.8s ease-in-out infinite;
+}
+
+.turno-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7effe8 0%, #00ffc8 100%);
+  box-shadow: 0 0 0 0 rgba(0, 255, 200, 0.55);
+  animation: dotPulse 1.5s ease-out infinite;
+}
+
+.turno-chip__text {
+  font-size: clamp(12px, 1.6vmin, 14px);
 }
 
 /* 🎨 Colores por fila */
@@ -373,7 +497,8 @@ width: 100vw;
 }
 
 
-.typewriter .cursor {
+.typewriter .cursor,
+.frase-construida .cursor {
   display: inline-block;
   margin-left: 2px;
   width: 1ch;
@@ -511,6 +636,52 @@ width: 100vw;
   }
 }
 
+@keyframes ghostPulse {
+  0% {
+    transform: scale(0.94);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.98);
+    opacity: 0.8;
+  }
+}
+
+@keyframes ghostDrift {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(2px, -3px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes ghostSpark {
+  0% { transform: scale(0.9); filter: blur(0); }
+  50% { transform: scale(1.15); filter: blur(2px); }
+  100% { transform: scale(0.95); filter: blur(0); }
+}
+
+@keyframes dotPulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 255, 200, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(0, 255, 200, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 255, 200, 0); }
+}
+
+@keyframes chipFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+.nivel-animando-overlay {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  pointer-events: all;
+  z-index: 35;
+}
+
 /* === Modal final de Gatología === */
 .gatologia-modal-overlay {
   position: fixed;
@@ -581,6 +752,38 @@ width: 100vw;
   color: #e8dbff;
 }
 
+
+@media (orientation: landscape) and (max-height: 900px) and (min-width: 900px) {
+  .tablero {
+    height: auto;
+    min-height: 100vh;
+    padding: clamp(12px, 3vw, 24px) clamp(18px, 5vw, 48px) clamp(220px, 32vh, 340px);
+    justify-content: flex-end;
+  }
+
+  .tablero-cuadricula {
+    flex: 0 0 auto;
+    padding-bottom: clamp(32px, 8vh, 56px);
+  }
+
+  .tablero-frases {
+    flex: 0 0 auto;
+    padding-bottom: clamp(48px, 10vh, 96px);
+  }
+
+  .frase-construida {
+    max-width: min(80vw, 560px);
+    margin-top: clamp(8px, 2vh, 24px);
+  }
+
+  .cuadricula {
+    --board: min(55vh, 420px);
+    max-width: 420px;
+    max-height: 420px;
+  }
+}
+
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -589,4 +792,32 @@ width: 100vw;
 @keyframes scaleIn {
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fraseResetFade {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(12px);
+  }
+}
+
+@keyframes boardEntryBounce {
+  0% {
+    transform: translateY(-120%);
+    opacity: 0;
+  }
+  70% {
+    transform: translateY(8%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

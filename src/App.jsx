@@ -8,7 +8,6 @@ import GameBoard from "./components/GameBoard";
 import TutorialCarousel from "./components/TutorialCarousel";
 import NarrativeResult from "./components/NarrativeResult";
 import CurtainTransition from "./components/CurtainTransition";
-import RoleSwitcher from "./components/RoleSwitcher";
 import DashboardGatologias from "./components/dashboard/DashboardGatologias";
 
 function App() {
@@ -53,7 +52,6 @@ function App() {
 
   return (
     <>
-      <RoleSwitcher />
       {screen === "splash" ? content : <CurtainTransition>{content}</CurtainTransition>}
     </>
   );

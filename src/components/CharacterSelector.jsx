@@ -1,5 +1,6 @@
 // src/components/CharacterSelector.jsx
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import useGameStore from "../store/useGameStore";
 import usePersonajesSupabase from "../hooks/usePersonajesSupabase";
 import "./CharacterSelector.css";
@@ -13,91 +14,90 @@ export const BASE_CHARACTER_LAYOUT = {
   "reina-de-espadas": {
     top: "33%",
     left: "50%",
-    intro: "Todo gato sabe cortar el silencio...",
+    intro: "🗡️ Cuidado: sabe cortar sin levantar la voz.",
     nombre_visible: "La Reina de Espadas",
     genero_literario: "Aforismo filosófico",
-    frase_base: "Todo gato sabe cortar el silencio...",
+    frase_base: "Si juegas con filo, corta con verdad.",
     sticker_url: "/assets/reina_sticker.svg",
     widthRatio: 0.21,
   },
   "don-polo": {
     top: "37%",
     left: "83%",
-    intro: "No hay gato encerrado que no maúlle la verdad.",
+    intro: "🦉 Domina el tablero antes del primer movimiento.",
     nombre_visible: "Don Polo",
     genero_literario: "Cronicón costumbrista",
-    frase_base: "El gato negocia incluso con la siesta...",
+    frase_base: "Negocia tu papel… pero nunca tu alma.",
     sticker_url: "/assets/polo_sticker.svg",
     widthRatio: 0.18,
   },
   saturnina: {
     top: "38%",
     left: "20%",
-    intro: "Cuenta anécdotas de la vida cotidiana, con un toque de surrealismo.",
+    intro: "🎠 Convierte el absurdo en táctica impredecible.",
     nombre_visible: "Saturnina",
     genero_literario: "Haiku expandido / microcuento",
-    frase_base: "Un gato cabe en una taza, y en un momento...",
+    frase_base: "Si entiendes el chiste, ya comenzaste.",
     sticker_url: "/assets/saturnina_sticker.svg",
     widthRatio: 0.17,
   },
   lucinda: {
     top: "51%",
     left: "50%",
-    intro: "Confiesa sueños y secretos en cartas.",
+    intro: "🕯️ Juega con emociones que otros no resisten.",
     nombre_visible: "Lucinda",
     genero_literario: "Carta confesional",
-    frase_base: "A veces el gato se esconde en los sueños...",
+    frase_base: "Las cartas revelan más de lo que esconden.",
     sticker_url: "/assets/lucinda_sticker.svg",
     widthRatio: 0.18,
   },
   "payasito-triste": {
     top: "55%",
     left: "20%",
-    intro: "Humor negro, ironía existencial y ruptura teatral para confrontar verdades incómodas.Si el telón sube, no es por gloria. Es por necesidad.",
+    intro: "🎭 Hace trampa… pero con verdades incómodas.",
     nombre_visible: "Payasito Triste",
     genero_literario: "Poema en prosa / cuento breve onírico",
-    frase_base: "El gato que ríe por fuera...",
+    frase_base: "Ríe conmigo… si te atreves, claro.",
     sticker_url: "/assets/payasito_sticker.svg",
     widthRatio: 0.17,
   },
   "la-maestra": {
     top: "55%",
     left: "82%",
-    intro: "Eres un gato que enseña con el ejemplo.",
+    intro: "📚 Corrige mientras juega. No se equivoca dos veces.",
     nombre_visible: "La Maestra",
     genero_literario: "Ensayo corto",
-    frase_base: "Eres un gato que enseña con el ejemplo...",
+    frase_base: "ESe enseña mejor desde la herida.",
     sticker_url: "/assets/maestra_sticker.svg",
     widthRatio: 0.19,
   },
   "la-doctora": {
     top: "71%",
     left: "20%",
-    intro: "Especialista en patologías del alma felina.",
+    intro: "🔬 Detecta tus fallas antes que tú mismo.",
     nombre_visible: "La Doctora",
     genero_literario: "Informe poético / análisis simbólico",
-    frase_base: "Todo gato tiene heridas que no se ven...",
+    frase_base: "Cada herida tuya escribe una escena nueva.",    
     sticker_url: "/assets/doctora_sticker.svg",
     widthRatio: 0.17,
   },
   silvestre: {
     top: "69%",
     left: "50%",
-    intro: "Actor sin papel fijo. Vive atrapado entre funciones pasadas y un guion que cambia con cada emoción. Si entras a escena con él, no olvides tu verdad.",
+    intro: "🎭 Improvisa tan bien… que parece guion.",
     nombre_visible: "Silvestre",
     genero_literario: "Monólogo dramático",
-    frase_base:
-      "«El telón no cae hasta que te atreves a sentir».",
+    frase_base: "No hay guion. Solo verdad escénica.",
     sticker_url: "/assets/silvestre_sticker.svg",
     widthRatio: 0.2,
   },
   andy: {
     top: "71%",
     left: "82%",
-    intro: "Ensaya, falla, juega, vuelve a intentar. Andy no busca ganar, sino entender cómo funciona todo (¡incluido tu corazón!). Presiona “entrar” y empieza el experimento.",
+    intro: "💥 Juega a romper las reglas… científicamente.",
     nombre_visible: "Andy",
     genero_literario: "Flash fiction / meme narrativo",
-    frase_base: "«Si nada explota, no fue un buen intento.»",
+    frase_base: "Si explota, vas bien. Bienvenidx, jugadorx.",
     sticker_url: "/assets/andy_sticker.svg",
     widthRatio: 0.18,
   },
@@ -115,6 +115,11 @@ export default function CharacterSelector() {
   const [hovered, setHovered] = useState(null);
   const [introText, setIntroText] = useState(null);
   const [closing, setClosing] = useState(false);
+  const [bubbleCharacter, setBubbleCharacter] = useState(null);
+  const [isTouchMode, setIsTouchMode] = useState(false);
+  const bubbleTimeoutRef = useRef(null);
+  const hostRef = useRef(null);
+  const [bubblePosition, setBubblePosition] = useState(null);
 
   const { personajes, loading } = usePersonajesSupabase();
   const buildingRef = useRef(null);
@@ -142,6 +147,43 @@ export default function CharacterSelector() {
     };
   }, []);
 
+  useEffect(() => {
+    const mql = window.matchMedia("(hover: none), (pointer: coarse)");
+    const updateMode = () => setIsTouchMode(mql.matches);
+    updateMode();
+    mql.addEventListener?.("change", updateMode);
+    return () => mql.removeEventListener?.("change", updateMode);
+  }, []);
+
+  const clearBubbleTimeout = useCallback(() => {
+    if (bubbleTimeoutRef.current) {
+      clearTimeout(bubbleTimeoutRef.current);
+      bubbleTimeoutRef.current = null;
+    }
+  }, []);
+
+  const scheduleAutoClose = useCallback(() => {
+    if (!isTouchMode) return;
+    clearBubbleTimeout();
+    bubbleTimeoutRef.current = setTimeout(() => {
+      setClosing(true);
+    }, 4200);
+  }, [clearBubbleTimeout, isTouchMode]);
+
+  const updateBubblePosition = useCallback(() => {
+    if (!hostRef.current) return;
+    const rect = hostRef.current.getBoundingClientRect();
+    const eyeOffset = rect.height * 0.16;
+    setBubblePosition({
+      left: rect.left + rect.width / 2,
+      top: rect.top + eyeOffset,
+    });
+  }, []);
+
+  useEffect(() => {
+    return () => clearBubbleTimeout();
+  }, [clearBubbleTimeout]);
+
   const setPersonajeActual = useGameStore((s) => s.setPersonajeActual);
   const setPersonajeSeleccionado = useGameStore((s) => s.setPersonajeSeleccionado);
   const setScreen = useGameStore((s) => s.setScreen);
@@ -155,6 +197,7 @@ export default function CharacterSelector() {
   };
 
   const handleSelect = (p) => {
+    clearBubbleTimeout();
     const canPlay = canPlayPersonaje(p.id);
 
     setPersonajeActual(p.id);
@@ -169,6 +212,9 @@ export default function CharacterSelector() {
 
     setLockedPersonajeId(canPlay ? null : p.id);
     setScreen("camerino");
+    setIntroText(null);
+    setBubbleCharacter(null);
+    setClosing(false);
   };
 
   const characters = useMemo(() => {
@@ -218,14 +264,113 @@ export default function CharacterSelector() {
   }, [personajes]);
 
   const handleHover = (char) => {
+    if (isTouchMode) return;
     setClosing(false); // evita que se corte al re-hover
     setHovered(char.id);
     setIntroText(char.intro || DEFAULT_INTRO);
+    setBubbleCharacter(char);
   };
 
   const handleLeave = () => {
+    if (isTouchMode) return;
+    clearBubbleTimeout();
     if (introText) setClosing(true); // dispara fade-out
   };
+
+  const previewCharacter = (char) => {
+    setClosing(false);
+    setHovered(char.id);
+    setIntroText(char.intro || DEFAULT_INTRO);
+    setBubbleCharacter(char);
+  };
+
+  const handleCharacterActivate = (char) => {
+    if (!isTouchMode) {
+      handleSelect(char);
+      return;
+    }
+
+    if (bubbleCharacter?.id === char.id) {
+      clearBubbleTimeout();
+      handleSelect(char);
+      return;
+    }
+
+    previewCharacter(char);
+  };
+
+  useEffect(() => {
+    if (!isTouchMode || !bubbleCharacter || closing) {
+      clearBubbleTimeout();
+      return;
+    }
+    scheduleAutoClose();
+    return () => clearBubbleTimeout();
+  }, [bubbleCharacter, isTouchMode, closing, scheduleAutoClose, clearBubbleTimeout]);
+
+  useEffect(() => {
+    if (!introText) {
+      setBubblePosition(null);
+      return;
+    }
+    updateBubblePosition();
+    window.addEventListener("resize", updateBubblePosition);
+    window.addEventListener("scroll", updateBubblePosition, { passive: true });
+    return () => {
+      window.removeEventListener("resize", updateBubblePosition);
+      window.removeEventListener("scroll", updateBubblePosition);
+    };
+  }, [introText, updateBubblePosition]);
+
+  const bubbleContent =
+    introText && bubblePosition
+      ? createPortal(
+          <div
+            className={`cs-speech-bubble cs-speech-bubble--floating ${closing ? "is-closing" : ""}`}
+            style={{
+              position: "fixed",
+              left: `${bubblePosition.left}px`,
+              top: `${bubblePosition.top}px`,
+              transform: "translate(-50%, -100%)",
+              bottom: "auto",
+              zIndex: 12000,
+            }}
+            onClick={(evt) => evt.stopPropagation()}
+            onAnimationEnd={() => {
+              if (closing) {
+                setClosing(false);
+                setIntroText(null);
+                setBubbleCharacter(null);
+                clearBubbleTimeout();
+              }
+            }}
+          >
+            {bubbleCharacter ? (
+              <>
+                <div className="cs-bubble-header">
+                  <div className="cs-bubble-header-row">
+                    <button
+                      type="button"
+                      className="cs-bubble-name-link"
+                      onClick={(evt) => {
+                        evt.stopPropagation();
+                        handleSelect(bubbleCharacter);
+                      }}
+                    >
+                      {bubbleCharacter.nombre_visible}
+                    </button>
+                    <p className="cs-bubble-genre">{bubbleCharacter.genero_literario}</p>
+                  </div>
+                </div>
+                <p className="cs-bubble-body">{introText}</p>
+              </>
+            ) : (
+              <p className="cs-bubble-body">{introText}</p>
+            )}
+          </div>,
+          document.body
+        )
+      : null;
 
   return (
     <div className="character-selector">
@@ -258,11 +403,11 @@ export default function CharacterSelector() {
                 data-character-id={p.id}
                 role="button"
                 tabIndex={0}
-                onClick={() => handleSelect(p)}
+                onClick={() => handleCharacterActivate(p)}
                 onKeyDown={(evt) => {
                   if (evt.key === "Enter" || evt.key === " ") {
                     evt.preventDefault();
-                    handleSelect(p);
+                    handleCharacterActivate(p);
                   }
                 }}
                 onMouseEnter={() => handleHover(p)}
@@ -288,6 +433,7 @@ export default function CharacterSelector() {
       {/* Gato anfitrión */}
       <div
         className="character-selector__host"
+        ref={hostRef}
         style={{ top: hostCharacter.top, left: hostCharacter.left }}
         role="button"
         tabIndex={0}
@@ -314,19 +460,7 @@ export default function CharacterSelector() {
           aria-hidden="true"
         />
 
-        {introText && (
-          <div
-            className={`cs-speech-bubble ${closing ? "is-closing" : ""}`}
-            onAnimationEnd={() => {
-              if (closing) {
-                setClosing(false);
-                setIntroText(null);
-              }
-            }}
-          >
-            {introText}
-          </div>
-        )}
+        {bubbleContent}
       </div>
               </div>
       </div>

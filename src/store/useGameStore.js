@@ -9,7 +9,7 @@ export const useGameStore = create((set, get) => ({
   // acción para abrir/cerrar cortinas
   setCurtainsOpen: (isOpen) => set({ curtainsOpen: isOpen }),
 
-  role: "anon", // anon | subscriber | superadmin
+  role: "subscriber", // anon | subscriber | superadmin
   setRole: (nuevoRol) => set({ role: nuevoRol, lockedPersonajeId: null }),
   defaultFreeCharacter: "la-maestra",
   lockedPersonajeId: null,
@@ -27,7 +27,17 @@ export const useGameStore = create((set, get) => ({
 
     // Para el selector clásico
     personajeActual: null,
-    setPersonajeActual: (personajeId) => set({ personajeActual: personajeId }),
+    nivelesPorPersonaje: {},
+    setPersonajeActual: (personajeId) =>
+      set((state) => {
+        const safePersonaje = personajeId || state.defaultFreeCharacter;
+        const niveles = state.nivelesPorPersonaje || {};
+        const nivelGuardado = niveles[safePersonaje] ?? 1;
+        return {
+          personajeActual: safePersonaje,
+          nivelActual: nivelGuardado,
+        };
+      }),
 
     // Para la lógica de compendio/camerino
     personajeSeleccionado: null,
@@ -53,7 +63,19 @@ export const useGameStore = create((set, get) => ({
 
   // Estado del nivel actual (nuevo)
   nivelActual: 1,
-  setNivelActual: (nuevoNivel) => set({ nivelActual: nuevoNivel }),
+  setNivelActual: (nuevoNivel, personajeId) =>
+    set((state) => {
+      const safePersonaje =
+        personajeId || state.personajeActual || state.defaultFreeCharacter;
+      const safeNivel = nuevoNivel || 1;
+      return {
+        nivelActual: safeNivel,
+        nivelesPorPersonaje: {
+          ...(state.nivelesPorPersonaje || {}),
+          [safePersonaje]: safeNivel,
+        },
+      };
+    }),
 
   setFraseBase: (nueva) => set({ fraseBase: nueva }),
 

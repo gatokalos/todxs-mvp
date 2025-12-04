@@ -4,6 +4,8 @@ import useGameStore from '../store/useGameStore'
 export default function NarrativeResult() {
   const { frasesFinales, resetJuego, setScreen } = useGameStore()
 
+  const formatFrase = (text = "") => text.replace(/\\n/g, "\n")
+
   const handleRestart = () => {
     resetJuego()
     setScreen('selector')
@@ -19,7 +21,9 @@ export default function NarrativeResult() {
         {frasesFinales.map((frase, index) => (
           <div key={index} style={{ marginBottom: 16 }}>
             <strong>{frase.personajeId}</strong><br />
-            {frase.fraseFinal}
+            <span style={{ whiteSpace: 'pre-line' }}>
+              {formatFrase(frase.fraseFinal)}
+            </span>
           </div>
         ))}
       </div>

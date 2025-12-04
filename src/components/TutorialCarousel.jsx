@@ -1,5 +1,5 @@
 // src/components/TutorialCarousel.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import useGameStore from "../store/useGameStore";
 
 // Assets
@@ -18,6 +18,39 @@ const [subStep, setSubStep] = useState(0);
 const [open, setOpen] = useState(false);
 const [isTransitioning, setIsTransitioning] = useState(false);
 const [marks, setMarks] = useState([]); // 👈 marcas fantasma
+const audioCtxRef = useRef(null);
+
+const getAudioCtx = useCallback(() => {
+  if (typeof window === "undefined") return null;
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  if (!Ctx) return null;
+  if (!audioCtxRef.current) {
+    audioCtxRef.current = new Ctx();
+  } else if (audioCtxRef.current.state === "suspended") {
+    audioCtxRef.current.resume().catch(() => {});
+  }
+  return audioCtxRef.current;
+}, []);
+
+const playCasillaPop = useCallback(() => {
+  const ctx = getAudioCtx();
+  if (!ctx) return;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  const bp = ctx.createBiquadFilter();
+  const now = ctx.currentTime;
+  osc.type = "sine";
+  osc.frequency.setValueAtTime(220 + Math.random() * 60, now);
+  bp.type = "bandpass";
+  bp.frequency.value = 900 + Math.random() * 400;
+  bp.Q.value = 6;
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.exponentialRampToValueAtTime(0.04, now + 0.01);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+  osc.connect(bp).connect(gain).connect(ctx.destination);
+  osc.start(now);
+  osc.stop(now + 0.22);
+}, [getAudioCtx]);
 
 // Hook para abrir el telón automáticamente
 useEffect(() => {
@@ -26,6 +59,13 @@ useEffect(() => {
     return () => clearTimeout(t);
   }
 }, [step]);
+
+// Pop sutil cuando se explica la casilla (ASMR-ish)
+useEffect(() => {
+  if (step === 1) {
+    playCasillaPop();
+  }
+}, [step, playCasillaPop]);
 
 // Hook para registrar SOLO la revelación original de X y O
 useEffect(() => {

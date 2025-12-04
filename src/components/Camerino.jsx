@@ -54,6 +54,7 @@ export default function Camerino() {
   const [entries, setEntries] = useState([]);
   const [camerinoImage, setCamerinoImage] = useState(null);
   const [stats, setStats] = useState(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   const setScreen = useGameStore((s) => s.setScreen);
   const setPersonajeActual = useGameStore((s) => s.setPersonajeActual);
@@ -158,6 +159,14 @@ export default function Camerino() {
     if (!personaje?.slug) return;
     fetchPersonajeStats(personaje.slug).then(setStats).catch(console.error);
   }, [personaje]);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(hover: none), (pointer: coarse)");
+    const update = () => setIsTouchDevice(mql.matches);
+    update();
+    mql.addEventListener?.("change", update);
+    return () => mql.removeEventListener?.("change", update);
+  }, []);
 
   // === Cortinas de apertura ===
   useEffect(() => {
@@ -269,39 +278,30 @@ useEffect(() => {
 
         {/* Ficha + Post fijo */}
         <div className="camerino-blog__draft camerino-blog__draft--default">
-          <button
-            type="button"
-            className="camerino-draft-nav camerino-draft-nav--prev"
-            onClick={goPrevCharacter}
-            aria-label="Personaje anterior"
-          >
-            ‹
-          </button>
-          <button
-            type="button"
-            className="camerino-draft-nav camerino-draft-nav--next"
-            onClick={goNextCharacter}
-            aria-label="Siguiente personaje"
-          >
-            ›
-          </button>
+          {!isTouchDevice && (
+            <>
+              <button
+                type="button"
+                className="camerino-draft-nav camerino-draft-nav--prev"
+                onClick={goPrevCharacter}
+                aria-label="Personaje anterior"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                className="camerino-draft-nav camerino-draft-nav--next"
+                onClick={goNextCharacter}
+                aria-label="Siguiente personaje"
+              >
+                ›
+              </button>
+            </>
+          )}
           
    
            {/* Botones flotantes */}
-      <button
-        ref={btnRef}
-        type="button"
-        className="btn-entrar-sticky"
-        onClick={handleEntrarEscenario}
-        disabled={isLocked}
-        title={
-          isLocked
-            ? "Este personaje está bloqueado para tu rol actual"
-            : undefined
-        }
-      >
-        <span>Entrar al escenario</span>
-      </button>
+   
 
                        <div className="draft-image" style={{ backgroundImage: `url(${camerinoImage})` }}>
   <div className="draft-image-overlay" />
@@ -311,8 +311,23 @@ useEffect(() => {
   </div>
 </div>
 
+    
+
           <div className="draft-content">
-            <h3>Resumen semanal</h3>
+         <button
+              ref={btnRef}
+              type="button"
+              className="btn-entrar"
+              onClick={handleEntrarEscenario}
+              disabled={isLocked}
+              title={
+                isLocked
+                  ? "Este personaje está bloqueado para tu rol actual"
+                  : undefined
+              }
+            >
+              <span>Entrar al escenario</span>
+            </button>
             <p>
               Jugado <strong>{stats?.jugado_veces ?? "—"}</strong> veces esta
               semana · Popularidad ⭐⭐⭐⭐☆
@@ -320,10 +335,15 @@ useEffect(() => {
               Última actividad: hace{" "}
               {stats?.dias_desde_ultima_actividad ?? "—"} días.
               <br />
-              Este bloque es informativo y solo editable por el superadmin.
             </p>
             
           </div>
+                {isTouchDevice && (
+            <div className="camerino-swipe-hint" aria-hidden="true">
+              <span className="camerino-swipe-icon">⇆</span>
+              <span>Desliza para cambiar de personaje</span>
+            </div>
+          )}
 
         </div>
         

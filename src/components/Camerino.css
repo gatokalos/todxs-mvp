@@ -2,10 +2,9 @@
 /* === ESCENARIO CAMERINO === */
 .camerino {
   position: relative;
-  width: 100%;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
   overflow-y: auto;
-  overflow-x: hidden;
   font-family: "Inter", "Nunito Sans", sans-serif;
 }
 
@@ -58,13 +57,12 @@
   touch-action: pan-y;
 
   /* Centrado real */
-  max-width: min(960px, 70vw);
+  max-width: 70vw;
   width: 100%;
   margin: -6vh auto 6vh auto; /* centrado vertical y horizontal */
-  padding: 0rem 35rem;
+  padding: 2rem 3rem;
 
   /* Estilo de fondo */
-  
   backdrop-filter: blur(12px);
   border-radius: 18px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
@@ -76,21 +74,15 @@
 
 
 
-@media (max-width: 1024px) {
+/* Para pantallas más pequeñas */
+@media (max-width: 768px) {
   .camerino-blog {
-    max-width: 90vw;
-    margin: -2vh auto 3rem;
-    padding: 1.5rem 2rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .camerino-blog {
+    width: 100%;
     max-width: 100%;
     margin: 0;
+    padding: 1.2rem 1rem 2.4rem;
     border-radius: 0;
-    padding: 1.25rem 1rem 2.5rem;
-    min-height: auto;
+    box-shadow: none;
   }
 }
 .btn-entrar-sticky {
@@ -111,18 +103,6 @@
   cursor: pointer;
   box-shadow: 0 12px 24px rgba(255, 188, 120, 0.35);
   z-index: 1000;
-}
-
-@media (max-width: 768px) {
-  .btn-entrar-sticky {
-    position: static;
-    width: 100%;
-    margin: 1rem 0 0;
-    transform: none;
-    right: auto;
-    left: auto;
-    justify-content: center;
-  }
 }
 
 .btn-entrar-sticky:hover,
@@ -159,7 +139,6 @@
   position: relative;
   z-index: 12;
   max-width: 720px;
-  width: 100%;
   margin: 6vh auto 4vh;
   padding: 2rem 2.4rem;
 
@@ -179,12 +158,12 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .camerino-blog__draft {
+    width: 100%;
     max-width: 100%;
     margin: 2rem 0;
-    padding: 1.25rem 1.35rem;
-    border-radius: 18px;
+    padding: 1.2rem 1.3rem;
   }
 }
 
@@ -237,8 +216,8 @@
 
 @media (max-width: 768px) {
   .camerino-draft-nav {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     font-size: 1.2rem;
     top: auto;
     bottom: 12px;
@@ -502,6 +481,31 @@
   opacity: 0.9;
 }
 
+.camerino-swipe-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 12px;
+  margin: 0.75rem auto 0;
+  font-size: 0.85rem;
+  color: rgba(45, 26, 83, 0.85);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.4);
+  width: fit-content;
+}
+
+.camerino-swipe-icon {
+  font-size: 1.2rem;
+  animation: swipePulse 1.8s ease-in-out infinite;
+}
+
+@keyframes swipePulse {
+  0%, 100% { opacity: 0.5; transform: translateX(0); }
+  50% { opacity: 1; transform: translateX(6px); }
+}
+
 
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
@@ -555,20 +559,20 @@
 
 /* === PARALLAX EN POST FIJO === */
 .camerino-blog__draft--default {
-    position: relative;
-    background: linear-gradient(135deg, #f6d365, #fda085);
-    border-radius: 18px;
-    box-shadow: 0 12px 30px rgb(244 164 192 / 58%);
-    padding: 0;
-    margin: 0 auto 2rem;
-    margin-top: 6vh;
+  position: relative;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  padding: 0;
+  margin: 0 auto 2rem; /* centrado */
+  margin-top: 6vh; /* ajústalo entre -2vh y -6vh según la pantalla */
 }
 
 /* Imagen con efecto parallax interno */
 .draft-image {
   position: relative;
   width: 100%;
-  height: 800px;
+  height: 60vh;
   overflow: hidden;
   z-index: 1;
   background-repeat: no-repeat;
@@ -607,21 +611,6 @@
   opacity: 0.9;
 }
 
-@media (max-width: 600px) {
-  .draft-content {
-    padding: 1rem 1.1rem 1.5rem;
-  }
-  .draft-content h3 {
-    font-size: 1.2rem;
-    text-align: left;
-  }
-  .draft-content p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    text-align: left;
-  }
-}
-
 
 
 
@@ -648,31 +637,6 @@
   opacity: 0.85;
 }
 
-.camerino-swipe-hint {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.6rem 0.8rem;
-  border-radius: 12px;
-  margin: 0.75rem auto 0;
-  font-size: 0.85rem;
-  color: rgba(45, 26, 83, 0.85);
-  text-align: center;
-  background: rgba(255, 255, 255, 0.4);
-  width: fit-content;
-}
-
-.camerino-swipe-icon {
-  font-size: 1.2rem;
-  animation: swipePulse 1.8s ease-in-out infinite;
-}
-
-@keyframes swipePulse {
-  0%, 100% { opacity: 0.5; transform: translateX(0); }
-  50% { opacity: 1; transform: translateX(6px); }
-}
-
 /* Desvanece al hacer scroll */
 .camerino-ficha.is-hidden {
   opacity: 0;
@@ -682,7 +646,7 @@
 /* Para pantallas más pequeñas */
 @media (max-width: 768px) {
   .camerino-blog {
-    max-width: 100vw;
+    max-width: 92vw;
   }
 }
 
@@ -730,21 +694,12 @@
   opacity: 0.9;
 }
 
-@media (max-width: 600px) {
-  .draft-image-text h2 {
-    font-size: 1.8rem;
-  }
-  .draft-image-text h4 {
-    font-size: 1rem;
-  }
-}
-
 /* === Responsive para el contenedor principal del Camerino === */
 @media (max-width: 768px) {
   .camerino {
     position: relative;
-  width: 100%;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
   overflow-y: auto;
   color: #4a3d79;
   font-family: "Inter", "Nunito Sans", sans-serif;
@@ -755,7 +710,7 @@
     background-size: contain; /* evita recortes del fondo */
     background-position: center top;
     background-attachment: scroll; /* mejora rendimiento mobile */
-    filter: blur(8px) brightness(1.1); /* más legible el primer plano */
+    filter: blur(2px) brightness(0.9); /* más legible el primer plano */
   }
 
   .camerino-blog {
@@ -780,18 +735,16 @@
 @media (max-width: 768px) {
   .camerino-blog__draft--default {
     width: 100%;
-    margin: 6vh 0 2rem;
+    margin: 2rem 0 1.5rem;
     padding: 0;
     border-radius: 12px;
   }
 
 
   .draft-image {
-    height: 55vh; /* en lugar de 260px */
-    min-height: 360px;
-    background-size: cover; /* evita corte del rostro */
+    height: 50vh;
+    background-size: cover;
     background-position: center top;
-    background-attachment: fixed;
   }
 
   .draft-image-overlay {
@@ -814,8 +767,19 @@
     opacity: 0.8;
   }
 
+  .btn-entrar-sticky {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    transform: none;
+    justify-content: center;
+    font-size: 0.9rem;
+    margin: 0 auto 1rem;
+  }
+
   .draft-content {
-    padding: 0.75rem 1.2rem 1.5rem;
+    padding: 0.75rem 1.2rem;
   }
 
   .camerino-bg {
@@ -828,17 +792,19 @@
 /* Muy pequeño (teléfonos viejos) */
 @media (max-width: 480px) {
   .draft-image {
-    height: clamp(320px, 60vh, 420px);
+    height: 500px;
     background-repeat: no-repeat;
-    margin-top: 0;
-    background-position: center top;
-    background-size: cover;
-    background-attachment: fixed;
+    margin-top: -16vh; /* ajústalo entre -2vh y -6vh según la pantalla */
+  background-position: top;
+  background-size: cover;
+  background-attachment: fixed; /
   }
 
   .camerino-ficha h2 {
     font-size: 1.3rem;
-    margin-top: 1rem;
+    margin-top: 2vh; /* ajústalo entre -2vh y -6vh según la pantalla */
+
+  
   }
 
   .camerino-ficha h4 {
@@ -921,7 +887,7 @@
   max-width: 680px;
   margin: 2.4rem auto;
   padding: 2rem 2.4rem;
-  background: rgb(40 40 40 / 45%);
+  background: rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   box-shadow: 0 6px 22px rgba(0, 0, 0, 0.25);
@@ -929,6 +895,17 @@
   animation: fadeInUp 0.6s ease both;
   color: #f2f2f2;
   cursor: default;
+}
+
+@media (max-width: 768px) {
+  .blog-card {
+    max-width: 100%;
+    margin: 1.2rem 0;
+    padding: 1.4rem 1rem;
+    border-radius: 12px;
+    box-shadow: none;
+    background: rgba(32, 24, 48, 0.6);
+  }
 }
 
 .blog-card:hover {
@@ -1024,7 +1001,7 @@
 /* === Responsive === */
 @media (max-width: 768px) {
   .blog-card {
-    max-width: 77vw;
+    max-width: 90vw;
     padding: 1.4rem 1.6rem;
   }
 
@@ -1125,7 +1102,7 @@
 /* Responsivo */
 @media (max-width: 768px) {
   .draft-image {
-    height: 400px;
+    height: 68vh;
   }
 
   .camerino-ficha {

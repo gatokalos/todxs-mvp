@@ -14,8 +14,8 @@
 
 .speech-bubble-container {
   position: absolute;
-  bottom: 5vh;   /* modal pegado abajo */
-  top: auto;           /* 👈 la tenías así, cubriendo frase base */
+  bottom: 3vh;
+  top: auto;
   left: 0;
   right: 0;
   display: flex;
@@ -25,22 +25,32 @@
 }
 
 .speech-bubble {
-    position: relative;
-    background: #bbb;
-    color: black;
-    border-radius: 12px;
-    padding: 20px;
-    width: 100%;
-    max-width: 555px;
-    height: 33vh;
-    overflow-y: auto;
-    pointer-events: auto;
-    box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #bbb;
+  color: black;
+  border-radius: 12px;
+  padding: 20px;
+  width: 100%;
+  max-width: 555px;
+  height: auto;
+  min-height: clamp(320px, 35vh, 520px);
+  max-height: 80vh;
+  overflow-y: auto;
+  pointer-events: auto;
+  box-sizing: border-box;
   transition: transform 0.6s;
+  --speech-font-base: clamp(0.65rem, 1.8vw, 1.2rem);
+  --speech-font-heading: clamp(1.15rem, 1.2vw, 1.45rem);
+  --speech-font-option: clamp(1rem, 2.3vw, 1.35rem);
+  --speech-font-instruction: clamp(0.85rem, 1.6vw, 1.05rem);
+  font-size: var(--speech-font-base);
+  line-height: 1.4;
 }
 
 .speech-instruction {
-  font-size: 0.95rem;
+  font-size: var(--speech-font-instruction);
   margin-bottom: 8px;
   color: #555;
   text-align: center;
@@ -48,33 +58,27 @@
 
 .speech-title {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: var(--speech-font-heading);
   margin: 8px 0 16px;
   text-align: center;
   color: #222;
 }
 
-.speech-options {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.speech-header {
+  position: sticky;
+  top: 0;
+  padding-bottom: 4px;
+  padding-top: 18px;
+  background: #bbb;
+  z-index: 2;
+  display: block;
 }
 
-.speech-options li {
-  padding: 14px 12px;
-  cursor: pointer;
-  border-bottom: 1px solid #eee; /* 👈 estilo lista scroll */
-  transition: background 0.2s, color 0.2s;
-  text-align: left;
-}
-
-.speech-options li:last-child {
-  border-bottom: none;
-}
-
-.speech-options li:hover {
-  background: #f5f5f5;
-  color: #000;
+.speech-header strong {
+  font-size: var(--speech-font-heading);
+  letter-spacing: 0.06em;
+  margin-top: 0;
+  padding-top: 6px;
 }
 
 .btn-close {
@@ -101,6 +105,22 @@
   .speech-bubble-container {
     bottom: 5vh;   /* modal pegado abajo */
     top: auto;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 900px) and (min-width: 900px) {
+  .speech-bubble-container {
+    bottom: clamp(8vh, 15vh, 22vh);
+  }
+
+  .speech-bubble {
+    max-width: min(520px, 70vw);
+    height: auto;
+    max-height: 40vh;
+  }
+
+  .speech-content {
+    max-height: 32vh;
   }
 }
 
@@ -153,13 +173,126 @@
 }
 
 .speech-content {
-  max-height: 60vh;
+  flex: 1;
+  height: auto;
   overflow-y: auto;
   scroll-behavior: smooth;
   padding: 1rem;
+  overscroll-behavior: contain;
+  scrollbar-width: none; /* Firefox */
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
-.speech-options-block,
+.speech-content--centered {
+  justify-content: center;
+  align-items: center;
+}
+
 .speech-creative-block {
   margin-bottom: 2rem;
+}
+
+.speech-letterbox {
+  margin: 1.5rem auto;
+  width: min(360px, 90%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.speech-letterbox-btn {
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  background: #fff;
+  color: #101010;
+  padding: 18px 20px;
+  font-size: clamp(0.9rem, 2.3vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 16px 26px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+
+.speech-letterbox-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.3);
+}
+
+.speech-letterbox-hint {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  margin: 0;
+}
+
+.speech-roulette-icon {
+  position: absolute;
+  bottom: clamp(12px, 2.4vw, 18px);
+  right: clamp(12px, 2.4vw, 18px);
+  width: clamp(46px, 5vw, 56px);
+  height: clamp(46px, 5vw, 56px);
+  border-radius: 50%;
+  border: none;
+  background: #111;
+  color: #fefefe;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 5;
+}
+
+.speech-roulette-icon span {
+  display: inline-flex;
+}
+
+.speech-roulette-icon:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.4);
+}
+
+.speech-roulette-icon:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.25);
+}
+
+.speech-roulette-icon.is-spinning span {
+  animation: roulette-spin 0.75s linear infinite;
+}
+
+.speech-roulette-icon span::after {
+  content: "";
+  display: none;
+}
+
+@keyframes roulette-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.digital-timer {
+  text-align: center;
+  font-size: clamp(1rem, 2.6vw, 1.55rem);
+  letter-spacing: 0.2em;
+  margin-bottom: 0.85rem;
+}
+
+.speech-content::-webkit-scrollbar {
+  display: none; /* WebKit */
 }

@@ -6,7 +6,7 @@ import "./CurtainTransition.css";
 
 const SCREEN_BEHAVIOR = {
   selector: { openLeft: -40, openRight: 40, openDuration: 1.2, openEase: "power1.out", closeDuration: 0.95, closeEase: "power2.inOut" },
-  camerino: { openLeft: -70, openRight: 70, openDuration: 1.2, openEase: "power1.out", closeDuration: 0.95, closeEase: "power2.inOut" },
+  camerino: { openLeft: -60, openRight: 60, openDuration: 1.2, openEase: "power1.out", closeDuration: 0.95, closeEase: "power2.inOut" },
   compendio: { openLeft: -100, openRight: 100, openDuration: 1.2, openEase: "power1.out", closeDuration: 0.95, closeEase: "power2.inOut" },
   gameboard: { openLeft: -100, openRight: 100, openDuration: 3.55, openEase: "power2.out", closeDuration: 0.45, closeEase: "power2.in" },
   game: { openLeft: -100, openRight: 100, openDuration: 0.55, openEase: "power2.out", closeDuration: 0.45, closeEase: "power2.in" },
@@ -113,13 +113,10 @@ export default function CurtainTransition({ children }) {
     if (timelineRef.current) timelineRef.current.kill();
 
     const config = getScreenBehavior(screen, viewportWidth);
-    const stage = stageRef.current;
-
     setIsAnimating(true);
 
     if (!hasOpenedRef.current) {
       setRenderedChildren(pendingChildrenRef.current);
-      gsap.set(stage, { opacity: 0 });
 
       const initialTimeline = gsap.timeline({
         delay: 0.1,
@@ -132,7 +129,6 @@ export default function CurtainTransition({ children }) {
       initialTimeline
         .to(leftCurtainRef.current, { xPercent: config.openLeft, duration: config.openDuration, ease: config.openEase })
         .to(rightCurtainRef.current, { xPercent: config.openRight, duration: config.openDuration, ease: config.openEase }, "<")
-        .to(stage, { opacity: 1, duration: 0.9, ease: "power1.out" }, "-=0.5")
         .add(() => {
           startRightWaveIfSelector(); // 👈 aquí arranca la derecha con delay si toca
         }, "-=0.3");
@@ -142,12 +138,16 @@ export default function CurtainTransition({ children }) {
     }
 
     const tl = gsap.timeline({ onComplete: () => setIsAnimating(false) });
-    tl.to(stage, { opacity: 0, duration: 0.9, ease: "power2.inOut" })
-      .to([leftCurtainRef.current, rightCurtainRef.current], { xPercent: 0, y: 0, skewX: 0, duration: config.closeDuration, ease: config.closeEase }, "-=0.4")
+    tl.to([leftCurtainRef.current, rightCurtainRef.current], {
+        xPercent: 0,
+        y: 0,
+        skewX: 0,
+        duration: config.closeDuration,
+        ease: config.closeEase,
+      })
       .add(() => setRenderedChildren(pendingChildrenRef.current))
       .to(leftCurtainRef.current, { xPercent: config.openLeft, duration: config.openDuration, ease: config.openEase })
       .to(rightCurtainRef.current, { xPercent: config.openRight, duration: config.openDuration, ease: config.openEase }, "<")
-      .to(stage, { opacity: 1, duration: 0.8, ease: "power1.out" }, "-=0.5")
       .add(() => {
         startRightWaveIfSelector(); // 👈 también al cambiar de pantalla
       }, "-=0.3");

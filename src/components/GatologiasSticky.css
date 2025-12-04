@@ -18,3 +18,20 @@
   background: transparent;
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .gatologias-sticky img {
+    width: 120px;
+  }
+  .gatologias-sticky {
+    top: auto !important;
+    bottom: 16px !important;
+    right: 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .gatologias-sticky img {
+    width: 96px;
+  }
+}
