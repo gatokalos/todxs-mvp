@@ -166,6 +166,12 @@ export default function GameBoard() {
   const transitionStartTimeoutRef = useRef(null);
   const closeBubbleTimeoutRef = useRef(null);
   const pendingAutoORef = useRef(false);
+  const cardRef = useRef(null);
+  const fraseRef = useRef(null);
+  const cuadriculaRef = useRef(null);
+  const resizeRafRef = useRef(null);
+  const lastBoardSizeRef = useRef(0);
+  const [boardSize, setBoardSize] = useState(320);
 
   const stopGhostCursor = useCallback(() => {
     if (ghostIntervalRef.current) {
@@ -181,6 +187,37 @@ export default function GameBoard() {
       thinkTimeoutRef.current = null;
     }
   }, []);
+
+  const updateBoardSize = useCallback(() => {
+    const card = cardRef.current;
+    if (!card) return;
+    const styles = window.getComputedStyle(card);
+    const padX = parseFloat(styles.paddingLeft) + parseFloat(styles.paddingRight);
+    const innerWidth = card.clientWidth - padX;
+    const size = Math.max(240, Math.min(innerWidth, 520));
+    const next = Math.floor(size);
+    if (Math.abs(next - lastBoardSizeRef.current) < 1) return;
+    lastBoardSizeRef.current = next;
+    setBoardSize(next);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const observer = new ResizeObserver(() => {
+      if (resizeRafRef.current) cancelAnimationFrame(resizeRafRef.current);
+      resizeRafRef.current = requestAnimationFrame(updateBoardSize);
+    });
+    if (cardRef.current) observer.observe(cardRef.current);
+    if (fraseRef.current) observer.observe(fraseRef.current);
+    if (cuadriculaRef.current) observer.observe(cuadriculaRef.current);
+    window.addEventListener("resize", updateBoardSize);
+    updateBoardSize();
+    return () => {
+      observer.disconnect();
+      if (resizeRafRef.current) cancelAnimationFrame(resizeRafRef.current);
+      window.removeEventListener("resize", updateBoardSize);
+    };
+  }, [updateBoardSize]);
 
   // --- Sonido (sin assets: Web Audio sutil) ---
   const audioCtxRef = useRef(null);
@@ -1365,13 +1402,20 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
         </div>
       )}
 
-      <div className="tablero-card">
+      <div
+        className="tablero-card"
+        ref={cardRef}
+        style={{ "--board-size": `${boardSize}px` }}
+      >
         <div className="tablero-personaje">
           <PersonajeMenu personaje={{ nombreVisible, icono, id: personajeActual }} mensaje={mensajeAnimado} />
         </div>
 
         {/* Base → X → (O/tercera) */}
-        <div className={`frase-construida ${phraseResetting ? "frase-resetting" : ""}`}>
+        <div
+          className={`frase-construida ${phraseResetting ? "frase-resetting" : ""}`}
+          ref={fraseRef}
+        >
           <span className="typewriter">
             {baseAnimada}
             {xAnimada}
@@ -1388,7 +1432,10 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
               <span className="turno-chip__text">O está eligiendo cómo cerrar la frase...</span>
             </div>
           )}
-          <div className={`cuadricula ${bloqueaClicks ? "no-clicks" : ""} ${!boardReady ? "board-hidden" : ""} ${animateEntry ? "board-entry" : ""}`}>
+          <div
+            className={`cuadricula ${bloqueaClicks ? "no-clicks" : ""} ${!boardReady ? "board-hidden" : ""} ${animateEntry ? "board-entry" : ""}`}
+            ref={cuadriculaRef}
+          >
             {tablero.map((_, index) => {
               const fila = Math.floor(index / 3);
               const isGarra = fila === 0;
@@ -1473,28 +1520,28 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
 
         {/* Efecto de victoria */}
         <VictoryEffect show={victoryActive} winningCells={victory?.cells || []} shapes={shapesArray} />
-      </div>
 
-      {/* Modal creativo (burbuja) */}
-      {burbujaAbierta !== null && (
-        <SpeechBubbleModal
-          creativeMode={victory?.winner === "X" && tresCasillasTodasX(jugadas)}
-          titulo={
-            burbujaAbierta === -1
-              ? (tituloModal?.default || "Yo escojo")
-              : (tituloModal?.[turno] || tituloModal?.default || "Yo escojo")
-          }
-          prefijo={burbujaAbierta === -1 ? "" : (prefijos[turno] || "")}
-          opciones={burbujaAbierta === -1 ? [] : (tablero[burbujaAbierta]?.[turno] || [])}
-          fraseBase={fraseBase}
-          jugadasX={jugadas.filter(j => j?.jugador === "X").map(j => j.palabra)}
-          personaje={personajeActual}
-          tailCoords={tailCoords}
-          onSelect={handleSeleccion}
-          onConfirmCreative={handleConfirmCreative}
-          onClose={() => setBurbujaAbierta(null)}
-        />
-      )}
+        {/* Modal creativo (burbuja) */}
+        {burbujaAbierta !== null && (
+          <SpeechBubbleModal
+            creativeMode={victory?.winner === "X" && tresCasillasTodasX(jugadas)}
+            titulo={
+              burbujaAbierta === -1
+                ? (tituloModal?.default || "Yo escojo")
+                : (tituloModal?.[turno] || tituloModal?.default || "Yo escojo")
+            }
+            prefijo={burbujaAbierta === -1 ? "" : (prefijos[turno] || "")}
+            opciones={burbujaAbierta === -1 ? [] : (tablero[burbujaAbierta]?.[turno] || [])}
+            fraseBase={fraseBase}
+            jugadasX={jugadas.filter(j => j?.jugador === "X").map(j => j.palabra)}
+            personaje={personajeActual}
+            tailCoords={tailCoords}
+            onSelect={handleSeleccion}
+            onConfirmCreative={handleConfirmCreative}
+            onClose={() => setBurbujaAbierta(null)}
+          />
+        )}
+      </div>
 
       {/* Overlay de animación entre niveles */}
       {(!xDone || animando) && <div className="nivel-animando-overlay" />}

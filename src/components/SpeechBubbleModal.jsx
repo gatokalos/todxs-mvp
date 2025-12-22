@@ -223,7 +223,7 @@ export default function SpeechBubbleModal({
             <svg className="speech-tail" xmlns="http://www.w3.org/2000/svg">
               <polygon
                 points={`${tailCoords.x1},${tailCoords.y1} ${tailCoords.x2},${tailCoords.y2} ${tailCoords.x3},${tailCoords.y3}`}
-                fill="#bbb"
+                fill="currentColor"
               />
             </svg>
           )}
