@@ -1365,111 +1365,115 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
         </div>
       )}
 
-      <PersonajeMenu personaje={{ nombreVisible, icono, id: personajeActual }} mensaje={mensajeAnimado} />
-
-      {/* Base → X → (O/tercera) */}
-      <div className={`frase-construida ${phraseResetting ? "frase-resetting" : ""}`}>
-        <span className="typewriter">
-          {baseAnimada}
-          {xAnimada}
-          {creativeMode ? terceraAnimada : oAnimada}
-        </span>
-        <span className="cursor">|</span>
-      </div>
-
-      {/* Tablero */}
-      <div className="tablero-cuadricula">
-        {turno === "O" && boardReady && !isTransitioning && (
-          <div className="turno-chip turno-chip--o" aria-live="polite">
-            <span className="turno-dot" />
-            <span className="turno-chip__text">O está eligiendo cómo cerrar la frase...</span>
-          </div>
-        )}
-        <div className={`cuadricula ${bloqueaClicks ? "no-clicks" : ""} ${!boardReady ? "board-hidden" : ""} ${animateEntry ? "board-entry" : ""}`}>
-          {tablero.map((_, index) => {
-            const fila = Math.floor(index / 3);
-            const isGarra = fila === 0;
-            const jugada = jugadas[index];
-            const mark = jugada ? jugada.jugador : null;
-            const isGhosting = turno === "O" && ghostCell === index && !jugada;
-
-            return (
-              <div
-                key={index}
-                className={`casilla ${isGarra ? "garra" : ""} ${jugada ? "ocupada" : ""} ${(palabraX && palabraO) ? "deshabilitada" : ""} ${isGhosting ? "ghosting" : ""}`}
-                onClick={() => { if (!(palabraX && palabraO)) handleCasillaClick(index); }}
-              >
-                {isGarra ? (
-                  <img src={Garra} alt="garra" className="garra-img" />
-                ) : (
-                  <div className="esfera"></div>
-                )}
-                {isGhosting && (
-                  <div className="ghost-cursor" aria-hidden="true">
-                    <span className="ghost-cursor__spark" />
-                  </div>
-                )}
-                {mark && (
-                  <span className={`marca ${mark === "X" ? "marca-x" : "marca-o"}`}>{mark}</span>
-                )}
-              </div>
-            );
-          })}
+      <div className="tablero-card">
+        <div className="tablero-personaje">
+          <PersonajeMenu personaje={{ nombreVisible, icono, id: personajeActual }} mensaje={mensajeAnimado} />
         </div>
-        <BoardResetOverlay pieces={resetOverlayPieces} onComplete={handleResetOverlayComplete} />
 
-        <div className="hub-botones">
-          <button
-            className={`btn-icono ${!(palabraX && (palabraO || creativeMode)) ? "oculto" : ""}`}
-            onClick={handleAbuchear}
-            title="Abuchear (elige otro remate)"
-          >
-            <img src="/assets/abuchea.png" alt="Abuchear" />
-          </button>
-          <button
-            className={`btn-icono ${!(palabraX && (palabraO || creativeMode)) ? "oculto" : ""}`}
-            onClick={handleAplaudir}
-            title="Aplaudir (guardar frase)"
-          >
-            <img src="/assets/aplaude.png" alt="Aplaudir" />
-          </button>
+        {/* Base → X → (O/tercera) */}
+        <div className={`frase-construida ${phraseResetting ? "frase-resetting" : ""}`}>
+          <span className="typewriter">
+            {baseAnimada}
+            {xAnimada}
+            {creativeMode ? terceraAnimada : oAnimada}
+          </span>
+          <span className="cursor">|</span>
+        </div>
 
-          {menuAlternativasAbierto && (
-            <div className="alternativas-panel">
-              <div className="alternativas-header">
-                <strong>Otras frases para cerrar</strong>
-                <button className="alternativas-close" onClick={() => cerrarMenuAbucheo(true)}>✕</button>
-              </div>
-              <p className="alternativas-subtitle">Toca una frase para probarla, luego confirma con Salvada.</p>
-              <div className="alternativas-lista">
-                {alternativasAbucheo.map((opcion) => (
-                  <button
-                    key={opcion}
-                    className={`alternativa-chip ${palabraO === opcion ? "seleccionada" : ""}`}
-                    onClick={() => aplicarAlternativaAbucheo(opcion)}
-                  >
-                    {buildLinea({
-                      jugador: "O",
-                      palabra: opcion,
-                      casillaIndex: ultimaCasillaO,
-                      prefijos,
-                      sufijos,
-                      tablero,
-                    }) || opcion}
-                  </button>
-                ))}
-              </div>
-              <div className="alternativas-actions">
-                <button className="alternativa-confirmar" onClick={confirmarSalvada}>Salvada</button>
-                <button className="alternativa-cancelar" onClick={() => cerrarMenuAbucheo(true)}>Cancelar</button>
-              </div>
+        {/* Tablero */}
+        <div className="tablero-cuadricula">
+          {turno === "O" && boardReady && !isTransitioning && (
+            <div className="turno-chip turno-chip--o" aria-live="polite">
+              <span className="turno-dot" />
+              <span className="turno-chip__text">O está eligiendo cómo cerrar la frase...</span>
             </div>
           )}
-        </div>
-      </div>
+          <div className={`cuadricula ${bloqueaClicks ? "no-clicks" : ""} ${!boardReady ? "board-hidden" : ""} ${animateEntry ? "board-entry" : ""}`}>
+            {tablero.map((_, index) => {
+              const fila = Math.floor(index / 3);
+              const isGarra = fila === 0;
+              const jugada = jugadas[index];
+              const mark = jugada ? jugada.jugador : null;
+              const isGhosting = turno === "O" && ghostCell === index && !jugada;
 
-      {/* Efecto de victoria */}
-      <VictoryEffect show={victoryActive} winningCells={victory?.cells || []} shapes={shapesArray} />
+              return (
+                <div
+                  key={index}
+                  className={`casilla ${isGarra ? "garra" : ""} ${jugada ? "ocupada" : ""} ${(palabraX && palabraO) ? "deshabilitada" : ""} ${isGhosting ? "ghosting" : ""}`}
+                  onClick={() => { if (!(palabraX && palabraO)) handleCasillaClick(index); }}
+                >
+                  {isGarra ? (
+                    <img src={Garra} alt="garra" className="garra-img" />
+                  ) : (
+                    <div className="esfera"></div>
+                  )}
+                  {isGhosting && (
+                    <div className="ghost-cursor" aria-hidden="true">
+                      <span className="ghost-cursor__spark" />
+                    </div>
+                  )}
+                  {mark && (
+                    <span className={`marca ${mark === "X" ? "marca-x" : "marca-o"}`}>{mark}</span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+          <BoardResetOverlay pieces={resetOverlayPieces} onComplete={handleResetOverlayComplete} />
+
+          <div className="hub-botones">
+            <button
+              className={`btn-icono ${!(palabraX && (palabraO || creativeMode)) ? "oculto" : ""}`}
+              onClick={handleAbuchear}
+              title="Abuchear (elige otro remate)"
+            >
+              <img src="/assets/abuchea.png" alt="Abuchear" />
+            </button>
+            <button
+              className={`btn-icono ${!(palabraX && (palabraO || creativeMode)) ? "oculto" : ""}`}
+              onClick={handleAplaudir}
+              title="Aplaudir (guardar frase)"
+            >
+              <img src="/assets/aplaude.png" alt="Aplaudir" />
+            </button>
+
+            {menuAlternativasAbierto && (
+              <div className="alternativas-panel">
+                <div className="alternativas-header">
+                  <strong>Otras frases para cerrar</strong>
+                  <button className="alternativas-close" onClick={() => cerrarMenuAbucheo(true)}>✕</button>
+                </div>
+                <p className="alternativas-subtitle">Toca una frase para probarla, luego confirma con Salvada.</p>
+                <div className="alternativas-lista">
+                  {alternativasAbucheo.map((opcion) => (
+                    <button
+                      key={opcion}
+                      className={`alternativa-chip ${palabraO === opcion ? "seleccionada" : ""}`}
+                      onClick={() => aplicarAlternativaAbucheo(opcion)}
+                    >
+                      {buildLinea({
+                        jugador: "O",
+                        palabra: opcion,
+                        casillaIndex: ultimaCasillaO,
+                        prefijos,
+                        sufijos,
+                        tablero,
+                      }) || opcion}
+                    </button>
+                  ))}
+                </div>
+                <div className="alternativas-actions">
+                  <button className="alternativa-confirmar" onClick={confirmarSalvada}>Salvada</button>
+                  <button className="alternativa-cancelar" onClick={() => cerrarMenuAbucheo(true)}>Cancelar</button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Efecto de victoria */}
+        <VictoryEffect show={victoryActive} winningCells={victory?.cells || []} shapes={shapesArray} />
+      </div>
 
       {/* Modal creativo (burbuja) */}
       {burbujaAbierta !== null && (

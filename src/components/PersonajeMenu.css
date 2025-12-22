@@ -13,6 +13,15 @@
   transition: transform 0.2s ease;
 }
 
+.personaje-icono--placeholder {
+  background: linear-gradient(135deg, #c8a2ff, #f0a6f0);
+  color: #2c0e3c;
+  font-weight: bold;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+}
+
 .personaje-icono:hover {
   transform: scale(1.1);
 }

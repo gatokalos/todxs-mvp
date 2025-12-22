@@ -10,22 +10,36 @@ function PersonajeMenu({ personaje, mensaje }) {
     setModalAbierto((prev) => !prev)
   }
 
+  const icono = personaje.icono?.trim()
+  const iconoProps = {
+    onClick: handleIconClick,
+    role: "button",
+    tabIndex: 0,
+    onKeyDown: (evt) => {
+      if (evt.key === "Enter" || evt.key === " ") {
+        evt.preventDefault()
+        handleIconClick()
+      }
+    },
+  }
+
   return (
     <div className="personaje-menu">
-      <img
-        src={personaje.icono}
-        alt={personaje.nombreVisible}
-        className="personaje-icono"
-        onClick={handleIconClick}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(evt) => {
-          if (evt.key === "Enter" || evt.key === " ") {
-            evt.preventDefault()
-            handleIconClick()
-          }
-        }}
-      />
+      {icono ? (
+        <img
+          src={icono}
+          alt={personaje.nombreVisible}
+          {...iconoProps}
+          className="personaje-icono"
+        />
+      ) : (
+        <div
+          {...iconoProps}
+          className="personaje-icono personaje-icono--placeholder"
+        >
+          {personaje.nombreVisible?.[0] || "?"}
+        </div>
+      )}
 
       {mensaje && <div className="personaje-mensaje">{mensaje}</div>}
 
