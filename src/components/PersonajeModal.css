@@ -1,7 +1,12 @@
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(8, 4, 18, 0.6);
+  background: linear-gradient(
+    160deg,
+    rgba(108, 108, 108, 0.55) 0%,
+    rgba(170, 166, 166, 0.62) 100%
+  );
+  backdrop-filter: blur(6px) saturate(120%);
   display: flex;
   align-items: stretch;
   justify-content: flex-end;
@@ -9,6 +14,16 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
+}
+
+.modal-backdrop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 220, 200, 0.18), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(255, 180, 220, 0.16), transparent 50%);
+  pointer-events: none;
 }
 
 .modal-backdrop.is-active {

@@ -6,7 +6,7 @@
   height: 100vh;
   pointer-events: none;  /* el SVG no interfiere con clicks */
   overflow: visible;     /* que no recorte el triángulo */
-  z-index: 9998;         /* por debajo del modal (ajusta si necesitas otro orden) */
+  z-index: 1999;         /* por debajo del modal y de la carita */
   background: transparent;
   color: var(--speech-bubble-start, rgba(165, 165, 165, 0.92));
 }
@@ -21,7 +21,7 @@
   right: 0;
   display: flex;
   justify-content: center;
-  z-index: 30;
+  z-index: 2000;
   pointer-events: none;
 }
 

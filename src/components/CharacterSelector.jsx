@@ -379,7 +379,7 @@ export default function CharacterSelector() {
         ref={buildingRef}
         style={buildingWidth ? { "--building-width": `${buildingWidth}px` } : undefined}
       >
-        <img src="/assets/edificio.svg" alt="Edificio canon" className="character-selector__building" />
+        <img src="/assets/edificio.png" alt="Edificio canon" className="character-selector__building" />
 
         <div className="characters-layer">
           {loading && (

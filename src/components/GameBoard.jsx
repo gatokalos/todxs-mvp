@@ -93,6 +93,7 @@ import Lagrima from "/assets/esfera2.svg";
 
 const O_THINK_DELAY_MS = 1400;
 const TYPE_TICK_SPEED = 90;
+const SALVADA_WIND_DELAY_MS = 1400;
 
 export default function GameBoard() {
   const {
@@ -148,6 +149,7 @@ export default function GameBoard() {
   const [alternativasAbucheo, setAlternativasAbucheo] = useState([]);
   const [palabraOriginalAbucheo, setPalabraOriginalAbucheo] = useState(null);
   const [shouldOpenCreativeModal, setShouldOpenCreativeModal] = useState(false);
+  const phraseResetTimeoutRef = useRef(null);
 
   // --- Estado local alimentado por Supabase ---
   const [nombreVisible, setNombreVisible] = useState("");
@@ -501,6 +503,10 @@ export default function GameBoard() {
     stopAsmrPad();
     typeOProgressRef.current = 0;
     setShouldOpenCreativeModal(false);
+    if (phraseResetTimeoutRef.current) {
+      clearTimeout(phraseResetTimeoutRef.current);
+      phraseResetTimeoutRef.current = null;
+    }
     pendingAutoORef.current = false;
     typeProgressRef.current = 0;
     clearThinkTimeout();
@@ -1091,8 +1097,16 @@ useEffect(() => {
   };
 
   const confirmarSalvada = () => {
+    if (phraseResetTimeoutRef.current) {
+      clearTimeout(phraseResetTimeoutRef.current);
+    }
+    setPhraseResetting(true);
     limpiarMenuAbucheo();
-    continuarDespuesDeFrase();
+    phraseResetTimeoutRef.current = setTimeout(() => {
+      setPhraseResetting(false);
+      phraseResetTimeoutRef.current = null;
+      continuarDespuesDeFrase();
+    }, SALVADA_WIND_DELAY_MS);
   };
 
   // --- confirmar remate creativo ---
@@ -1424,6 +1438,60 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
           <span className="cursor">|</span>
         </div>
 
+        <div className="hub-botones">
+          <button
+            className={`btn-icono ${!(palabraX && (palabraO || creativeMode)) ? "oculto" : ""}`}
+            onClick={handleAbuchear}
+            title="Abuchear (elige otro remate)"
+          >
+            <img src="/assets/abuchea.png" alt="Abuchear" />
+          </button>
+          <button
+            className={`btn-icono ${!(palabraX && (palabraO || creativeMode)) ? "oculto" : ""}`}
+            onClick={handleAplaudir}
+            title="Aplaudir (guardar frase)"
+          >
+            <img src="/assets/aplaude.png" alt="Aplaudir" />
+          </button>
+        </div>
+
+        {menuAlternativasAbierto && (
+          <>
+            <div
+              className="alternativas-overlay"
+              onClick={() => cerrarMenuAbucheo(true)}
+              aria-hidden="true"
+            />
+            <div className="alternativas-panel">
+              <div className="alternativas-header">
+                <strong>Otras frases para cerrar</strong>
+              </div>
+              <p className="alternativas-subtitle">Toca una frase para probarla, luego confirma con Salvada.</p>
+              <div className="alternativas-lista">
+                {alternativasAbucheo.map((opcion) => (
+                  <button
+                    key={opcion}
+                    className={`alternativa-chip ${palabraO === opcion ? "seleccionada" : ""}`}
+                    onClick={() => aplicarAlternativaAbucheo(opcion)}
+                  >
+                    {buildLinea({
+                      jugador: "O",
+                      palabra: opcion,
+                      casillaIndex: ultimaCasillaO,
+                      prefijos,
+                      sufijos,
+                      tablero,
+                    }) || opcion}
+                  </button>
+                ))}
+              </div>
+              <div className="alternativas-actions">
+                <button className="alternativa-confirmar" onClick={confirmarSalvada}>Salvada</button>
+              </div>
+            </div>
+          </>
+        )}
+
         {/* Tablero */}
         <div className="tablero-cuadricula">
           {turno === "O" && boardReady && !isTransitioning && (
@@ -1467,55 +1535,6 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
             })}
           </div>
           <BoardResetOverlay pieces={resetOverlayPieces} onComplete={handleResetOverlayComplete} />
-
-          <div className="hub-botones">
-            <button
-              className={`btn-icono ${!(palabraX && (palabraO || creativeMode)) ? "oculto" : ""}`}
-              onClick={handleAbuchear}
-              title="Abuchear (elige otro remate)"
-            >
-              <img src="/assets/abuchea.png" alt="Abuchear" />
-            </button>
-            <button
-              className={`btn-icono ${!(palabraX && (palabraO || creativeMode)) ? "oculto" : ""}`}
-              onClick={handleAplaudir}
-              title="Aplaudir (guardar frase)"
-            >
-              <img src="/assets/aplaude.png" alt="Aplaudir" />
-            </button>
-
-            {menuAlternativasAbierto && (
-              <div className="alternativas-panel">
-                <div className="alternativas-header">
-                  <strong>Otras frases para cerrar</strong>
-                  <button className="alternativas-close" onClick={() => cerrarMenuAbucheo(true)}>✕</button>
-                </div>
-                <p className="alternativas-subtitle">Toca una frase para probarla, luego confirma con Salvada.</p>
-                <div className="alternativas-lista">
-                  {alternativasAbucheo.map((opcion) => (
-                    <button
-                      key={opcion}
-                      className={`alternativa-chip ${palabraO === opcion ? "seleccionada" : ""}`}
-                      onClick={() => aplicarAlternativaAbucheo(opcion)}
-                    >
-                      {buildLinea({
-                        jugador: "O",
-                        palabra: opcion,
-                        casillaIndex: ultimaCasillaO,
-                        prefijos,
-                        sufijos,
-                        tablero,
-                      }) || opcion}
-                    </button>
-                  ))}
-                </div>
-                <div className="alternativas-actions">
-                  <button className="alternativa-confirmar" onClick={confirmarSalvada}>Salvada</button>
-                  <button className="alternativa-cancelar" onClick={() => cerrarMenuAbucheo(true)}>Cancelar</button>
-                </div>
-              </div>
-            )}
-          </div>
         </div>
 
         {/* Efecto de victoria */}

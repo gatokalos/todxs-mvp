@@ -214,7 +214,7 @@
   border-radius: 18px;
   box-shadow: 0 6px 18px rgba(255, 251, 251, 0.5);
   animation: bubble-pop-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: 1002;
+  z-index: 19;
   color: #fdf8ff;
   text-align: left;
   line-height: 1.35;
