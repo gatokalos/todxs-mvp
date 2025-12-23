@@ -207,6 +207,23 @@ export default function SpeechBubbleModal({
           }
         >
           {!creativeMode && opciones?.length > 0 && (
+            <button
+              type="button"
+              className={`speech-roulette-icon${isRouletteSpinning ? " is-spinning" : ""}`}
+              onClick={handleRoulette}
+              disabled={isRouletteSpinning}
+              aria-label={
+                isRouletteSpinning
+                  ? `Ruleta girando, ${rouletteTurnsLeft} turnos restantes`
+                  : "Activar ruleta rusa"
+              }
+              title="Activar ruleta rusa"
+            >
+              <span aria-hidden="true">🎲</span>
+            </button>
+          )}
+
+          {!creativeMode && opciones?.length > 0 && (
             <div className="speech-letterbox">
               <button
                 type="button"
@@ -256,22 +273,6 @@ export default function SpeechBubbleModal({
             </div>
           )}
         </div>
-        {!creativeMode && opciones?.length > 0 && (
-          <button
-            type="button"
-            className={`speech-roulette-icon${isRouletteSpinning ? " is-spinning" : ""}`}
-            onClick={handleRoulette}
-            disabled={isRouletteSpinning}
-            aria-label={
-              isRouletteSpinning
-                ? `Ruleta girando, ${rouletteTurnsLeft} turnos restantes`
-                : "Activar ruleta rusa"
-            }
-            title="Activar ruleta rusa"
-          >
-            <span aria-hidden="true">🎲</span>
-          </button>
-        )}
       </div>
     </div>
   );

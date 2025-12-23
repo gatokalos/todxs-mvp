@@ -241,9 +241,8 @@
 }
 
 .speech-roulette-icon {
-  position: absolute;
-  bottom: clamp(12px, 2.4vw, 18px);
-  right: clamp(12px, 2.4vw, 18px);
+  position: static;
+  margin: 6px auto 10px;
   width: clamp(46px, 5vw, 56px);
   height: clamp(46px, 5vw, 56px);
   border-radius: 50%;
@@ -256,6 +255,7 @@
   font-size: 1.4rem;
   box-shadow: 0 12px 26px rgba(0, 0, 0, 0.45), 0 0 12px rgba(255, 140, 90, 0.12);
   cursor: pointer;
+  align-self: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   z-index: 5;
 }

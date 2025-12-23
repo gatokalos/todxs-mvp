@@ -54,17 +54,17 @@ body {
 }
 
 .tablero-personaje {
-  position: sticky;
-  top: clamp(10px, 2vh, 18px);
-  align-self: flex-end;
-  height: 0;
+  position: absolute;
+  right: clamp(10px, 2vh, 18px);
+  bottom: clamp(10px, 2vh, 18px);
   z-index: 40;
   pointer-events: none;
 }
 
 .tablero-card .personaje-menu {
-  position: sticky;
-  top: clamp(10px, 2vh, 18px);
+  position: absolute;
+  right: 0;
+  bottom: 0;
   pointer-events: auto;
 }
 
