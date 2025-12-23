@@ -8,7 +8,7 @@
   overflow: visible;     /* que no recorte el triángulo */
   z-index: 9998;         /* por debajo del modal (ajusta si necesitas otro orden) */
   background: transparent;
-  color: rgba(18, 12, 12, 0.92);
+  color: var(--speech-bubble-start, rgba(165, 165, 165, 0.92));
 }
 
 
@@ -29,7 +29,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(165deg, rgba(18, 12, 12, 0.94), rgba(8, 6, 6, 0.96));
+  --speech-bubble-start: rgba(108, 108, 108, 0.94);
+  --speech-bubble-end: rgba(170, 166, 166, 0.96);
+  background: linear-gradient(165deg, var(--speech-bubble-start), var(--speech-bubble-end));
   color: #f6efe9;
   border-radius: 18px;
   border: 1px solid rgba(255, 182, 128, 0.2);

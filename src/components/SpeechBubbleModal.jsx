@@ -221,9 +221,15 @@ export default function SpeechBubbleModal({
 
           {tailCoords?.x1 && (
             <svg className="speech-tail" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="speechTailGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="var(--speech-bubble-start)" />
+                  <stop offset="100%" stopColor="var(--speech-bubble-end)" />
+                </linearGradient>
+              </defs>
               <polygon
                 points={`${tailCoords.x1},${tailCoords.y1} ${tailCoords.x2},${tailCoords.y2} ${tailCoords.x3},${tailCoords.y3}`}
-                fill="currentColor"
+                fill="url(#speechTailGradient)"
               />
             </svg>
           )}

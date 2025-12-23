@@ -6,18 +6,36 @@ import "./CurtainTransition.css";
 
 const SCREEN_BEHAVIOR = {
   selector: { openLeft: -40, openRight: 40, openDuration: 1.2, openEase: "power1.out", closeDuration: 0.95, closeEase: "power2.inOut" },
-  camerino: { openLeft: -60, openRight: 60, openDuration: 1.2, openEase: "power1.out", closeDuration: 0.95, closeEase: "power2.inOut" },
+  camerino: { openLeft: -100, openRight: 100, openDuration: 1.2, openEase: "power1.out", closeDuration: 0.95, closeEase: "power2.inOut" },
   compendio: { openLeft: -100, openRight: 100, openDuration: 1.2, openEase: "power1.out", closeDuration: 0.95, closeEase: "power2.inOut" },
   gameboard: { openLeft: -100, openRight: 100, openDuration: 3.55, openEase: "power2.out", closeDuration: 0.45, closeEase: "power2.in" },
   game: { openLeft: -100, openRight: 100, openDuration: 0.55, openEase: "power2.out", closeDuration: 0.45, closeEase: "power2.in" },
   default: { openLeft: -100, openRight: 100, openDuration: 0.65, openEase: "power2.out", closeDuration: 0.5, closeEase: "power2.in" },
 };
 
+// 🔑 overrides SOLO para vertical (portrait)
+// Ajusta estos números a gusto: mayor magnitud = más apertura (menos cortina tapando centro)
+const PORTRAIT_OVERRIDES = {
+  selector: { openLeft: -90, openRight: 90 },
+  camerino: { openLeft: -100, openRight: 100 },
+  compendio: { openLeft: -120, openRight: 120 },
+  gameboard: { openLeft: -120, openRight: 120 },
+  game: { openLeft: -120, openRight: 120 },
+  default: { openLeft: -120, openRight: 120 },
+};
+
 // 🔑 función responsive
-function getScreenBehavior(screen, width = window.innerWidth) {
+function getScreenBehavior(screen, width = window.innerWidth, height = window.innerHeight) {
   const base = SCREEN_BEHAVIOR[screen] || SCREEN_BEHAVIOR.default;
+  const isPortrait = height > width;
+
+  if (isPortrait) {
+    const overrides = PORTRAIT_OVERRIDES[screen] || PORTRAIT_OVERRIDES.default;
+    return { ...base, ...overrides };
+  }
+
   if (width <= 768) {
-    return { ...base, openLeft: -100, openRight: 100 };
+    return { ...base, openLeft: -80, openRight: 80 };
   }
   return base;
 }
@@ -35,14 +53,10 @@ export default function CurtainTransition({ children }) {
 
   const [renderedChildren, setRenderedChildren] = useState(() => children);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
-
-  // 🖥️ listener de resize
-  useEffect(() => {
-    const handleResize = () => setViewportWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const [viewportSize, setViewportSize] = useState(() => ({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  }));
 
   // 🎭 Configura wave de ambas cortinas
   useLayoutEffect(() => {
@@ -109,10 +123,26 @@ export default function CurtainTransition({ children }) {
   }, [children]);
 
   useEffect(() => {
+    const updateViewport = () => {
+      setViewportSize((prev) => {
+        const next = { width: window.innerWidth, height: window.innerHeight };
+        if (prev.width === next.width && prev.height === next.height) return prev;
+        return next;
+      });
+    };
+    window.addEventListener("resize", updateViewport);
+    window.addEventListener("orientationchange", updateViewport);
+    return () => {
+      window.removeEventListener("resize", updateViewport);
+      window.removeEventListener("orientationchange", updateViewport);
+    };
+  }, []);
+
+  useEffect(() => {
     if (!leftCurtainRef.current || !rightCurtainRef.current || !stageRef.current) return;
     if (timelineRef.current) timelineRef.current.kill();
 
-    const config = getScreenBehavior(screen, viewportWidth);
+    const activeConfig = getScreenBehavior(screen, viewportSize.width, viewportSize.height);
     setIsAnimating(true);
 
     if (!hasOpenedRef.current) {
@@ -127,8 +157,8 @@ export default function CurtainTransition({ children }) {
       });
 
       initialTimeline
-        .to(leftCurtainRef.current, { xPercent: config.openLeft, duration: config.openDuration, ease: config.openEase })
-        .to(rightCurtainRef.current, { xPercent: config.openRight, duration: config.openDuration, ease: config.openEase }, "<")
+        .to(leftCurtainRef.current, { xPercent: activeConfig.openLeft, duration: activeConfig.openDuration, ease: activeConfig.openEase })
+        .to(rightCurtainRef.current, { xPercent: activeConfig.openRight, duration: activeConfig.openDuration, ease: activeConfig.openEase }, "<")
         .add(() => {
           startRightWaveIfSelector(); // 👈 aquí arranca la derecha con delay si toca
         }, "-=0.3");
@@ -142,19 +172,19 @@ export default function CurtainTransition({ children }) {
         xPercent: 0,
         y: 0,
         skewX: 0,
-        duration: config.closeDuration,
-        ease: config.closeEase,
+        duration: activeConfig.closeDuration,
+        ease: activeConfig.closeEase,
       })
       .add(() => setRenderedChildren(pendingChildrenRef.current))
-      .to(leftCurtainRef.current, { xPercent: config.openLeft, duration: config.openDuration, ease: config.openEase })
-      .to(rightCurtainRef.current, { xPercent: config.openRight, duration: config.openDuration, ease: config.openEase }, "<")
+      .to(leftCurtainRef.current, { xPercent: activeConfig.openLeft, duration: activeConfig.openDuration, ease: activeConfig.openEase })
+      .to(rightCurtainRef.current, { xPercent: activeConfig.openRight, duration: activeConfig.openDuration, ease: activeConfig.openEase }, "<")
       .add(() => {
         startRightWaveIfSelector(); // 👈 también al cambiar de pantalla
       }, "-=0.3");
 
     timelineRef.current = tl;
     return () => tl.kill();
-  }, [screen, viewportWidth]);
+  }, [screen, viewportSize]);
 
   return (
     <div className="curtain-transition">

@@ -168,19 +168,6 @@ export default function Camerino() {
     return () => mql.removeEventListener?.("change", update);
   }, []);
 
-  // === Cortinas de apertura ===
-  useEffect(() => {
-    const left = curtainLeftRef.current;
-    const right = curtainRightRef.current;
-    if (!left || !right) return;
-
-    const tl = gsap.timeline();
-    gsap.set([left, right], { xPercent: 0 });
-    tl.to(left, { xPercent: -100, duration: 1.8, ease: "power4.inOut" })
-      .to(right, { xPercent: 100, duration: 1.8, ease: "power4.inOut" }, 0);
-
-    return () => tl.kill();
-  }, []);
 
   // === Imagen de fondo ===
   useEffect(() => {
@@ -252,127 +239,107 @@ useEffect(() => {
 
   return (
     <div className="camerino">
-      {/* Cortinas */}
-      <div ref={curtainLeftRef} className="curtain curtain-left" />
-      <div ref={curtainRightRef} className="curtain curtain-right" />
-
       {/* Fondo */}
       <div
         className="camerino-bg"
         style={{ backgroundImage: `url(${camerinoImage})` }}
       />
 
-
       <GatologiasSticky onClick={() => setScreen("compendio")} />
 
       {/* Contenido principal */}
       <div
-        className="camerino-blog"
+        className={`camerino-blog${currentSlug ? ` camerino-blog--${currentSlug}` : ""}`}
         onTouchStart={handleSwipeStart}
         onTouchEnd={handleSwipeEnd}
       >
         <div key={currentSlug} className="camerino-blog__inner">
-      
-                    
-    
-
-        {/* Ficha + Post fijo */}
-        <div className="camerino-blog__draft camerino-blog__draft--default">
-          {!isTouchDevice && (
-            <>
-              <button
-                type="button"
-                className="camerino-draft-nav camerino-draft-nav--prev"
-                onClick={goPrevCharacter}
-                aria-label="Personaje anterior"
-              >
-                ‹
-              </button>
-              <button
-                type="button"
-                className="camerino-draft-nav camerino-draft-nav--next"
-                onClick={goNextCharacter}
-                aria-label="Siguiente personaje"
-              >
-                ›
-              </button>
-            </>
-          )}
-          
-   
-           {/* Botones flotantes */}
-   
-
-                       <div className="draft-image" style={{ backgroundImage: `url(${camerinoImage})` }}>
-  <div className="draft-image-overlay" />
-  <div className="camerino-ficha">
-    <h2>{personaje.nombre_visible}</h2>
-    <h4>{personaje.genero_literario}</h4>
-  </div>
-</div>
-
-    
-
-          <div className="draft-content">
-         <button
-              ref={btnRef}
-              type="button"
-              className="btn-entrar"
-              onClick={handleEntrarEscenario}
-              disabled={isLocked}
-              title={
-                isLocked
-                  ? "Este personaje está bloqueado para tu rol actual"
-                  : undefined
-              }
-            >
-              <span>Entrar al escenario</span>
-            </button>
-            <p>
-              Jugado <strong>{stats?.jugado_veces ?? "—"}</strong> veces esta
-              semana · Popularidad ⭐⭐⭐⭐☆
-              <br />
-              Última actividad: hace{" "}
-              {stats?.dias_desde_ultima_actividad ?? "—"} días.
-              <br />
-            </p>
-            
-          </div>
-                {isTouchDevice && (
-            <div className="camerino-swipe-hint" aria-hidden="true">
-              <span className="camerino-swipe-icon">⇆</span>
-              <span>Desliza para cambiar de personaje</span>
+          {/* Ficha + Post fijo */}
+          <div className="camerino-blog__draft camerino-blog__draft--default">
+            {!isTouchDevice && (
+              <>
+                <button
+                  type="button"
+                  className="camerino-draft-nav camerino-draft-nav--prev"
+                  onClick={goPrevCharacter}
+                  aria-label="Personaje anterior"
+                >
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  className="camerino-draft-nav camerino-draft-nav--next"
+                  onClick={goNextCharacter}
+                  aria-label="Siguiente personaje"
+                >
+                  ›
+                </button>
+              </>
+            )}
+            <div className="draft-image" style={{ backgroundImage: `url(${camerinoImage})` }}>
+              <div className="draft-image-overlay" />
+              <div className="camerino-ficha">
+                <h2>{personaje.nombre_visible}</h2>
+                <h4>{personaje.genero_literario}</h4>
+              </div>
             </div>
+            <div className="draft-content">
+              <button
+                ref={btnRef}
+                type="button"
+                className="btn-entrar"
+                onClick={handleEntrarEscenario}
+                disabled={isLocked}
+                title={
+                  isLocked
+                    ? "Este personaje está bloqueado para tu rol actual"
+                    : undefined
+                }
+              >
+                <span>Entrar al escenario</span>
+              </button>
+              <p>
+                Jugado <strong>{stats?.jugado_veces ?? "—"}</strong> veces esta
+                semana · Popularidad ⭐⭐⭐⭐☆
+                <br />
+                Última actividad: hace{" "}
+                {stats?.dias_desde_ultima_actividad ?? "—"} días.
+                <br />
+              </p>
+            </div>
+            {isTouchDevice && (
+              <div className="camerino-swipe-hint" aria-hidden="true">
+                <span className="camerino-swipe-icon">⇆</span>
+                <span>Desliza para cambiar de personaje</span>
+              </div>
+            )}
+          </div>
+
+          {/* Gatologías Supabase */}
+          {entries.map((entry) => (
+            <BlogEntry key={entry.id} entry={entry} onSave={handleSave} />
+          ))}
+
+          {/* Nuevo draft (modo edición) */}
+          {draft?.status === "nuevo" && (
+            <BlogEntry
+              key={draft.id}
+              entry={draft}
+              onSave={async (updatedEntry) => {
+                const { error } = await supabase
+                  .from("gatologias")
+                  .update({
+                    titulo: updatedEntry.titulo,
+                    contenido: updatedEntry.contenido,
+                  })
+                  .eq("id", updatedEntry.id);
+
+                if (error)
+                  console.error("❌ Error actualizando gatología:", error.message);
+                else console.log("✅ Gatología actualizada:", updatedEntry.titulo);
+              }}
+            />
           )}
-
-        </div>
-        
-
-        {/* Gatologías Supabase */}
-        {entries.map((entry) => (
-          <BlogEntry key={entry.id} entry={entry} onSave={handleSave} />
-        ))}
-
-        {/* Nuevo draft (modo edición) */}
-        {draft?.status === "nuevo" && (
-          <BlogEntry
-            key={draft.id}
-            entry={draft}
-            onSave={async (updatedEntry) => {
-              const { error } = await supabase
-                .from("gatologias")
-                .update({
-                  titulo: updatedEntry.titulo,
-                  contenido: updatedEntry.contenido,
-                })
-                .eq("id", updatedEntry.id);
-
-              if (error)
-                console.error("❌ Error actualizando gatología:", error.message);
-              else console.log("✅ Gatología actualizada:", updatedEntry.titulo);
-            }}
-          />
-        )}
         </div>
       </div>
     </div>

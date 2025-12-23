@@ -1,5 +1,10 @@
 /* Lienzo general: no cambia tu fondo ni cortinas */
 .character-selector {
+  --bg-rose: #d67bb6;
+  --bg-mauve: #b2aacd;
+  --bg-plum: #2b292a;
+  --bg-wine: #8b3b5a;
+  --bg-sheen: rgba(255, 212, 236, 0.55);
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -7,7 +12,11 @@
   display: flex;
   justify-content: center;   /* centramos el wrap */
   align-items: flex-start;
-  background: radial-gradient(1180px 900px at 50% 20%, #d67bb6ff 0%, #b2aacdff 65%, #2b292aff 100%);
+  background:
+    radial-gradient(900px 650px at 18% 12%, var(--bg-sheen) 0%, rgba(255, 212, 236, 0) 55%),
+    radial-gradient(980px 760px at 82% 18%, rgba(194, 152, 220, 0.6) 0%, rgba(194, 152, 220, 0) 58%),
+    linear-gradient(150deg, rgba(139, 59, 90, 0.35) 0%, rgba(139, 59, 90, 0) 45%),
+    radial-gradient(1200px 900px at 50% 12%, var(--bg-rose) 0%, var(--bg-mauve) 58%, var(--bg-plum) 100%);
 }
 
 /* === Contenedor que “encoge” al tamaño del IMG === */

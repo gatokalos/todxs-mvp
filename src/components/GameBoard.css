@@ -39,7 +39,6 @@ body {
   width: min(92vw, 560px);
   min-height: clamp(720px, 92vh, 900px);
   padding: var(--card-pad);
-  padding-top: clamp(36px, 8vh, 96px);
   border-radius: 28px;
   background: linear-gradient(165deg, rgba(14, 10, 10, 0.96), rgba(8, 6, 6, 0.96));
   border: 1px solid rgba(255, 175, 120, 0.12);
