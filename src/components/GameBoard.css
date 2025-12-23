@@ -40,7 +40,7 @@ body {
   min-height: clamp(720px, 92vh, 900px);
   padding: var(--card-pad);
   border-radius: 28px;
-  background: linear-gradient(165deg, rgba(14, 10, 10, 0.96), rgba(8, 6, 6, 0.96));
+  background: linear-gradient(160deg, rgba(135, 97, 193, 0.85) 0%, rgba(235, 131, 131, 0.9) 100%);
   border: 1px solid rgba(255, 175, 120, 0.12);
   box-shadow:
     0 40px 80px rgba(4, 2, 2, 0.75),

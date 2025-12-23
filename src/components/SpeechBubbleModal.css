@@ -110,7 +110,7 @@
 
 @media (max-width: 768px) {
   .speech-bubble-container {
-    bottom: 5vh;   /* modal pegado abajo */
+    bottom: 13vh;   /* modal pegado abajo */
     top: auto;
   }
 }

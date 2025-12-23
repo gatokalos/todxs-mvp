@@ -1,10 +1,18 @@
 /* Lienzo general: no cambia tu fondo ni cortinas */
 .character-selector {
-  --bg-rose: #d67bb6;
-  --bg-mauve: #b2aacd;
-  --bg-plum: #2b292a;
-  --bg-wine: #8b3b5a;
-  --bg-sheen: rgba(255, 212, 236, 0.55);
+  --warm-ink: #f7efe7;
+  --warm-amber: #cdb1ff;
+  --warm-rose: #ff7b6e;
+  --warm-coral: #ff8f66;
+  --warm-gold: #ffd28a;
+  --warm-ember: #ff5a3f;
+  --warm-shadow: rgba(196, 170, 255, 0.6);
+  --mesh-pink: rgba(255, 127, 202, 0.55);
+  --mesh-purple: rgba(168, 110, 255, 0.55);
+  --mesh-blue: rgba(92, 182, 255, 0.5);
+  --mesh-coral: rgba(255, 140, 110, 0.5);
+  --mesh-gold: rgba(255, 204, 140, 0.5);
+  --mesh-mint: rgba(140, 242, 214, 0.45);
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -13,10 +21,30 @@
   justify-content: center;   /* centramos el wrap */
   align-items: flex-start;
   background:
-    radial-gradient(900px 650px at 18% 12%, var(--bg-sheen) 0%, rgba(255, 212, 236, 0) 55%),
-    radial-gradient(980px 760px at 82% 18%, rgba(194, 152, 220, 0.6) 0%, rgba(194, 152, 220, 0) 58%),
-    linear-gradient(150deg, rgba(139, 59, 90, 0.35) 0%, rgba(139, 59, 90, 0) 45%),
-    radial-gradient(1200px 900px at 50% 12%, var(--bg-rose) 0%, var(--bg-mauve) 58%, var(--bg-plum) 100%);
+    radial-gradient(1200px 900px at 15% 15%, var(--mesh-pink), transparent 65%),
+    radial-gradient(1100px 800px at 70% 10%, var(--mesh-purple), transparent 65%),
+    radial-gradient(1200px 900px at 85% 45%, var(--mesh-blue), transparent 65%),
+    radial-gradient(1000px 800px at 25% 60%, var(--mesh-coral), transparent 65%),
+    radial-gradient(1200px 900px at 60% 75%, var(--mesh-gold), transparent 65%),
+    radial-gradient(900px 700px at 40% 40%, var(--mesh-mint), transparent 65%),
+    linear-gradient(160deg, rgba(135, 97, 193, 0.85) 0%, rgba(235, 131, 131, 0.9) 100%);
+  background-size: 140% 140%;
+  animation:
+    selectorGlow 18s ease-in-out infinite,
+    selectorMeshDrift 28s ease-in-out infinite;
+}
+
+
+@keyframes selectorGlow {
+  0%, 100% { filter: saturate(1.02) brightness(1.02); }
+  50% { filter: saturate(1.08) brightness(1.05); }
+}
+
+@keyframes selectorMeshDrift {
+  0% { background-position: 0% 0%; }
+  45% { background-position: 50% 20%; }
+  70% { background-position: 80% 60%; }
+  100% { background-position: 0% 0%; }
 }
 
 /* === Contenedor que “encoge” al tamaño del IMG === */

@@ -29,12 +29,12 @@
 }
 
 .camerino-blog__inner {
-  width: min(100%, var(--card-width));
+  width: 100%;
   max-width: 100%;
-  align-items: stretch;
   animation: camerinoFade 0.55s ease both;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   gap: 2.4rem;
   padding: 2rem 0;
   margin: 0 auto;
@@ -936,7 +936,7 @@ html, body {
 /* === BLOG CARDS (publicados) === */
 .blog-card {
   position: relative;
-  width: var(--card-width);
+  width: 100%;
   max-width: 100%;
   margin: 0;
   padding: 2rem 2.4rem;
