@@ -15,6 +15,7 @@ export const BASE_CHARACTER_LAYOUT = {
   "reina-de-espadas": {
     top: "33%",
     left: "50%",
+    glowRow: "top",
     intro: "🗡️ Cuidado: sabe cortar sin levantar la voz.",
     nombre_visible: "La Reina de Espadas",
     genero_literario: "Aforismo filosófico",
@@ -25,6 +26,7 @@ export const BASE_CHARACTER_LAYOUT = {
   "don-polo": {
     top: "37%",
     left: "83%",
+    glowRow: "top",
     intro: "🦉 Domina el tablero antes del primer movimiento.",
     nombre_visible: "Don Polo",
     genero_literario: "Cronicón costumbrista",
@@ -35,6 +37,7 @@ export const BASE_CHARACTER_LAYOUT = {
   saturnina: {
     top: "38%",
     left: "20%",
+    glowRow: "top",
     intro: "🎠 Convierte el absurdo en táctica impredecible.",
     nombre_visible: "Saturnina",
     genero_literario: "Haiku expandido / microcuento",
@@ -45,6 +48,7 @@ export const BASE_CHARACTER_LAYOUT = {
   lucinda: {
     top: "51%",
     left: "50%",
+    glowRow: "middle",
     intro: "🕯️ Juega con emociones que otros no resisten.",
     nombre_visible: "Lucinda",
     genero_literario: "Carta confesional",
@@ -55,6 +59,7 @@ export const BASE_CHARACTER_LAYOUT = {
   "payasito-triste": {
     top: "55%",
     left: "20%",
+    glowRow: "middle",
     intro: "🎭 Hace trampa… pero con verdades incómodas.",
     nombre_visible: "Payasito Triste",
     genero_literario: "Poema en prosa / cuento breve onírico",
@@ -65,6 +70,7 @@ export const BASE_CHARACTER_LAYOUT = {
   "la-maestra": {
     top: "55%",
     left: "82%",
+    glowRow: "middle",
     intro: "📚 Corrige mientras juega. No se equivoca dos veces.",
     nombre_visible: "La Maestra",
     genero_literario: "Ensayo corto",
@@ -75,6 +81,7 @@ export const BASE_CHARACTER_LAYOUT = {
   "la-doctora": {
     top: "71%",
     left: "20%",
+    glowRow: "bottom",
     intro: "🔬 Detecta tus fallas antes que tú mismo.",
     nombre_visible: "La Doctora",
     genero_literario: "Informe poético / análisis simbólico",
@@ -85,6 +92,7 @@ export const BASE_CHARACTER_LAYOUT = {
   silvestre: {
     top: "69%",
     left: "50%",
+    glowRow: "bottom",
     intro: "🎭 Improvisa tan bien… que parece guion.",
     nombre_visible: "Silvestre",
     genero_literario: "Monólogo dramático",
@@ -95,6 +103,7 @@ export const BASE_CHARACTER_LAYOUT = {
   andy: {
     top: "71%",
     left: "82%",
+    glowRow: "bottom",
     intro: "💥 Juega a romper las reglas… científicamente.",
     nombre_visible: "Andy",
     genero_literario: "Flash fiction / meme narrativo",
@@ -189,13 +198,24 @@ export default function CharacterSelector() {
     playVictoryXSound(ctx);
   }, [getAudioCtx]);
 
+  const getCharacterCenter = useCallback((id) => {
+    const root = buildingRef.current;
+    if (!root) return null;
+    const el = root.querySelector(`[data-character-id="${id}"]`);
+    if (!el) return null;
+    const rect = el.getBoundingClientRect();
+    return {
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2,
+    };
+  }, []);
+
   const scheduleAutoClose = useCallback(() => {
-    if (!isTouchMode) return;
     clearBubbleTimeout();
     bubbleTimeoutRef.current = setTimeout(() => {
       setClosing(true);
     }, 4200);
-  }, [clearBubbleTimeout, isTouchMode]);
+  }, [clearBubbleTimeout]);
 
   const updateBubblePosition = useCallback(() => {
     if (!hostRef.current) return;
@@ -227,6 +247,7 @@ export default function CharacterSelector() {
     clearBubbleTimeout();
     clearSelectionTimeout();
     setSpotlightTarget(null);
+    setHovered(null);
     const canPlay = canPlayPersonaje(p.id);
 
     setPersonajeActual(p.id);
@@ -253,6 +274,7 @@ export default function CharacterSelector() {
         slug,
         ...info,
         sticker_url: info.sticker_url,
+        glowRow: info.glowRow,
       }));
     }
 
@@ -268,6 +290,7 @@ export default function CharacterSelector() {
           top: layout.top,
           left: layout.left,
           intro: layout.intro,
+          glowRow: layout.glowRow,
           nombre_visible: personaje.nombre_visible || personaje.nombre || layout.nombre_visible,
           genero_literario: personaje.genero_literario || layout.genero_literario,
           frase_base: personaje.frase_base || layout.frase_base,
@@ -285,6 +308,7 @@ export default function CharacterSelector() {
         slug,
         ...info,
         sticker_url: info.sticker_url,
+        glowRow: info.glowRow,
         widthRatio: info.widthRatio ?? DEFAULT_WIDTH_RATIO,
       }));
     }
@@ -294,16 +318,12 @@ export default function CharacterSelector() {
 
   const handleHover = (char) => {
     if (isTouchMode) return;
-    setClosing(false); // evita que se corte al re-hover
     setHovered(char.id);
-    setIntroText(char.intro || DEFAULT_INTRO);
-    setBubbleCharacter(char);
   };
 
   const handleLeave = () => {
     if (isTouchMode) return;
-    clearBubbleTimeout();
-    if (introText) setClosing(true); // dispara fade-out
+    setHovered(null);
   };
 
   const previewCharacter = (char) => {
@@ -315,13 +335,16 @@ export default function CharacterSelector() {
 
   const handleCharacterActivate = (char) => {
     if (!isTouchMode) {
-      playVictoryX();
-      clearSelectionTimeout();
-      setClosing(true);
-      setSpotlightTarget({ id: char.id, top: char.top, left: char.left });
-      selectionTimeoutRef.current = setTimeout(() => {
+      if (bubbleCharacter?.id === char.id) {
+        clearBubbleTimeout();
         handleSelect(char);
-      }, 800);
+        return;
+      }
+
+      playVictoryX();
+      const center = getCharacterCenter(char.id);
+      setSpotlightTarget(center ? { id: char.id, x: center.x, y: center.y } : null);
+      previewCharacter(char);
       return;
     }
 
@@ -332,18 +355,19 @@ export default function CharacterSelector() {
     }
 
     playVictoryX();
-    setSpotlightTarget({ id: char.id, top: char.top, left: char.left });
+    const center = getCharacterCenter(char.id);
+    setSpotlightTarget(center ? { id: char.id, x: center.x, y: center.y } : null);
     previewCharacter(char);
   };
 
   useEffect(() => {
-    if (!isTouchMode || !bubbleCharacter || closing) {
+    if (!bubbleCharacter || closing) {
       clearBubbleTimeout();
       return;
     }
     scheduleAutoClose();
     return () => clearBubbleTimeout();
-  }, [bubbleCharacter, isTouchMode, closing, scheduleAutoClose, clearBubbleTimeout]);
+  }, [bubbleCharacter, closing, scheduleAutoClose, clearBubbleTimeout]);
 
   useEffect(() => {
     return () => clearSelectionTimeout();
@@ -383,6 +407,7 @@ export default function CharacterSelector() {
                 setIntroText(null);
                 setBubbleCharacter(null);
                 setSpotlightTarget(null);
+                setHovered(null);
                 clearBubbleTimeout();
               }
             }}
@@ -428,7 +453,10 @@ export default function CharacterSelector() {
           }`}
           style={
             spotlightTarget
-              ? { "--spotlight-x": spotlightTarget.left, "--spotlight-y": spotlightTarget.top }
+              ? {
+                  "--spotlight-x": `${spotlightTarget.x}px`,
+                  "--spotlight-y": `${spotlightTarget.y}px`,
+                }
               : undefined
           }
           aria-hidden="true"
@@ -447,7 +475,9 @@ export default function CharacterSelector() {
                 key={p.id}
                 className={`character-selector__slot ${hovered === p.id ? "is-hover" : ""} ${
                   isLocked ? "is-locked" : ""
-                } ${spotlightTarget && spotlightTarget.id !== p.id ? "is-dimmed" : ""}`}
+                } ${spotlightTarget && spotlightTarget.id !== p.id ? "is-dimmed" : ""} ${
+                  spotlightTarget?.id === p.id ? "is-spotlight" : ""
+                } row-${p.glowRow || "top"}`}
                 style={{
                   top: p.top,
                   left: p.left,
@@ -472,7 +502,13 @@ export default function CharacterSelector() {
                   className={`character-selector__sticker ${hovered === p.id ? "is-hover" : ""}`}
                 />
                 {!isTouchMode && hovered === p.id && (
-                  <div className="character-selector__name">{p.nombre_visible}</div>
+                  <div
+                    className={`character-selector__name ${
+                      bubbleCharacter ? "is-muted" : ""
+                    }`}
+                  >
+                    {p.nombre_visible}
+                  </div>
                 )}
                 {isLocked && (
                   <div className="character-selector__lock">

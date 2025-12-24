@@ -13,31 +13,29 @@ const SCREEN_BEHAVIOR = {
   default: { openLeft: -100, openRight: 100, openDuration: 0.65, openEase: "power2.out", closeDuration: 0.5, closeEase: "power2.in" },
 };
 
-// 🔑 overrides SOLO para vertical (portrait)
-// Ajusta estos números a gusto: mayor magnitud = más apertura (menos cortina tapando centro)
-const PORTRAIT_OVERRIDES = {
-  selector: { openLeft: -85, openRight: 80 },
-  camerino: { openLeft: -90, openRight: 90 },
-  compendio: { openLeft: -120, openRight: 120 },
-  gameboard: { openLeft: -120, openRight: 120 },
-  game: { openLeft: -120, openRight: 120 },
-  default: { openLeft: -120, openRight: 120 },
-};
-
 // 🔑 función responsive
-function getScreenBehavior(screen, width = window.innerWidth, height = window.innerHeight) {
+function getScreenBehavior(
+  screen,
+  width = window.innerWidth,
+  height = window.innerHeight,
+  buildingRect = null
+) {
   const base = SCREEN_BEHAVIOR[screen] || SCREEN_BEHAVIOR.default;
-  const isPortrait = height > width;
 
-  if (isPortrait) {
-    const overrides = PORTRAIT_OVERRIDES[screen] || PORTRAIT_OVERRIDES.default;
-    return { ...base, ...overrides };
+  if (screen !== "selector" || !buildingRect) {
+    return base;
   }
 
-  if (width <= 768) {
-    return { ...base, openLeft: -80, openRight: 80 };
-  }
-  return base;
+  const curtainWidth = width * 0.5;
+  const edgeGap = Math.round(Math.min(Math.max(width * 0.02, 8), 18));
+  const leftTarget = buildingRect.left - edgeGap;
+  const rightTarget = buildingRect.right + edgeGap;
+  const leftPercent = ((leftTarget / curtainWidth) - 1) * 100;
+  const rightPercent = ((rightTarget / curtainWidth) - 1) * 100;
+  const openLeft = Math.max(-100, Math.min(0, leftPercent));
+  const openRight = Math.min(100, Math.max(0, rightPercent));
+
+  return { ...base, openLeft, openRight };
 }
 
 export default function CurtainTransition({ children }) {
@@ -142,7 +140,17 @@ export default function CurtainTransition({ children }) {
     if (!leftCurtainRef.current || !rightCurtainRef.current || !stageRef.current) return;
     if (timelineRef.current) timelineRef.current.kill();
 
-    const activeConfig = getScreenBehavior(screen, viewportSize.width, viewportSize.height);
+    const buildingRect =
+      screen === "selector"
+        ? stageRef.current?.querySelector(".character-selector__building")?.getBoundingClientRect() ||
+          null
+        : null;
+    const activeConfig = getScreenBehavior(
+      screen,
+      viewportSize.width,
+      viewportSize.height,
+      buildingRect
+    );
     setIsAnimating(true);
 
     if (!hasOpenedRef.current) {
