@@ -6,6 +6,7 @@ import { api } from "../services/api";
 import SpeechBubbleModal from "./SpeechBubbleModal";
 import PersonajeMenu from "./PersonajeMenu";
 import VictoryEffect from "./VictoryEffect";
+import { playVictoryXSound } from "../utils/victorySound";
 import BoardResetOverlay from "./BoardResetOverlay";
 import "./GameBoard.css";
 import useTypewriter from "../hooks/useTypewriter";
@@ -229,6 +230,7 @@ export default function GameBoard() {
   const thinkGainRef = useRef(null);
   const asmrPadRef = useRef(null);
   const noiseBufferRef = useRef(null);
+  const victorySoundPlayedRef = useRef(false);
 
   const getAudioCtx = useCallback(() => {
     if (typeof window === "undefined") return null;
@@ -363,6 +365,12 @@ export default function GameBoard() {
     osc.start(now);
     osc.stop(now + 0.2);
   }, [getAudioCtx, getNoiseBuffer]);
+
+  const playVictoryX = useCallback(() => {
+    const ctx = getAudioCtx();
+    if (!ctx) return;
+    playVictoryXSound(ctx);
+  }, [getAudioCtx]);
 
   const stopAsmrPad = useCallback(() => {
     const ctx = audioCtxRef.current;
@@ -984,6 +992,16 @@ useEffect(() => {
       setVictoryActive(false);
     }
   }, [palabraX, palabraO, creativeMode, victory]);
+
+  useEffect(() => {
+    if (victoryActive && victory?.winner === "X" && !victorySoundPlayedRef.current) {
+      playVictoryX();
+      victorySoundPlayedRef.current = true;
+    }
+    if (!victoryActive) {
+      victorySoundPlayedRef.current = false;
+    }
+  }, [victoryActive, victory, playVictoryX]);
 
   // Abrir modal creativo solo cuando X terminó de escribir
   useEffect(() => {

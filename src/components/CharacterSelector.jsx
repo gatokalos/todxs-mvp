@@ -3,6 +3,7 @@ import { useLayoutEffect, useMemo, useRef, useState, useEffect, useCallback } fr
 import { createPortal } from "react-dom";
 import useGameStore from "../store/useGameStore";
 import usePersonajesSupabase from "../hooks/usePersonajesSupabase";
+import { playVictoryXSound } from "../utils/victorySound";
 import "./CharacterSelector.css";
 
 
@@ -117,9 +118,12 @@ export default function CharacterSelector() {
   const [closing, setClosing] = useState(false);
   const [bubbleCharacter, setBubbleCharacter] = useState(null);
   const [isTouchMode, setIsTouchMode] = useState(false);
+  const [spotlightTarget, setSpotlightTarget] = useState(null);
+  const selectionTimeoutRef = useRef(null);
   const bubbleTimeoutRef = useRef(null);
   const hostRef = useRef(null);
   const [bubblePosition, setBubblePosition] = useState(null);
+  const audioCtxRef = useRef(null);
 
   const { personajes, loading } = usePersonajesSupabase();
   const buildingRef = useRef(null);
@@ -162,6 +166,29 @@ export default function CharacterSelector() {
     }
   }, []);
 
+  const clearSelectionTimeout = useCallback(() => {
+    if (selectionTimeoutRef.current) {
+      clearTimeout(selectionTimeoutRef.current);
+      selectionTimeoutRef.current = null;
+    }
+  }, []);
+
+  const getAudioCtx = useCallback(() => {
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!audioCtxRef.current) {
+      audioCtxRef.current = new Ctx();
+    } else if (audioCtxRef.current.state === "suspended") {
+      audioCtxRef.current.resume().catch(() => {});
+    }
+    return audioCtxRef.current;
+  }, []);
+
+  const playVictoryX = useCallback(() => {
+    const ctx = getAudioCtx();
+    if (!ctx) return;
+    playVictoryXSound(ctx);
+  }, [getAudioCtx]);
+
   const scheduleAutoClose = useCallback(() => {
     if (!isTouchMode) return;
     clearBubbleTimeout();
@@ -198,6 +225,8 @@ export default function CharacterSelector() {
 
   const handleSelect = (p) => {
     clearBubbleTimeout();
+    clearSelectionTimeout();
+    setSpotlightTarget(null);
     const canPlay = canPlayPersonaje(p.id);
 
     setPersonajeActual(p.id);
@@ -286,7 +315,13 @@ export default function CharacterSelector() {
 
   const handleCharacterActivate = (char) => {
     if (!isTouchMode) {
-      handleSelect(char);
+      playVictoryX();
+      clearSelectionTimeout();
+      setClosing(true);
+      setSpotlightTarget({ id: char.id, top: char.top, left: char.left });
+      selectionTimeoutRef.current = setTimeout(() => {
+        handleSelect(char);
+      }, 800);
       return;
     }
 
@@ -296,6 +331,8 @@ export default function CharacterSelector() {
       return;
     }
 
+    playVictoryX();
+    setSpotlightTarget({ id: char.id, top: char.top, left: char.left });
     previewCharacter(char);
   };
 
@@ -307,6 +344,10 @@ export default function CharacterSelector() {
     scheduleAutoClose();
     return () => clearBubbleTimeout();
   }, [bubbleCharacter, isTouchMode, closing, scheduleAutoClose, clearBubbleTimeout]);
+
+  useEffect(() => {
+    return () => clearSelectionTimeout();
+  }, [clearSelectionTimeout]);
 
   useEffect(() => {
     if (!introText) {
@@ -341,6 +382,7 @@ export default function CharacterSelector() {
                 setClosing(false);
                 setIntroText(null);
                 setBubbleCharacter(null);
+                setSpotlightTarget(null);
                 clearBubbleTimeout();
               }
             }}
@@ -380,6 +422,17 @@ export default function CharacterSelector() {
         style={buildingWidth ? { "--building-width": `${buildingWidth}px` } : undefined}
       >
         <img src="/assets/edificio.png" alt="Edificio canon" className="character-selector__building" />
+        <div
+          className={`character-selector__selection-overlay ${
+            spotlightTarget ? "is-active" : ""
+          }`}
+          style={
+            spotlightTarget
+              ? { "--spotlight-x": spotlightTarget.left, "--spotlight-y": spotlightTarget.top }
+              : undefined
+          }
+          aria-hidden="true"
+        />
 
         <div className="characters-layer">
           {loading && (
@@ -394,7 +447,7 @@ export default function CharacterSelector() {
                 key={p.id}
                 className={`character-selector__slot ${hovered === p.id ? "is-hover" : ""} ${
                   isLocked ? "is-locked" : ""
-                }`}
+                } ${spotlightTarget && spotlightTarget.id !== p.id ? "is-dimmed" : ""}`}
                 style={{
                   top: p.top,
                   left: p.left,
@@ -418,6 +471,9 @@ export default function CharacterSelector() {
                   alt={p.nombre_visible}
                   className={`character-selector__sticker ${hovered === p.id ? "is-hover" : ""}`}
                 />
+                {!isTouchMode && hovered === p.id && (
+                  <div className="character-selector__name">{p.nombre_visible}</div>
+                )}
                 {isLocked && (
                   <div className="character-selector__lock">
                     <span>Suscríbete para jugar</span>
@@ -446,11 +502,14 @@ export default function CharacterSelector() {
         }}
         aria-label="Visitar Gatologías"
       >
-        <img
-          src={hostCharacter.src}
-          alt="Gato anfitrión"
-          className="character-selector__host-img"
-        />
+        <div className="character-selector__host-avatar">
+          <img
+            src={hostCharacter.src}
+            alt="Gato anfitrión"
+            className="character-selector__host-img"
+          />
+          <span className="character-selector__host-blink" aria-hidden="true" />
+        </div>
 
         {/* Colita SVG */}
         <img

@@ -16,7 +16,7 @@ const SCREEN_BEHAVIOR = {
 // 🔑 overrides SOLO para vertical (portrait)
 // Ajusta estos números a gusto: mayor magnitud = más apertura (menos cortina tapando centro)
 const PORTRAIT_OVERRIDES = {
-  selector: { openLeft: -90, openRight: 90 },
+  selector: { openLeft: -85, openRight: 80 },
   camerino: { openLeft: -90, openRight: 90 },
   compendio: { openLeft: -120, openRight: 120 },
   gameboard: { openLeft: -120, openRight: 120 },
