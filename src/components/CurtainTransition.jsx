@@ -22,8 +22,16 @@ function getScreenBehavior(
 ) {
   const base = SCREEN_BEHAVIOR[screen] || SCREEN_BEHAVIOR.default;
 
-  if (screen !== "selector" || !buildingRect) {
+  if (screen !== "selector") {
     return base;
+  }
+
+  if (!buildingRect) {
+    const isPortrait = height > width;
+    const portraitOpen = 88;
+    const landscapeOpen = height <= 420 ? 46 : 50;
+    const openMagnitude = isPortrait ? portraitOpen : landscapeOpen;
+    return { ...base, openLeft: -openMagnitude, openRight: openMagnitude };
   }
 
   const curtainWidth = width * 0.5;
@@ -167,6 +175,28 @@ export default function CurtainTransition({ children }) {
       initialTimeline
         .to(leftCurtainRef.current, { xPercent: activeConfig.openLeft, duration: activeConfig.openDuration, ease: activeConfig.openEase })
         .to(rightCurtainRef.current, { xPercent: activeConfig.openRight, duration: activeConfig.openDuration, ease: activeConfig.openEase }, "<")
+        .add(() => {
+          if (screen !== "selector" || !stageRef.current) return;
+          const rect =
+            stageRef.current.querySelector(".character-selector__building")?.getBoundingClientRect() ||
+            null;
+          const refined = getScreenBehavior(
+            screen,
+            viewportSize.width,
+            viewportSize.height,
+            rect
+          );
+          gsap.to(leftCurtainRef.current, {
+            xPercent: refined.openLeft,
+            duration: 0.35,
+            ease: "power1.out",
+          });
+          gsap.to(rightCurtainRef.current, {
+            xPercent: refined.openRight,
+            duration: 0.35,
+            ease: "power1.out",
+          });
+        }, "-=0.2")
         .add(() => {
           startRightWaveIfSelector(); // 👈 aquí arranca la derecha con delay si toca
         }, "-=0.3");

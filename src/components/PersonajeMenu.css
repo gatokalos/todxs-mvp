@@ -10,7 +10,23 @@
   height: 120px;
   cursor: pointer;
   border-radius: 50%;
+  position: relative;
+  z-index: 3;
   transition: transform 0.2s ease;
+}
+
+.personaje-menu:not(.is-speaking) .personaje-icono,
+.personaje-menu:not(.is-speaking) .personaje-icono--placeholder {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.9);
+}
+
+.personaje-menu.is-speaking .personaje-icono,
+.personaje-menu.is-speaking .personaje-icono--placeholder {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .personaje-icono--placeholder {
@@ -24,6 +40,18 @@
 
 .personaje-icono:hover {
   transform: scale(1.1);
+}
+
+@media (max-width: 375px), (max-height: 667px) {
+  .personaje-menu {
+    bottom: 8px;
+    right: 8px;
+  }
+
+  .personaje-icono {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 .personaje-dropdown {
@@ -96,26 +124,163 @@
 
 /* Para que el mensaje no tape al dropdown */
 .personaje-mensaje {
-  top: -10px;        /* súbelo un poco */
-  right: 100px;      /* aléjalo más de la carita */
-  background: #fff;
-  color: #000;
-  padding: 10px 14px;
-  border-radius: 12px;
-  max-width: 260px;  /* un poco más ancho */
-  font-size: 15px;   /* más legible */
-  line-height: 1.5;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
-  z-index: 200;      /* siempre arriba */
-  animation: fadeIn 0.3s ease-in-out, fadeOut 0.3s ease-in-out 4s forwards;
+  position: absolute;
+  top: 8px;
+  right: 6px;
+  background: linear-gradient(165deg, rgba(35, 31, 52, 0.96), rgba(23, 19, 36, 0.96));
+  color: #e6def5;
+  padding: 16px 72px 14px 16px;
+  border-radius: 18px;
+  width: min(88vw, 420px);
+  max-width: calc(100vw - 16px);
+  min-height: 120px;
+  font-size: 14px;
+  line-height: 1.45;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 32px rgba(8, 6, 16, 0.45);
+  z-index: 1;      /* debajo del sticky */
+  box-sizing: border-box;
+  font-family: "Fraunces", "Georgia", serif;
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: mensajeSlideIn 0.32s ease-out;
+  transition: width 0.28s ease, max-height 0.28s ease, padding 0.28s ease, transform 0.28s ease;
+  transform-origin: top right;
+}
+
+.personaje-mensaje.is-expanded {
+  width: min(92vw, 560px);
+  max-width: calc(100vw - 16px);
+  max-height: none;
+  padding: 18px;
+  transform: translateY(-6px);
+}
+
+.personaje-mensaje.is-expanded .alternativas-header {
+  padding-right: 0;
+}
+
+.personaje-mensaje__avatar {
+  position: static;
+  margin-left: auto;
+  margin-bottom: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(10, 8, 14, 0.55);
+  border: 1px solid rgba(255, 220, 190, 0.22);
+  box-shadow: 0 6px 14px rgba(5, 3, 10, 0.4);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.personaje-mensaje__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.personaje-mensaje__avatar span {
+  color: #f7eefc;
+  font-weight: 700;
+}
+
+.personaje-mensaje__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.personaje-mensaje.is-expanded .alternativas-lista {
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.personaje-mensaje.is-expanded .alternativa-chip {
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.personaje-mensaje.is-expanded .alternativas-actions {
+  justify-content: center;
+}
+
+@keyframes mensajeSlideIn {
+  from {
+    opacity: 0;
+    transform: translate(14px, -14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+.personaje-mensaje__row {
+  display: flex;
+  align-items: center;
+}
+
+.personaje-mensaje__text {
+  flex: 1;
+}
+
+.personaje-mensaje__actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.personaje-mensaje__cta {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 220, 200, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  color: #efe6ff;
+  font-size: 18px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.personaje-mensaje__cta.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.9);
+}
+
+.personaje-mensaje__cta--alt {
+  width: auto;
+  padding: 0 14px;
+  height: 32px;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.personaje-mensaje__cta:hover,
+.personaje-mensaje__cta:focus-visible {
+  transform: translateY(-1px);
+  background: rgba(255, 210, 180, 0.3);
+  box-shadow: 0 8px 16px rgba(5, 3, 10, 0.4);
+  outline: none;
 }
 
 /* Ajuste de la flechita del globo */
 .personaje-mensaje::after {
-  top: 18px;
-  right: -12px; /* desplaza la punta */
-  border-width: 7px;
-  border-color: transparent transparent transparent #fff;
+  display: none;
 }
 
 /* Animaciones */

@@ -84,7 +84,7 @@ export const BASE_CHARACTER_LAYOUT = {
     glowRow: "bottom",
     intro: "🔬 Detecta tus fallas antes que tú mismo.",
     nombre_visible: "La Doctora",
-    genero_literario: "Informe poético / análisis simbólico",
+    genero_literario: "Análisis simbólico",
     frase_base: "Cada herida tuya escribe una escena nueva.",    
     sticker_url: "/assets/doctora_sticker.svg",
     widthRatio: 0.17,
@@ -224,6 +224,7 @@ export default function CharacterSelector() {
     setBubblePosition({
       left: rect.left + rect.width / 2,
       top: rect.top + eyeOffset,
+      align: "center",
     });
   }, []);
 
@@ -481,7 +482,9 @@ export default function CharacterSelector() {
                 style={{
                   top: p.top,
                   left: p.left,
-                  "--sticker-width": `calc(var(--building-width, 1px) * ${p.widthRatio ?? DEFAULT_WIDTH_RATIO})`,
+                  "--sticker-width": `calc(var(--building-width, 1px) * ${
+                    p.widthRatio ?? DEFAULT_WIDTH_RATIO
+                  } * var(--sticker-scale, 1.9))`,
                 }}
                 data-character-id={p.id}
                 role="button"

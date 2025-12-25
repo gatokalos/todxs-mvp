@@ -37,7 +37,8 @@ body {
   --card-gap: clamp(8px, 1.6vmin, 12px);
   --board-size: 320px;
   width: min(92vw, 560px);
-  min-height: clamp(720px, 92vh, 900px);
+  min-height: min(92vh, 900px);
+  height: 95vh;
   padding: var(--card-pad);
   border-radius: 28px;
   background: linear-gradient(160deg, rgba(135, 97, 193, 0.85) 0%, rgba(235, 131, 131, 0.9) 100%);
@@ -56,7 +57,7 @@ body {
 .tablero-personaje {
   position: absolute;
   right: clamp(10px, 2vh, 18px);
-  bottom: clamp(10px, 2vh, 18px);
+  top: clamp(10px, 2vh, 18px);
   z-index: 2100;
   pointer-events: none;
 }
@@ -64,7 +65,8 @@ body {
 .tablero-card .personaje-menu {
   position: absolute;
   right: 0;
-  bottom: 0;
+  top: 0;
+  bottom: auto;
   z-index: 2100;
   pointer-events: auto;
 }
@@ -93,10 +95,10 @@ body {
 }
 
 .hub-botones {
+  display: none;
   position: absolute;
   left: 50%;
   bottom: clamp(16px, 4vh, 44px);
-  display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
@@ -259,7 +261,6 @@ body {
 .alternativas-overlay {
   position: absolute;
   inset: 0;
-      background: linear-gradient(160deg, rgb(94 122 171) 0%, rgb(126 78 60) 100%);
   box-shadow: inset 0 0 120px rgba(8, 4, 12, 0.6);
   backdrop-filter: blur(6px) saturate(120%);
   z-index: 40;
@@ -376,11 +377,18 @@ body {
 }
 
 @media (max-width: 480px), (max-height: 720px) {
+  .tablero {
+    padding-bottom: 0;
+  }
+
   .tablero-card {
     width: min(94vw, 440px);
     --card-height: 95vh;
     --card-pad: clamp(14px, 3.4vmin, 22px);
     --card-gap: clamp(10px, 2.6vmin, 16px);
+    min-height: 0;
+    height: 100vh;
+    padding-bottom: clamp(20px, 3vh, 60px);
   }
 
   .tablero-cuadricula {
@@ -392,14 +400,25 @@ body {
   }
 
   .frase-construida {
-    font-size: clamp(18px, 3.6vmin, 24px);
-    max-height: 30vh;
+    font-size: clamp(16px, 3.6vmin, 24px);
+    max-height: 24vh;
     overflow-y: auto;
   }
 
   .hub-botones {
     right: clamp(6px, 2vw, 16px);
-    bottom: clamp(6px, 2vw, 16px);
+    bottom: clamp(8px, 2.6vh, 20px);
+  }
+
+  .tablero-personaje {
+    top: clamp(8px, 2.6vh, 20px);
+  }
+}
+
+@media (max-width: 575px), (max-height: 667px) {
+  .tablero-personaje {
+    right: 8px;
+    top: 8px;
   }
 }
 /* ===== Casillas ===== */

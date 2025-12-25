@@ -18,6 +18,7 @@ const DEFAULT_RITMO_FRASE = {
   x_creativa: "\\n",
 };
 
+
 const normalizeConnector = (text) => {
   if (typeof text !== "string") return null;
   return text.replace(/\n/g, "\\n");
@@ -168,6 +169,10 @@ export default function GameBoard() {
   const transitionTimeoutRef = useRef(null);
   const transitionStartTimeoutRef = useRef(null);
   const closeBubbleTimeoutRef = useRef(null);
+  const [promptMensaje, setPromptMensaje] = useState("");
+  const [promptAnimado, setPromptAnimado] = useState("");
+  const [promptDone, setPromptDone] = useState(false);
+  const lastPromptKeyRef = useRef(null);
   const pendingAutoORef = useRef(false);
   const cardRef = useRef(null);
   const fraseRef = useRef(null);
@@ -190,6 +195,7 @@ export default function GameBoard() {
       thinkTimeoutRef.current = null;
     }
   }, []);
+
 
   const updateBoardSize = useCallback(() => {
     const card = cardRef.current;
@@ -702,13 +708,13 @@ export default function GameBoard() {
     baseDone ? 0 : 999999
   );
 
-  const { displayed: oAnimada } = useTypewriter(
+  const { displayed: oAnimada, done: oDone } = useTypewriter(
     !creativeMode ? oSegmentDisplay : "",
     TYPE_TICK_SPEED,
     xDone ? 0 : 999999
   );
 
-  const { displayed: terceraAnimada } = useTypewriter(
+  const { displayed: terceraAnimada, done: terceraDone } = useTypewriter(
     creativeMode ? creativeSegmentDisplay : "",
     TYPE_TICK_SPEED,
     xDone ? 0 : 999999
@@ -1299,7 +1305,6 @@ async function avanzarNivel() {
 
   const handleAbuchear = () => {
     if (menuAlternativasAbierto) {
-      cerrarMenuAbucheo(true);
       return;
     }
 
@@ -1307,10 +1312,14 @@ async function avanzarNivel() {
       return;
     }
 
+    setPromptMensaje("");
+    setPromptAnimado("");
     abrirMenuAbucheo();
   };
 
   const handleAplaudir = async () => {
+    setPromptMensaje("");
+    setPromptAnimado("");
     if (menuAlternativasAbierto) {
       cerrarMenuAbucheo(false);
     }
@@ -1352,6 +1361,145 @@ async function avanzarNivel() {
 
     continuarDespuesDeFrase();
   };
+
+  const pickPromptMessage = useCallback(() => {
+    const opciones = [
+      "Qué buen remate, hacemos buen equipo.",
+      "¿Lo dejamos así? Como que necesita otra pasada.",
+      "¿Te gustó nuestra frase?. Si no, lo cambiamos.",
+      "¿Quieres ajustar el cierre o le seguimos?",
+    ];
+    return opciones[Math.floor(Math.random() * opciones.length)];
+  }, []);
+
+  useEffect(() => {
+    if (!promptMensaje) {
+      setPromptAnimado("");
+      setPromptDone(false);
+      return;
+    }
+    let i = 0;
+    setPromptAnimado("");
+    setPromptDone(false);
+    const interval = setInterval(() => {
+      setPromptAnimado((prev) => prev + promptMensaje[i]);
+      i += 1;
+      if (i >= promptMensaje.length) {
+        clearInterval(interval);
+        setPromptDone(true);
+      }
+    }, 24);
+
+    return () => clearInterval(interval);
+  }, [promptMensaje]);
+
+  useEffect(() => {
+    const fraseCompleta = Boolean(palabraX && (palabraO || creativeMode));
+    const oSegmentDone = creativeMode ? terceraDone : oDone;
+    if (!fraseCompleta || !oSegmentDone || menuAlternativasAbierto) {
+      if (!menuAlternativasAbierto) {
+        setPromptMensaje("");
+        setPromptAnimado("");
+        setPromptDone(false);
+        lastPromptKeyRef.current = null;
+      }
+      return;
+    }
+
+    const key = fraseCompuestaDisplay;
+    if (!key || key === lastPromptKeyRef.current) return;
+    lastPromptKeyRef.current = key;
+
+    setPromptMensaje(pickPromptMessage());
+  }, [
+    palabraX,
+    palabraO,
+    creativeMode,
+    oDone,
+    terceraDone,
+    fraseCompuestaDisplay,
+    menuAlternativasAbierto,
+    pickPromptMessage,
+  ]);
+
+  useEffect(() => {
+    if (menuAlternativasAbierto) {
+      setPromptMensaje("");
+      setPromptAnimado("");
+      setPromptDone(false);
+    }
+  }, [menuAlternativasAbierto]);
+
+  const fraseCompleta = Boolean(palabraX && (palabraO || creativeMode));
+  const promptTexto = promptAnimado || promptMensaje;
+  const handlePromptSave = useCallback(() => {
+    if (!fraseCompleta) return;
+    handleAplaudir();
+  }, [fraseCompleta, handleAplaudir]);
+  const promptNode = promptTexto ? (
+    <>
+      <div className="personaje-mensaje__row">
+        <span className="personaje-mensaje__text">{promptTexto}</span>
+      </div>
+      <div className="personaje-mensaje__actions">
+        <button
+          type="button"
+          className={`personaje-mensaje__cta personaje-mensaje__cta--alt${
+            promptDone ? "" : " is-hidden"
+          }`}
+          onClick={handleAbuchear}
+          aria-label="Ver otros remates"
+          title="Otro remate"
+        >
+          Otro remate
+        </button>
+        <button
+          type="button"
+          className={`personaje-mensaje__cta${promptDone ? "" : " is-hidden"}`}
+          onClick={handlePromptSave}
+          aria-label="Guardar frase ahora"
+          title="Guardar ahora"
+        >
+          →
+        </button>
+      </div>
+    </>
+  ) : null;
+  const menuNode = menuAlternativasAbierto ? (
+    <div className="personaje-mensaje__panel">
+      <div className="alternativas-header">
+        <strong>Otras frases para cerrar</strong>
+      </div>
+      <div className="alternativas-lista">
+        {alternativasAbucheo.map((opcion) => (
+          <button
+            key={opcion}
+            className={`alternativa-chip ${palabraO === opcion ? "seleccionada" : ""}`}
+            onClick={() => aplicarAlternativaAbucheo(opcion)}
+          >
+            {buildLinea({
+              jugador: "O",
+              palabra: opcion,
+              casillaIndex: ultimaCasillaO,
+              prefijos,
+              sufijos,
+              tablero,
+            }) || opcion}
+          </button>
+        ))}
+      </div>
+      <div className="alternativas-actions">
+        <button className="alternativa-confirmar" onClick={confirmarSalvada}>
+          ¡Buena salvada!
+        </button>
+      </div>
+    </div>
+  ) : null;
+  const mensajeMostrado = menuNode || promptNode || mensajeAnimado;
+  const handlePersonajeIconClick = useCallback(() => {
+    if (!fraseCompleta) return;
+    handleAbuchear();
+  }, [fraseCompleta, handleAbuchear]);
 
 // === Estado del modal final de gatología ===
 const [modalGatologia, setModalGatologia] = useState({
@@ -1440,7 +1588,11 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
         style={{ "--board-size": `${boardSize}px` }}
       >
         <div className="tablero-personaje">
-          <PersonajeMenu personaje={{ nombreVisible, icono, id: personajeActual }} mensaje={mensajeAnimado} />
+          <PersonajeMenu
+            personaje={{ nombreVisible, icono, id: personajeActual }}
+            mensaje={mensajeMostrado}
+            menuAbierto={menuAlternativasAbierto}
+          />
         </div>
 
         {/* Base → X → (O/tercera) */}
@@ -1474,40 +1626,10 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
         </div>
 
         {menuAlternativasAbierto && (
-          <>
-            <div
-              className="alternativas-overlay"
-              onClick={() => cerrarMenuAbucheo(true)}
-              aria-hidden="true"
-            />
-            <div className="alternativas-panel">
-              <div className="alternativas-header">
-                <strong>Otras frases para cerrar</strong>
-              </div>
-              <p className="alternativas-subtitle">Toca una frase para probarla, luego confirma con Salvada.</p>
-              <div className="alternativas-lista">
-                {alternativasAbucheo.map((opcion) => (
-                  <button
-                    key={opcion}
-                    className={`alternativa-chip ${palabraO === opcion ? "seleccionada" : ""}`}
-                    onClick={() => aplicarAlternativaAbucheo(opcion)}
-                  >
-                    {buildLinea({
-                      jugador: "O",
-                      palabra: opcion,
-                      casillaIndex: ultimaCasillaO,
-                      prefijos,
-                      sufijos,
-                      tablero,
-                    }) || opcion}
-                  </button>
-                ))}
-              </div>
-              <div className="alternativas-actions">
-                <button className="alternativa-confirmar" onClick={confirmarSalvada}>Salvada</button>
-              </div>
-            </div>
-          </>
+          <div
+            className="alternativas-overlay"
+            aria-hidden="true"
+          />
         )}
 
         {/* Tablero */}
