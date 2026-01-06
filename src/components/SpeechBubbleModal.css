@@ -190,6 +190,24 @@
   }
 }
 
+@media (orientation: landscape) and (max-height: 500px) {
+  .speech-bubble-container {
+    left: clamp(10px, 3vw, 26px);
+    right: auto;
+    bottom: clamp(8px, 3vh, 20px);
+    justify-content: flex-start;
+  }
+
+  .speech-bubble {
+    width: 50vw;
+    max-width: 50vw;
+    height: calc(100vh - clamp(24px, 8vh, 64px));
+    min-height: calc(100vh - clamp(24px, 8vh, 64px));
+    max-height: calc(100vh - clamp(24px, 8vh, 64px));
+    padding: clamp(14px, 3vh, 22px) clamp(16px, 3vw, 22px);
+  }
+}
+
 .speech-textarea {
   width: 100%;
   min-height: 80px;

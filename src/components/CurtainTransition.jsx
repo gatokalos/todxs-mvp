@@ -22,16 +22,11 @@ function getScreenBehavior(
 ) {
   const base = SCREEN_BEHAVIOR[screen] || SCREEN_BEHAVIOR.default;
 
-  if (screen !== "selector") {
-    return base;
-  }
+  if (screen !== "selector") return base;
 
+  // Si no hay medición del edificio, usamos el fallback base.
   if (!buildingRect) {
-    const isPortrait = height > width;
-    const portraitOpen = 88;
-    const landscapeOpen = height <= 420 ? 46 : 50;
-    const openMagnitude = isPortrait ? portraitOpen : landscapeOpen;
-    return { ...base, openLeft: -openMagnitude, openRight: openMagnitude };
+    return base;
   }
 
   const curtainWidth = width * 0.5;
@@ -59,13 +54,14 @@ export default function CurtainTransition({ children }) {
 
   const [renderedChildren, setRenderedChildren] = useState(() => children);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [manualOpen, setManualOpen] = useState(false);
   const [viewportSize, setViewportSize] = useState(() => ({
     width: window.innerWidth,
     height: window.innerHeight,
   }));
 
   // 🎭 Configura wave de ambas cortinas
-  useLayoutEffect(() => {
+  useEffect(() => {
   if (!leftCurtainRef.current || !rightCurtainRef.current || !stageRef.current)
     return;
 
@@ -144,7 +140,7 @@ export default function CurtainTransition({ children }) {
     };
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!leftCurtainRef.current || !rightCurtainRef.current || !stageRef.current) return;
     if (timelineRef.current) timelineRef.current.kill();
 
@@ -163,6 +159,17 @@ export default function CurtainTransition({ children }) {
 
     if (!hasOpenedRef.current) {
       setRenderedChildren(pendingChildrenRef.current);
+      if (screen === "selector" && !manualOpen) {
+        setIsAnimating(false);
+        return;
+      }
+
+      // Primera apertura: arrancamos con cortinas cerradas
+      gsap.set([leftCurtainRef.current, rightCurtainRef.current], {
+        xPercent: 0,
+        y: 0,
+        skewX: 0,
+      });
 
       const initialTimeline = gsap.timeline({
         delay: 0.1,
@@ -217,16 +224,53 @@ export default function CurtainTransition({ children }) {
       .to(leftCurtainRef.current, { xPercent: activeConfig.openLeft, duration: activeConfig.openDuration, ease: activeConfig.openEase })
       .to(rightCurtainRef.current, { xPercent: activeConfig.openRight, duration: activeConfig.openDuration, ease: activeConfig.openEase }, "<")
       .add(() => {
+        if (screen !== "selector" || !stageRef.current) return;
+        const rect =
+          stageRef.current.querySelector(".character-selector__building")?.getBoundingClientRect() ||
+          null;
+        const refined = getScreenBehavior(
+          screen,
+          viewportSize.width,
+          viewportSize.height,
+          rect
+        );
+        gsap.to(leftCurtainRef.current, {
+          xPercent: refined.openLeft,
+          duration: 0.35,
+          ease: "power1.out",
+        });
+        gsap.to(rightCurtainRef.current, {
+          xPercent: refined.openRight,
+          duration: 0.35,
+          ease: "power1.out",
+        });
+      }, "-=0.2")
+      .add(() => {
         startRightWaveIfSelector(); // 👈 también al cambiar de pantalla
       }, "-=0.3");
 
     timelineRef.current = tl;
     return () => tl.kill();
-  }, [screen, viewportSize]);
+  }, [screen, viewportSize, manualOpen]);
 
   return (
     <div className="curtain-transition">
       <div ref={stageRef} className="curtain-stage">{renderedChildren}</div>
+      {!hasOpenedRef.current && screen === "selector" && !manualOpen && (
+        <div className="curtain-entry">
+          <div className="curtain-entry-card">
+            <p className="curtain-entry-title">Bienvenida</p>
+            <p className="curtain-entry-text">¿Lista para entrar al escenario?</p>
+            <button
+              type="button"
+              className="curtain-entry-button"
+              onClick={() => setManualOpen(true)}
+            >
+              Abrir cortinas
+            </button>
+          </div>
+        </div>
+      )}
       <div className="curtain-panel curtain-panel--left" ref={leftCurtainRef} aria-hidden="true" data-animating={isAnimating} />
       <div className="curtain-panel curtain-panel--right" ref={rightCurtainRef} aria-hidden="true" data-animating={isAnimating} />
     </div>

@@ -35,7 +35,7 @@ export const BASE_CHARACTER_LAYOUT = {
     widthRatio: 0.18,
   },
   saturnina: {
-    top: "38%",
+    top: "40%",
     left: "20%",
     glowRow: "top",
     intro: "🎠 Convierte el absurdo en táctica impredecible.",
@@ -90,7 +90,7 @@ export const BASE_CHARACTER_LAYOUT = {
     widthRatio: 0.17,
   },
   silvestre: {
-    top: "69%",
+    top: "70%",
     left: "50%",
     glowRow: "bottom",
     intro: "🎭 Improvisa tan bien… que parece guion.",
@@ -101,7 +101,7 @@ export const BASE_CHARACTER_LAYOUT = {
     widthRatio: 0.2,
   },
   andy: {
-    top: "71%",
+    top: "75%",
     left: "82%",
     glowRow: "bottom",
     intro: "💥 Juega a romper las reglas… científicamente.",
@@ -198,17 +198,35 @@ export default function CharacterSelector() {
     playVictoryXSound(ctx);
   }, [getAudioCtx]);
 
+  const getSpotlightOffset = useCallback(() => {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    if (w <= 430 && h > w) return { x: 0, y: -50 };
+    if (h <= 500 && w > h) return { x: 0, y: -(h * 0.15) };
+    return { x: 0, y: 0 };
+  }, []);
+
   const getCharacterCenter = useCallback((id) => {
     const root = buildingRef.current;
     if (!root) return null;
+    const isSmallScreen =
+      window.innerWidth <= 430 || window.innerHeight <= 500;
+    const offset = getSpotlightOffset();
+    if (isSmallScreen) {
+      const rect = root.getBoundingClientRect();
+      return {
+        x: rect.left + rect.width / 2 + offset.x,
+        y: rect.top + rect.height / 2 + offset.y,
+      };
+    }
     const el = root.querySelector(`[data-character-id="${id}"]`);
     if (!el) return null;
     const rect = el.getBoundingClientRect();
     return {
-      x: rect.left + rect.width / 2,
-      y: rect.top + rect.height / 2,
+      x: rect.left + rect.width / 2 + offset.x,
+      y: rect.top + rect.height / 2 + offset.y,
     };
-  }, []);
+  }, [getSpotlightOffset]);
 
   const scheduleAutoClose = useCallback(() => {
     clearBubbleTimeout();
@@ -344,7 +362,15 @@ export default function CharacterSelector() {
 
       playVictoryX();
       const center = getCharacterCenter(char.id);
-      setSpotlightTarget(center ? { id: char.id, x: center.x, y: center.y } : null);
+      if (center) {
+        setSpotlightTarget({
+          id: char.id,
+          x: center.x,
+          y: center.y,
+        });
+      } else {
+        setSpotlightTarget(null);
+      }
       previewCharacter(char);
       return;
     }
@@ -357,7 +383,15 @@ export default function CharacterSelector() {
 
     playVictoryX();
     const center = getCharacterCenter(char.id);
-    setSpotlightTarget(center ? { id: char.id, x: center.x, y: center.y } : null);
+    if (center) {
+      setSpotlightTarget({
+        id: char.id,
+        x: center.x,
+        y: center.y,
+      });
+    } else {
+      setSpotlightTarget(null);
+    }
     previewCharacter(char);
   };
 
@@ -440,26 +474,38 @@ export default function CharacterSelector() {
         )
       : null;
 
+  const spotlightStyle = spotlightTarget
+    ? {
+        "--spotlight-x": `${spotlightTarget.x}px`,
+        "--spotlight-y": `${spotlightTarget.y}px`,
+      }
+    : undefined;
+
+  const curtainSpotlight = spotlightTarget
+    ? createPortal(
+        <div
+          className="character-selector__curtain-spotlight is-active"
+          style={spotlightStyle}
+          aria-hidden="true"
+        />,
+        document.body
+      )
+    : null;
+
   return (
     <div className="character-selector">
+      {curtainSpotlight}
       <div
         className="building-wrap"
         ref={buildingRef}
         style={buildingWidth ? { "--building-width": `${buildingWidth}px` } : undefined}
       >
-        <img src="/assets/edificio.png" alt="Edificio canon" className="character-selector__building" />
+        <img src="/assets/edificio.svg" alt="Edificio canon" className="character-selector__building" />
         <div
           className={`character-selector__selection-overlay ${
             spotlightTarget ? "is-active" : ""
           }`}
-          style={
-            spotlightTarget
-              ? {
-                  "--spotlight-x": `${spotlightTarget.x}px`,
-                  "--spotlight-y": `${spotlightTarget.y}px`,
-                }
-              : undefined
-          }
+          style={spotlightStyle}
           aria-hidden="true"
         />
 

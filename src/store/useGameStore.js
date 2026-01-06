@@ -3,7 +3,7 @@ import campos from '../data/camposSemanticos.json'
 
 // Exporto named y default para evitar errores de import en otros componentes
 export const useGameStore = create((set, get) => ({
-  screen: "splash", // arranca en el Splash
+  screen: "selector", // arranca en el Selector (splash deshabilitado temporalmente)
   setScreen: (pantalla) => set({ screen: pantalla }),
   curtainsOpen: false,
   // acción para abrir/cerrar cortinas

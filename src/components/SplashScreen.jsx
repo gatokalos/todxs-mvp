@@ -14,6 +14,15 @@ export default function SplashScreen() {
       setInstallState("Listo para instalar");
     };
 
+    const preloadCurtains = () => {
+      const assets = ["/assets/curtain-left.svg", "/assets/curtain-right.svg"];
+      assets.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+    };
+
+    preloadCurtains();
     window.addEventListener("beforeinstallprompt", handleBeforeInstall);
     return () => window.removeEventListener("beforeinstallprompt", handleBeforeInstall);
   }, []);

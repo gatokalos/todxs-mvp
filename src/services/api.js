@@ -4,8 +4,11 @@ import { supabase } from "../lib/supabaseClient";
 
 export const api = {
   fetchGatologias,
+  fetchBlogEntries,
   insertGatologia,
   updateGatologia,
+  deleteGatologia,
+  togglePinned,
   publishGatologia,
   insertEleccion: guardarEleccion,
   fetchEleccionesPorPersonaje,
@@ -25,6 +28,23 @@ export async function fetchGatologias(personajeSlug) {
 
   if (error) {
     console.error("❌ Error fetchGatologias:", error.message);
+    return [];
+  }
+  return data || [];
+}
+
+/**
+ * Obtener entradas publicadas del blog
+ */
+export async function fetchBlogEntries() {
+  const { data, error } = await supabase
+    .from("gatologias")
+    .select("*")
+    .in("estado", ["blog", "published"])
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("❌ Error fetchBlogEntries:", error.message);
     return [];
   }
   return data || [];
@@ -76,6 +96,38 @@ export async function updateGatologia(id, payload = {}) {
 
   if (error) {
     console.error("❌ Error updateGatologia:", error.message);
+    return null;
+  }
+  return true;
+}
+
+/**
+ * Borrar una gatología
+ */
+export async function deleteGatologia(id) {
+  const { error } = await supabase
+    .from("gatologias")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    console.error("❌ Error deleteGatologia:", error.message);
+    return null;
+  }
+  return true;
+}
+
+/**
+ * Pinear/despinear una gatología
+ */
+export async function togglePinned(id, pinned = false) {
+  const { error } = await supabase
+    .from("gatologias")
+    .update({ pinned })
+    .eq("id", id);
+
+  if (error) {
+    console.error("❌ Error togglePinned:", error.message);
     return null;
   }
   return true;

@@ -1,9 +1,14 @@
 // src/components/Blog.jsx
 import { useEffect, useState } from "react";
-import { fetchBlogEntries, updateGatologia } from "../services/api";
+import {
+  fetchBlogEntries,
+  updateGatologia,
+  insertGatologia,
+  deleteGatologia,
+  togglePinned,
+} from "../services/api";
 import BlogEntry from "./BlogEntry";
 import "./Blog.css";
-import { fetchBlogEntries, updateGatologia, insertGatologia } from "../services/api";
 
 export default function Blog() {
   const [entries, setEntries] = useState([]);
@@ -13,47 +18,50 @@ export default function Blog() {
   }, []);
 
   const handleSave = async (entry) => {
-  let saved;
+    let saved;
 
-  if (entry.id) {
-    // Update en Supabase
-    saved = await updateGatologia(entry.id, {
-      titulo: entry.titulo,
-      contenido: entry.contenido,
-    });
-
-    // Actualiza el estado local inmediatamente
-    setEntries((prev) =>
-      prev.map((e) => (e.id === entry.id ? { ...e, ...entry } : e))
-    );
-  } else {
-    // Insert en Supabase (nueva gatología)
-    saved = await insertGatologia({
-      personaje_slug: personaje.slug,
-      titulo: entry.titulo,
-      contenido: entry.contenido,
-      estado: "draft",
-    });
-
-    if (saved) {
-      setEntries((prev) => [saved, ...prev]);
-    }
-  }
-
-  // 🔄 Copia también al "blog" (otra tabla o mismo con estado diferente)
-  if (saved) {
-    try {
-      await insertGatologia({
-        personaje_slug: personaje.slug,
-        titulo: saved.titulo,
-        contenido: saved.contenido,
-        estado: "blog", // 👈 aquí se marca para blog
+    if (entry.id) {
+      saved = await updateGatologia(entry.id, {
+        titulo: entry.titulo,
+        contenido: entry.contenido,
       });
-    } catch (err) {
-      console.error("❌ Error guardando en blog:", err);
+
+      setEntries((prev) =>
+        prev.map((e) => (e.id === entry.id ? { ...e, ...entry } : e))
+      );
+    } else {
+      const personajeSlug = entry.personaje_slug || entry.personaje || "blog";
+      saved = await insertGatologia({
+        personaje_slug: personajeSlug,
+        titulo: entry.titulo,
+        contenido: entry.contenido,
+        estado: "blog",
+      });
+
+      if (saved) {
+        setEntries((prev) => [saved, ...prev]);
+      }
     }
-  }
-};
+  };
+
+  const handleDelete = async (entry) => {
+    if (!entry?.id) return;
+    const ok = await deleteGatologia(entry.id);
+    if (ok) {
+      setEntries((prev) => prev.filter((e) => e.id !== entry.id));
+    }
+  };
+
+  const handleTogglePin = async (entry) => {
+    if (!entry?.id) return;
+    const nextPinned = !entry.pinned;
+    const ok = await togglePinned(entry.id, nextPinned);
+    if (ok) {
+      setEntries((prev) =>
+        prev.map((e) => (e.id === entry.id ? { ...e, pinned: nextPinned } : e))
+      );
+    }
+  };
   
 
   return (
@@ -73,6 +81,8 @@ export default function Blog() {
             entry={entry}
             context="blog"
             onSave={handleSave}
+            onDelete={handleDelete}
+            onTogglePin={handleTogglePin}
           />
         ))}
       </div>

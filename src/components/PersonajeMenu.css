@@ -127,11 +127,11 @@
   position: absolute;
   top: 8px;
   right: 6px;
-  background: linear-gradient(165deg, rgba(35, 31, 52, 0.96), rgba(23, 19, 36, 0.96));
+  background: linear-gradient(165deg, rgba(35, 31, 52, 0.96), rgba(23, 19, 36, 0.9));
   color: #e6def5;
   padding: 16px 72px 14px 16px;
   border-radius: 18px;
-  width: min(88vw, 420px);
+  width: min(75vw, 420px);
   max-width: calc(100vw - 16px);
   min-height: 120px;
   font-size: 14px;
@@ -157,6 +157,32 @@
   max-height: none;
   padding: 18px;
   transform: translateY(-6px);
+}
+
+@media (orientation: landscape) and (min-width: 900px) {
+  .personaje-mensaje {
+    left: clamp(12px, 4vw, 28px);
+    right: auto;
+    top: clamp(12px, 3vh, 28px);
+    width: min(42vw, 360px);
+  }
+
+  .personaje-mensaje.is-expanded {
+    width: min(48vw, 460px);
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .personaje-mensaje {
+    left: auto;
+    right: clamp(10px, 3vw, 20px);
+    top: clamp(8px, 2vh, 16px);
+    width: min(46vw, 360px);
+  }
+
+  .personaje-mensaje.is-expanded {
+    width: min(50vw, 420px);
+  }
 }
 
 .personaje-mensaje.is-expanded .alternativas-header {

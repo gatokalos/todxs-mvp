@@ -136,16 +136,22 @@
 
 .acciones button {
   margin-right: 0.5rem;
-  background: #444;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 0.4rem 0.8rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f6f1ff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .acciones button:hover {
-  background: #666;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  transform: translateY(-1px);
 }
 
 .meme-panel {

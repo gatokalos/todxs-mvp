@@ -10,6 +10,8 @@ import {
   insertGatologia,
   updateGatologia,
   publishGatologia,
+  deleteGatologia,
+  togglePinned,
 } from "../services/api";
 import "./Camerino.css";
 import BlogEntry from "./BlogEntry";
@@ -224,6 +226,25 @@ useEffect(() => {
     );
   };
 
+  const handleDelete = async (entry) => {
+    if (!entry?.id) return;
+    const ok = await deleteGatologia(entry.id);
+    if (ok) {
+      setEntries((prev) => prev.filter((e) => e.id !== entry.id));
+    }
+  };
+
+  const handleTogglePin = async (entry) => {
+    if (!entry?.id) return;
+    const nextPinned = !entry.pinned;
+    const ok = await togglePinned(entry.id, nextPinned);
+    if (ok) {
+      setEntries((prev) =>
+        prev.map((e) => (e.id === entry.id ? { ...e, pinned: nextPinned } : e))
+      );
+    }
+  };
+
   const handleEntrarEscenario = () => {
     if (!personaje) return;
     const personajeId = personaje.id || personaje.slug;
@@ -299,12 +320,7 @@ useEffect(() => {
                 <span>Entrar al escenario</span>
               </button>
               <p>
-                Jugado <strong>{stats?.jugado_veces ?? "—"}</strong> veces esta
-                semana · Popularidad ⭐⭐⭐⭐☆
-                <br />
-                Última actividad: hace{" "}
-                {stats?.dias_desde_ultima_actividad ?? "—"} días.
-                <br />
+               Popularidad ⭐⭐⭐⭐☆
               </p>
             </div>
             {isTouchDevice && (
@@ -317,7 +333,13 @@ useEffect(() => {
 
           {/* Gatologías Supabase */}
           {entries.map((entry) => (
-            <BlogEntry key={entry.id} entry={entry} onSave={handleSave} />
+            <BlogEntry
+              key={entry.id}
+              entry={entry}
+              onSave={handleSave}
+              onDelete={handleDelete}
+              onTogglePin={handleTogglePin}
+            />
           ))}
 
           {/* Nuevo draft (modo edición) */}

@@ -172,6 +172,7 @@ export default function GameBoard() {
   const [promptMensaje, setPromptMensaje] = useState("");
   const [promptAnimado, setPromptAnimado] = useState("");
   const [promptDone, setPromptDone] = useState(false);
+  const [victoryPromptReady, setVictoryPromptReady] = useState(false);
   const lastPromptKeyRef = useRef(null);
   const pendingAutoORef = useRef(false);
   const cardRef = useRef(null);
@@ -507,6 +508,7 @@ export default function GameBoard() {
     setResetOverlayPieces([]);
     setPhraseResetting(false);
     setBoardReady(true);
+    setVictoryPromptReady(false);
     setMenuAlternativasAbierto(false);
     setAlternativasAbucheo([]);
     setPalabraOriginalAbucheo(null);
@@ -524,6 +526,10 @@ export default function GameBoard() {
     pendingAutoORef.current = false;
     typeProgressRef.current = 0;
     clearThinkTimeout();
+    setPromptMensaje("");
+    setPromptAnimado("");
+    setPromptDone(false);
+    lastPromptKeyRef.current = null;
 
     if (transitionTimeoutRef.current) {
       clearTimeout(transitionTimeoutRef.current);
@@ -1025,6 +1031,17 @@ useEffect(() => {
 
   // ============ COLITA ============
   function calcularColita(cx, cy, modalRect, anchoBase = 60) {
+    const isLandscapeCompact =
+      window.innerWidth > window.innerHeight && window.innerHeight <= 500;
+    if (isLandscapeCompact) {
+      const edgeX = modalRect.right;
+      const edgeY = modalRect.top + modalRect.height / 2;
+      return {
+        x1: cx, y1: cy,
+        x2: edgeX, y2: edgeY - anchoBase,
+        x3: edgeX, y3: edgeY + anchoBase,
+      };
+    }
     const modalCenterX = modalRect.left + modalRect.width / 2;
     const modalY = modalRect.top;
     return {
@@ -1124,6 +1141,9 @@ useEffect(() => {
     if (phraseResetTimeoutRef.current) {
       clearTimeout(phraseResetTimeoutRef.current);
     }
+    setPromptMensaje("");
+    setPromptAnimado("");
+    setPromptDone(false);
     setPhraseResetting(true);
     limpiarMenuAbucheo();
     phraseResetTimeoutRef.current = setTimeout(() => {
@@ -1158,6 +1178,7 @@ useEffect(() => {
 
     setRespuestaCreativa(remateLimpio || "");
     setFraseFinal(nuevaDisplay);
+    setVictoryPromptReady(true);
 
     if (api?.insertEleccion) {
       api
@@ -1396,7 +1417,19 @@ async function avanzarNivel() {
   useEffect(() => {
     const fraseCompleta = Boolean(palabraX && (palabraO || creativeMode));
     const oSegmentDone = creativeMode ? terceraDone : oDone;
-    if (!fraseCompleta || !oSegmentDone || menuAlternativasAbierto) {
+    const isVictory = Boolean(victory?.winner);
+    const isVictoryTimerActive =
+      victory?.winner === "X" &&
+      tresCasillasTodasX(jugadas) &&
+      burbujaAbierta !== null;
+    if (
+      !fraseCompleta ||
+      !oSegmentDone ||
+      menuAlternativasAbierto ||
+      phraseResetting ||
+      isVictory ||
+      isVictoryTimerActive
+    ) {
       if (!menuAlternativasAbierto) {
         setPromptMensaje("");
         setPromptAnimado("");
@@ -1419,8 +1452,24 @@ async function avanzarNivel() {
     terceraDone,
     fraseCompuestaDisplay,
     menuAlternativasAbierto,
+    phraseResetting,
+    victory,
+    jugadas,
+    burbujaAbierta,
+    victoryPromptReady,
     pickPromptMessage,
   ]);
+
+  useEffect(() => {
+    if (!victory?.winner) {
+      setVictoryPromptReady(false);
+      return;
+    }
+    setPromptMensaje("");
+    setPromptAnimado("");
+    setPromptDone(false);
+    lastPromptKeyRef.current = null;
+  }, [victory]);
 
   useEffect(() => {
     if (menuAlternativasAbierto) {
@@ -1431,11 +1480,30 @@ async function avanzarNivel() {
   }, [menuAlternativasAbierto]);
 
   const fraseCompleta = Boolean(palabraX && (palabraO || creativeMode));
-  const promptTexto = promptAnimado || promptMensaje;
+  const isVictory = Boolean(victory?.winner);
+  const isVictoryTimerActive =
+    victory?.winner === "X" &&
+    tresCasillasTodasX(jugadas) &&
+    burbujaAbierta !== null;
+  const victorySegmentDone = creativeMode ? terceraDone : oDone;
+  const victoryPromptText =
+    victoryPromptReady && victorySegmentDone
+      ? (mensajeAnimado || mensajePersonaje || "")
+      : "";
+  const promptTexto = isVictoryTimerActive
+    ? "Tienes sólo 10 segundos, no te pongas nervioso."
+    : victoryPromptText
+      ? victoryPromptText
+      : (isVictory ? "" : (promptAnimado || promptMensaje));
   const handlePromptSave = useCallback(() => {
+    if (victoryPromptReady) {
+      setVictoryPromptReady(false);
+      terminarRonda(checkWinner(jugadas));
+      return;
+    }
     if (!fraseCompleta) return;
     handleAplaudir();
-  }, [fraseCompleta, handleAplaudir]);
+  }, [fraseCompleta, handleAplaudir, victoryPromptReady, jugadas]);
   const promptNode = promptTexto ? (
     <>
       <div className="personaje-mensaje__row">
@@ -1445,7 +1513,7 @@ async function avanzarNivel() {
         <button
           type="button"
           className={`personaje-mensaje__cta personaje-mensaje__cta--alt${
-            promptDone ? "" : " is-hidden"
+            promptDone && !isVictoryTimerActive && !victoryPromptReady ? "" : " is-hidden"
           }`}
           onClick={handleAbuchear}
           aria-label="Ver otros remates"
@@ -1455,10 +1523,12 @@ async function avanzarNivel() {
         </button>
         <button
           type="button"
-          className={`personaje-mensaje__cta${promptDone ? "" : " is-hidden"}`}
+          className={`personaje-mensaje__cta${
+            promptDone || victoryPromptReady ? "" : " is-hidden"
+          }`}
           onClick={handlePromptSave}
           aria-label="Guardar frase ahora"
-          title="Guardar ahora"
+          title={victoryPromptReady ? "Siguiente nivel" : "Guardar ahora"}
         >
           →
         </button>
@@ -1495,7 +1565,11 @@ async function avanzarNivel() {
       </div>
     </div>
   ) : null;
-  const mensajeMostrado = menuNode || promptNode || mensajeAnimado;
+  const shouldShowVictoryBubble = victory?.winner && victoryPromptReady;
+  const mensajeMostrado =
+    menuNode ||
+    promptNode ||
+    (shouldShowVictoryBubble ? mensajeAnimado : (victory?.winner ? null : mensajeAnimado));
   const handlePersonajeIconClick = useCallback(() => {
     if (!fraseCompleta) return;
     handleAbuchear();
@@ -1608,23 +1682,6 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
           <span className="cursor">|</span>
         </div>
 
-        <div className="hub-botones">
-          <button
-            className={`btn-icono ${!(palabraX && (palabraO || creativeMode)) ? "oculto" : ""}`}
-            onClick={handleAbuchear}
-            title="Abuchear (elige otro remate)"
-          >
-            <img src="/assets/abuchea.png" alt="Abuchear" />
-          </button>
-          <button
-            className={`btn-icono ${!(palabraX && (palabraO || creativeMode)) ? "oculto" : ""}`}
-            onClick={handleAplaudir}
-            title="Aplaudir (guardar frase)"
-          >
-            <img src="/assets/aplaude.png" alt="Aplaudir" />
-          </button>
-        </div>
-
         {menuAlternativasAbierto && (
           <div
             className="alternativas-overlay"
@@ -1634,12 +1691,7 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
 
         {/* Tablero */}
         <div className="tablero-cuadricula">
-          {turno === "O" && boardReady && !isTransitioning && (
-            <div className="turno-chip turno-chip--o" aria-live="polite">
-              <span className="turno-dot" />
-              <span className="turno-chip__text">O está eligiendo cómo cerrar la frase...</span>
-            </div>
-          )}
+          
           <div
             className={`cuadricula ${bloqueaClicks ? "no-clicks" : ""} ${!boardReady ? "board-hidden" : ""} ${animateEntry ? "board-entry" : ""}`}
             ref={cuadriculaRef}
@@ -1678,7 +1730,12 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
         </div>
 
         {/* Efecto de victoria */}
-        <VictoryEffect show={victoryActive} winningCells={victory?.cells || []} shapes={shapesArray} />
+        <VictoryEffect
+          show={victoryActive}
+          winningCells={victory?.cells || []}
+          markedCells={jugadas.map((jugada, index) => (jugada ? index : null)).filter((idx) => idx !== null)}
+          shapes={shapesArray}
+        />
 
         {/* Modal creativo (burbuja) */}
         {burbujaAbierta !== null && (
