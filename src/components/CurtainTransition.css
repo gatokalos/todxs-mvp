@@ -32,6 +32,55 @@
   pointer-events: auto;
 }
 
+.curtain-entry-spotlight {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 10;
+  mix-blend-mode: screen;
+  transition: opacity 0.3s ease;
+}
+
+.curtain-entry-spotlight::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: min(68vmin, 520px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.9) 62%,
+    transparent 63%
+  );
+}
+
+.curtain-entry-spotlight.is-active {
+  opacity: 0.9;
+}
+
+.curtain-entry-spotlight.is-active::before {
+  animation: entrySpotlightOrbit 5.5s ease-in-out infinite;
+}
+
+@media (orientation: portrait) {
+  .curtain-entry-spotlight::before {
+    width: min(86vmin, 640px);
+  }
+}
+
+@keyframes entrySpotlightOrbit {
+  0% { transform: translate(-50%, -50%) translate(0, 0); }
+  25% { transform: translate(-50%, -50%) translate(10px, -6px); }
+  50% { transform: translate(-50%, -50%) translate(0, -12px); }
+  75% { transform: translate(-50%, -50%) translate(-10px, -6px); }
+  100% { transform: translate(-50%, -50%) translate(0, 0); }
+}
+
 .curtain-entry-card {
   min-width: min(80vw, 320px);
   padding: 18px 20px;

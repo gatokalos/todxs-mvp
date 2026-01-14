@@ -51,10 +51,12 @@ export default function CurtainTransition({ children }) {
   const rightWaveRef = useRef(null);
   const hasOpenedRef = useRef(false);
   const pendingChildrenRef = useRef(children);
+  const entrySpotlightRef = useRef(null);
 
   const [renderedChildren, setRenderedChildren] = useState(() => children);
   const [isAnimating, setIsAnimating] = useState(false);
   const [manualOpen, setManualOpen] = useState(false);
+  const [entrySpotlightActive, setEntrySpotlightActive] = useState(false);
   const [viewportSize, setViewportSize] = useState(() => ({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -125,6 +127,14 @@ export default function CurtainTransition({ children }) {
   }, [children]);
 
   useEffect(() => {
+    if (screen === "selector" && !hasOpenedRef.current && !manualOpen) {
+      setEntrySpotlightActive(true);
+      return;
+    }
+    setEntrySpotlightActive(false);
+  }, [screen, manualOpen]);
+
+  useEffect(() => {
     const updateViewport = () => {
       setViewportSize((prev) => {
         const next = { width: window.innerWidth, height: window.innerHeight };
@@ -175,6 +185,7 @@ export default function CurtainTransition({ children }) {
         delay: 0.1,
         onComplete: () => {
           setIsAnimating(false);
+          setEntrySpotlightActive(false);
           hasOpenedRef.current = true;
         },
       });
@@ -253,6 +264,20 @@ export default function CurtainTransition({ children }) {
     return () => tl.kill();
   }, [screen, viewportSize, manualOpen]);
 
+  const handleManualOpen = () => {
+    if (!entrySpotlightRef.current) {
+      setManualOpen(true);
+      return;
+    }
+    setEntrySpotlightActive(false);
+    gsap.to(entrySpotlightRef.current, {
+      opacity: 0,
+      duration: 0.45,
+      ease: "power1.out",
+      onComplete: () => setManualOpen(true),
+    });
+  };
+
   return (
     <div className="curtain-transition">
       <div ref={stageRef} className="curtain-stage">{renderedChildren}</div>
@@ -264,12 +289,19 @@ export default function CurtainTransition({ children }) {
             <button
               type="button"
               className="curtain-entry-button"
-              onClick={() => setManualOpen(true)}
+              onClick={handleManualOpen}
             >
               Abrir cortinas
             </button>
           </div>
         </div>
+      )}
+      {screen === "selector" && !hasOpenedRef.current && (
+        <div
+          ref={entrySpotlightRef}
+          className={`curtain-entry-spotlight${entrySpotlightActive ? " is-active" : ""}`}
+          aria-hidden="true"
+        />
       )}
       <div className="curtain-panel curtain-panel--left" ref={leftCurtainRef} aria-hidden="true" data-animating={isAnimating} />
       <div className="curtain-panel curtain-panel--right" ref={rightCurtainRef} aria-hidden="true" data-animating={isAnimating} />

@@ -35,7 +35,7 @@ body {
   --card-height: 95vh;
   --card-pad: clamp(18px, 3vmin, 28px);
   --card-gap: clamp(8px, 1.6vmin, 12px);
-  --board-size: 320px;
+  --board-size: 333px;
   width: min(92vw, 560px);
   min-height: min(92vh, 900px);
   height: 95vh;
@@ -402,7 +402,7 @@ body {
 
   .frase-construida {
     font-size: clamp(16px, 3.6vmin, 24px);
-    max-height: 24vh;
+    max-height: 30vh;
     overflow-y: auto;
   }
 

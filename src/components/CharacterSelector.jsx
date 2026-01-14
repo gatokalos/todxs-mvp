@@ -79,7 +79,7 @@ export const BASE_CHARACTER_LAYOUT = {
     widthRatio: 0.19,
   },
   "la-doctora": {
-    top: "71%",
+    top: "74%",
     left: "20%",
     glowRow: "bottom",
     intro: "🔬 Detecta tus fallas antes que tú mismo.",
@@ -130,6 +130,7 @@ export default function CharacterSelector() {
   const [spotlightTarget, setSpotlightTarget] = useState(null);
   const selectionTimeoutRef = useRef(null);
   const bubbleTimeoutRef = useRef(null);
+  const bubbleCloseTimeoutRef = useRef(null);
   const hostRef = useRef(null);
   const [bubblePosition, setBubblePosition] = useState(null);
   const audioCtxRef = useRef(null);
@@ -173,6 +174,10 @@ export default function CharacterSelector() {
       clearTimeout(bubbleTimeoutRef.current);
       bubbleTimeoutRef.current = null;
     }
+    if (bubbleCloseTimeoutRef.current) {
+      clearTimeout(bubbleCloseTimeoutRef.current);
+      bubbleCloseTimeoutRef.current = null;
+    }
   }, []);
 
   const clearSelectionTimeout = useCallback(() => {
@@ -209,10 +214,12 @@ export default function CharacterSelector() {
   const getCharacterCenter = useCallback((id) => {
     const root = buildingRef.current;
     if (!root) return null;
+    const isPortrait = window.innerHeight > window.innerWidth;
     const isSmallScreen =
       window.innerWidth <= 430 || window.innerHeight <= 500;
+    const isTabletPortrait = isPortrait && window.innerWidth >= 700;
     const offset = getSpotlightOffset();
-    if (isSmallScreen) {
+    if (isSmallScreen || isTabletPortrait) {
       const rect = root.getBoundingClientRect();
       return {
         x: rect.left + rect.width / 2 + offset.x,
@@ -231,8 +238,12 @@ export default function CharacterSelector() {
   const scheduleAutoClose = useCallback(() => {
     clearBubbleTimeout();
     bubbleTimeoutRef.current = setTimeout(() => {
-      setClosing(true);
-    }, 4200);
+      setSpotlightTarget(null);
+      setHovered(null);
+      bubbleCloseTimeoutRef.current = setTimeout(() => {
+        setClosing(true);
+      }, 200);
+    }, 5200);
   }, [clearBubbleTimeout]);
 
   const updateBubblePosition = useCallback(() => {
@@ -363,10 +374,14 @@ export default function CharacterSelector() {
       playVictoryX();
       const center = getCharacterCenter(char.id);
       if (center) {
+        const yOffset =
+          typeof window !== "undefined" && window.innerHeight > window.innerWidth
+            ? -window.innerHeight * 0.08
+            : 0;
         setSpotlightTarget({
           id: char.id,
           x: center.x,
-          y: center.y,
+          y: center.y + yOffset,
         });
       } else {
         setSpotlightTarget(null);
@@ -384,10 +399,14 @@ export default function CharacterSelector() {
     playVictoryX();
     const center = getCharacterCenter(char.id);
     if (center) {
+      const yOffset =
+        typeof window !== "undefined" && window.innerHeight > window.innerWidth
+          ? -window.innerHeight * 0.08
+          : 0;
       setSpotlightTarget({
         id: char.id,
         x: center.x,
-        y: center.y,
+        y: center.y + yOffset,
       });
     } else {
       setSpotlightTarget(null);
@@ -481,16 +500,13 @@ export default function CharacterSelector() {
       }
     : undefined;
 
-  const curtainSpotlight = spotlightTarget
-    ? createPortal(
-        <div
-          className="character-selector__curtain-spotlight is-active"
-          style={spotlightStyle}
-          aria-hidden="true"
-        />,
-        document.body
-      )
-    : null;
+  const curtainSpotlight = spotlightTarget ? (
+    <div
+      className="character-selector__curtain-spotlight is-active"
+      style={spotlightStyle}
+      aria-hidden="true"
+    />
+  ) : null;
 
   return (
     <div className="character-selector">
