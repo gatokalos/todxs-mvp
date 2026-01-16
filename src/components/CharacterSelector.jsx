@@ -218,8 +218,16 @@ export default function CharacterSelector() {
     const isSmallScreen =
       window.innerWidth <= 430 || window.innerHeight <= 500;
     const isTabletPortrait = isPortrait && window.innerWidth >= 700;
+    const isTabletLandscape =
+      !isPortrait && window.innerWidth >= 900 && window.innerHeight >= 600;
     const offset = getSpotlightOffset();
-    if (isSmallScreen || isTabletPortrait) {
+    if (isTabletPortrait || isTabletLandscape) {
+      return {
+        x: window.innerWidth / 2 + offset.x,
+        y: window.innerHeight / 2 + offset.y,
+      };
+    }
+    if (isSmallScreen) {
       const rect = root.getBoundingClientRect();
       return {
         x: rect.left + rect.width / 2 + offset.x,
@@ -449,7 +457,7 @@ export default function CharacterSelector() {
             style={{
               position: "fixed",
               left: `${bubblePosition.left}px`,
-              top: `${bubblePosition.top}px`,
+              top: `calc(${bubblePosition.top}px - var(--bubble-raise, 0px))`,
               transform: "translate(-50%, -100%)",
               bottom: "auto",
               zIndex: 12000,
@@ -500,13 +508,16 @@ export default function CharacterSelector() {
       }
     : undefined;
 
-  const curtainSpotlight = spotlightTarget ? (
-    <div
-      className="character-selector__curtain-spotlight is-active"
-      style={spotlightStyle}
-      aria-hidden="true"
-    />
-  ) : null;
+  const curtainSpotlight = spotlightTarget
+    ? createPortal(
+        <div
+          className="character-selector__curtain-spotlight is-active"
+          style={spotlightStyle}
+          aria-hidden="true"
+        />,
+        document.body
+      )
+    : null;
 
   return (
     <div className="character-selector">
