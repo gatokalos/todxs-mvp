@@ -255,6 +255,26 @@ export default function CharacterSelector() {
   }, [clearBubbleTimeout]);
 
   const updateBubblePosition = useCallback(() => {
+    const isDesktop = window.matchMedia(
+      "(hover: hover) and (pointer: fine) and (min-width: 1200px)"
+    ).matches;
+    const targetId = bubbleCharacter?.id;
+
+    if (isDesktop && targetId) {
+      const root = buildingRef.current;
+      const slot = root?.querySelector(`[data-character-id="${targetId}"]`);
+      const sticker = slot?.querySelector(".character-selector__sticker");
+      const rect = (sticker || slot)?.getBoundingClientRect();
+      if (rect) {
+        setBubblePosition({
+          left: rect.left + rect.width / 2,
+          top: rect.bottom,
+          align: "center",
+        });
+        return;
+      }
+    }
+
     if (!hostRef.current) return;
     const rect = hostRef.current.getBoundingClientRect();
     const eyeOffset = rect.height * 0.16;
@@ -263,7 +283,7 @@ export default function CharacterSelector() {
       top: rect.top + eyeOffset,
       align: "center",
     });
-  }, []);
+  }, [bubbleCharacter]);
 
   useEffect(() => {
     return () => clearBubbleTimeout();
@@ -458,7 +478,7 @@ export default function CharacterSelector() {
               position: "fixed",
               left: `${bubblePosition.left}px`,
               top: `calc(${bubblePosition.top}px - var(--bubble-raise, 0px))`,
-              transform: "translate(-50%, -100%)",
+              transform: "translate(-50%, var(--bubble-translate-y, -100%))",
               bottom: "auto",
               zIndex: 12000,
             }}
@@ -496,6 +516,20 @@ export default function CharacterSelector() {
             ) : (
               <p className="cs-bubble-body">{introText}</p>
             )}
+            <svg
+              className="cs-speech-tail"
+              viewBox="0 0 120 80"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <defs>
+                <linearGradient id="csBubbleTailGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="rgba(108, 108, 108, 1)" />
+                  <stop offset="100%" stopColor="rgba(170, 166, 166, 0.96)" />
+                </linearGradient>
+              </defs>
+              <polygon points="0,0 60,80 120,0" fill="url(#csBubbleTailGradient)" />
+            </svg>
           </div>,
           document.body
         )
@@ -577,15 +611,6 @@ export default function CharacterSelector() {
                   alt={p.nombre_visible}
                   className={`character-selector__sticker ${hovered === p.id ? "is-hover" : ""}`}
                 />
-                {!isTouchMode && hovered === p.id && (
-                  <div
-                    className={`character-selector__name ${
-                      bubbleCharacter ? "is-muted" : ""
-                    }`}
-                  >
-                    {p.nombre_visible}
-                  </div>
-                )}
                 {isLocked && (
                   <div className="character-selector__lock">
                     <span>Suscríbete para jugar</span>

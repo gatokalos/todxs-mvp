@@ -39,24 +39,131 @@
   opacity: 0;
   z-index: 10;
   mix-blend-mode: screen;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.9s ease;
+}
+
+.curtain-entry-figures {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 3.3s ease;
+}
+
+.curtain-entry-spotlight.is-active .curtain-entry-figures {
+  opacity: 1;
+}
+
+.curtain-entry-spotlight:not(.is-active) .curtain-entry-figure {
+  animation-play-state: paused;
+}
+
+.curtain-entry-figure {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  --size: clamp(96px, 18vmax, 240px);
+  width: var(--size);
+  height: var(--size);
+  transform: translate(-50%, -50%) translate(var(--offset-x), var(--offset-y)) scale(1.2);
+  opacity: var(--opacity, 0.95);
+  filter: blur(var(--blur, 0.8px)) brightness(1.45) drop-shadow(0 0 36px rgba(255, 255, 255, 0.7));
+  mix-blend-mode: screen;
+  animation: entryFigureDrift var(--duration, 9s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.curtain-entry-figure.is-garra {
+  --size: calc(var(--size) * 1.4);
+}
+
+.curtain-entry-figure.is-reverse {
+  animation-name: entryFigureDriftReverse;
+}
+
+.curtain-entry-figure:nth-child(1) {
+  --offset-x: -28vw;
+  --offset-y: -18vh;
+  --size: clamp(110px, 22vmax, 280px);
+  --duration: 9.5s;
+  --blur: 0.6px;
+  --opacity: 0.95;
+}
+
+.curtain-entry-figure:nth-child(2) {
+  --offset-x: 22vw;
+  --offset-y: -14vh;
+  --size: clamp(96px, 18vmax, 240px);
+  --duration: 8.2s;
+  --blur: 0.9px;
+  --opacity: 0.9;
+  --delay: -1.2s;
+}
+
+.curtain-entry-figure:nth-child(3) {
+  --offset-x: -12vw;
+  --offset-y: 18vh;
+  --size: clamp(90px, 17vmax, 220px);
+  --duration: 10.4s;
+  --blur: 1.2px;
+  --opacity: 0.85;
+  --delay: -2.1s;
+}
+
+.curtain-entry-figure:nth-child(4) {
+  --offset-x: 26vw;
+  --offset-y: 16vh;
+  --size: clamp(108px, 20vmax, 260px);
+  --duration: 9.1s;
+  --blur: 0.7px;
+  --opacity: 0.95;
+  --delay: -0.4s;
+}
+
+.curtain-entry-figure:nth-child(5) {
+  --offset-x: -6vw;
+  --offset-y: -26vh;
+  --size: clamp(88px, 16vmax, 210px);
+  --duration: 7.8s;
+  --blur: 1px;
+  --opacity: 0.88;
+  --delay: -1.6s;
+}
+
+.curtain-entry-figure:nth-child(6) {
+  --offset-x: 10vw;
+  --offset-y: 8vh;
+  --size: clamp(120px, 24vmax, 300px);
+  --duration: 11.2s;
+  --blur: 1.3px;
+  --opacity: 0.9;
+  --delay: -2.6s;
+}
+
+.curtain-entry-figure:nth-child(7) {
+  --offset-x: -24vw;
+  --offset-y: 22vh;
+  --size: clamp(98px, 19vmax, 240px);
+  --duration: 8.8s;
+  --blur: 0.9px;
+  --opacity: 0.9;
+  --delay: -0.9s;
+}
+
+.curtain-entry-figure:nth-child(8) {
+  --offset-x: 28vw;
+  --offset-y: -6vh;
+  --size: clamp(104px, 21vmax, 270px);
+  --duration: 10s;
+  --blur: 0.8px;
+  --opacity: 0.92;
+  --delay: -1.9s;
 }
 
 .curtain-entry-spotlight::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 45%;
-  width: min(68vmin, 520px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(255, 255, 255, 0.9) 62%,
-    transparent 63%
-  );
+  content: none;
 }
 
 .curtain-entry-spotlight.is-active {
@@ -64,13 +171,7 @@
 }
 
 .curtain-entry-spotlight.is-active::before {
-  animation: entrySpotlightOrbit 5.5s ease-in-out infinite;
-}
-
-@media (orientation: portrait) {
-  .curtain-entry-spotlight::before {
-    width: min(86vmin, 640px);
-  }
+  animation: none;
 }
 
 @keyframes entrySpotlightOrbit {
@@ -79,6 +180,36 @@
   50% { transform: translate(-50%, -50%) translate(0, -12px); }
   75% { transform: translate(-50%, -50%) translate(-10px, -6px); }
   100% { transform: translate(-50%, -50%) translate(0, 0); }
+}
+
+@keyframes entryFigureDrift {
+  0% {
+    transform: translate(-50%, -50%) translate(var(--offset-x), var(--offset-y)) rotate(0deg) scale(1.18);
+    opacity: var(--opacity, 0.95);
+  }
+  50% {
+    transform: translate(-50%, -50%) translate(calc(var(--offset-x) + 2.5vmin), calc(var(--offset-y) - 1.6vmin)) rotate(180deg) scale(1.5);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(calc(var(--offset-x) - 2vmin), calc(var(--offset-y) + 1.2vmin)) rotate(360deg) scale(1.32);
+    opacity: 0.6;
+  }
+}
+
+@keyframes entryFigureDriftReverse {
+  0% {
+    transform: translate(-50%, -50%) translate(var(--offset-x), var(--offset-y)) rotate(0deg) scale(1.2);
+    opacity: var(--opacity, 0.95);
+  }
+  50% {
+    transform: translate(-50%, -50%) translate(calc(var(--offset-x) - 2.2vmin), calc(var(--offset-y) - 1.4vmin)) rotate(-180deg) scale(1.45);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(calc(var(--offset-x) + 1.8vmin), calc(var(--offset-y) + 1.4vmin)) rotate(-360deg) scale(1.3);
+    opacity: 0.6;
+  }
 }
 
 .curtain-entry-card {

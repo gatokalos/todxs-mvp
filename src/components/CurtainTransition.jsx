@@ -301,7 +301,18 @@ export default function CurtainTransition({ children }) {
           ref={entrySpotlightRef}
           className={`curtain-entry-spotlight${entrySpotlightActive ? " is-active" : ""}`}
           aria-hidden="true"
-        />
+        >
+          <div className="curtain-entry-figures" aria-hidden="true">
+            <img className="curtain-entry-figure is-garra" src="/assets/garra.svg" alt="" />
+            <img className="curtain-entry-figure is-esfera" src="/assets/esfera.svg" alt="" />
+            <img className="curtain-entry-figure is-esfera2" src="/assets/esfera2.svg" alt="" />
+            <img className="curtain-entry-figure is-garra is-reverse" src="/assets/garra.svg" alt="" />
+            
+            <img className="curtain-entry-figure is-esfera2" src="/assets/esfera2.svg" alt="" />
+            
+            <img className="curtain-entry-figure is-garra" src="/assets/garra.svg" alt="" />
+          </div>
+        </div>
       )}
       <div className="curtain-panel curtain-panel--left" ref={leftCurtainRef} aria-hidden="true" data-animating={isAnimating} />
       <div className="curtain-panel curtain-panel--right" ref={rightCurtainRef} aria-hidden="true" data-animating={isAnimating} />
