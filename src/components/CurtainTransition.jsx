@@ -283,16 +283,19 @@ export default function CurtainTransition({ children }) {
       <div ref={stageRef} className="curtain-stage">{renderedChildren}</div>
       {!hasOpenedRef.current && screen === "selector" && !manualOpen && (
         <div className="curtain-entry">
-          <div className="curtain-entry-card">
-            <p className="curtain-entry-title">Bienvenida</p>
-            <p className="curtain-entry-text">¿Lista para entrar al escenario?</p>
-            <button
-              type="button"
-              className="curtain-entry-button"
-              onClick={handleManualOpen}
-            >
-              Abrir cortinas
-            </button>
+          <div className="curtain-entry-content">
+            <img className="curtain-entry-logo" src="/assets/logoTRAZO.png" alt="Logo TRAZO" />
+            <div className="curtain-entry-card">
+              <p className="curtain-entry-title">Bienvenida</p>
+              <p className="curtain-entry-text">¿Listx para entrar al escenario?</p>
+              <button
+                type="button"
+                className="curtain-entry-button"
+                onClick={handleManualOpen}
+              >
+                Abrir cortinas
+              </button>
+            </div>
           </div>
         </div>
       )}

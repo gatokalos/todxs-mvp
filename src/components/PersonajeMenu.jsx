@@ -28,7 +28,7 @@ function PersonajeMenu({ personaje, mensaje, onIconClick, menuAbierto = false })
   }
 
   return (
-    <div className={`personaje-menu${mensaje ? " is-speaking" : ""}`}>
+    <div className={`personaje-menu${mensaje ? " is-speaking" : ""}${menuAbierto ? " is-expanded" : ""}`}>
       {icono ? (
         <img
           src={icono}

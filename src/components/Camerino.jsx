@@ -1,5 +1,5 @@
 // src/components/Camerino.jsx
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
@@ -7,6 +7,9 @@ gsap.registerPlugin(ScrollTrigger);
 import useGameStore from "../store/useGameStore";
 import {
   fetchGatologias,
+  fetchEleccionesPorPersonaje,
+  toggleEleccionFavorita,
+  deleteEleccion,
   insertGatologia,
   updateGatologia,
   publishGatologia,
@@ -15,7 +18,6 @@ import {
 } from "../services/api";
 import "./Camerino.css";
 import BlogEntry from "./BlogEntry";
-import GatologiasSticky from "./GatologiasSticky";
 import { supabase } from "../lib/supabaseClient";
 import { BASE_CHARACTER_LAYOUT } from "./CharacterSelector";
 
@@ -51,12 +53,32 @@ export default function Camerino() {
   const curtainLeftRef = useRef(null);
   const curtainRightRef = useRef(null);
   const btnRef = useRef(null);
+  const canvasRef = useRef(null);
 
   const personaje = useGameStore((s) => s.personajeSeleccionado);
   const [entries, setEntries] = useState([]);
   const [camerinoImage, setCamerinoImage] = useState(null);
   const [stats, setStats] = useState(null);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterMode, setFilterMode] = useState("all");
+  const [activePanel, setActivePanel] = useState("textos");
+  const [fraseSearchTerm, setFraseSearchTerm] = useState("");
+  const [fraseFilterMode, setFraseFilterMode] = useState("all");
+  const [frases, setFrases] = useState([]);
+  const [frasesLoading, setFrasesLoading] = useState(true);
+  const [activeMemeFraseId, setActiveMemeFraseId] = useState(null);
+  const [generatingMeme, setGeneratingMeme] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(max-width: 768px)").matches;
+  });
+  const [memePreview, setMemePreview] = useState({ frase: "", url: "" });
+  const [memeOptions, setMemeOptions] = useState({
+    bgColor: "#000000",
+    textColor: "#ffffff",
+    font: "Georgia",
+  });
 
   const setScreen = useGameStore((s) => s.setScreen);
   const setPersonajeActual = useGameStore((s) => s.setPersonajeActual);
@@ -102,6 +124,60 @@ export default function Camerino() {
 
   const currentSlug = personaje?.slug || personaje?.id;
   const currentIndex = charactersPool.findIndex((char) => char.slug === currentSlug);
+
+  const filteredEntries = useMemo(() => {
+    let list = entries;
+    const term = searchTerm.trim().toLowerCase();
+
+    if (term) {
+      list = list.filter((entry) => {
+        const titulo = entry?.titulo?.toLowerCase() || "";
+        const contenido = entry?.contenido?.toLowerCase() || "";
+        return titulo.includes(term) || contenido.includes(term);
+      });
+    }
+
+    if (filterMode === "pinned") {
+      list = list.filter((entry) => entry?.pinned);
+    } else if (filterMode === "recent") {
+      list = [...list].sort((a, b) => {
+        const aDate = new Date(a?.updated_at || a?.created_at || 0).getTime();
+        const bDate = new Date(b?.updated_at || b?.created_at || 0).getTime();
+        return bDate - aDate;
+      });
+    }
+
+    return list;
+  }, [entries, filterMode, searchTerm]);
+
+  const isFraseFavorita = useCallback(
+    (frase) => Boolean(frase?.favorita ?? frase?.is_favorite ?? frase?.favorite),
+    []
+  );
+
+  const filteredFrases = useMemo(() => {
+    let list = frases;
+    const term = fraseSearchTerm.trim().toLowerCase();
+
+    if (term) {
+      list = list.filter((frase) => {
+        const decision = frase?.decision?.toLowerCase() || "";
+        return decision.includes(term);
+      });
+    }
+
+    if (fraseFilterMode === "favoritas") {
+      list = list.filter((frase) => isFraseFavorita(frase));
+    } else if (fraseFilterMode === "recientes") {
+      list = [...list].sort((a, b) => {
+        const aDate = new Date(a?.created_at || a?.timestamp || 0).getTime();
+        const bDate = new Date(b?.created_at || b?.timestamp || 0).getTime();
+        return bDate - aDate;
+      });
+    }
+
+    return list;
+  }, [fraseFilterMode, fraseSearchTerm, frases, isFraseFavorita]);
 
   const selectCarouselCharacter = (char) => {
     if (!char) return;
@@ -170,6 +246,14 @@ export default function Camerino() {
     return () => mql.removeEventListener?.("change", update);
   }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+    const mql = window.matchMedia("(max-width: 768px)");
+    const handler = (event) => setIsMobileView(event.matches);
+    handler(mql);
+    mql.addEventListener?.("change", handler);
+    return () => mql.removeEventListener?.("change", handler);
+  }, []);
 
   // === Imagen de fondo ===
   useEffect(() => {
@@ -183,6 +267,38 @@ export default function Camerino() {
     if (!personaje?.slug) return;
     fetchGatologias(personaje.slug).then(setEntries);
   }, [personaje]);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function fetchFrases() {
+      if (!personaje?.id) {
+        setFrases([]);
+        setFrasesLoading(false);
+        return;
+      }
+      setFrasesLoading(true);
+      try {
+        const data = await fetchEleccionesPorPersonaje(personaje.id);
+        if (!cancelled) setFrases(Array.isArray(data) ? data : []);
+      } catch (error) {
+        if (!cancelled) setFrases([]);
+        console.error("❌ Error cargando frases:", error);
+      } finally {
+        if (!cancelled) setFrasesLoading(false);
+      }
+    }
+    fetchFrases();
+    return () => {
+      cancelled = true;
+    };
+  }, [personaje?.id]);
+
+  useEffect(() => {
+    if (activePanel !== "memes") {
+      setActiveMemeFraseId(null);
+      setMemePreview({ frase: "", url: "" });
+    }
+  }, [activePanel]);
 
   // === Parallax fade del header ===
 useEffect(() => {
@@ -252,6 +368,253 @@ useEffect(() => {
     setScreen("gameboard");
   };
 
+  const compartirTwitter = (texto) => {
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+      texto
+    )}`;
+    window.open(url, "_blank");
+  };
+
+  const generarMeme = async (frase, opciones) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return null;
+
+    const ctx = canvas.getContext("2d");
+    const width = 1000;
+    const height = 600;
+    canvas.width = width;
+    canvas.height = height;
+
+    ctx.fillStyle = opciones.bgColor;
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.fillStyle = opciones.textColor;
+    ctx.font = `bold 40px '${opciones.font || "Georgia"}'`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    const maxWidth = width - 120;
+    const lineHeight = 55;
+    const words = frase.split(" ");
+    let line = "";
+    const lines = [];
+    for (let i = 0; i < words.length; i++) {
+      const testLine = `${line}${words[i]} `;
+      const metrics = ctx.measureText(testLine);
+      if (metrics.width > maxWidth && i > 0) {
+        lines.push(line);
+        line = `${words[i]} `;
+      } else {
+        line = testLine;
+      }
+    }
+    lines.push(line);
+
+    const totalHeight = lines.length * lineHeight;
+    let y = height / 2 - totalHeight / 2;
+    lines.forEach((l) => {
+      ctx.fillText(l.trim(), width / 2, y);
+      y += lineHeight;
+    });
+
+    return canvas.toDataURL("image/png");
+  };
+
+  const abrirPreview = async (frase) => {
+    setGeneratingMeme(true);
+    try {
+      const url = await generarMeme(frase, memeOptions);
+      setMemePreview({ frase, url });
+    } catch (error) {
+      console.error("❌ Error generando meme:", error);
+      setMemePreview({ frase, url: "" });
+    } finally {
+      setGeneratingMeme(false);
+    }
+  };
+
+  const cerrarPreview = () => setMemePreview({ frase: "", url: "" });
+
+  const descargarMeme = async () => {
+    if (!memePreview?.url || !activeMemeFraseId) return;
+    const link = document.createElement("a");
+    link.download = `meme-${Date.now()}.png`;
+    link.href = memePreview.url;
+    link.click();
+  };
+
+  const compartirWhatsApp = async () => {
+    if (!memePreview?.url || !activeMemeFraseId) return;
+    const wa = `https://wa.me/?text=${encodeURIComponent(
+      "Mira este meme 😸 " + memePreview.url
+    )}`;
+    window.open(wa, "_blank");
+  };
+
+  const obtenerFraseId = (frase, index) => {
+    if (frase?.id) return frase.id;
+    if (frase?.created_at) return `${frase.created_at}-${index}`;
+    return `${index}-${frase?.decision?.slice(0, 20) || "frase"}`;
+  };
+
+  const handleToggleMeme = async (frase, id) => {
+    if (activeMemeFraseId === id) {
+      setActiveMemeFraseId(null);
+      cerrarPreview();
+      return;
+    }
+    setActiveMemeFraseId(id);
+    setMemePreview({ frase: "", url: "" });
+    await abrirPreview(frase.decision);
+  };
+
+  const closeMemeInterface = () => {
+    setActiveMemeFraseId(null);
+    cerrarPreview();
+  };
+
+  const handleToggleFavorita = async (frase) => {
+    if (!frase?.id) return;
+    const nextFavorita = !isFraseFavorita(frase);
+    const ok = await toggleEleccionFavorita(frase.id, nextFavorita);
+    if (ok) {
+      setFrases((prev) =>
+        prev.map((item) =>
+          item.id === frase.id
+            ? {
+                ...item,
+                favorita: nextFavorita,
+                is_favorite: nextFavorita,
+              }
+            : item
+        )
+      );
+    }
+  };
+
+  const handleDeleteFrase = async (frase) => {
+    if (!frase?.id) return;
+    if (!confirm("¿Seguro que quieres borrar esta frase?")) return;
+    const ok = await deleteEleccion(frase.id);
+    if (ok) {
+      setFrases((prev) => prev.filter((item) => item.id !== frase.id));
+    }
+  };
+
+  const activeFrase = useMemo(() => {
+    if (!activeMemeFraseId) return null;
+    return (
+      frases.find((frase, idx) => obtenerFraseId(frase, idx) === activeMemeFraseId) ||
+      null
+    );
+  }, [activeMemeFraseId, frases]);
+
+  const activePreviewReady =
+    activeFrase &&
+    memePreview.url &&
+    memePreview.frase === activeFrase.decision;
+
+  const renderMemeEditorBody = (frase, previewReady) => (
+    <>
+      <div className="camerino-meme-panel__preview">
+        {generatingMeme && !memePreview.url ? (
+          <p className="camerino-meme-panel__loading">Generando vista previa...</p>
+        ) : previewReady ? (
+          <img
+            src={memePreview.url}
+            alt={`Vista previa del meme para ${personaje?.nombre || "el personaje"}`}
+          />
+        ) : (
+          <p className="camerino-meme-panel__placeholder">
+            Toca Actualizar para ver la vista previa.
+          </p>
+        )}
+      </div>
+
+      <div className="camerino-meme-panel-actions">
+        <button type="button" onClick={descargarMeme} disabled={!previewReady}>
+          ⬇️ Descargar
+        </button>
+        <button type="button" onClick={compartirWhatsApp} disabled={!previewReady}>
+          📱 WhatsApp
+        </button>
+      </div>
+
+      <div className="camerino-meme-options">
+        <div className="camerino-color-palette">
+          {["#D9C4F3", "#F9B4D4", "#FCA17D", "#E94F37", "#F6A057"].map((color) => (
+            <button
+              key={color}
+              type="button"
+              className="camerino-color-swatch"
+              style={{ background: color }}
+              onClick={() => setMemeOptions((prev) => ({ ...prev, bgColor: color }))}
+            />
+          ))}
+
+          <input
+            type="color"
+            value={memeOptions.bgColor}
+            onChange={(e) =>
+              setMemeOptions((prev) => ({ ...prev, bgColor: e.target.value }))
+            }
+            className="camerino-color-picker"
+          />
+
+          <button
+            type="button"
+            className="camerino-update-btn"
+            onClick={() => abrirPreview(frase.decision)}
+          >
+            🔄 Actualizar
+          </button>
+        </div>
+
+        <label>
+          🔤 Texto
+          <input
+            type="color"
+            value={memeOptions.textColor}
+            onChange={(e) =>
+              setMemeOptions((prev) => ({ ...prev, textColor: e.target.value }))
+            }
+          />
+        </label>
+
+        <label>
+          ✍️ Fuente
+          <select
+            value={memeOptions.font || "Georgia"}
+            onChange={(e) => setMemeOptions((prev) => ({ ...prev, font: e.target.value }))}
+          >
+            <option value="Georgia">Georgia</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Arial">Arial</option>
+            <option value="Comic Sans MS">Comic Sans</option>
+            <option value="Times New Roman">Times New Roman</option>
+          </select>
+        </label>
+      </div>
+    </>
+  );
+
+  const renderMobileMemeEditor = (frase, previewReady, onClose) => (
+    <div className="camerino-meme-panel">
+      <div className="camerino-meme-panel__header">
+        <strong>Editar meme</strong>
+        <button
+          type="button"
+          className="camerino-meme-panel__close"
+          onClick={onClose}
+          aria-label="Cerrar panel de meme"
+        >
+          ✖️
+        </button>
+      </div>
+      {renderMemeEditorBody(frase, previewReady)}
+    </div>
+  );
+
   const isLocked =
     lockedPersonajeId === personaje.id || !canPlayPersonaje(personaje.id);
 
@@ -265,8 +628,6 @@ useEffect(() => {
         className="camerino-bg"
         style={{ backgroundImage: `url(${camerinoImage})` }}
       />
-
-      <GatologiasSticky onClick={() => setScreen("compendio")} />
 
       {/* Contenido principal */}
       <div
@@ -305,20 +666,36 @@ useEffect(() => {
               </div>
             </div>
             <div className="draft-content">
-              <button
-                ref={btnRef}
-                type="button"
-                className="btn-entrar"
-                onClick={handleEntrarEscenario}
-                disabled={isLocked}
-                title={
-                  isLocked
-                    ? "Este personaje está bloqueado para tu rol actual"
-                    : undefined
-                }
-              >
-                <span>Entrar al escenario</span>
-              </button>
+              <div className="camerino-primary-actions">
+                <button
+                  ref={btnRef}
+                  type="button"
+                  className="btn-entrar"
+                  onClick={handleEntrarEscenario}
+                  disabled={isLocked}
+                  title={
+                    isLocked
+                      ? "Este personaje está bloqueado para tu rol actual"
+                      : undefined
+                  }
+                >
+                  <span>Bajar a ensayar</span>
+                </button>
+                <button
+                  type="button"
+                  className={`camerino-tab${activePanel === "textos" ? " is-active" : ""}`}
+                  onClick={() => setActivePanel("textos")}
+                >
+                  Textos
+                </button>
+                <button
+                  type="button"
+                  className={`camerino-tab${activePanel === "memes" ? " is-active" : ""}`}
+                  onClick={() => setActivePanel("memes")}
+                >
+                  Memes
+                </button>
+              </div>
               <p>
                Popularidad ⭐⭐⭐⭐☆
               </p>
@@ -331,16 +708,184 @@ useEffect(() => {
             )}
           </div>
 
-          {/* Gatologías Supabase */}
-          {entries.map((entry) => (
-            <BlogEntry
-              key={entry.id}
-              entry={entry}
-              onSave={handleSave}
-              onDelete={handleDelete}
-              onTogglePin={handleTogglePin}
-            />
-          ))}
+          <div className="camerino-quick-actions">
+            <button
+              type="button"
+              className="camerino-cta camerino-cta--ghost"
+              onClick={() => setScreen("compendio")}
+            >
+              Gatologias
+            </button>
+            <button
+              type="button"
+              className="camerino-cta camerino-cta--ghost"
+              onClick={() => setScreen("selector")}
+            >
+              Selector
+            </button>
+          </div>
+
+          {activePanel === "textos" && (
+            <>
+              <div className="camerino-filters" aria-label="Filtrar gatologias">
+                <label className="camerino-filters__search">
+                  <span className="camerino-filters__label">Buscar</span>
+                  <input
+                    type="search"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Titulo o contenido"
+                  />
+                </label>
+                <div className="camerino-filters__chips">
+                  <button
+                    type="button"
+                    className={`camerino-chip${filterMode === "all" ? " is-active" : ""}`}
+                    onClick={() => setFilterMode("all")}
+                  >
+                    Todas
+                  </button>
+                  <button
+                    type="button"
+                    className={`camerino-chip${filterMode === "pinned" ? " is-active" : ""}`}
+                    onClick={() => setFilterMode("pinned")}
+                  >
+                    Pineadas
+                  </button>
+                  <button
+                    type="button"
+                    className={`camerino-chip${filterMode === "recent" ? " is-active" : ""}`}
+                    onClick={() => setFilterMode("recent")}
+                  >
+                    Recientes
+                  </button>
+                </div>
+              </div>
+
+              {/* Gatologías Supabase */}
+              {filteredEntries.map((entry) => (
+                <BlogEntry
+                  key={entry.id}
+                  entry={entry}
+                  onSave={handleSave}
+                  onDelete={handleDelete}
+                  onTogglePin={handleTogglePin}
+                />
+              ))}
+
+              {!filteredEntries.length && (
+                <div className="camerino-filters__empty">
+                  No hay gatologias que coincidan con tu busqueda.
+                </div>
+              )}
+            </>
+          )}
+
+          {activePanel === "memes" && (
+            <div className="camerino-memes">
+              {frasesLoading && (
+                <p className="camerino-memes__status">Cargando frases...</p>
+              )}
+              {!frasesLoading && frases.length === 0 && (
+                <p className="camerino-memes__status">
+                  Aun no hay frases guardadas.
+                </p>
+              )}
+              {!frasesLoading && frases.length > 0 && (
+                <>
+                  <div className="camerino-meme-filters" aria-label="Filtrar frases">
+                    <label className="camerino-meme-filters__search">
+                      <span>Buscar</span>
+                      <input
+                        type="search"
+                        value={fraseSearchTerm}
+                        onChange={(e) => setFraseSearchTerm(e.target.value)}
+                        placeholder="Buscar frases"
+                      />
+                    </label>
+                    <div className="camerino-meme-filters__chips">
+                      <button
+                        type="button"
+                        className={`camerino-chip${fraseFilterMode === "all" ? " is-active" : ""}`}
+                        onClick={() => setFraseFilterMode("all")}
+                      >
+                        Todas
+                      </button>
+                      <button
+                        type="button"
+                        className={`camerino-chip${fraseFilterMode === "favoritas" ? " is-active" : ""}`}
+                        onClick={() => setFraseFilterMode("favoritas")}
+                      >
+                        Favoritas
+                      </button>
+                      <button
+                        type="button"
+                        className={`camerino-chip${fraseFilterMode === "recientes" ? " is-active" : ""}`}
+                        onClick={() => setFraseFilterMode("recientes")}
+                      >
+                        Recientes
+                      </button>
+                    </div>
+                  </div>
+                  <ul className="camerino-memes__list">
+                    {filteredFrases.map((f, idx) => {
+                      const fraseId = obtenerFraseId(f, idx);
+                      const estaAbierto = activeMemeFraseId === fraseId;
+                      const favorita = isFraseFavorita(f);
+                      const previewReady =
+                        estaAbierto &&
+                        memePreview.url &&
+                        memePreview.frase === f.decision;
+                      return (
+                        <li key={`${f.created_at}-${idx}`} className="camerino-meme-item">
+                          <div className="camerino-meme-item__meta">
+                            <button
+                              type="button"
+                              className={`camerino-meme-star${favorita ? " is-active" : ""}`}
+                              onClick={() => handleToggleFavorita(f)}
+                              aria-label={favorita ? "Quitar de favoritas" : "Marcar como favorita"}
+                            >
+                              ★
+                            </button>
+                            <button
+                              type="button"
+                              className="camerino-meme-delete"
+                              onClick={() => handleDeleteFrase(f)}
+                              aria-label="Borrar frase"
+                            >
+                              🗑️
+                            </button>
+                          </div>
+                          <p>{f.decision}</p>
+                          <div className="camerino-meme-actions">
+                            <button onClick={() => compartirTwitter(f.decision)}>
+                              🐦 Tweet
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleToggleMeme(f, fraseId)}
+                            >
+                              📱 Meme
+                            </button>
+                          </div>
+
+                          {estaAbierto &&
+                            isMobileView &&
+                            renderMobileMemeEditor(f, previewReady, closeMemeInterface)}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  {!filteredFrases.length && (
+                    <div className="camerino-memes__status">
+                      No hay frases que coincidan con tu busqueda.
+                    </div>
+                  )}
+                  <canvas ref={canvasRef} style={{ display: "none" }} />
+                </>
+              )}
+            </div>
+          )}
 
           {/* Nuevo draft (modo edición) */}
           {draft?.status === "nuevo" && (
@@ -364,6 +909,28 @@ useEffect(() => {
           )}
         </div>
       </div>
+
+      {activePanel === "memes" && !isMobileView && activeFrase && (
+        <div className="camerino-meme-overlay" onClick={closeMemeInterface}>
+          <div
+            className="camerino-meme-container"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="camerino-meme-overlay__header">
+              <strong>Editar meme</strong>
+              <button
+                type="button"
+                className="camerino-meme-overlay__close"
+                onClick={closeMemeInterface}
+                aria-label="Cerrar panel de meme"
+              >
+                ✖️
+              </button>
+            </div>
+            {renderMemeEditorBody(activeFrase, activePreviewReady)}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

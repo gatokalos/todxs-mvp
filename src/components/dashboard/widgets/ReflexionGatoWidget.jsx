@@ -6,6 +6,8 @@ const DEFAULT_REFLEXION = {
   texto: "El Gato Enigmático está afilando sus palabras. Intenta generar una nueva reflexión.",
 };
 
+const API_BASE_URL = import.meta.env?.VITE_API_BASE_URL || "https://api.gatoencerrado.ai";
+
 export default function ReflexionGatoWidget() {
   const [reflexion, setReflexion] = useState(DEFAULT_REFLEXION);
   const [loading, setLoading] = useState(true);
@@ -33,7 +35,7 @@ export default function ReflexionGatoWidget() {
     setError(null);
 
     try {
-      const response = await fetch("/api/todxs/generate", {
+      const response = await fetch(`${API_BASE_URL}/api/todxs/generate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ personaje: "Gato Enigmático" }),

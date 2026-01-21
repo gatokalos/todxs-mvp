@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import SpotlightOverlay from "@/components/SpotlightOverlay";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
@@ -10,6 +10,7 @@ export default function BlogEntry({
   onTogglePin,
 }) {
   const [isEditing, setIsEditing] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [titulo, setTitulo] = useState(entry.titulo);
   const [contenido, setContenido] = useState(entry.contenido);
   const [loading, setLoading] = useState(false);
@@ -52,11 +53,23 @@ export default function BlogEntry({
     return (tmp.textContent || tmp.innerText || "").trim();
   }, []);
 
-  const buildShareText = useCallback(() => {
-    const title = titulo?.trim() || "Gatología";
-    const body = stripHtml(contenido);
-    return `${title}\n\n${body}`;
-  }, [contenido, stripHtml, titulo]);
+  const plainText = useMemo(() => stripHtml(contenido), [contenido, stripHtml]);
+  const isLongContent = plainText.length > 250;
+
+  const truncateText = useCallback((text = "", maxChars) => {
+    if (!maxChars || text.length <= maxChars) return text;
+    const clipped = text.slice(0, maxChars).replace(/\s+\S*$/, "").trim();
+    return clipped ? `${clipped}...` : text.slice(0, maxChars);
+  }, []);
+
+  const buildShareText = useCallback(
+    ({ maxChars } = {}) => {
+      const title = titulo?.trim() || "Gatologia";
+      const body = truncateText(plainText, maxChars);
+      return `${title}\n\n${body}`.trim();
+    },
+    [plainText, titulo, truncateText]
+  );
 
   const handleShare = useCallback(async () => {
     if (shareInFlightRef.current) return;
@@ -78,7 +91,7 @@ export default function BlogEntry({
   }, [buildShareText, titulo]);
 
   const handleCreateImage = useCallback(() => {
-    const text = buildShareText();
+    const text = buildShareText({ maxChars: 500 });
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
@@ -226,9 +239,18 @@ export default function BlogEntry({
     {/* Contenido */}
     <h3 className="blog-card__title">{titulo}</h3>
     <div
-      className="blog-card__content"
+      className={`blog-card__content${isLongContent && !isExpanded ? " is-clamped" : ""}`}
       dangerouslySetInnerHTML={{ __html: contenido }}
     />
+    {isLongContent && (
+      <button
+        type="button"
+        className="blog-card__toggle"
+        onClick={() => setIsExpanded((prev) => !prev)}
+      >
+        {isExpanded ? "Ver menos" : "Leer completo"}
+      </button>
+    )}
 
   
 

@@ -115,6 +115,21 @@
   }
 }
 
+@media (orientation: portrait) and (max-width: 430px) and (min-height: 800px) {
+  .speech-bubble-container {
+    top: var(--frase-top, auto);
+    bottom: auto;
+    left: var(--card-pad, 18px);
+    right: var(--card-pad, 18px);
+    justify-content: flex-start;
+  }
+
+  .speech-bubble {
+    width: 100%;
+    max-width: none;
+  }
+}
+
 @media (max-width: 575px), (max-height: 667px) {
   .speech-bubble-container {
     bottom: 1px;

@@ -1,5 +1,5 @@
 // src/components/GameBoard.jsx
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import useGameStore from "../store/useGameStore";
 import { supabase } from "../lib/supabaseClient";
 import { api } from "../services/api";
@@ -149,6 +149,7 @@ export default function GameBoard() {
   const thinkTimeoutRef = useRef(null);
   const [menuAlternativasAbierto, setMenuAlternativasAbierto] = useState(false);
   const [alternativasAbucheo, setAlternativasAbucheo] = useState([]);
+  const [alternativasTargetCount, setAlternativasTargetCount] = useState(0);
   const [palabraOriginalAbucheo, setPalabraOriginalAbucheo] = useState(null);
   const [shouldOpenCreativeModal, setShouldOpenCreativeModal] = useState(false);
   const phraseResetTimeoutRef = useRef(null);
@@ -178,6 +179,7 @@ export default function GameBoard() {
   const cardRef = useRef(null);
   const fraseRef = useRef(null);
   const cuadriculaRef = useRef(null);
+  const alternativasListRef = useRef(null);
   const resizeRafRef = useRef(null);
   const lastBoardSizeRef = useRef(0);
   const [boardSize, setBoardSize] = useState(320);
@@ -203,6 +205,13 @@ export default function GameBoard() {
     if (!card) return;
     const styles = window.getComputedStyle(card);
     const padX = parseFloat(styles.paddingLeft) + parseFloat(styles.paddingRight);
+    const frase = fraseRef.current;
+    if (frase) {
+      const cardRect = card.getBoundingClientRect();
+      const fraseRect = frase.getBoundingClientRect();
+      const top = Math.max(0, fraseRect.top - cardRect.top);
+      card.style.setProperty("--frase-top", `${Math.round(top)}px`);
+    }
     const innerWidth = card.clientWidth - padX;
     const size = Math.max(240, Math.min(innerWidth, 520));
     const next = Math.floor(size);
@@ -1479,7 +1488,98 @@ async function avanzarNivel() {
     }
   }, [menuAlternativasAbierto]);
 
+  useEffect(() => {
+    if (!menuAlternativasAbierto) {
+      setAlternativasTargetCount(0);
+      return;
+    }
+    const list = alternativasListRef.current;
+    if (!list) return;
+
+    const rafId = requestAnimationFrame(() => {
+      const chip = list.querySelector(".alternativa-chip");
+      if (!chip) return;
+      const chipHeight = chip.getBoundingClientRect().height;
+      const listHeight = list.clientHeight;
+      if (!chipHeight || !listHeight) return;
+      const gap = 8;
+      const needed = Math.ceil(listHeight / (chipHeight + gap)) + 2;
+      setAlternativasTargetCount(Math.max(needed, alternativasAbucheo.length));
+    });
+
+    return () => cancelAnimationFrame(rafId);
+  }, [menuAlternativasAbierto, alternativasAbucheo]);
+
+  useEffect(() => {
+    const list = alternativasListRef.current;
+    if (!menuAlternativasAbierto || !list) return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) return;
+
+    list.scrollTop = 0;
+    let paused = false;
+    let rafId;
+    let resumeTimeout;
+
+    const handlePointerDown = () => { paused = true; };
+    const handlePointerUp = () => { paused = false; };
+    const handleWheel = () => {
+      paused = true;
+      if (resumeTimeout) {
+        clearTimeout(resumeTimeout);
+      }
+      resumeTimeout = setTimeout(() => {
+        paused = false;
+      }, 600);
+    };
+
+    list.addEventListener("pointerdown", handlePointerDown);
+    list.addEventListener("pointerup", handlePointerUp);
+    list.addEventListener("pointercancel", handlePointerUp);
+    list.addEventListener("wheel", handleWheel, { passive: true });
+    list.addEventListener("touchstart", handlePointerDown, { passive: true });
+    list.addEventListener("touchend", handlePointerUp);
+
+    const speed = 0.35;
+    const tick = () => {
+      if (!paused) {
+        const maxScroll = list.scrollHeight - list.clientHeight;
+        if (maxScroll > 0) {
+          list.scrollTop += speed;
+          if (list.scrollTop >= maxScroll) {
+            list.scrollTop = 0;
+          }
+        }
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      list.removeEventListener("pointerdown", handlePointerDown);
+      list.removeEventListener("pointerup", handlePointerUp);
+      list.removeEventListener("pointercancel", handlePointerUp);
+      list.removeEventListener("wheel", handleWheel);
+      list.removeEventListener("touchstart", handlePointerDown);
+      list.removeEventListener("touchend", handlePointerUp);
+      if (resumeTimeout) {
+        clearTimeout(resumeTimeout);
+      }
+    };
+  }, [menuAlternativasAbierto, alternativasTargetCount]);
+
   const fraseCompleta = Boolean(palabraX && (palabraO || creativeMode));
+  const alternativasLoop = useMemo(() => {
+    if (!alternativasAbucheo.length) return [];
+    const target = Math.max(alternativasAbucheo.length, alternativasTargetCount || 0);
+    if (alternativasAbucheo.length >= target) return alternativasAbucheo;
+    const result = [];
+    while (result.length < target) {
+      result.push(...alternativasAbucheo);
+    }
+    return result.slice(0, target);
+  }, [alternativasAbucheo, alternativasTargetCount]);
   const isVictory = Boolean(victory?.winner);
   const isVictoryTimerActive =
     victory?.winner === "X" &&
@@ -1506,8 +1606,13 @@ async function avanzarNivel() {
   }, [fraseCompleta, handleAplaudir, victoryPromptReady, jugadas]);
   const promptNode = promptTexto ? (
     <>
-      <div className="personaje-mensaje__row">
+      <div className="personaje-mensaje__row personaje-mensaje__row--with-avatar">
         <span className="personaje-mensaje__text">{promptTexto}</span>
+        {icono ? (
+          <div className="alternativas-avatar" aria-hidden="true">
+            <img src={icono} alt="" />
+          </div>
+        ) : null}
       </div>
       <div className="personaje-mensaje__actions">
         <button
@@ -1539,11 +1644,16 @@ async function avanzarNivel() {
     <div className="personaje-mensaje__panel">
       <div className="alternativas-header">
         <strong>Otras frases para cerrar</strong>
+        {icono ? (
+          <div className="alternativas-avatar" aria-hidden="true">
+            <img src={icono} alt="" />
+          </div>
+        ) : null}
       </div>
-      <div className="alternativas-lista">
-        {alternativasAbucheo.map((opcion) => (
+      <div className="alternativas-lista" ref={alternativasListRef}>
+        {alternativasLoop.map((opcion, index) => (
           <button
-            key={opcion}
+            key={`${opcion}-${index}`}
             className={`alternativa-chip ${palabraO === opcion ? "seleccionada" : ""}`}
             onClick={() => aplicarAlternativaAbucheo(opcion)}
           >
@@ -1597,7 +1707,7 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
       throw new Error(`No se encontró data para ${safeSlug}`);
     }
 
-    const base = import.meta.env?.VITE_API_BASE_URL || "http://localhost:5050";
+    const base = import.meta.env?.VITE_API_BASE_URL || "https://api.gatoencerrado.ai";
 
     const payload = {
       personaje: { id: safeSlug, ...personajeData },
@@ -1643,7 +1753,11 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
 
     // ============ RENDER ============
   return (
-    <div className="tablero tablero-invertido">
+    <div
+      className={`tablero tablero-invertido${
+        burbujaAbierta !== null ? " tablero--bubble-open" : ""
+      }`}
+    >
       {isTransitioning && (
         <div className="gameboard-transition-blur" role="status" aria-live="polite">
           <div className="transition-overlay" />

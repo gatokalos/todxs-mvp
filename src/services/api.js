@@ -12,6 +12,8 @@ export const api = {
   publishGatologia,
   insertEleccion: guardarEleccion,
   fetchEleccionesPorPersonaje,
+  toggleEleccionFavorita,
+  deleteEleccion,
   generarGatologiaDesdeAPI
 
 };
@@ -154,7 +156,7 @@ export async function publishGatologia(id) {
 export async function fetchEleccionesPorPersonaje(personajeId) {
   const { data, error } = await supabase
     .from("elecciones")
-    .select("id, decision, created_at, timestamp")
+    .select("*")
     .eq("personaje_id", personajeId)
     .order("created_at", { ascending: false });
 
@@ -163,6 +165,48 @@ export async function fetchEleccionesPorPersonaje(personajeId) {
     return [];
   }
   return data || [];
+}
+
+/**
+ * Marcar una eleccion como favorita
+ */
+export async function toggleEleccionFavorita(id, favorita = false) {
+  const { error } = await supabase
+    .from("elecciones")
+    .update({ favorita })
+    .eq("id", id);
+
+  if (!error) return true;
+
+  if (error.message?.includes("favorita")) {
+    const { error: retryError } = await supabase
+      .from("elecciones")
+      .update({ is_favorite: favorita })
+      .eq("id", id);
+
+    if (!retryError) return true;
+    console.error("❌ Error toggleEleccionFavorita (retry):", retryError.message);
+    return null;
+  }
+
+  console.error("❌ Error toggleEleccionFavorita:", error.message);
+  return null;
+}
+
+/**
+ * Borrar una eleccion guardada
+ */
+export async function deleteEleccion(id) {
+  const { error } = await supabase
+    .from("elecciones")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    console.error("❌ Error deleteEleccion:", error.message);
+    return null;
+  }
+  return true;
 }
 
 /**
@@ -226,7 +270,7 @@ export async function fetchPersonajeStats(slug) {
  * Llamar a la API local del Gato Enigmático para generar una nueva gatología
  */
 export async function generarGatologiaDesdeAPI(personaje, frases = []) {
-  const baseURL = import.meta.env?.VITE_API_BASE_URL || "http://localhost:5050";
+  const baseURL = import.meta.env?.VITE_API_BASE_URL || "https://api.gatoencerrado.ai";
 
   try {
     const response = await fetch(`${baseURL}/api/todxs/generate`, {

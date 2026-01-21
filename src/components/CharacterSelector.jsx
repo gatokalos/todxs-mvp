@@ -54,7 +54,7 @@ export const BASE_CHARACTER_LAYOUT = {
     genero_literario: "Carta confesional",
     frase_base: "Las cartas revelan más de lo que esconden.",
     sticker_url: "/assets/lucinda_sticker.svg",
-    widthRatio: 0.18,
+    widthRatio: 0.20,
   },
   "payasito-triste": {
     top: "55%",
@@ -206,8 +206,10 @@ export default function CharacterSelector() {
   const getSpotlightOffset = useCallback(() => {
     const w = window.innerWidth;
     const h = window.innerHeight;
+    const isLandscape = w > h;
     if (w <= 430 && h > w) return { x: 0, y: -50 };
-    if (h <= 500 && w > h) return { x: 0, y: -(h * 0.15) };
+    if (h <= 500 && isLandscape) return { x: 0, y: -(h * 0.15) };
+    if (isLandscape && w >= 900 && h >= 600) return { x: 0, y: -(h * 0.08) };
     return { x: 0, y: 0 };
   }, []);
 

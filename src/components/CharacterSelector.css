@@ -74,10 +74,7 @@
 }
 
 
-@keyframes selectorGlow {
-  0%, 100% { filter: saturate(1.02) brightness(1.02); }
-  50% { filter: saturate(1.08) brightness(1.05); }
-}
+
 
 @keyframes selectorMeshDrift {
   0% { background-position: 0% 0%; }
@@ -115,38 +112,28 @@
   width: 100vw;
   height: 100vh;
 
-  background-color: rgba(125, 125, 125, 1);
-  box-shadow: inset 0 0 320px rgba(0, 0, 0, 0.95);
-  mix-blend-mode: multiply;
+  background-color: rgba(247, 247, 247, 0.53);
+  box-shadow: inset 0 0 100px rgba(43, 15, 15, 0.95);
+  mix-blend-mode: luminosity;
   opacity: 0;
   transition: opacity 0.35s ease;
   pointer-events: none;
   z-index: 1;
 }
 
-.character-selector__curtain-spotlight {
-  --spotlight2-size: 120px;
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  opacity: 0;
-  z-index: 12;
-}
 
 .character-selector .curtain {
   z-index: 10;
 }
 
 .character-selector__curtain-spotlight.is-active {
-  opacity: 0.75;
+  opacity: 0.65;
   animation: spotlightPulse 3.8s ease-in-out infinite;
 }
 
 .character-selector__curtain-spotlight {
   -webkit-mask-image: radial-gradient(
-    circle calc(var(--spotlight2-size) * 0.75) at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+    circle calc(var(--spotlight2-size) * 0.95) at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
     transparent 0%,
     transparent 62%,
     rgba(0, 0, 0, 1) 64%
@@ -162,38 +149,38 @@
 @media (orientation: landscape) {
   .character-selector__curtain-spotlight {
     display: block;
-    --spotlight2-size: 100vmin;
-    mix-blend-mode: overlay;
-      mix-blend-mode: overlay;
-      background:
+    --spotlight2-size: 90vmin;
+    mix-blend-mode: luminosity;
+    background:
     radial-gradient(
       circle var(--spotlight2-size) at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
-      rgba(255, 255, 255, 0.76) 0%,
-      rgba(255, 255, 255, 0.94) 37%,
-      rgba(187, 71, 254, 0.28) 41%,
-      transparent 56%
+      rgb(227, 20, 27) 10%,
+      rgba(255, 255, 255, 0.29) 37%,
+      rgba(0, 0, 0, 0.28) 41%,
+      transparent 26%
     );
   }
 }
 
+
 @media (orientation: landscape) and (min-width: 812px) {
   .character-selector__curtain-spotlight {
-    --spotlight2-size: 110vmin;
+    --spotlight2-size: 100vmin;
   }
 }
 
 @media (orientation: portrait) {
   .character-selector__curtain-spotlight {
     display: block;
-    --spotlight2-size: 150vmin;
+    --spotlight2-size: 140vmin;
     mix-blend-mode: overlay;
       background:
       radial-gradient(
       circle var(--spotlight2-size) at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
-      rgb(255, 255, 255) 0%,
-      rgb(240, 170, 237) 37%,
-      rgba(116, 70, 29, 0.18) 41%,
-      transparent 56%
+      rgba(255, 255, 255, 0.63) 1%,
+      rgba(142, 139, 243, 0.85) 17%,
+      rgba(248, 149, 202, 0.88) 21%,
+      transparent 26%
     );
 }
 }
@@ -245,11 +232,9 @@
 
 @keyframes spotlightPulse {
   0%, 100% {
-    filter: brightness(1) contrast(1.05);
+    filter: brightness(0.98) contrast(1.05);
   }
-  50% {
-    filter: brightness(1.08) contrast(1.15);
-  }
+
 }
 
 @keyframes spotlightHover {
@@ -388,8 +373,8 @@
 
 @media (orientation: portrait) and (min-width: 390px) and (max-width: 430px) {
   .character-selector__slot.is-spotlight .character-selector__sticker {
-    width: min(115vw, 560px);
-    max-width: min(115vw, 560px);
+    width: min(130vw, 600px);
+    max-width: min(135vw, 600px);
     transform: none;
   }
 
@@ -558,6 +543,25 @@
   }
 }
 
+@media (orientation: landscape) and (min-height: 600px) {
+  .character-selector__selection-overlay {
+    background:
+      radial-gradient(
+        circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+        rgb(236, 181, 181) 1%,
+        rgba(198, 139, 240, 0.65) 32%,
+        rgba(0, 0, 0, 0.92) 35%,
+        rgba(0, 0, 0, 0.98) 90%
+      ),
+      radial-gradient(
+        circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+        transparent 0%,
+        rgba(0, 0, 0, 0.35) 52%,
+        rgba(0, 0, 0, 0.85) 68%
+      );
+  }
+}
+
 .character-selector__slot.is-dimmed {
   opacity: 0;
   filter: none;
@@ -576,8 +580,8 @@
     background:
       radial-gradient(
         circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 0.65) 52%,
+        rgba(255, 187, 147, 0.87) 0%,
+        rgba(223, 165, 248, 0.65) 52%,
         rgba(0, 0, 0, 0.92) 58%,
         rgba(0, 0, 0, 0.98) 100%
       ),
@@ -589,6 +593,7 @@
       );
   }
 }
+
 
 @media (orientation: portrait) {
   .cs-bubble-name-link {
@@ -635,10 +640,6 @@
 }
 
 
-@keyframes pulseGlow {
-  0%, 100% { filter: drop-shadow(0 0 2px rgba(244, 136, 136, 0.76)); }
-  50% { filter: drop-shadow(0 0 6px rgba(255,255,255,0.8)); }
-}
 
 
 .character-selector__slot.is-locked .character-selector__sticker {

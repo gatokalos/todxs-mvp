@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 
+const API_BASE_URL = import.meta.env?.VITE_API_BASE_URL || "https://api.gatoencerrado.ai";
+
 export default function FraseDelDiaWidget() {
   const [frase, setFrase] = useState(null);
 
   useEffect(() => {
     async function fetchFrase() {
       try {
-        const res = await fetch("https://bienvenida.gatoencerrado.ai/api/todxs/generate", {
+        const res = await fetch(`${API_BASE_URL}/api/todxs/generate`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
