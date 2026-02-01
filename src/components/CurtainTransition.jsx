@@ -1,7 +1,8 @@
 // CurtainTransition.jsx
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import useGameStore from "../store/useGameStore";
+import { playVictoryXSound } from "../utils/victorySound";
 import "./CurtainTransition.css";
 
 const SCREEN_BEHAVIOR = {
@@ -43,6 +44,7 @@ function getScreenBehavior(
 
 export default function CurtainTransition({ children }) {
   const screen = useGameStore((state) => state.screen);
+  const setScreen = useGameStore((state) => state.setScreen);
   const leftCurtainRef = useRef(null);
   const rightCurtainRef = useRef(null);
   const stageRef = useRef(null);
@@ -52,6 +54,7 @@ export default function CurtainTransition({ children }) {
   const hasOpenedRef = useRef(false);
   const pendingChildrenRef = useRef(children);
   const entrySpotlightRef = useRef(null);
+  const audioCtxRef = useRef(null);
 
   const [renderedChildren, setRenderedChildren] = useState(() => children);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -61,6 +64,23 @@ export default function CurtainTransition({ children }) {
     width: window.innerWidth,
     height: window.innerHeight,
   }));
+
+  const getAudioCtx = useCallback(() => {
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return null;
+    if (!audioCtxRef.current) {
+      audioCtxRef.current = new Ctx();
+    } else if (audioCtxRef.current.state === "suspended") {
+      audioCtxRef.current.resume().catch(() => {});
+    }
+    return audioCtxRef.current;
+  }, []);
+
+  const playCurtainApplause = useCallback(() => {
+    const ctx = getAudioCtx();
+    if (!ctx) return;
+    playVictoryXSound(ctx);
+  }, [getAudioCtx]);
 
   // 🎭 Configura wave de ambas cortinas
   useEffect(() => {
@@ -191,6 +211,9 @@ export default function CurtainTransition({ children }) {
       });
 
       initialTimeline
+        .add(() => {
+          if (screen === "selector") playCurtainApplause();
+        }, 0)
         .to(leftCurtainRef.current, { xPercent: activeConfig.openLeft, duration: activeConfig.openDuration, ease: activeConfig.openEase })
         .to(rightCurtainRef.current, { xPercent: activeConfig.openRight, duration: activeConfig.openDuration, ease: activeConfig.openEase }, "<")
         .add(() => {
@@ -232,6 +255,9 @@ export default function CurtainTransition({ children }) {
         ease: activeConfig.closeEase,
       })
       .add(() => setRenderedChildren(pendingChildrenRef.current))
+      .add(() => {
+        if (screen === "selector") playCurtainApplause();
+      }, 0)
       .to(leftCurtainRef.current, { xPercent: activeConfig.openLeft, duration: activeConfig.openDuration, ease: activeConfig.openEase })
       .to(rightCurtainRef.current, { xPercent: activeConfig.openRight, duration: activeConfig.openDuration, ease: activeConfig.openEase }, "<")
       .add(() => {
@@ -284,17 +310,16 @@ export default function CurtainTransition({ children }) {
       {!hasOpenedRef.current && screen === "selector" && !manualOpen && (
         <div className="curtain-entry">
           <div className="curtain-entry-content">
-            <img className="curtain-entry-logo" src="/assets/logoTRAZO.png" alt="Logo TRAZO" />
-            <div className="curtain-entry-card">
-              <p className="curtain-entry-title">Bienvenida</p>
-              <p className="curtain-entry-text">¿Listx para entrar al escenario?</p>
+            <div className="curtain-entry-hub" role="presentation">
               <button
                 type="button"
-                className="curtain-entry-button"
+                className="curtain-entry-logo-button"
+                aria-label="Abrir cortinas"
                 onClick={handleManualOpen}
               >
-                Abrir cortinas
+                <img className="curtain-entry-logo" src="/assets/logoTRAZO.png" alt="Logo TRAZO" />
               </button>
+              <p className="curtain-entry-hint">Toca el logo para abrir cortinas</p>
             </div>
           </div>
         </div>

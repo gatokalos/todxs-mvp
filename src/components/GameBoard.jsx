@@ -1,5 +1,5 @@
 // src/components/GameBoard.jsx
-import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import useGameStore from "../store/useGameStore";
 import { supabase } from "../lib/supabaseClient";
 import { api } from "../services/api";
@@ -8,6 +8,9 @@ import PersonajeMenu from "./PersonajeMenu";
 import VictoryEffect from "./VictoryEffect";
 import { playVictoryXSound } from "../utils/victorySound";
 import BoardResetOverlay from "./BoardResetOverlay";
+import TieGlitchOverlay from "./TieGlitchOverlay";
+import TieCurtainOverlay from "./TieCurtainOverlay";
+import LecternStage from "./LecternStage";
 import "./GameBoard.css";
 import useTypewriter from "../hooks/useTypewriter";
 import personajesData from "../data/personajes.json";
@@ -46,6 +49,11 @@ const sanitizeRitmoFrase = (value) => {
 const ensureText = (value) => (typeof value === "string" ? value : "");
 const toDisplayText = (text = "") => text.replace(/\\n/g, "\n");
 const renderConnector = (connector = "") => ensureText(connector).replace(/\\n/g, "\n");
+const escapeHtml = (text = "") =>
+  text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 
 const getPrefijoCasilla = (tablero, index, jugador) => {
   if (!Number.isInteger(index)) return null;
@@ -115,6 +123,9 @@ export default function GameBoard() {
     nivelActual,
     setNivelActual,
     actualizarJugada,
+    setScreen,
+    setDraft,
+    setPersonajeSeleccionado,
   } = useGameStore();
 
   useEffect(() => {
@@ -132,6 +143,14 @@ export default function GameBoard() {
 
   const [victory, setVictory] = useState(null);
   const [victoryActive, setVictoryActive] = useState(false);
+  const [tieGlitchActive, setTieGlitchActive] = useState(false);
+  const [tieErrorActive, setTieErrorActive] = useState(false);
+  const [tieCurtainActive, setTieCurtainActive] = useState(false);
+  const [tieLecternActive, setTieLecternActive] = useState(false);
+  const [tieLecternData, setTieLecternData] = useState(null);
+  const [tieLecternLoading, setTieLecternLoading] = useState(false);
+  const [tieLecternError, setTieLecternError] = useState(null);
+  const tieSnapshotRef = useRef(null);
 
   const [burbujaAbierta, setBurbujaAbierta] = useState(null);
   const [tailCoords, setTailCoords] = useState(null);
@@ -149,7 +168,6 @@ export default function GameBoard() {
   const thinkTimeoutRef = useRef(null);
   const [menuAlternativasAbierto, setMenuAlternativasAbierto] = useState(false);
   const [alternativasAbucheo, setAlternativasAbucheo] = useState([]);
-  const [alternativasTargetCount, setAlternativasTargetCount] = useState(0);
   const [palabraOriginalAbucheo, setPalabraOriginalAbucheo] = useState(null);
   const [shouldOpenCreativeModal, setShouldOpenCreativeModal] = useState(false);
   const phraseResetTimeoutRef = useRef(null);
@@ -179,7 +197,6 @@ export default function GameBoard() {
   const cardRef = useRef(null);
   const fraseRef = useRef(null);
   const cuadriculaRef = useRef(null);
-  const alternativasListRef = useRef(null);
   const resizeRafRef = useRef(null);
   const lastBoardSizeRef = useRef(0);
   const [boardSize, setBoardSize] = useState(320);
@@ -247,6 +264,9 @@ export default function GameBoard() {
   const asmrPadRef = useRef(null);
   const noiseBufferRef = useRef(null);
   const victorySoundPlayedRef = useRef(false);
+  const errorNoiseRef = useRef(null);
+  const errorNoiseGainRef = useRef(null);
+  const resetSoundTimeoutsRef = useRef([]);
 
   const getAudioCtx = useCallback(() => {
     if (typeof window === "undefined") return null;
@@ -381,6 +401,68 @@ export default function GameBoard() {
     osc.start(now);
     osc.stop(now + 0.2);
   }, [getAudioCtx, getNoiseBuffer]);
+
+  const playCrackle = useCallback(() => {
+    const ctx = getAudioCtx();
+    if (!ctx) return;
+    const duration = 0.32;
+    const buffer = ctx.createBuffer(1, ctx.sampleRate * duration, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < data.length; i++) {
+      const t = i / data.length;
+      data[i] = (Math.random() * 2 - 1) * Math.pow(1 - t, 2.4);
+    }
+
+    const source = ctx.createBufferSource();
+    const hp = ctx.createBiquadFilter();
+    const gain = ctx.createGain();
+    source.buffer = buffer;
+    hp.type = "highpass";
+    hp.frequency.value = 1100;
+    gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.35, ctx.currentTime + 0.015);
+    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+    source.connect(hp).connect(gain).connect(ctx.destination);
+    source.start();
+    source.stop(ctx.currentTime + duration);
+  }, [getAudioCtx]);
+
+  const clearResetSoundTimeouts = useCallback(() => {
+    if (!resetSoundTimeoutsRef.current.length) return;
+    resetSoundTimeoutsRef.current.forEach((id) => clearTimeout(id));
+    resetSoundTimeoutsRef.current = [];
+  }, []);
+
+  const startErrorNoise = useCallback(() => {
+    if (errorNoiseRef.current) return;
+    const ctx = getAudioCtx();
+    const buffer = getNoiseBuffer();
+    if (!ctx || !buffer) return;
+    const noise = ctx.createBufferSource();
+    const gain = ctx.createGain();
+    noise.buffer = buffer;
+    noise.loop = true;
+    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+    noise.connect(gain).connect(ctx.destination);
+    noise.start();
+    errorNoiseRef.current = noise;
+    errorNoiseGainRef.current = gain;
+  }, [getAudioCtx, getNoiseBuffer]);
+
+  const stopErrorNoise = useCallback(() => {
+    if (!errorNoiseRef.current) return;
+    try {
+      errorNoiseRef.current.stop();
+    } catch (e) {
+      /* noop */
+    }
+    errorNoiseRef.current.disconnect();
+    errorNoiseRef.current = null;
+    if (errorNoiseGainRef.current) {
+      errorNoiseGainRef.current.disconnect();
+      errorNoiseGainRef.current = null;
+    }
+  }, []);
 
   const playVictoryX = useCallback(() => {
     const ctx = getAudioCtx();
@@ -642,8 +724,9 @@ export default function GameBoard() {
       stopGhostCursor();
       stopThinkHum();
       stopAsmrPad();
+      stopErrorNoise();
     };
-  }, [clearThinkTimeout, stopGhostCursor, stopThinkHum, stopAsmrPad]);
+  }, [clearThinkTimeout, stopGhostCursor, stopThinkHum, stopAsmrPad, stopErrorNoise]);
   // Modo creativo
   const creativeMode = victory?.winner === "X" && tresCasillasTodasX(jugadas);
 
@@ -699,6 +782,41 @@ export default function GameBoard() {
     creativeMode
   );
   const fraseCompuestaDisplay = toDisplayText(fraseCompuestaRaw);
+
+  const buildTieLecternPayload = useCallback(() => {
+    const snapshot = tieSnapshotRef.current;
+    const safeSlug = (personajeActual || "la-maestra")
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, "-");
+    const personajeData = personajesData[safeSlug] || {};
+    const genero = personajeData.generoLiterario || "Texto";
+    const nombre = nombreVisible || personajeData.nombre || safeSlug;
+    const iconoLocal = icono || personajeData.icono || "";
+    const baseText = snapshot?.fraseCompuestaDisplay || fraseCompuestaDisplay || fraseFinal || fraseBase || "";
+    const lines = baseText
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean);
+    if (personajeData.cta) lines.push(personajeData.cta);
+    const contenido = lines.map((line) => `<p>${escapeHtml(line)}</p>`).join("");
+    const titulo = `${genero} — ${nombre}`;
+
+    return {
+      slug: safeSlug,
+      genero,
+      nombre,
+      icono: iconoLocal,
+      titulo,
+      contenido,
+      lines,
+      frasesSnapshot: [
+        snapshot?.fraseBase || fraseBase,
+        snapshot?.palabraX || palabraX,
+        snapshot?.palabraO || palabraO,
+      ].filter(Boolean),
+    };
+  }, [personajeActual, nombreVisible, icono, fraseCompuestaDisplay, fraseFinal, fraseBase, palabraX, palabraO]);
 
   const baseDisplayText = toDisplayText(baseRaw);
   const xSegmentDisplay = lineaXRaw
@@ -983,7 +1101,7 @@ useEffect(() => {
     }
   } 
   else if (tableroLleno && !result) {
-    setMensajePersonaje("Empate… prueben otra vez.");
+    setMensajePersonaje(null);
   }
 }, [jugadas, msgsX, msgsO, clearThinkTimeout, stopGhostCursor, stopThinkHum]);
 
@@ -993,16 +1111,7 @@ useEffect(() => {
       setMensajeAnimado("");
       return;
     }
-
-    let i = 0;
-    setMensajeAnimado("");
-    const interval = setInterval(() => {
-      setMensajeAnimado((prev) => prev + mensajePersonaje[i]);
-      i++;
-      if (i >= mensajePersonaje.length) clearInterval(interval);
-    }, 45);
-
-    return () => clearInterval(interval);
+    setMensajeAnimado(mensajePersonaje);
   }, [mensajePersonaje]);
 
   // activar/desactivar efecto de victoria
@@ -1070,11 +1179,19 @@ useEffect(() => {
       return;
     }
 
+    clearResetSoundTimeouts();
+    snapshot.forEach((_, order) => {
+      const id = setTimeout(() => {
+        playCrackle();
+      }, order * 90);
+      resetSoundTimeoutsRef.current.push(id);
+    });
+
     setPhraseResetting(true);
     setBoardReady(false);
     setResetOverlayPieces(snapshot);
     resetCallbackRef.current = afterReset;
-  }, [jugadas]);
+  }, [jugadas, clearResetSoundTimeouts, playCrackle]);
 
   const handleResetOverlayComplete = useCallback(async () => {
     const callback = resetCallbackRef.current;
@@ -1084,6 +1201,7 @@ useEffect(() => {
       await callback();
     }
 
+    clearResetSoundTimeouts();
     setResetOverlayPieces([]);
     setPhraseResetting(false);
     setBoardReady(true);
@@ -1093,11 +1211,148 @@ useEffect(() => {
       setAnimateEntry(false);
       entryTimeoutRef.current = null;
     }, 700);
+  }, [clearResetSoundTimeouts]);
+
+  const handleTieGlitchComplete = useCallback(() => {
+    setTieGlitchActive(false);
+    setTieErrorActive(false);
+    setTieCurtainActive(false);
+    setTieLecternActive(false);
+    setTieLecternData(null);
+    setTieLecternLoading(false);
+    setTieLecternError(null);
+    tieSnapshotRef.current = null;
+    stopErrorNoise();
+    reiniciarTablero();
+    resetFraseActual();
+    setRespuestaCreativa("");
+    setFraseFinal("");
+    setMensajePersonaje(null);
+    setMensajeAnimado("");
+    setVictory(null);
+    setVictoryActive(false);
+    setPromptMensaje("");
+    setPromptAnimado("");
+    setPromptDone(false);
+    setMenuAlternativasAbierto(false);
+    setAlternativasAbucheo([]);
+    setPalabraOriginalAbucheo(null);
+    setBurbujaAbierta(null);
+    setTailCoords(null);
+    setPhraseResetting(false);
+    setResetOverlayPieces([]);
+    setBoardReady(true);
+    setAnimando(false);
+    endTransition();
+  }, [endTransition, reiniciarTablero, resetFraseActual, stopErrorNoise]);
+
+  const triggerTieError = useCallback(() => {
+    if (!tieGlitchActive || tieErrorActive || tieCurtainActive || tieLecternActive) return;
+    setTieGlitchActive(false);
+    setTieErrorActive(true);
+    startErrorNoise();
+  }, [tieGlitchActive, tieErrorActive, tieCurtainActive, tieLecternActive, startErrorNoise]);
+
+  const handleCloseCurtains = useCallback(() => {
+    stopErrorNoise();
+    setTieErrorActive(false);
+    setTieCurtainActive(true);
+    setTieLecternLoading(true);
+    setTieLecternError(null);
+  }, [stopErrorNoise]);
+
+  const handleCurtainsClosed = useCallback(() => {
+    setTieLecternActive(true);
   }, []);
+
+  const handleSaveLecternDraft = useCallback(async () => {
+    const payload = tieLecternData || buildTieLecternPayload();
+    const draftPayload = {
+      personaje_slug: payload.slug,
+      titulo: payload.titulo,
+      contenido: payload.contenido,
+      estado: "draft",
+      created_at: new Date().toISOString(),
+    };
+    const row = await api.insertGatologia(draftPayload);
+    const draftEntry = row
+      ? { ...row, status: "nuevo" }
+      : { id: `draft-${Date.now()}`, ...draftPayload, status: "nuevo" };
+
+    setDraft(draftEntry);
+    setPersonajeSeleccionado({
+      id: payload.slug,
+      slug: payload.slug,
+      nombre_visible: payload.nombre,
+      genero_literario: payload.genero,
+      icono: payload.icono || undefined,
+      sticker_url: payload.icono || undefined,
+    });
+    setScreen("camerino");
+  }, [buildTieLecternPayload, setDraft, setPersonajeSeleccionado, setScreen, tieLecternData]);
+
+  useEffect(() => {
+    if (!tieCurtainActive) return;
+    let cancelled = false;
+    const load = async () => {
+      const fallback = buildTieLecternPayload();
+      try {
+        const personajeData = personajesData[fallback.slug] || {};
+        const apiPayload = {
+          personaje: { id: fallback.slug, ...personajeData },
+          frases: fallback.frasesSnapshot.length ? fallback.frasesSnapshot : fallback.lines,
+        };
+        const data = await api.generarGatologiaDesdeAPI(
+          apiPayload.personaje,
+          apiPayload.frases
+        );
+        if (cancelled) return;
+        const contenido = (data?.contenido ?? data?.texto ?? "").toString();
+        const lines = contenido
+          .split(/\n+/)
+          .map((line) => line.trim())
+          .filter(Boolean);
+        const contenidoHtml = lines.length
+          ? lines.map((line) => `<p>${escapeHtml(line)}</p>`).join("")
+          : fallback.contenido;
+        setTieLecternData({
+          ...fallback,
+          titulo: data?.titulo || fallback.titulo,
+          contenido: contenidoHtml,
+          lines: lines.length ? lines : fallback.lines,
+        });
+        setTieLecternLoading(false);
+      } catch (err) {
+        if (cancelled) return;
+        setTieLecternError(err?.message || "Error generando texto");
+        setTieLecternData(fallback);
+        setTieLecternLoading(false);
+      }
+    };
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, [tieCurtainActive, buildTieLecternPayload]);
 
   const finalizarTurnoO = () => {
     terminarRonda(checkWinner(jugadas));
   };
+
+  useEffect(() => {
+    if (!tieGlitchActive) return;
+    const handleInteraction = () => {
+      triggerTieError();
+    };
+    window.addEventListener("keydown", handleInteraction);
+    window.addEventListener("mousedown", handleInteraction);
+    window.addEventListener("touchstart", handleInteraction, { passive: true });
+    return () => {
+      window.removeEventListener("keydown", handleInteraction);
+      window.removeEventListener("mousedown", handleInteraction);
+      window.removeEventListener("touchstart", handleInteraction);
+    };
+  }, [tieGlitchActive, triggerTieError]);
 
   const limpiarMenuAbucheo = () => {
     setMenuAlternativasAbierto(false);
@@ -1216,6 +1471,32 @@ useEffect(() => {
 
     playCasillaPop();
 
+    const preview = [...jugadas];
+    preview[index] = { jugador: turno, palabra: "" };
+    const empate = preview.every(Boolean) && !checkWinner(preview);
+    if (empate) {
+      tieSnapshotRef.current = {
+        fraseBase,
+        palabraX,
+        palabraO,
+        fraseCompuestaDisplay,
+      };
+      registrarJugada(index, turno, "");
+      pendingAutoORef.current = false;
+      clearThinkTimeout();
+      stopGhostCursor();
+      stopThinkHum();
+      stopErrorNoise();
+      setTieErrorActive(false);
+      setTieCurtainActive(false);
+      setTieLecternActive(false);
+      playCrackle();
+      if (!tieGlitchActive) {
+        setTieGlitchActive(true);
+      }
+      return;
+    }
+
     const cell = document.querySelectorAll(".casilla")[index];
     if (!cell) return;
 
@@ -1234,12 +1515,32 @@ useEffect(() => {
   };
 
   const handleSeleccion = (palabra) => {
+    const preview = [...jugadas];
+    preview[burbujaAbierta] = { jugador: turno, palabra };
+    const empate = preview.every(Boolean) && !checkWinner(preview);
+
     registrarJugada(burbujaAbierta, turno, palabra);
     setBurbujaAbierta(null);
+
+    if (empate) {
+      tieSnapshotRef.current = {
+        fraseBase,
+        palabraX,
+        palabraO,
+        fraseCompuestaDisplay,
+      };
+      pendingAutoORef.current = false;
+      clearThinkTimeout();
+      stopGhostCursor();
+      stopThinkHum();
+      if (!tieGlitchActive) {
+        setTieGlitchActive(true);
+      }
+      return;
+    }
+
     if (turno === "X") {
       clearThinkTimeout();
-      const preview = [...jugadas];
-      preview[burbujaAbierta] = { jugador: "X", palabra };
       const ganaX = checkWinner(preview)?.winner === "X";
       pendingAutoORef.current = !ganaX;
       if (ganaX) {
@@ -1251,6 +1552,16 @@ useEffect(() => {
 
 // ============ AVANZAR NIVEL O GENERAR GATOLOGÍA FINAL ============
 async function terminarRonda(ganador) {
+  const tableroLleno = jugadas.every((j) => j !== null);
+  const esEmpate = tableroLleno && !ganador;
+
+  if (esEmpate) {
+    if (!tieGlitchActive) {
+      setTieGlitchActive(true);
+    }
+    return;
+  }
+
   setAnimando(true);
 
   const limpiarEstado = () => {
@@ -1408,19 +1719,8 @@ async function avanzarNivel() {
       setPromptDone(false);
       return;
     }
-    let i = 0;
-    setPromptAnimado("");
-    setPromptDone(false);
-    const interval = setInterval(() => {
-      setPromptAnimado((prev) => prev + promptMensaje[i]);
-      i += 1;
-      if (i >= promptMensaje.length) {
-        clearInterval(interval);
-        setPromptDone(true);
-      }
-    }, 24);
-
-    return () => clearInterval(interval);
+    setPromptAnimado(promptMensaje);
+    setPromptDone(true);
   }, [promptMensaje]);
 
   useEffect(() => {
@@ -1488,98 +1788,7 @@ async function avanzarNivel() {
     }
   }, [menuAlternativasAbierto]);
 
-  useEffect(() => {
-    if (!menuAlternativasAbierto) {
-      setAlternativasTargetCount(0);
-      return;
-    }
-    const list = alternativasListRef.current;
-    if (!list) return;
-
-    const rafId = requestAnimationFrame(() => {
-      const chip = list.querySelector(".alternativa-chip");
-      if (!chip) return;
-      const chipHeight = chip.getBoundingClientRect().height;
-      const listHeight = list.clientHeight;
-      if (!chipHeight || !listHeight) return;
-      const gap = 8;
-      const needed = Math.ceil(listHeight / (chipHeight + gap)) + 2;
-      setAlternativasTargetCount(Math.max(needed, alternativasAbucheo.length));
-    });
-
-    return () => cancelAnimationFrame(rafId);
-  }, [menuAlternativasAbierto, alternativasAbucheo]);
-
-  useEffect(() => {
-    const list = alternativasListRef.current;
-    if (!menuAlternativasAbierto || !list) return;
-    if (window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) return;
-
-    list.scrollTop = 0;
-    let paused = false;
-    let rafId;
-    let resumeTimeout;
-
-    const handlePointerDown = () => { paused = true; };
-    const handlePointerUp = () => { paused = false; };
-    const handleWheel = () => {
-      paused = true;
-      if (resumeTimeout) {
-        clearTimeout(resumeTimeout);
-      }
-      resumeTimeout = setTimeout(() => {
-        paused = false;
-      }, 600);
-    };
-
-    list.addEventListener("pointerdown", handlePointerDown);
-    list.addEventListener("pointerup", handlePointerUp);
-    list.addEventListener("pointercancel", handlePointerUp);
-    list.addEventListener("wheel", handleWheel, { passive: true });
-    list.addEventListener("touchstart", handlePointerDown, { passive: true });
-    list.addEventListener("touchend", handlePointerUp);
-
-    const speed = 0.35;
-    const tick = () => {
-      if (!paused) {
-        const maxScroll = list.scrollHeight - list.clientHeight;
-        if (maxScroll > 0) {
-          list.scrollTop += speed;
-          if (list.scrollTop >= maxScroll) {
-            list.scrollTop = 0;
-          }
-        }
-      }
-      rafId = requestAnimationFrame(tick);
-    };
-
-    rafId = requestAnimationFrame(tick);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      list.removeEventListener("pointerdown", handlePointerDown);
-      list.removeEventListener("pointerup", handlePointerUp);
-      list.removeEventListener("pointercancel", handlePointerUp);
-      list.removeEventListener("wheel", handleWheel);
-      list.removeEventListener("touchstart", handlePointerDown);
-      list.removeEventListener("touchend", handlePointerUp);
-      if (resumeTimeout) {
-        clearTimeout(resumeTimeout);
-      }
-    };
-  }, [menuAlternativasAbierto, alternativasTargetCount]);
-
   const fraseCompleta = Boolean(palabraX && (palabraO || creativeMode));
-  const alternativasLoop = useMemo(() => {
-    if (!alternativasAbucheo.length) return [];
-    const target = Math.max(alternativasAbucheo.length, alternativasTargetCount || 0);
-    if (alternativasAbucheo.length >= target) return alternativasAbucheo;
-    const result = [];
-    while (result.length < target) {
-      result.push(...alternativasAbucheo);
-    }
-    return result.slice(0, target);
-  }, [alternativasAbucheo, alternativasTargetCount]);
   const isVictory = Boolean(victory?.winner);
   const isVictoryTimerActive =
     victory?.winner === "X" &&
@@ -1595,6 +1804,10 @@ async function avanzarNivel() {
     : victoryPromptText
       ? victoryPromptText
       : (isVictory ? "" : (promptAnimado || promptMensaje));
+  const handlePersonajeIconClick = useCallback(() => {
+    handleAbuchear();
+  }, [handleAbuchear]);
+  const inlineAvatarActive = Boolean(promptTexto) || menuAlternativasAbierto;
   const handlePromptSave = useCallback(() => {
     if (victoryPromptReady) {
       setVictoryPromptReady(false);
@@ -1609,23 +1822,17 @@ async function avanzarNivel() {
       <div className="personaje-mensaje__row personaje-mensaje__row--with-avatar">
         <span className="personaje-mensaje__text">{promptTexto}</span>
         {icono ? (
-          <div className="alternativas-avatar" aria-hidden="true">
+          <button
+            type="button"
+            className="alternativas-avatar"
+            onClick={handlePersonajeIconClick}
+            aria-label="Ver otros remates"
+          >
             <img src={icono} alt="" />
-          </div>
+          </button>
         ) : null}
       </div>
       <div className="personaje-mensaje__actions">
-        <button
-          type="button"
-          className={`personaje-mensaje__cta personaje-mensaje__cta--alt${
-            promptDone && !isVictoryTimerActive && !victoryPromptReady ? "" : " is-hidden"
-          }`}
-          onClick={handleAbuchear}
-          aria-label="Ver otros remates"
-          title="Otro remate"
-        >
-          Otro remate
-        </button>
         <button
           type="button"
           className={`personaje-mensaje__cta${
@@ -1645,15 +1852,20 @@ async function avanzarNivel() {
       <div className="alternativas-header">
         <strong>Otras frases para cerrar</strong>
         {icono ? (
-          <div className="alternativas-avatar" aria-hidden="true">
+          <button
+            type="button"
+            className="alternativas-avatar"
+            onClick={confirmarSalvada}
+            aria-label="Confirmar salvada"
+          >
             <img src={icono} alt="" />
-          </div>
+          </button>
         ) : null}
       </div>
-      <div className="alternativas-lista" ref={alternativasListRef}>
-        {alternativasLoop.map((opcion, index) => (
+      <div className="alternativas-lista">
+        {alternativasAbucheo.map((opcion) => (
           <button
-            key={`${opcion}-${index}`}
+            key={opcion}
             className={`alternativa-chip ${palabraO === opcion ? "seleccionada" : ""}`}
             onClick={() => aplicarAlternativaAbucheo(opcion)}
           >
@@ -1668,11 +1880,6 @@ async function avanzarNivel() {
           </button>
         ))}
       </div>
-      <div className="alternativas-actions">
-        <button className="alternativa-confirmar" onClick={confirmarSalvada}>
-          ¡Buena salvada!
-        </button>
-      </div>
     </div>
   ) : null;
   const shouldShowVictoryBubble = victory?.winner && victoryPromptReady;
@@ -1680,10 +1887,6 @@ async function avanzarNivel() {
     menuNode ||
     promptNode ||
     (shouldShowVictoryBubble ? mensajeAnimado : (victory?.winner ? null : mensajeAnimado));
-  const handlePersonajeIconClick = useCallback(() => {
-    if (!fraseCompleta) return;
-    handleAbuchear();
-  }, [fraseCompleta, handleAbuchear]);
 
 // === Estado del modal final de gatología ===
 const [modalGatologia, setModalGatologia] = useState({
@@ -1749,9 +1952,11 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
   } finally {
     setGenerando(false);
   }
-}
+  }
 
     // ============ RENDER ============
+  const tieLecternPayload = buildTieLecternPayload();
+  const lecternDisplay = tieLecternData || tieLecternPayload;
   return (
     <div
       className={`tablero tablero-invertido${
@@ -1780,6 +1985,8 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
             personaje={{ nombreVisible, icono, id: personajeActual }}
             mensaje={mensajeMostrado}
             menuAbierto={menuAlternativasAbierto}
+            onIconClick={handlePersonajeIconClick}
+            inlineAvatarActive={inlineAvatarActive}
           />
         </div>
 
@@ -1805,40 +2012,50 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
 
         {/* Tablero */}
         <div className="tablero-cuadricula">
-          
-          <div
-            className={`cuadricula ${bloqueaClicks ? "no-clicks" : ""} ${!boardReady ? "board-hidden" : ""} ${animateEntry ? "board-entry" : ""}`}
-            ref={cuadriculaRef}
-          >
-            {tablero.map((_, index) => {
-              const fila = Math.floor(index / 3);
-              const isGarra = fila === 0;
-              const jugada = jugadas[index];
-              const mark = jugada ? jugada.jugador : null;
-              const isGhosting = turno === "O" && ghostCell === index && !jugada;
+          <div className="tablero-cuadricula-inner">
+            <div
+              className={`cuadricula ${bloqueaClicks ? "no-clicks" : ""} ${!boardReady ? "board-hidden" : ""} ${animateEntry ? "board-entry" : ""}`}
+              ref={cuadriculaRef}
+            >
+              {tablero.map((_, index) => {
+                const fila = Math.floor(index / 3);
+                const isGarra = fila === 0;
+                const jugada = jugadas[index];
+                const mark = jugada ? jugada.jugador : null;
+                const isGhosting = turno === "O" && ghostCell === index && !jugada;
 
-              return (
-                <div
-                  key={index}
-                  className={`casilla ${isGarra ? "garra" : ""} ${jugada ? "ocupada" : ""} ${(palabraX && palabraO) ? "deshabilitada" : ""} ${isGhosting ? "ghosting" : ""}`}
-                  onClick={() => { if (!(palabraX && palabraO)) handleCasillaClick(index); }}
-                >
-                  {isGarra ? (
-                    <img src={Garra} alt="garra" className="garra-img" />
-                  ) : (
-                    <div className="esfera"></div>
-                  )}
-                  {isGhosting && (
-                    <div className="ghost-cursor" aria-hidden="true">
-                      <span className="ghost-cursor__spark" />
-                    </div>
-                  )}
-                  {mark && (
-                    <span className={`marca ${mark === "X" ? "marca-x" : "marca-o"}`}>{mark}</span>
-                  )}
-                </div>
-              );
-            })}
+                return (
+                  <div
+                    key={index}
+                    className={`casilla ${isGarra ? "garra" : ""} ${jugada ? "ocupada" : ""} ${(palabraX && palabraO) ? "deshabilitada" : ""} ${isGhosting ? "ghosting" : ""}`}
+                    onClick={() => { if (!(palabraX && palabraO)) handleCasillaClick(index); }}
+                  >
+                    {isGarra ? (
+                      <img src={Garra} alt="garra" className="garra-img" />
+                    ) : (
+                      <div className="esfera"></div>
+                    )}
+                    {isGhosting && (
+                      <div className="ghost-cursor" aria-hidden="true">
+                        <span className="ghost-cursor__spark" />
+                      </div>
+                    )}
+                    {mark && (
+                      <span className={`marca ${mark === "X" ? "marca-x" : "marca-o"}`}>{mark}</span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            <button
+              className="tablero-return-chip"
+              type="button"
+              onClick={() => setScreen("camerino")}
+              aria-label="Regresar al camerino"
+              title="Regresar al camerino"
+            >
+              ↩
+            </button>
           </div>
           <BoardResetOverlay pieces={resetOverlayPieces} onComplete={handleResetOverlayComplete} />
         </div>
@@ -1849,6 +2066,42 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
           winningCells={victory?.cells || []}
           markedCells={jugadas.map((jugada, index) => (jugada ? index : null)).filter((idx) => idx !== null)}
           shapes={shapesArray}
+        />
+
+        <TieGlitchOverlay
+          active={tieGlitchActive}
+          onComplete={handleTieGlitchComplete}
+          duration={0}
+        />
+
+        {tieErrorActive && (
+          <div className="tie-error-modal" role="dialog" aria-modal="true">
+            <div className="tie-error-modal__panel">
+              <span className="tie-error-modal__title">ERROR</span>
+              <button
+                type="button"
+                className="tie-error-modal__cta"
+                onClick={handleCloseCurtains}
+              >
+                CERRAR CORTINAS
+              </button>
+            </div>
+          </div>
+        )}
+
+        <TieCurtainOverlay
+          active={tieCurtainActive}
+          onClosed={handleCurtainsClosed}
+        />
+
+        <LecternStage
+          active={tieLecternActive}
+          genero={lecternDisplay.genero}
+          titulo={lecternDisplay.titulo}
+          lines={lecternDisplay.lines}
+          loading={tieLecternLoading}
+          error={tieLecternError}
+          onSave={handleSaveLecternDraft}
         />
 
         {/* Modal creativo (burbuja) */}

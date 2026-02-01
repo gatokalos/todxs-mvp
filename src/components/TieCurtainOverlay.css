@@ -1,0 +1,33 @@
+.tie-curtains {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  z-index: 6100;
+  background: rgba(6, 4, 10, 0.75);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.tie-curtains__panel {
+  width: 50vw;
+  height: 110vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom center;
+  transition: transform 0.9s ease;
+}
+
+.tie-curtains__panel--left {
+  background-image: url("/assets/curtain-left.svg");
+  transform: translateX(-100%);
+}
+
+.tie-curtains__panel--right {
+  background-image: url("/assets/curtain-right.svg");
+  transform: translateX(100%);
+}
+
+.tie-curtains.is-closed .tie-curtains__panel--left,
+.tie-curtains.is-closed .tie-curtains__panel--right {
+  transform: translateX(0);
+}

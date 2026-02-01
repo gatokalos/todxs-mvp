@@ -3,7 +3,7 @@ import { useState } from "react"
 import PersonajeModal from "./PersonajeModal"
 import "./PersonajeMenu.css"
 
-function PersonajeMenu({ personaje, mensaje, onIconClick, menuAbierto = false }) {
+function PersonajeMenu({ personaje, mensaje, onIconClick, menuAbierto = false, inlineAvatarActive = false }) {
   const [modalAbierto, setModalAbierto] = useState(false)
 
   const handleIconClick = () => {
@@ -28,7 +28,9 @@ function PersonajeMenu({ personaje, mensaje, onIconClick, menuAbierto = false })
   }
 
   return (
-    <div className={`personaje-menu${mensaje ? " is-speaking" : ""}${menuAbierto ? " is-expanded" : ""}`}>
+    <div
+      className={`personaje-menu${mensaje ? " is-speaking" : ""}${menuAbierto ? " is-expanded" : ""}${inlineAvatarActive ? " has-inline-avatar" : ""}`}
+    >
       {icono ? (
         <img
           src={icono}

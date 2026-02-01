@@ -29,6 +29,13 @@
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
+.personaje-menu.has-inline-avatar .personaje-icono,
+.personaje-menu.has-inline-avatar .personaje-icono--placeholder {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.92);
+}
+
 .personaje-menu.is-expanded .personaje-icono,
 .personaje-menu.is-expanded .personaje-icono--placeholder {
   opacity: 0;

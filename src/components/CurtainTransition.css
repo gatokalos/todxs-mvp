@@ -39,6 +39,36 @@
   gap: 12px;
 }
 
+.curtain-entry-hub {
+  display: grid;
+  grid-template-rows: auto auto;
+  align-items: center;
+  justify-items: center;
+  gap: 12px;
+}
+
+.curtain-entry-logo-button {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+.curtain-entry-hint {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: rgba(246, 239, 233, 0.85);
+  text-shadow: 0 2px 10px rgba(10, 8, 8, 0.35);
+}
+
+.curtain-entry-logo-button:focus-visible {
+  outline: 2px solid rgba(255, 231, 210, 0.9);
+  outline-offset: 6px;
+  border-radius: 999px;
+}
+
 .curtain-entry-spotlight {
   position: fixed;
   inset: 0;
@@ -219,47 +249,10 @@
   }
 }
 
-.curtain-entry-card {
-  min-width: min(84vw, 360px);
-  padding: 16px 18px;
-  border-radius: 18px;
-  background: linear-gradient(165deg, rgba(108, 108, 108, 1), rgba(170, 166, 166, 0.96));
-  border: 1px solid rgba(255, 182, 128, 0.2);
-  box-shadow: 0 10px 24px rgba(10, 8, 8, 0.35);
-  color: #f6efe9;
-  text-align: center;
-}
-
 .curtain-entry-logo {
   display: block;
   width: clamp(120px, 20vw, 220px);
   height: auto;
-  margin: 0 auto 12px;
-}
-
-.curtain-entry-title {
-  margin: 0 0 6px;
-  font-size: 1.1rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.curtain-entry-text {
-  margin: 0 0 14px;
-  font-size: 0.95rem;
-  opacity: 0.9;
-}
-
-.curtain-entry-button {
-  border: none;
-  border-radius: 999px;
-  padding: 10px 18px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: #201512;
-  background: linear-gradient(135deg, rgba(255, 193, 133, 0.95), rgba(255, 140, 90, 0.95));
-  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.35);
-  cursor: pointer;
 }
 
 /* Cortina izquierda con tu PNG */
