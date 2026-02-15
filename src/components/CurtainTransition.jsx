@@ -1,8 +1,7 @@
 // CurtainTransition.jsx
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import useGameStore from "../store/useGameStore";
-import { playVictoryXSound } from "../utils/victorySound";
 import "./CurtainTransition.css";
 
 const SCREEN_BEHAVIOR = {
@@ -54,7 +53,6 @@ export default function CurtainTransition({ children }) {
   const hasOpenedRef = useRef(false);
   const pendingChildrenRef = useRef(children);
   const entrySpotlightRef = useRef(null);
-  const audioCtxRef = useRef(null);
 
   const [renderedChildren, setRenderedChildren] = useState(() => children);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -64,23 +62,6 @@ export default function CurtainTransition({ children }) {
     width: window.innerWidth,
     height: window.innerHeight,
   }));
-
-  const getAudioCtx = useCallback(() => {
-    const Ctx = window.AudioContext || window.webkitAudioContext;
-    if (!Ctx) return null;
-    if (!audioCtxRef.current) {
-      audioCtxRef.current = new Ctx();
-    } else if (audioCtxRef.current.state === "suspended") {
-      audioCtxRef.current.resume().catch(() => {});
-    }
-    return audioCtxRef.current;
-  }, []);
-
-  const playCurtainApplause = useCallback(() => {
-    const ctx = getAudioCtx();
-    if (!ctx) return;
-    playVictoryXSound(ctx);
-  }, [getAudioCtx]);
 
   // 🎭 Configura wave de ambas cortinas
   useEffect(() => {
@@ -207,12 +188,17 @@ export default function CurtainTransition({ children }) {
           setIsAnimating(false);
           setEntrySpotlightActive(false);
           hasOpenedRef.current = true;
+          if (screen === "selector") {
+            window.dispatchEvent(new CustomEvent("selectorCurtainsOpened"));
+          }
         },
       });
 
       initialTimeline
         .add(() => {
-          if (screen === "selector") playCurtainApplause();
+          if (screen === "selector") {
+            window.dispatchEvent(new CustomEvent("selectorCurtainsOpening"));
+          }
         }, 0)
         .to(leftCurtainRef.current, { xPercent: activeConfig.openLeft, duration: activeConfig.openDuration, ease: activeConfig.openEase })
         .to(rightCurtainRef.current, { xPercent: activeConfig.openRight, duration: activeConfig.openDuration, ease: activeConfig.openEase }, "<")
@@ -246,7 +232,14 @@ export default function CurtainTransition({ children }) {
       return () => initialTimeline.kill();
     }
 
-    const tl = gsap.timeline({ onComplete: () => setIsAnimating(false) });
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsAnimating(false);
+        if (screen === "selector") {
+          window.dispatchEvent(new CustomEvent("selectorCurtainsOpened"));
+        }
+      },
+    });
     tl.to([leftCurtainRef.current, rightCurtainRef.current], {
         xPercent: 0,
         y: 0,
@@ -256,7 +249,9 @@ export default function CurtainTransition({ children }) {
       })
       .add(() => setRenderedChildren(pendingChildrenRef.current))
       .add(() => {
-        if (screen === "selector") playCurtainApplause();
+        if (screen === "selector") {
+          window.dispatchEvent(new CustomEvent("selectorCurtainsOpening"));
+        }
       }, 0)
       .to(leftCurtainRef.current, { xPercent: activeConfig.openLeft, duration: activeConfig.openDuration, ease: activeConfig.openEase })
       .to(rightCurtainRef.current, { xPercent: activeConfig.openRight, duration: activeConfig.openDuration, ease: activeConfig.openEase }, "<")
@@ -291,6 +286,7 @@ export default function CurtainTransition({ children }) {
   }, [screen, viewportSize, manualOpen]);
 
   const handleManualOpen = () => {
+    window.dispatchEvent(new CustomEvent("selectorCurtainsOpening"));
     if (!entrySpotlightRef.current) {
       setManualOpen(true);
       return;
@@ -308,18 +304,22 @@ export default function CurtainTransition({ children }) {
     <div className="curtain-transition">
       <div ref={stageRef} className="curtain-stage">{renderedChildren}</div>
       {!hasOpenedRef.current && screen === "selector" && !manualOpen && (
-        <div className="curtain-entry">
+        <div
+          className="curtain-entry"
+          role="button"
+          tabIndex={0}
+          aria-label="Abrir cortinas"
+          onClick={handleManualOpen}
+          onKeyDown={(evt) => {
+            if (evt.key === "Enter" || evt.key === " ") {
+              evt.preventDefault();
+              handleManualOpen();
+            }
+          }}
+        >
           <div className="curtain-entry-content">
             <div className="curtain-entry-hub" role="presentation">
-              <button
-                type="button"
-                className="curtain-entry-logo-button"
-                aria-label="Abrir cortinas"
-                onClick={handleManualOpen}
-              >
-                <img className="curtain-entry-logo" src="/assets/logoTRAZO.png" alt="Logo TRAZO" />
-              </button>
-              <p className="curtain-entry-hint">Toca el logo para abrir cortinas</p>
+              <p className="curtain-entry-hint">Toca cualquier parte para abrir cortinas</p>
             </div>
           </div>
         </div>

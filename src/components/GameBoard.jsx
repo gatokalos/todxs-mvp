@@ -1148,7 +1148,10 @@ useEffect(() => {
   }, [fraseCompuestaDisplay]);
 
   // ============ COLITA ============
-  function calcularColita(cx, cy, modalRect, anchoBase = 60) {
+  function calcularColita(cx, cy, modalRect, anchoBase = null) {
+    const base =
+      anchoBase ??
+      Math.round(Math.max(56, Math.min(92, (modalRect?.width || 0) * 0.15)));
     const isLandscapeCompact =
       window.innerWidth > window.innerHeight && window.innerHeight <= 500;
     if (isLandscapeCompact) {
@@ -1156,16 +1159,16 @@ useEffect(() => {
       const edgeY = modalRect.top + modalRect.height / 2;
       return {
         x1: cx, y1: cy,
-        x2: edgeX, y2: edgeY - anchoBase,
-        x3: edgeX, y3: edgeY + anchoBase,
+        x2: edgeX, y2: edgeY - base,
+        x3: edgeX, y3: edgeY + base,
       };
     }
     const modalCenterX = modalRect.left + modalRect.width / 2;
     const modalY = modalRect.top;
     return {
       x1: cx, y1: cy,
-      x2: modalCenterX - anchoBase, y2: modalY,
-      x3: modalCenterX + anchoBase, y3: modalY,
+      x2: modalCenterX - base, y2: modalY,
+      x3: modalCenterX + base, y3: modalY,
     };
   }
 
@@ -1510,7 +1513,7 @@ useEffect(() => {
       const modal = document.querySelector(".speech-bubble");
       if (!modal) return;
       const modalRect = modal.getBoundingClientRect();
-      setTailCoords(calcularColita(cx, cy, modalRect, 60));
+      setTailCoords(calcularColita(cx, cy, modalRect));
     }, 0);
   };
 
@@ -2139,11 +2142,19 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
             </h2>
             <p className="gatologia-titulo">“{modalGatologia.titulo}”</p>
             <div className="gatologia-botones">
-              <button onClick={() => window.location.reload()}>Volver a jugar</button>
               <button
-                onClick={() =>
-                  window.dispatchEvent(new CustomEvent("abrirCamerino"))
-                }
+                onClick={() => {
+                  setModalGatologia((prev) => ({ ...prev, visible: false }));
+                  setScreen("selector");
+                }}
+              >
+                Volver a jugar
+              </button>
+              <button
+                onClick={() => {
+                  setModalGatologia((prev) => ({ ...prev, visible: false }));
+                  setScreen("camerino");
+                }}
               >
                 Ir a leerla
               </button>

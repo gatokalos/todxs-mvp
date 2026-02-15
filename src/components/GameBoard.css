@@ -4,7 +4,9 @@ html, body, #root {
 }
 body {
   margin: 0;
-  background: radial-gradient(circle at 20% 10%, #2b1c17 0%, #1b1413 45%, #0d0a0a 100%);
+  background:
+    radial-gradient(circle at 20% 8%, #2a2248 0%, #151229 42%, #08070f 100%),
+    linear-gradient(180deg, #0b0a14 0%, #06050c 100%);
   color: #f6efe9;
 }
 
@@ -109,17 +111,17 @@ body {
 
 .tablero::before {
   background:
-    radial-gradient(circle at 70% 20%, rgba(255, 164, 118, 0.22), transparent 45%),
-    radial-gradient(circle at 25% 70%, rgba(255, 110, 92, 0.2), transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(255, 210, 138, 0.12), transparent 50%);
+    radial-gradient(circle at 72% 18%, rgba(154, 138, 255, 0.2), transparent 46%),
+    radial-gradient(circle at 24% 72%, rgba(104, 164, 255, 0.16), transparent 52%),
+    radial-gradient(circle at 82% 82%, rgba(192, 142, 255, 0.12), transparent 52%);
   mix-blend-mode: screen;
 }
 
 .tablero::after {
   background:
-    linear-gradient(120deg, rgba(255, 140, 90, 0.08), transparent 40%),
-    linear-gradient(-120deg, rgba(255, 180, 120, 0.08), transparent 45%);
-  opacity: 0.9;
+    linear-gradient(120deg, rgba(122, 108, 255, 0.08), transparent 42%),
+    linear-gradient(-120deg, rgba(82, 137, 255, 0.08), transparent 46%);
+  opacity: 0.85;
 }
 
 .hub-botones {
@@ -1395,5 +1397,107 @@ body {
   100% {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+/* ===== Web Adaptation (desktop + iPad): keep mobile-first composition ===== */
+@media (min-width: 900px) and (min-height: 600px) {
+  .tablero {
+    height: 100dvh;
+    min-height: 100dvh;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+
+  .tablero-card {
+    width: min(92vw, 640px) !important;
+    max-width: 640px !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: flex-start;
+    gap: clamp(8px, 1.5vh, 16px);
+    padding: clamp(16px, 2.6vmin, 24px);
+    padding-bottom: clamp(18px, 3vh, 36px);
+    border-radius: 8px;
+    --board-size: min(82vw, 540px);
+    --panel-width: min(92vw, var(--board-size));
+  }
+
+  .tablero-personaje {
+    right: clamp(10px, 2vh, 18px);
+    left: auto;
+    top: clamp(10px, 2vh, 18px);
+  }
+
+  .tablero-cuadricula {
+    order: 1;
+    width: 100%;
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: clamp(8px, 1.4vh, 14px);
+  }
+
+  .tablero-cuadricula-inner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  .cuadricula {
+    width: 100%;
+    max-width: var(--board-size);
+    padding: clamp(8px, 1.8vmin, 14px);
+    gap: clamp(8px, 1.8vmin, 14px);
+  }
+
+  .frase-construida {
+    order: 2;
+    width: min(100%, var(--board-size));
+    max-width: min(100%, var(--board-size));
+    margin: 0;
+    align-self: center;
+    font-size: clamp(22px, 2.9vmin, 34px);
+    max-height: clamp(170px, 32dvh, 380px);
+  }
+
+  .tablero-card .personaje-menu .personaje-mensaje {
+    position: fixed;
+    top: clamp(18px, 4vh, 48px);
+    left: clamp(20px, 3vw, 52px);
+    right: auto;
+    width: min(34vw, 520px);
+    max-width: min(34vw, 520px);
+    min-height: clamp(140px, 18vh, 220px);
+    max-height: min(72vh, 620px);
+    z-index: 2400;
+    background: linear-gradient(165deg, rgba(28, 25, 60, 0.92), rgba(12, 11, 30, 0.9));
+    border: 1px solid rgba(168, 154, 255, 0.24);
+    box-shadow: 0 20px 40px rgba(5, 5, 15, 0.55), 0 0 36px rgba(120, 104, 255, 0.14);
+    backdrop-filter: blur(8px);
+  }
+
+  .tablero-card .personaje-menu .personaje-mensaje.is-expanded {
+    width: min(40vw, 620px);
+    max-width: min(40vw, 620px);
+  }
+}
+
+@media (min-width: 900px) and (min-height: 600px) and (max-width: 1200px) {
+  .tablero-card .personaje-menu .personaje-mensaje {
+    width: min(30vw, 420px);
+    max-width: min(30vw, 420px);
+    left: clamp(12px, 2vw, 24px);
+  }
+
+  .tablero-card .personaje-menu .personaje-mensaje.is-expanded {
+    width: min(34vw, 500px);
+    max-width: min(34vw, 500px);
   }
 }

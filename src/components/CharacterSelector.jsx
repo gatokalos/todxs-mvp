@@ -9,6 +9,11 @@ import "./CharacterSelector.css";
 
 
 const DEFAULT_INTRO = "¡Hola! Pronto conocerás nuestras historias desde el balcón.";
+const WELCOME_TITLE = "Bienvenidx a Trazo";
+const WELCOME_BODY =
+  "Un juego donde ensayas con los personajes de una obra que no existió.";
+const WELCOME_CTA = "Seleccionar";
+const WELCOME_INTRO = `${WELCOME_TITLE}\n${WELCOME_BODY}`;
 const DEFAULT_WIDTH_RATIO = 0.18;
 
 export const BASE_CHARACTER_LAYOUT = {
@@ -128,6 +133,7 @@ export default function CharacterSelector() {
   const [bubbleCharacter, setBubbleCharacter] = useState(null);
   const [isTouchMode, setIsTouchMode] = useState(false);
   const [spotlightTarget, setSpotlightTarget] = useState(null);
+  const [welcomeLocked, setWelcomeLocked] = useState(true);
   const selectionTimeoutRef = useRef(null);
   const bubbleTimeoutRef = useRef(null);
   const bubbleCloseTimeoutRef = useRef(null);
@@ -168,6 +174,26 @@ export default function CharacterSelector() {
     mql.addEventListener?.("change", updateMode);
     return () => mql.removeEventListener?.("change", updateMode);
   }, []);
+
+  useEffect(() => {
+    const handleCurtainsOpening = () => {
+      setWelcomeLocked(true);
+    };
+    const handleCurtainsOpened = () => {
+      setClosing(false);
+      setBubbleCharacter(null);
+      setIntroText(WELCOME_INTRO);
+      setWelcomeLocked(true);
+    };
+    window.addEventListener("selectorCurtainsOpening", handleCurtainsOpening);
+    window.addEventListener("selectorCurtainsOpened", handleCurtainsOpened);
+    return () => {
+      window.removeEventListener("selectorCurtainsOpening", handleCurtainsOpening);
+      window.removeEventListener("selectorCurtainsOpened", handleCurtainsOpened);
+    };
+  }, []);
+
+  const welcomeActive = welcomeLocked && !closing;
 
   const clearBubbleTimeout = useCallback(() => {
     if (bubbleTimeoutRef.current) {
@@ -475,7 +501,7 @@ export default function CharacterSelector() {
     introText && bubblePosition
       ? createPortal(
           <div
-            className={`cs-speech-bubble cs-speech-bubble--floating ${closing ? "is-closing" : ""}`}
+            className={`cs-speech-bubble cs-speech-bubble--floating ${!bubbleCharacter ? "is-welcome" : ""} ${closing ? "is-closing" : ""}`}
             style={{
               position: "fixed",
               left: `${bubblePosition.left}px`,
@@ -492,6 +518,7 @@ export default function CharacterSelector() {
                 setBubbleCharacter(null);
                 setSpotlightTarget(null);
                 setHovered(null);
+                setWelcomeLocked(false);
                 clearBubbleTimeout();
               }
             }}
@@ -516,7 +543,28 @@ export default function CharacterSelector() {
                 <p className="cs-bubble-body">{introText}</p>
               </>
             ) : (
-              <p className="cs-bubble-body">{introText}</p>
+              <>
+                <img
+                  className="cs-bubble-logo"
+                  src="/assets/logoTRAZO.png"
+                  alt="Logo Trazo"
+                />
+                <p className="cs-bubble-body">
+                  <strong className="cs-bubble-title">{WELCOME_TITLE}</strong>
+                  <span className="cs-bubble-line">{WELCOME_BODY}</span>
+                </p>
+                <button
+                  type="button"
+                  className="cs-bubble-cta"
+                  onClick={() => {
+                    playVictoryX();
+                    setClosing(true);
+                    setWelcomeLocked(false);
+                  }}
+                >
+                  {WELCOME_CTA}
+                </button>
+              </>
             )}
             <svg
               className="cs-speech-tail"
@@ -556,7 +604,13 @@ export default function CharacterSelector() {
     : null;
 
   return (
-    <div className="character-selector">
+    <div className={`character-selector ${welcomeActive ? "is-locked" : ""}`}>
+      {welcomeActive && (
+        <div
+          className="character-selector__welcome-overlay"
+          aria-hidden="true"
+        />
+      )}
       {curtainSpotlight}
       <div
         className="building-wrap"

@@ -187,7 +187,7 @@ export default function SpeechBubbleModal({
 
   return (
     <div className="speech-bubble-container">
-      <div className="speech-bubble">
+      <div className={`speech-bubble ${creativeMode ? "is-creative" : "is-choice"}`}>
         <div className="speech-header">
           <strong>{titulo}</strong>
           <button className="btn-close" onClick={onClose} aria-label="Regresar">
@@ -230,7 +230,7 @@ export default function SpeechBubbleModal({
                 className="speech-letterbox-btn"
                 onClick={handleLetterboxSelect}
               >
-                <span>{displayedOption}</span>
+                <span className="speech-letterbox-btn__text">{displayedOption}</span>
               </button>
               <p className="speech-letterbox-hint">Toca para confirmar esta frase</p>
             </div>

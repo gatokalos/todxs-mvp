@@ -678,31 +678,6 @@
 }
 
 
-.character-selector__host {
-  position: absolute;
-  transform: translate(-50%, -90%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  z-index: 3;
-  cursor: pointer;
-  pointer-events: auto;
-}
-
-.character-selector__host-img {
-  width: clamp(90px, 13vw, 200px);
-  height: auto;
-  filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
-  zindex: 100000;
-  transition: transform 0.2s ease;
-}
-
-.character-selector__host:focus-visible .character-selector__host-img,
-.character-selector__host:hover .character-selector__host-img {
-  transform: translateY(-4px) scale(1.04);
-}
-
 /* Pop-in al entrar */
 @keyframes bubble-pop-in {
   0%   { opacity: 0; transform: translate(-50%, 15px) scale(0.6); }
@@ -895,6 +870,113 @@
   text-align: center;
 }
 
+.cs-speech-bubble.is-welcome {
+  width: min(520px, 90vw);
+  max-width: min(520px, 90vw);
+  padding: 18px 18px 16px;
+  border-radius: 20px;
+}
+
+.cs-speech-bubble.is-welcome .cs-bubble-body {
+  margin: 2px 0 12px;
+  font-size: clamp(1rem, 1.95vh, 1.95rem);
+  line-height: 1.45;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.cs-speech-bubble.is-welcome .cs-bubble-title {
+  font-size: 1.18em;
+  margin-bottom: 8px;
+}
+
+.cs-bubble-logo {
+  display: block;
+  width: clamp(120px, 18vw, 186px);
+  height: auto;
+  margin: 4px auto 14px;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.cs-bubble-title {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.cs-bubble-line {
+  display: block;
+}
+
+.cs-speech-bubble.is-welcome .cs-bubble-line {
+  white-space: normal;
+}
+
+.cs-bubble-cta {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: clamp(0.98rem, 1.85vh, 1.95rem);
+  color: #201512;
+  background: linear-gradient(135deg, rgba(255, 222, 158, 1), rgba(255, 186, 104, 1));
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .cs-speech-bubble.is-welcome .cs-bubble-body {
+    font-size: 0.97rem;
+  }
+
+  .cs-speech-bubble.is-welcome .cs-bubble-title {
+    font-size: 1.04rem;
+  }
+
+  .cs-speech-bubble.is-welcome .cs-bubble-cta {
+    font-size: 1.02rem;
+    padding: 10px 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cs-speech-bubble.is-welcome {
+    width: min(640px, 74vw);
+    max-width: min(640px, 74vw);
+  }
+}
+
+.character-selector__welcome-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 8;
+  background: #000;
+  pointer-events: auto;
+}
+
+.character-selector.is-locked .character-selector__slot,
+.character-selector.is-locked .character-selector__host,
+.character-selector.is-locked .curtain {
+  pointer-events: none;
+}
+
+.character-selector.is-locked .cs-speech-bubble {
+  pointer-events: auto;
+}
+
+.character-selector.is-locked .characters-layer {
+  z-index: 30;
+}
+
+.character-selector.is-locked .character-selector__slot {
+  opacity: 0;
+}
+
 @media (hover: hover) and (pointer: fine) and (min-width: 1200px) {
   .character-selector__slot.is-hover:not(.is-spotlight) .character-selector__sticker,
   .character-selector__slot:not(.is-spotlight) .character-selector__sticker.is-hover {
@@ -953,6 +1035,19 @@
     pointer-events: none;
     z-index: 1;
   }
+
+  .cs-speech-bubble.is-welcome.cs-speech-bubble--floating {
+    --bubble-raise: 0px;
+    --bubble-translate-y: -100%;
+  }
+
+  .cs-speech-bubble.is-welcome::after {
+    content: "";
+  }
+
+  .cs-speech-bubble.is-welcome .cs-speech-tail {
+    display: none;
+  }
 }
 
 @media (orientation: landscape) and (min-width: 900px) and (max-width: 1366px) and (min-height: 600px) {
@@ -991,6 +1086,11 @@
     font-size: 0.92em;
     white-space: normal;
     overflow-wrap: anywhere;
+  }
+
+  .cs-speech-bubble.is-welcome.cs-speech-bubble--floating {
+    --bubble-raise: 0px;
+    --bubble-translate-y: -100%;
   }
 }
 
@@ -1040,7 +1140,13 @@
   transform: translateX(-50%); /* corrige el centrado */
   width: 20%;                 /* escala proporcional al edificio */
   height: auto;
-  z-index: 11;
+  z-index: 31;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .character-selector__host-avatar {
@@ -1055,6 +1161,13 @@
   display: block;
   position: relative;
   z-index: 1;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.35));
+  transition: transform 0.2s ease;
+}
+
+.character-selector__host:focus-visible .character-selector__host-img,
+.character-selector__host:hover .character-selector__host-img {
+  transform: translateY(-4px) scale(1.04);
 }
 
 .character-selector__host-blink {
@@ -1064,7 +1177,7 @@
   width: 30%;
   height: 29%;
   pointer-events: none;
-  z-index: 2;
+  z-index: 55;
   transform: translateX(-50%);
 }
 
@@ -1141,5 +1254,90 @@
   }
   100% {
     transform: rotate(10deg) skewY(8deg) scaleX(1);
+  }
+}
+
+/* Desktop should preserve iPad-like welcome layout (mobile-first baseline). */
+@media (orientation: landscape) and (min-width: 900px) {
+  .cs-speech-bubble.is-welcome {
+    width: min(640px, 92vw);
+    max-width: min(640px, 92vw);
+    padding: 15px 19px 19px;
+  }
+
+  .cs-speech-bubble.is-welcome.cs-speech-bubble--floating {
+    transform: translate(-50%, -100%) !important;
+    --bubble-raise: clamp(6px, 1.1vh, 14px);
+    --bubble-translate-y: -100%;
+  }
+
+  .cs-speech-bubble.is-welcome .cs-bubble-body {
+    font-size: clamp(0.98rem, 1.24vw, 1.08rem);
+    line-height: 1.45;
+    white-space: normal;
+  }
+
+  .cs-speech-bubble.is-welcome .cs-bubble-title {
+    font-size: clamp(0.98rem, 1.24vw, 1.08rem);
+  }
+}
+
+/* Desktop parity with iPad Pro (mobile-first baseline). */
+@media (orientation: landscape) and (min-width: 900px) and (pointer: fine) {
+  .character-selector__slot.is-spotlight {
+    top: 44% !important;
+  }
+
+  .character-selector__slot.is-spotlight .character-selector__sticker {
+    width: min(74vh, 940px);
+    max-width: min(74vh, 940px);
+    transform: none;
+  }
+
+  .cs-speech-bubble {
+    width: min(760px, 92vw);
+    max-width: min(760px, 92vw);
+    padding: 15px 19px 19px;
+    font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+  }
+
+  .cs-speech-bubble--floating {
+    transform: translate(-50%, -100%) !important;
+    --bubble-raise: clamp(6px, 1.1vh, 14px);
+    --bubble-translate-y: -100%;
+    animation: floating-bubble-in 0.25s ease both;
+  }
+
+  .cs-speech-bubble::after {
+    content: "";
+  }
+
+  .cs-speech-tail {
+    display: none;
+  }
+
+  .cs-bubble-header-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+  }
+
+  .cs-bubble-name-link {
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 1em;
+  }
+
+  .cs-bubble-genre {
+    text-align: center;
+    white-space: nowrap;
+    font-size: 0.86em;
+  }
+
+  .cs-bubble-body {
+    font-size: 0.92em;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 }
