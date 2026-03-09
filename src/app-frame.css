@@ -1,0 +1,38 @@
+.app-embed-host {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(1200px 900px at 20% 20%, rgba(39, 65, 126, 0.34), transparent 65%),
+    radial-gradient(1100px 850px at 80% 10%, rgba(18, 95, 132, 0.3), transparent 65%),
+    radial-gradient(1000px 820px at 50% 80%, rgba(12, 43, 84, 0.36), transparent 70%),
+    #06080d;
+}
+
+.app-embed-stage {
+  position: relative;
+  transform-origin: center center;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(183, 212, 255, 0.16);
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.68),
+    0 0 0 1px rgba(180, 220, 255, 0.08) inset;
+}
+
+.app-embed-iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+  background: #000;
+}
+
+@media (max-width: 720px) {
+  .app-embed-stage {
+    border-radius: 14px;
+  }
+}

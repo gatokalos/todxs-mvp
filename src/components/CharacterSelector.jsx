@@ -9,10 +9,12 @@ import "./CharacterSelector.css";
 
 
 const DEFAULT_INTRO = "¡Hola! Pronto conocerás nuestras historias desde el balcón.";
-const WELCOME_TITLE = "Bienvenidx a Trazo";
+const WELCOME_HEADING_TOP = "Bienvenidx al juego";
+const WELCOME_HEADING_BOTTOM = "de Trazos";
+const WELCOME_TITLE = `${WELCOME_HEADING_TOP} ${WELCOME_HEADING_BOTTOM}`;
 const WELCOME_BODY =
   "Un juego donde ensayas con los personajes de una obra que no existió.";
-const WELCOME_CTA = "Seleccionar";
+const WELCOME_CTA = "Encender luces";
 const WELCOME_INTRO = `${WELCOME_TITLE}\n${WELCOME_BODY}`;
 const DEFAULT_WIDTH_RATIO = 0.18;
 
@@ -544,15 +546,17 @@ export default function CharacterSelector() {
               </>
             ) : (
               <>
-                <img
-                  className="cs-bubble-logo"
-                  src="/assets/logoTRAZO.png"
-                  alt="Logo Trazo"
-                />
-                <p className="cs-bubble-body">
-                  <strong className="cs-bubble-title">{WELCOME_TITLE}</strong>
-                  <span className="cs-bubble-line">{WELCOME_BODY}</span>
-                </p>
+                <div className="cs-welcome-hero" aria-hidden="true">
+                  <img
+                    className="cs-bubble-logo"
+                    src="/assets/logoTRAZO.png"
+                    alt="Logo Trazo"
+                  />
+                  <p className="cs-welcome-heading">
+                    <span>{WELCOME_HEADING_TOP}</span>
+                    <span>{WELCOME_HEADING_BOTTOM}</span>
+                  </p>
+                </div>
                 <button
                   type="button"
                   className="cs-bubble-cta"
@@ -564,6 +568,9 @@ export default function CharacterSelector() {
                 >
                   {WELCOME_CTA}
                 </button>
+                <p className="cs-bubble-body">
+                  <span className="cs-bubble-line">{WELCOME_BODY}</span>
+                </p>
               </>
             )}
             <svg
