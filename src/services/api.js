@@ -240,7 +240,7 @@ export async function getNivel(personajeId, nivel) {
   const { data, error } = await supabase
     .from("niveles_semanticos")
     .select(
-      "frase_base, prefijos, sufijo, tablero, mensajes_victoria_x, mensajes_victoria_o"
+      "frase_base, prefijos, sufijos, tablero, mensajes_victoria_x, mensajes_victoria_o, titulo_modal, ritmo_frase, temporizador_ms"
     )
     .eq("personaje_id", personajeId)
     .eq("nivel", nivel)
@@ -251,7 +251,17 @@ export async function getNivel(personajeId, nivel) {
     return null;
   }
 
-  return data;
+  const normalizedSufijos =
+    data?.sufijos && typeof data.sufijos === "object"
+      ? data.sufijos
+      : { X: "", O: "" };
+
+  return {
+    ...data,
+    sufijos: normalizedSufijos,
+    // Compatibilidad temporal con consumidores legacy que aún esperan `sufijo`.
+    sufijo: normalizedSufijos?.O ?? normalizedSufijos?.X ?? "",
+  };
 }
 
 export async function fetchPersonajeStats(slug) {

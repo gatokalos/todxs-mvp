@@ -1,6 +1,18 @@
 import { create } from 'zustand'
 import campos from '../data/camposSemanticos.json'
 
+const normalizePersonajeId = (personajeId, fallback = "la-maestra") => {
+  if (typeof personajeId !== "string") return fallback;
+  const normalized = personajeId.trim().toLowerCase().replace(/\s+/g, "-");
+  return normalized || fallback;
+};
+
+const normalizeNivel = (nivel, fallback = 1) => {
+  const parsed = Number(nivel);
+  if (!Number.isFinite(parsed)) return fallback;
+  return Math.max(1, Math.floor(parsed));
+};
+
 // Exporto named y default para evitar errores de import en otros componentes
 export const useGameStore = create((set, get) => ({
   screen: "selector", // arranca en el Selector (splash deshabilitado temporalmente)
@@ -30,9 +42,12 @@ export const useGameStore = create((set, get) => ({
     nivelesPorPersonaje: {},
     setPersonajeActual: (personajeId) =>
       set((state) => {
-        const safePersonaje = personajeId || state.defaultFreeCharacter;
+        const safePersonaje = normalizePersonajeId(
+          personajeId,
+          state.defaultFreeCharacter
+        );
         const niveles = state.nivelesPorPersonaje || {};
-        const nivelGuardado = niveles[safePersonaje] ?? 1;
+        const nivelGuardado = normalizeNivel(niveles[safePersonaje], 1);
         return {
           personajeActual: safePersonaje,
           nivelActual: nivelGuardado,
@@ -65,9 +80,11 @@ export const useGameStore = create((set, get) => ({
   nivelActual: 1,
   setNivelActual: (nuevoNivel, personajeId) =>
     set((state) => {
-      const safePersonaje =
-        personajeId || state.personajeActual || state.defaultFreeCharacter;
-      const safeNivel = nuevoNivel || 1;
+      const safePersonaje = normalizePersonajeId(
+        personajeId || state.personajeActual,
+        state.defaultFreeCharacter
+      );
+      const safeNivel = normalizeNivel(nuevoNivel, 1);
       return {
         nivelActual: safeNivel,
         nivelesPorPersonaje: {
@@ -98,7 +115,15 @@ export const useGameStore = create((set, get) => ({
     const camposPersonaje = campos[personaje] || {}
     const prefijos = camposPersonaje.prefijos || {}
     const fraseBase = camposPersonaje.fraseBase || ''
-    const sufijo = camposPersonaje.sufijo || '.'
+    const sufijosConfig = camposPersonaje.sufijos
+    const sufijo =
+      typeof camposPersonaje.sufijo === 'string'
+        ? camposPersonaje.sufijo
+        : typeof sufijosConfig?.O === 'string'
+          ? sufijosConfig.O
+          : typeof sufijosConfig?.X === 'string'
+            ? sufijosConfig.X
+            : '.'
 
     let fraseFinal = state.fraseFinal
     if (nuevaPalabraX && nuevaPalabraO) {
