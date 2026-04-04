@@ -3,6 +3,14 @@
   bottom: 16px;
   right: 16px;
   z-index: 2100;
+  pointer-events: none;
+}
+
+/* Re-habilitar solo los hijos interactivos */
+.personaje-icono,
+.personaje-icono--placeholder,
+.personaje-mensaje {
+  pointer-events: auto;
 }
 
 .personaje-icono {

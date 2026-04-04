@@ -14,6 +14,11 @@ import LecternStage from "./LecternStage";
 import "./GameBoard.css";
 import useTypewriter from "../hooks/useTypewriter";
 import personajesData from "../data/personajes.json";
+import {
+  getTituloCasilla,
+  normalizeTableroSemantico,
+  resolverFraseSemantica,
+} from "../utils/resolverFraseSemantica";
 
 const DEFAULT_RITMO_FRASE = {
   base_x: "\\n",
@@ -151,6 +156,7 @@ export default function GameBoard() {
   const [tieLecternLoading, setTieLecternLoading] = useState(false);
   const [tieLecternError, setTieLecternError] = useState(null);
   const tieSnapshotRef = useRef(null);
+  const semanticaCacheRef = useRef(new Map());
 
   const [burbujaAbierta, setBurbujaAbierta] = useState(null);
   const [tailCoords, setTailCoords] = useState(null);
@@ -200,6 +206,10 @@ export default function GameBoard() {
   const resizeRafRef = useRef(null);
   const lastBoardSizeRef = useRef(0);
   const [boardSize, setBoardSize] = useState(320);
+
+  useEffect(() => {
+    semanticaCacheRef.current.clear();
+  }, [personajeActual, nivelActual]);
 
   const stopGhostCursor = useCallback(() => {
     if (ghostIntervalRef.current) {
@@ -578,8 +588,8 @@ export default function GameBoard() {
       ? opcionesO[Math.floor(Math.random() * opcionesO.length)]
       : "...";
 
-    registrarJugadaState(randomIndex, "O", palabraIA);
-  }, [tablero]);
+    registrarJugadaState(randomIndex, "O", palabraIA, { tablero, prefijos, sufijos, fraseBase, ritmoFrase });
+  }, [tablero, prefijos, sufijos, fraseBase, ritmoFrase]);
 
   const resetContextState = useCallback(() => {
     resetFraseActual();
@@ -657,41 +667,41 @@ export default function GameBoard() {
     prevPersonajeRef.current = personajeActual;
   }, [personajeActual, resetContextState]);
 
-  const beginTransition = (
-    message = "Preparando el siguiente acto...",
-    delay = 0
-  ) => {
-    if (transitionStartTimeoutRef.current) {
-      clearTimeout(transitionStartTimeoutRef.current);
-      transitionStartTimeoutRef.current = null;
-    }
-    if (transitionTimeoutRef.current) {
-      clearTimeout(transitionTimeoutRef.current);
-      transitionTimeoutRef.current = null;
-    }
-    if (closeBubbleTimeoutRef.current) {
-      clearTimeout(closeBubbleTimeoutRef.current);
-      closeBubbleTimeoutRef.current = null;
-    }
-
-    const start = () => {
-      setTransitionMessage(message);
-      setIsTransitioning(true);
-      setBurbujaAbierta(null);
-      setTailCoords(null);
-    };
-
-    if (delay > 0) {
-      transitionStartTimeoutRef.current = setTimeout(() => {
-        start();
+  const beginTransition = useCallback(
+    (message = "Preparando el siguiente acto...", delay = 0) => {
+      if (transitionStartTimeoutRef.current) {
+        clearTimeout(transitionStartTimeoutRef.current);
         transitionStartTimeoutRef.current = null;
-      }, delay);
-    } else {
-      start();
-    }
-  };
+      }
+      if (transitionTimeoutRef.current) {
+        clearTimeout(transitionTimeoutRef.current);
+        transitionTimeoutRef.current = null;
+      }
+      if (closeBubbleTimeoutRef.current) {
+        clearTimeout(closeBubbleTimeoutRef.current);
+        closeBubbleTimeoutRef.current = null;
+      }
 
-  const endTransition = (delay = 240) => {
+      const start = () => {
+        setTransitionMessage(message);
+        setIsTransitioning(true);
+        setBurbujaAbierta(null);
+        setTailCoords(null);
+      };
+
+      if (delay > 0) {
+        transitionStartTimeoutRef.current = setTimeout(() => {
+          start();
+          transitionStartTimeoutRef.current = null;
+        }, delay);
+      } else {
+        start();
+      }
+    },
+    []
+  );
+
+  const endTransition = useCallback((delay = 240) => {
     if (transitionStartTimeoutRef.current) {
       clearTimeout(transitionStartTimeoutRef.current);
       transitionStartTimeoutRef.current = null;
@@ -704,7 +714,7 @@ export default function GameBoard() {
       setTransitionMessage("");
       transitionTimeoutRef.current = null;
     }, delay);
-  };
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -763,25 +773,26 @@ export default function GameBoard() {
         tablero,
       })
     : "";
-  const lineaCreativaRaw = respuestaCreativa
-    ? buildLinea({
-        jugador: "O",
-        palabra: respuestaCreativa,
-        casillaIndex: ultimaCasillaO,
-        prefijos,
-        sufijos,
-        tablero,
-      })
-    : lineaORaw;
-
-  const fraseCompuestaRaw = composeFraseRaw(
-    baseRaw,
-    lineaXRaw,
-    creativeMode ? lineaCreativaRaw : lineaORaw,
+  const casillaXActual = Number.isInteger(ultimaCasillaX) ? tablero[ultimaCasillaX] ?? null : null;
+  // En creative mode O nunca jugó → usar la casilla de X como fallback para que el resolver
+  // encuentre eslabones_O y anteponga el conector al remate del usuario.
+  const casillaOActual = Number.isInteger(ultimaCasillaO)
+    ? tablero[ultimaCasillaO] ?? null
+    : creativeMode ? (casillaXActual ?? tablero[0] ?? null) : null;
+  const fraseResuelta = resolverFraseSemantica({
+    fraseBase: baseRaw,
+    casillaX: casillaXActual,
+    opcionX: palabraX,
+    casillaO: casillaOActual,
+    opcionO: creativeMode ? respuestaCreativa || palabraO || "" : palabraO,
+    prefijos,
+    sufijos,
     ritmoFrase,
-    creativeMode
-  );
-  const fraseCompuestaDisplay = toDisplayText(fraseCompuestaRaw);
+    usarCreativo: creativeMode,
+    cache: semanticaCacheRef.current,
+  });
+  const fraseCompuestaRaw = fraseResuelta.raw;
+  const fraseCompuestaDisplay = fraseResuelta.display;
 
   const buildTieLecternPayload = useCallback(() => {
     const snapshot = tieSnapshotRef.current;
@@ -819,15 +830,17 @@ export default function GameBoard() {
   }, [personajeActual, nombreVisible, icono, fraseCompuestaDisplay, fraseFinal, fraseBase, palabraX, palabraO]);
 
   const baseDisplayText = toDisplayText(baseRaw);
-  const xSegmentDisplay = lineaXRaw
-    ? `${baseRaw ? renderConnector(ritmoFrase.base_x) : ""}${toDisplayText(lineaXRaw)}`
+  const xSegmentText = fraseResuelta.meta.segmentX || lineaXRaw;
+  const oSegmentText = fraseResuelta.meta.segmentO || lineaORaw;
+  const xSegmentDisplay = xSegmentText
+    ? `${baseRaw ? renderConnector(ritmoFrase.base_x) : ""}${toDisplayText(xSegmentText)}`
     : "";
-  const contenidoPrevioParaO = Boolean(baseRaw || lineaXRaw);
-  const oSegmentDisplay = !creativeMode && lineaORaw
-    ? `${contenidoPrevioParaO ? renderConnector(ritmoFrase.x_o) : ""}${toDisplayText(lineaORaw)}`
+  const contenidoPrevioParaO = Boolean(baseRaw || xSegmentText);
+  const oSegmentDisplay = !creativeMode && oSegmentText
+    ? `${contenidoPrevioParaO ? renderConnector(ritmoFrase.x_o) : ""}${toDisplayText(oSegmentText)}`
     : "";
-  const creativeSegmentDisplay = creativeMode && lineaCreativaRaw
-    ? `${contenidoPrevioParaO ? renderConnector(ritmoFrase.x_creativa) : ""}${toDisplayText(lineaCreativaRaw)}`
+  const creativeSegmentDisplay = creativeMode && oSegmentText
+    ? `${contenidoPrevioParaO ? renderConnector(ritmoFrase.x_creativa) : ""}${toDisplayText(oSegmentText)}`
     : "";
 
   const { displayed: baseAnimada, done: baseDone } = useTypewriter(
@@ -993,13 +1006,43 @@ export default function GameBoard() {
     stopThinkHum,
   ]);
 
+  const clearLoadedLevelState = useCallback(() => {
+    setNombreVisible("");
+    setIcono("");
+    setFraseBase("");
+    setPrefijos({ X: "", O: "" });
+    setSufijos({ X: "", O: "" });
+    setTituloModal({ X: "", O: "" });
+    setTablero([]);
+    setMsgsX([]);
+    setMsgsO([]);
+    setRitmoFrase({ ...DEFAULT_RITMO_FRASE });
+  }, [setFraseBase]);
+
   // ============ CARGA DE NIVEL ============
   useEffect(() => {
     let cancelled = false;
 
     async function cargarNivel() {
       const personajeSeguro = personajeActual || "la-maestra";
-      if (!supabase || !personajeSeguro || !nivelActual) return;
+      const nivelSeguro = Number.isFinite(Number(nivelActual))
+        ? Math.max(1, Math.floor(Number(nivelActual)))
+        : 1;
+
+      clearLoadedLevelState();
+      resetFraseActual();
+      reiniciarTablero();
+      setRespuestaCreativa("");
+      setFraseFinal("");
+      setMensajePersonaje(null);
+      setMensajeAnimado("");
+      setVictory(null);
+      setVictoryActive(false);
+
+      if (!supabase || !personajeSeguro || !nivelSeguro) {
+        endTransition();
+        return;
+      }
       if (personajeSeguro !== personajeActivoRef.current) return;
 
       try {
@@ -1009,7 +1052,7 @@ export default function GameBoard() {
             "nombre_visible, icono, frase_base, prefijos, sufijos, titulo_modal, tablero, mensajes_victoria_x, mensajes_victoria_o, ritmo_frase"
           )
           .eq("personaje_id", personajeSeguro)
-          .eq("nivel", nivelActual)
+          .eq("nivel", nivelSeguro)
           .limit(1);
 
         if (error) {
@@ -1021,15 +1064,26 @@ export default function GameBoard() {
         const row = Array.isArray(data) ? data[0] : data;
         if (!row) {
           console.error(
-            `⚠️ No se encontró nivel ${nivelActual} para ${personajeSeguro}.`
+            `⚠️ No se encontró nivel ${nivelSeguro} para ${personajeSeguro}.`
           );
-          endTransition();
+          if (
+            nivelSeguro > 1 &&
+            !cancelled &&
+            personajeActivoRef.current === personajeSeguro
+          ) {
+            console.warn(
+              `↩️ Reiniciando ${personajeSeguro} a nivel 1 por desalineación de progreso.`
+            );
+            setNivelActual(1, personajeSeguro);
+          } else {
+            endTransition();
+          }
           return;
         }
 
         if (Array.isArray(data) && data.length > 1) {
           console.warn(
-            `⚠️ Se encontraron ${data.length} filas para ${personajeSeguro} nivel ${nivelActual}. Usando la primera.`
+            `⚠️ Se encontraron ${data.length} filas para ${personajeSeguro} nivel ${nivelSeguro}. Usando la primera.`
           );
         }
 
@@ -1039,7 +1093,7 @@ export default function GameBoard() {
         setFraseBase(row?.frase_base || "");
         setPrefijos(row?.prefijos || { X: "", O: "" });
         setSufijos(row?.sufijos || { X: "", O: "" });
-        setTablero(Array.isArray(row?.tablero) ? row.tablero : []);
+        setTablero(normalizeTableroSemantico(row?.tablero));
         setMsgsX(Array.isArray(row?.mensajes_victoria_x) ? row.mensajes_victoria_x : []);
         setMsgsO(Array.isArray(row?.mensajes_victoria_o) ? row.mensajes_victoria_o : []);
         setTituloModal(row?.titulo_modal || { X: "", O: "" });
@@ -1064,7 +1118,16 @@ export default function GameBoard() {
     return () => {
       cancelled = true;
     };
-  }, [personajeActual, nivelActual]);
+  }, [
+    personajeActual,
+    nivelActual,
+    clearLoadedLevelState,
+    endTransition,
+    reiniciarTablero,
+    resetFraseActual,
+    setFraseBase,
+    setNivelActual,
+  ]);
 
 // ============ DETECCIÓN DE VICTORIA Y MENSAJE ============
 useEffect(() => {
@@ -1434,14 +1497,20 @@ useEffect(() => {
         })
       : "";
 
-    const nuevaRaw = composeFraseRaw(
-      baseRaw,
-      lineaXRaw,
-      terceraLineaRaw,
+    const fraseCreativaResuelta = resolverFraseSemantica({
+      fraseBase: baseRaw,
+      casillaX: casillaXActual,
+      opcionX: palabraX,
+      casillaO: casillaOActual,
+      opcionO: remate,
+      prefijos,
+      sufijos,
       ritmoFrase,
-      true
-    );
-    const nuevaDisplay = toDisplayText(nuevaRaw);
+      usarCreativo: true,
+      cache: semanticaCacheRef.current,
+    });
+    const nuevaRaw = fraseCreativaResuelta.raw;
+    const nuevaDisplay = fraseCreativaResuelta.display;
 
     setRespuestaCreativa(remateLimpio || "");
     setFraseFinal(nuevaDisplay);
@@ -1484,7 +1553,7 @@ useEffect(() => {
         palabraO,
         fraseCompuestaDisplay,
       };
-      registrarJugada(index, turno, "");
+      registrarJugada(index, turno, "", { tablero, prefijos, sufijos, fraseBase, ritmoFrase });
       pendingAutoORef.current = false;
       clearThinkTimeout();
       stopGhostCursor();
@@ -1522,7 +1591,7 @@ useEffect(() => {
     preview[burbujaAbierta] = { jugador: turno, palabra };
     const empate = preview.every(Boolean) && !checkWinner(preview);
 
-    registrarJugada(burbujaAbierta, turno, palabra);
+    registrarJugada(burbujaAbierta, turno, palabra, { tablero, prefijos, sufijos, fraseBase, ritmoFrase });
     setBurbujaAbierta(null);
 
     if (empate) {
@@ -1670,15 +1739,20 @@ async function avanzarNivel() {
 
     if (!palabraX) return;
 
-    const lineaTerceraRaw = creativeMode ? lineaCreativaRaw : lineaORaw;
-    const fraseFinalRaw = composeFraseRaw(
-      baseRaw,
-      lineaXRaw,
-      lineaTerceraRaw,
+    const fraseFinalResuelta = resolverFraseSemantica({
+      fraseBase: baseRaw,
+      casillaX: casillaXActual,
+      opcionX: palabraX,
+      casillaO: casillaOActual,
+      opcionO: creativeMode ? respuestaCreativa || palabraO || "" : palabraO,
+      prefijos,
+      sufijos,
       ritmoFrase,
-      creativeMode
-    );
-    const fraseFinalDisplay = toDisplayText(fraseFinalRaw);
+      usarCreativo: creativeMode,
+      cache: semanticaCacheRef.current,
+    });
+    const fraseFinalRaw = fraseFinalResuelta.raw;
+    const fraseFinalDisplay = fraseFinalResuelta.display;
 
     const payload = {
       usuarioId: null,
@@ -1690,6 +1764,8 @@ async function avanzarNivel() {
       prefijoO: prefijos.O,
       sufijoX: sufijos.X || "",
       sufijoO: sufijos.O || "",
+      eslabonX: fraseFinalResuelta.meta.eslabonX || "",
+      eslabonO: fraseFinalResuelta.meta.eslabonO || "",
       fraseFinal: fraseFinalRaw,
       timestamp: new Date().toISOString(),
     };
@@ -1983,6 +2059,16 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
         ref={cardRef}
         style={{ "--board-size": `${boardSize}px` }}
       >
+        <button
+          className="tablero-return-chip"
+          type="button"
+          onClick={() => { setPersonajeSeleccionado(personajeActual); setScreen("camerino"); }}
+          aria-label="Regresar al camerino"
+          title="Regresar al camerino"
+        >
+          ↩
+        </button>
+
         <div className="tablero-personaje">
           <PersonajeMenu
             personaje={{ nombreVisible, icono, id: personajeActual }}
@@ -2050,16 +2136,7 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
                 );
               })}
             </div>
-            <button
-              className="tablero-return-chip"
-              type="button"
-              onClick={() => setScreen("camerino")}
-              aria-label="Regresar al camerino"
-              title="Regresar al camerino"
-            >
-              ↩
-            </button>
-          </div>
+            </div>
           <BoardResetOverlay pieces={resetOverlayPieces} onComplete={handleResetOverlayComplete} />
         </div>
 
@@ -2114,7 +2191,13 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
             titulo={
               burbujaAbierta === -1
                 ? (tituloModal?.default || "Yo escojo")
-                : (tituloModal?.[turno] || tituloModal?.default || "Yo escojo")
+                : (
+                    getTituloCasilla(
+                      tablero[burbujaAbierta],
+                      turno,
+                      tituloModal
+                    ) || "Yo escojo"
+                  )
             }
             prefijo={burbujaAbierta === -1 ? "" : (prefijos[turno] || "")}
             opciones={burbujaAbierta === -1 ? [] : (tablero[burbujaAbierta]?.[turno] || [])}

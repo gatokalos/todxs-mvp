@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout:*)",
+      "Bash(grep -rn \"personajeActual\\\\|nivelActual\" /Users/gatoenigmatico/gatoencerrado-ai/apps/todxs-mvp/src/components/*.jsx)",
+      "Bash(grep -rn \"setPersonajeActual\\\\|setNivelActual\" /Users/gatoenigmatico/gatoencerrado-ai/apps/todxs-mvp/src/components/*.jsx)",
+      "Bash(grep -l \"saturnina\" *.sql)",
+      "Bash(grep -l \"payasito\" *.sql)",
+      "Bash(python3)"
+    ],
+    "additionalDirectories": [
+      "/Users/gatoenigmatico/gatoencerrado-ai/supabase/migrations"
+    ]
+  }
+}

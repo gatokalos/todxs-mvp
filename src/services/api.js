@@ -1,5 +1,6 @@
 // src/services/api.js
 import { supabase } from "../lib/supabaseClient";
+import { normalizeTableroSemantico } from "../utils/resolverFraseSemantica";
 
 
 export const api = {
@@ -73,10 +74,7 @@ export async function insertGatologia(payload = {}) {
     .select()
     .single();
 
-  if (error) {
-    console.error("❌ Error insertGatologia:", error.message);
-    return null;
-  }
+  if (error) return null;
   return data;
 }
 
@@ -226,10 +224,7 @@ export async function guardarEleccion(payload = {}) {
     .insert([row])
     .select();
 
-  if (error) {
-    console.error("❌ Error guardarEleccion:", error.message);
-    return null;
-  }
+  if (error) return null;
   return data;
 }
 
@@ -258,8 +253,9 @@ export async function getNivel(personajeId, nivel) {
 
   return {
     ...data,
+    tablero: normalizeTableroSemantico(data?.tablero),
     sufijos: normalizedSufijos,
-    // Compatibilidad temporal con consumidores legacy que aún esperan `sufijo`.
+    // Compatibilidad temporal con consumidores legacy que aún no esperan `sufijo`.
     sufijo: normalizedSufijos?.O ?? normalizedSufijos?.X ?? "",
   };
 }
