@@ -39,7 +39,7 @@ async function fetchPersonajeStats(slug) {
     .from("personaje_stats")
     .select("*")
     .eq("personaje_slug", slug)
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error("❌ Error cargando stats:", error);

@@ -9,14 +9,24 @@ import "./CharacterSelector.css";
 
 
 const DEFAULT_INTRO = "¡Hola! Pronto conocerás nuestras historias desde el balcón.";
-const WELCOME_HEADING_TOP = "Bienvenidx al juego";
-const WELCOME_HEADING_BOTTOM = "de Trazos";
-const WELCOME_TITLE = `${WELCOME_HEADING_TOP} ${WELCOME_HEADING_BOTTOM}`;
-const WELCOME_BODY =
-  "Un juego donde ensayas con los personajes de una obra que no existió.";
-const WELCOME_CTA = "Encender luces";
-const WELCOME_INTRO = `${WELCOME_TITLE}\n${WELCOME_BODY}`;
+const WELCOME_GREETING = "¡Hola, colegato!";
+const WELCOME_BODY = "Ensaya con los personajes de una obra que aún no existe.";
+const WELCOME_CTA = "Encender las luces";
+const WELCOME_INTRO = `${WELCOME_GREETING}\n${WELCOME_BODY}`;
 const DEFAULT_WIDTH_RATIO = 0.18;
+
+const IDLE_MESSAGES = [
+  "Puedes elegir cuando quieras… la escena sigue lista.",
+  "No hay prisa… pero tampoco demora.",
+  "¿Ves algo que te llama? A veces el personaje te elige a ti.",
+  "No hay respuesta incorrecta. Bueno, hay una: no elegir.",
+  "Dicen que los indecisos también cuentan una historia.",
+  "Pss… alguno de allá arriba lleva rato mirándote.",
+  "A veces elegir es solo empezar a jugar.",
+  "Yo esperaré. Los personajes… no sé.",
+];
+const IDLE_INITIAL_DELAY = 4000;
+const IDLE_CYCLE_DELAY = 12000;
 
 export const BASE_CHARACTER_LAYOUT = {
   "reina-de-espadas": {
@@ -142,6 +152,9 @@ export default function CharacterSelector() {
   const hostRef = useRef(null);
   const [bubblePosition, setBubblePosition] = useState(null);
   const audioCtxRef = useRef(null);
+  const [isIdleMode, setIsIdleMode] = useState(false);
+  const idleIndexRef = useRef(0);
+  const idleTimerRef = useRef(null);
 
   const { personajes, loading } = usePersonajesSupabase();
   const buildingRef = useRef(null);
@@ -182,6 +195,8 @@ export default function CharacterSelector() {
       setWelcomeLocked(true);
     };
     const handleCurtainsOpened = () => {
+      clearIdleTimer();
+      setIsIdleMode(false);
       setClosing(false);
       setBubbleCharacter(null);
       setIntroText(WELCOME_INTRO);
@@ -207,6 +222,32 @@ export default function CharacterSelector() {
       bubbleCloseTimeoutRef.current = null;
     }
   }, []);
+
+  const clearIdleTimer = useCallback(() => {
+    if (idleTimerRef.current) {
+      clearTimeout(idleTimerRef.current);
+      idleTimerRef.current = null;
+    }
+  }, []);
+
+  const startIdleLoop = useCallback(() => {
+    clearIdleTimer();
+    const showNext = () => {
+      const idx = idleIndexRef.current;
+      idleIndexRef.current = (idx + 1) % IDLE_MESSAGES.length;
+      setIsIdleMode(true);
+      setBubbleCharacter(null);
+      setClosing(false);
+      setIntroText(IDLE_MESSAGES[idx]);
+      idleTimerRef.current = setTimeout(showNext, IDLE_CYCLE_DELAY);
+    };
+    idleTimerRef.current = setTimeout(showNext, IDLE_INITIAL_DELAY);
+  }, [clearIdleTimer]);
+
+  const stopIdle = useCallback(() => {
+    clearIdleTimer();
+    setIsIdleMode(false);
+  }, [clearIdleTimer]);
 
   const clearSelectionTimeout = useCallback(() => {
     if (selectionTimeoutRef.current) {
@@ -319,6 +360,10 @@ export default function CharacterSelector() {
     return () => clearBubbleTimeout();
   }, [clearBubbleTimeout]);
 
+  useEffect(() => {
+    return () => clearIdleTimer();
+  }, [clearIdleTimer]);
+
   const setPersonajeActual = useGameStore((s) => s.setPersonajeActual);
   const setPersonajeSeleccionado = useGameStore((s) => s.setPersonajeSeleccionado);
   const setScreen = useGameStore((s) => s.setScreen);
@@ -334,6 +379,7 @@ export default function CharacterSelector() {
   const handleSelect = (p) => {
     clearBubbleTimeout();
     clearSelectionTimeout();
+    stopIdle();
     setSpotlightTarget(null);
     setHovered(null);
     const canPlay = canPlayPersonaje(p.id);
@@ -422,6 +468,7 @@ export default function CharacterSelector() {
   };
 
   const handleCharacterActivate = (char) => {
+    stopIdle();
     if (!isTouchMode) {
       if (bubbleCharacter?.id === char.id) {
         clearBubbleTimeout();
@@ -503,7 +550,7 @@ export default function CharacterSelector() {
     introText && bubblePosition
       ? createPortal(
           <div
-            className={`cs-speech-bubble cs-speech-bubble--floating ${!bubbleCharacter ? "is-welcome" : ""} ${closing ? "is-closing" : ""}`}
+            className={`cs-speech-bubble cs-speech-bubble--floating ${!bubbleCharacter && !isIdleMode ? "is-welcome" : ""} ${isIdleMode ? "is-idle" : ""} ${closing ? "is-closing" : ""}`}
             style={{
               position: "fixed",
               left: `${bubblePosition.left}px`,
@@ -518,31 +565,34 @@ export default function CharacterSelector() {
                 setClosing(false);
                 setIntroText(null);
                 setBubbleCharacter(null);
+                setIsIdleMode(false);
                 setSpotlightTarget(null);
                 setHovered(null);
                 setWelcomeLocked(false);
                 clearBubbleTimeout();
+                startIdleLoop();
               }
             }}
           >
-            {bubbleCharacter ? (
+            {isIdleMode ? (
+              <p className="cs-bubble-idle">{introText}</p>
+            ) : bubbleCharacter ? (
               <>
                 <div className="cs-bubble-header">
-                  <div className="cs-bubble-header-row">
-                    <button
-                      type="button"
-                      className="cs-bubble-name-link"
-                      onClick={(evt) => {
-                        evt.stopPropagation();
-                        handleSelect(bubbleCharacter);
-                      }}
-                    >
-                      {bubbleCharacter.nombre_visible}
-                    </button>
-                    <p className="cs-bubble-genre">{bubbleCharacter.genero_literario}</p>
-                  </div>
+                  <p className="cs-bubble-name">{bubbleCharacter.nombre_visible}</p>
+                  <p className="cs-bubble-genre">{bubbleCharacter.genero_literario}</p>
                 </div>
                 <p className="cs-bubble-body">{introText}</p>
+                <button
+                  type="button"
+                  className="cs-bubble-cta"
+                  onClick={(evt) => {
+                    evt.stopPropagation();
+                    handleSelect(bubbleCharacter);
+                  }}
+                >
+                  Jugar con {bubbleCharacter.nombre_visible}
+                </button>
               </>
             ) : (
               <>
@@ -552,11 +602,10 @@ export default function CharacterSelector() {
                     src="/assets/logoTRAZO.png"
                     alt="Logo Trazo"
                   />
-                  <p className="cs-welcome-heading">
-                    <span>{WELCOME_HEADING_TOP}</span>
-                    <span>{WELCOME_HEADING_BOTTOM}</span>
-                  </p>
+                  <p className="cs-welcome-heading">Trazos</p>
                 </div>
+                <p className="cs-bubble-greeting">{WELCOME_GREETING}</p>
+                <p className="cs-bubble-body">{WELCOME_BODY}</p>
                 <button
                   type="button"
                   className="cs-bubble-cta"
@@ -568,25 +617,11 @@ export default function CharacterSelector() {
                 >
                   {WELCOME_CTA}
                 </button>
-                <p className="cs-bubble-body">
-                  <span className="cs-bubble-line">{WELCOME_BODY}</span>
-                </p>
               </>
             )}
-            <svg
-              className="cs-speech-tail"
-              viewBox="0 0 120 80"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <defs>
-                <linearGradient id="csBubbleTailGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="rgba(108, 108, 108, 1)" />
-                  <stop offset="100%" stopColor="rgba(170, 166, 166, 0.96)" />
-                </linearGradient>
-              </defs>
-              <polygon points="0,0 60,80 120,0" fill="url(#csBubbleTailGradient)" />
-            </svg>
+            <span className="cs-thought-bubble cs-thought-bubble--lg" aria-hidden="true" />
+            <span className="cs-thought-bubble cs-thought-bubble--md" aria-hidden="true" />
+            <span className="cs-thought-bubble cs-thought-bubble--sm" aria-hidden="true" />
           </div>,
           document.body
         )

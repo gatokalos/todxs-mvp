@@ -1,5 +1,6 @@
 // src/services/api.js
 import { supabase } from "../lib/supabaseClient";
+import { normalizeTableroSemantico } from "../utils/resolverFraseSemantica";
 
 
 export const api = {
@@ -73,10 +74,7 @@ export async function insertGatologia(payload = {}) {
     .select()
     .single();
 
-  if (error) {
-    console.error("❌ Error insertGatologia:", error.message);
-    return null;
-  }
+  if (error) return null;
   return data;
 }
 
@@ -226,10 +224,7 @@ export async function guardarEleccion(payload = {}) {
     .insert([row])
     .select();
 
-  if (error) {
-    console.error("❌ Error guardarEleccion:", error.message);
-    return null;
-  }
+  if (error) return null;
   return data;
 }
 
@@ -240,7 +235,7 @@ export async function getNivel(personajeId, nivel) {
   const { data, error } = await supabase
     .from("niveles_semanticos")
     .select(
-      "frase_base, prefijos, sufijo, tablero, mensajes_victoria_x, mensajes_victoria_o"
+      "frase_base, prefijos, sufijos, tablero, mensajes_victoria_x, mensajes_victoria_o, titulo_modal, ritmo_frase, temporizador_ms"
     )
     .eq("personaje_id", personajeId)
     .eq("nivel", nivel)
@@ -251,7 +246,18 @@ export async function getNivel(personajeId, nivel) {
     return null;
   }
 
-  return data;
+  const normalizedSufijos =
+    data?.sufijos && typeof data.sufijos === "object"
+      ? data.sufijos
+      : { X: "", O: "" };
+
+  return {
+    ...data,
+    tablero: normalizeTableroSemantico(data?.tablero),
+    sufijos: normalizedSufijos,
+    // Compatibilidad temporal con consumidores legacy que aún no esperan `sufijo`.
+    sufijo: normalizedSufijos?.O ?? normalizedSufijos?.X ?? "",
+  };
 }
 
 export async function fetchPersonajeStats(slug) {

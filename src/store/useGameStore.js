@@ -1,5 +1,18 @@
 import { create } from 'zustand'
 import campos from '../data/camposSemanticos.json'
+import { normalizeTableroSemantico, resolverFraseSemantica } from '../utils/resolverFraseSemantica'
+
+const normalizePersonajeId = (personajeId, fallback = "la-maestra") => {
+  if (typeof personajeId !== "string") return fallback;
+  const normalized = personajeId.trim().toLowerCase().replace(/\s+/g, "-");
+  return normalized || fallback;
+};
+
+const normalizeNivel = (nivel, fallback = 1) => {
+  const parsed = Number(nivel);
+  if (!Number.isFinite(parsed)) return fallback;
+  return Math.max(1, Math.floor(parsed));
+};
 
 // Exporto named y default para evitar errores de import en otros componentes
 export const useGameStore = create((set, get) => ({
@@ -30,9 +43,12 @@ export const useGameStore = create((set, get) => ({
     nivelesPorPersonaje: {},
     setPersonajeActual: (personajeId) =>
       set((state) => {
-        const safePersonaje = personajeId || state.defaultFreeCharacter;
+        const safePersonaje = normalizePersonajeId(
+          personajeId,
+          state.defaultFreeCharacter
+        );
         const niveles = state.nivelesPorPersonaje || {};
-        const nivelGuardado = niveles[safePersonaje] ?? 1;
+        const nivelGuardado = normalizeNivel(niveles[safePersonaje], 1);
         return {
           personajeActual: safePersonaje,
           nivelActual: nivelGuardado,
@@ -65,9 +81,11 @@ export const useGameStore = create((set, get) => ({
   nivelActual: 1,
   setNivelActual: (nuevoNivel, personajeId) =>
     set((state) => {
-      const safePersonaje =
-        personajeId || state.personajeActual || state.defaultFreeCharacter;
-      const safeNivel = nuevoNivel || 1;
+      const safePersonaje = normalizePersonajeId(
+        personajeId || state.personajeActual,
+        state.defaultFreeCharacter
+      );
+      const safeNivel = normalizeNivel(nuevoNivel, 1);
       return {
         nivelActual: safeNivel,
         nivelesPorPersonaje: {
@@ -80,7 +98,9 @@ export const useGameStore = create((set, get) => ({
   setFraseBase: (nueva) => set({ fraseBase: nueva }),
 
   // Registrar la jugada del usuario (sin IA — tú pones X y O manualmente)
-  registrarJugada: (index, jugador, palabra) => {
+  // nivelCtx: { tablero, prefijos, sufijos, fraseBase, ritmoFrase } — datos de Supabase.
+  // Si no se provee, se usa el fallback legacy del JSON estático (sin eslabones).
+  registrarJugada: (index, jugador, palabra, nivelCtx = null) => {
     const state = get()
     const nuevas = [...state.jugadas]
     nuevas[index] = { jugador, palabra }
@@ -94,18 +114,51 @@ export const useGameStore = create((set, get) => ({
       nuevaPalabraO = palabra
     }
 
-    const personaje = state.personajeActual
-    const camposPersonaje = campos[personaje] || {}
-    const prefijos = camposPersonaje.prefijos || {}
-    const fraseBase = camposPersonaje.fraseBase || ''
-    const sufijo = camposPersonaje.sufijo || '.'
+    let prefijos, fraseBase, tablero, sufijos, ritmoFrase
+    if (nivelCtx) {
+      tablero = nivelCtx.tablero
+      prefijos = nivelCtx.prefijos || {}
+      fraseBase = nivelCtx.fraseBase || state.fraseBase || ''
+      sufijos = nivelCtx.sufijos || { X: '', O: '' }
+      ritmoFrase = nivelCtx.ritmoFrase || { base_x: ' ', x_o: ' ', x_creativa: '\n' }
+    } else {
+      const personaje = state.personajeActual
+      const camposPersonaje = campos[personaje] || {}
+      prefijos = camposPersonaje.prefijos || {}
+      fraseBase = camposPersonaje.fraseBase || ''
+      tablero = normalizeTableroSemantico(camposPersonaje.tablero || [])
+      const sufijosConfig = camposPersonaje.sufijos
+      const legacySufijo =
+        typeof camposPersonaje.sufijo === 'string'
+          ? camposPersonaje.sufijo
+          : typeof sufijosConfig?.O === 'string'
+            ? sufijosConfig.O
+            : typeof sufijosConfig?.X === 'string'
+              ? sufijosConfig.X
+              : '.'
+      sufijos = {
+        X: typeof sufijosConfig?.X === 'string' ? sufijosConfig.X : '',
+        O: typeof sufijosConfig?.O === 'string' ? sufijosConfig.O : legacySufijo,
+      }
+      ritmoFrase = { base_x: ' ', x_o: ' ', x_creativa: '\n' }
+    }
+
+    const nextUltimaCasillaX = jugador === 'X' ? index : state.ultimaCasillaX
+    const nextUltimaCasillaO = jugador === 'O' ? index : state.ultimaCasillaO
 
     let fraseFinal = state.fraseFinal
     if (nuevaPalabraX && nuevaPalabraO) {
-      fraseFinal =
-        fraseBase +
-        prefijos.X + nuevaPalabraX + ', ' +
-        prefijos.O + nuevaPalabraO + sufijo
+      const fraseResuelta = resolverFraseSemantica({
+        fraseBase,
+        casillaX: Number.isInteger(nextUltimaCasillaX) ? tablero[nextUltimaCasillaX] : null,
+        opcionX: nuevaPalabraX,
+        casillaO: Number.isInteger(nextUltimaCasillaO) ? tablero[nextUltimaCasillaO] : null,
+        opcionO: nuevaPalabraO,
+        prefijos,
+        sufijos,
+        ritmoFrase,
+      })
+      fraseFinal = fraseResuelta.display
     }
 
     set({
@@ -114,8 +167,8 @@ export const useGameStore = create((set, get) => ({
       turno: jugador === 'X' ? 'O' : 'X',
       palabraX: nuevaPalabraX,
       palabraO: nuevaPalabraO,
-      ultimaCasillaX: jugador === 'X' ? index : state.ultimaCasillaX,
-      ultimaCasillaO: jugador === 'O' ? index : state.ultimaCasillaO,
+      ultimaCasillaX: nextUltimaCasillaX,
+      ultimaCasillaO: nextUltimaCasillaO,
       fraseFinal
     })
   },

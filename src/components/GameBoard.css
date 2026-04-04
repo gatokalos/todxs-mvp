@@ -71,7 +71,7 @@ body {
   justify-content: center;
   box-shadow: 0 10px 24px rgba(10, 6, 16, 0.35);
   cursor: pointer;
-  z-index: 60;
+  z-index: 3000;
 }
 
 .tablero-return-chip:hover {

@@ -701,9 +701,9 @@
   max-width: min(520px, 90vw);
   height: auto;
   padding: 12px 16px 16px;
-  background: linear-gradient(165deg, rgba(108, 108, 108, 1), rgba(170, 166, 166, 0.96));
+  background: rgba(22, 18, 28, 0.97);
   border-radius: 18px;
-  border: 1px solid rgba(255, 182, 128, 0.2);
+  border: 1.5px solid rgba(220, 170, 70, 0.38);
   box-shadow: 0 10px 24px rgba(10, 8, 8, 0.35);
   animation: bubble-pop-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 30;
@@ -719,18 +719,43 @@
 }
 
 .cs-speech-bubble::after {
-  content: "";
-  position: absolute;
-  top: 100%;                 /* colita hacia abajo */
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 10px 8px 0 8px;
-  border-style: solid;
-  border-color: rgba(90, 90, 90, 1) transparent transparent transparent;
+  content: none !important;
 }
 
 .cs-speech-tail {
   display: none;
+}
+
+/* Esferas de pensamiento */
+.cs-thought-bubble {
+  display: block;
+  position: absolute;
+  background: rgba(22, 18, 28, 0.97);
+  border: 1.5px solid rgba(220, 170, 70, 0.38);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.cs-thought-bubble--lg {
+  width: 20px;
+  height: 20px;
+  bottom: -10px;
+  left: 10%;
+  border-top: none;
+}
+
+.cs-thought-bubble--md {
+  width: 13px;
+  height: 13px;
+  bottom: -26px;
+  left: 16%;
+}
+
+.cs-thought-bubble--sm {
+  width: 8px;
+  height: 8px;
+  bottom: -38px;
+  left: 23%;
 }
 
 
@@ -793,6 +818,10 @@
   .cs-bubble-genre {
     white-space: nowrap;
   }
+
+  .cs-speech-bubble--floating:not(.is-welcome):not(.is-idle) {
+    --bubble-raise: -50px;
+  }
 }
 
 .cs-bubble-header {
@@ -821,8 +850,36 @@
 
 .cs-bubble-name {
   font-weight: 700;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  color: #fff;
+  margin: 0 0 2px;
+  text-align: center;
+}
+
+.cs-bubble-greeting {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #fff;
+  margin: 0 0 6px;
+  text-align: center;
+}
+
+.cs-bubble-idle {
+  font-size: clamp(0.88rem, 1.15vw, 1rem);
+  color: #ede8e3;
+  text-align: center;
   margin: 0;
+  line-height: 1.45;
+  font-style: italic;
+  opacity: 0.92;
+}
+
+.cs-speech-bubble.is-idle {
+  padding: 14px 18px;
+  width: fit-content;
+  max-width: min(340px, 88vw);
 }
 
 .cs-bubble-header-row {
@@ -933,6 +990,9 @@
   background: linear-gradient(135deg, rgba(255, 222, 158, 1), rgba(255, 186, 104, 1));
   box-shadow: 0 10px 18px rgba(0, 0, 0, 0.35);
   cursor: pointer;
+  display: block;
+  width: fit-content;
+  margin: 10px auto 0;
 }
 
 @media (max-width: 640px) {
@@ -1380,11 +1440,12 @@
 .cs-speech-bubble.is-welcome .cs-welcome-heading {
   margin: 0;
   color: #f8f4f0;
-  font-weight: 600;
-  line-height: 1.1;
+  font-weight: 700;
+  line-height: 1;
   text-align: center;
-  font-size: clamp(2.05rem, 4.3vw, 3.35rem);
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
   text-shadow: 0 8px 28px rgba(0, 0, 0, 0.58);
+  letter-spacing: -0.01em;
 }
 
 .cs-speech-bubble.is-welcome .cs-welcome-heading span {
@@ -1400,13 +1461,12 @@
 }
 
 .cs-speech-bubble.is-welcome .cs-bubble-body {
-  margin: 10px 0 0;
-  font-size: clamp(0.68rem, 0.95vw, 0.84rem);
-  line-height: 1.3;
+  margin: 6px 0 12px;
+  font-size: clamp(0.82rem, 1.1vw, 0.95rem);
+  line-height: 1.4;
   opacity: 0.88;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  text-align: center;
 }
 
 .cs-speech-bubble.is-welcome .cs-bubble-line {
@@ -1430,12 +1490,12 @@
   }
 
   .cs-speech-bubble.is-welcome .cs-welcome-heading {
-    font-size: clamp(1.75rem, 8.4vw, 2.4rem);
+    font-size: clamp(2.2rem, 10vw, 3rem);
   }
 
   .cs-speech-bubble.is-welcome .cs-bubble-body {
     white-space: normal;
-    font-size: 0.74rem;
+    font-size: 0.82rem;
   }
 }
 
