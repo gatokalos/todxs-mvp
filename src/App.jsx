@@ -1,6 +1,8 @@
 // src/App.jsx
 import React, { useEffect, useMemo, useState } from "react";
 import useGameStore from "./store/useGameStore";
+import { BASE_CHARACTER_LAYOUT } from "./components/CharacterSelector";
+import { fetchTransformacion } from "./services/api";
 import SplashScreen from "./components/SplashScreen";
 import CharacterSelector from "./components/CharacterSelector";
 import Camerino from "./components/Camerino";
@@ -32,6 +34,32 @@ function getViewportPreset(width, height) {
 
 function AppRuntime() {
   const screen = useGameStore((s) => s.screen);
+  const setScreen = useGameStore((s) => s.setScreen);
+  const setPersonajeSeleccionado = useGameStore((s) => s.setPersonajeSeleccionado);
+  const setPersonajeActual = useGameStore((s) => s.setPersonajeActual);
+  const setTransformacion = useGameStore((s) => s.setTransformacion);
+
+  // Deep-link desde Oráculo: ?transformacion=<id>&personaje=<slug>
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tid = params.get("transformacion");
+    const slug = params.get("personaje");
+    if (!tid || !slug) return;
+
+    const layout = BASE_CHARACTER_LAYOUT[slug];
+    if (!layout) return;
+
+    setPersonajeSeleccionado({ id: slug, slug, ...layout });
+    setPersonajeActual(slug);
+
+    fetchTransformacion(tid)
+      .then((data) => {
+        setTransformacion(data);
+        setScreen("camerino");
+      })
+      .catch((err) => console.error("deep-link transformacion:", err));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const handleBeforeUnload = (e) => {

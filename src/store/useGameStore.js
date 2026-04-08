@@ -61,6 +61,11 @@ export const useGameStore = create((set, get) => ({
 
     draft: null,
     setDraft: (d) => set({ draft: d }),
+
+    // Texto oracular transformado que llega desde Oráculo
+    transformacion: null,  // { id, personaje_id, texto_original, texto_transformado }
+    setTransformacion: (t) => set({ transformacion: t }),
+    clearTransformacion: () => set({ transformacion: null }),
     
   hoveredPersonaje: null,
   setHoveredPersonaje: (personaje) => set({ hoveredPersonaje: personaje }),

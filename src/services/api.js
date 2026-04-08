@@ -229,6 +229,23 @@ export async function guardarEleccion(payload = {}) {
 }
 
 /**
+ * Obtener todos los niveles de un personaje (solo metadata para el camerino)
+ */
+export async function fetchNivelesPersonaje(personajeId) {
+  const { data, error } = await supabase
+    .from("niveles_semanticos")
+    .select("nivel, frase_base, nombre_visible, nombre_nivel")
+    .eq("personaje_id", personajeId)
+    .order("nivel", { ascending: true });
+
+  if (error) {
+    console.error("❌ Error fetchNivelesPersonaje:", error.message);
+    return [];
+  }
+  return data || [];
+}
+
+/**
  * Obtener un nivel específico desde "niveles_semanticos"
  */
 export async function getNivel(personajeId, nivel) {
@@ -275,6 +292,20 @@ export async function fetchPersonajeStats(slug) {
 /**
  * Llamar a la API local del Gato Enigmático para generar una nueva gatología
  */
+const API_BASE = () => import.meta.env?.VITE_API_BASE_URL || "https://api.gatoencerrado.ai";
+
+export async function fetchTransformacion(id) {
+  const res = await fetch(`${API_BASE()}/api/transformar/${id}`);
+  if (!res.ok) throw new Error(`No se pudo cargar la transformación: ${res.status}`);
+  return res.json();
+}
+
+export async function publicarTransformacion(id) {
+  const res = await fetch(`${API_BASE()}/api/transformar/${id}/publicar`, { method: "PATCH" });
+  if (!res.ok) throw new Error(`No se pudo publicar: ${res.status}`);
+  return res.json();
+}
+
 export async function generarGatologiaDesdeAPI(personaje, frases = []) {
   const baseURL = import.meta.env?.VITE_API_BASE_URL || "https://api.gatoencerrado.ai";
 

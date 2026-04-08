@@ -79,7 +79,7 @@
   --accent-border: rgba(215, 195, 255, 0.6);
   --accent-glow: rgba(215, 195, 255, 0.3);
   --card-width: 100%;
-  --hero-width: 75%;
+  --hero-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -744,7 +744,7 @@
 /* === PARALLAX EN POST FIJO === */
 .camerino-blog__draft--default {
   position: relative;
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(15, 15, 15, 0.35);
   border-radius: 18px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
   padding: 0;
@@ -1227,34 +1227,6 @@
 
 
 
-.camerino-ficha h2 {
-  font-size: clamp(2rem, 3.2vw, 3.2rem);
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  margin-bottom: 0.4rem;
-}
-
-.camerino-ficha h4 {
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
-  font-style: italic;
-  font-weight: 500;
-  opacity: 0.9;
-  top: -10%;
-  left: 50%;
-  z-index: 5;
-}
-
-.camerino-ficha blockquote.frase-base {
-  font-style: italic;
-  font-size: clamp(0.9rem, 1.3vw, 1.1rem);
-  opacity: 0.85;
-}
-
-/* Desvanece al hacer scroll */
-.camerino-ficha.is-hidden {
-  opacity: 0;
-  transform: translate(-50%, -40%);
-}
 
 /* Para pantallas más pequeñas */
 /* (Removed duplicate max-width: 92vw rule, replaced by above feed rules) */
@@ -1263,18 +1235,6 @@ html, body {
 }
 
 
-/* Responsividad */
-@media (max-width: 768px) {
-  .camerino-ficha h2 {
-    font-size: 2rem;
-  }
-  .camerino-ficha h4 {
-    font-size: 1.2rem;
-  }
-  .camerino-ficha blockquote {
-    font-size: 1rem;
-  }
-}
 
 .draft-image-text {
   position: absolute;
@@ -1364,20 +1324,6 @@ html, body {
     opacity: 0.5;
   }
 
-  .camerino-ficha {
-    top: 4vh;
-    text-align: center;
-  }
-
-  .camerino-ficha h2 {
-    font-size: 1.5rem;
-    line-height: 1.2;
-  }
-
-  .camerino-ficha h4 {
-    font-size: 1rem;
-    opacity: 0.8;
-  }
 
   .btn-entrar-sticky,
   .btn-entrar {
@@ -1420,21 +1366,8 @@ html, body {
   .draft-image {
     height: 500px;
     background-repeat: no-repeat;
-    margin-top: 0vh; /* ajústalo entre -2vh y -6vh según la pantalla */
-  background-position: top;
-  background-size: cover;
-  background-attachment: fixed; /
-  }
-
-  .camerino-ficha h2 {
-    font-size: 1.3rem;
-    margin-top: 2vh; /* ajústalo entre -2vh y -6vh según la pantalla */
-
-  
-  }
-
-  .camerino-ficha h4 {
-    font-size: 0.9rem;
+    background-position: top;
+    background-size: cover;
   }
 }
 
@@ -1726,7 +1659,9 @@ html, body {
   100% {
     transform: translateX(120%) skewX(-10deg);
   }
-}icha sobre la imagen */
+}
+
+/* === Ficha sobre la imagen === */
 .camerino-ficha {
   position: absolute;
   top: 60%;
@@ -1739,7 +1674,6 @@ html, body {
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Texto dentro de la ficha */
 .camerino-ficha h2 {
   font-size: clamp(2rem, 3vw, 3rem);
   font-weight: 800;
@@ -1754,10 +1688,207 @@ html, body {
   opacity: 0.9;
 }
 
-/* Pequeño efecto de fade con scroll */
+.camerino-ficha blockquote.frase-base {
+  font-style: italic;
+  font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+  opacity: 0.85;
+}
+
 .camerino-ficha.is-hidden {
   opacity: 0;
   transform: translate(-50%, -20%);
+}
+
+/* === Niveles del camerino === */
+.camerino-niveles {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 0 1rem;
+  z-index: 10;
+}
+
+.camerino-nivel__chip {
+  background: rgba(0, 0, 0, 0);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  color: #ede8e3;
+  padding: 0.35rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.camerino-nivel__chip:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.camerino-nivel__chip.is-active {
+  background: linear-gradient(135deg, rgba(255, 222, 158, 0.9), rgba(255, 186, 104, 0.9));
+  border-color: transparent;
+  color: #201512;
+}
+
+/* === Escenario (panel debajo de los chips) === */
+.camerino-escenario {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 14px;
+  background: rgb(0, 0, 0);
+  padding: 1.25rem 1rem;
+  min-height: 160px;
+}
+
+/* Ojos del gato cuando no hay nivel seleccionado */
+.camerino-escenario__ojos {
+  position: relative;
+  width: 56px;
+  height: 24px;
+  display: block;
+}
+
+.camerino-escenario__ojos::before,
+.camerino-escenario__ojos::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 42%;
+  height: 100%;
+  background: rgba(220, 210, 255, 0.9);
+  border-radius: 999px;
+  transform-origin: center;
+  animation: camerino-blink 9.8s ease-in-out infinite;
+}
+
+.camerino-escenario__ojos::before { left: 0; }
+.camerino-escenario__ojos::after  { right: 0; animation-delay: 0.08s; }
+
+@keyframes camerino-blink {
+  0%, 78%, 100% { transform: scaleY(1); opacity: 0.85; }
+  80%            { transform: scaleY(0.05); opacity: 0.3; }
+  82%            { transform: scaleY(1); opacity: 0.85; }
+}
+
+/* Burbuja cuando hay nivel seleccionado */
+.camerino-escenario__burbuja {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.camerino-escenario__top {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.camerino-escenario__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+.camerino-escenario__titulo {
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #fff;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.camerino-escenario__subtitulo {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #ffd28a;
+  margin: 0;
+}
+
+.camerino-escenario__frase {
+  font-style: italic;
+  font-size: 0.88rem;
+  opacity: 0.85;
+  margin: 0.25rem 0 0;
+  line-height: 1.5;
+  color: #ede8e3;
+}
+
+/* Gato host en el escenario — usa las mismas clases del selector */
+.camerino-escenario__host {
+  width: 140px;
+  height: auto;       /* override the fixed 60px from character-selector__host-avatar */
+  flex-shrink: 0;
+  align-self: flex-end;
+  overflow: visible;  /* sticker puede sobresalir del bounding box */
+}
+
+/* Modo editor (transformación desde Oráculo) */
+.camerino-escenario.is-editor {
+  height: auto;
+  min-height: 0;
+}
+
+.camerino-escenario__editor {
+  all: unset;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 0.88rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: #ede8e3;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.camerino-escenario__editor:focus {
+  border-color: rgba(255, 210, 138, 0.4);
+  outline: none;
+}
+
+/* CTA inline tipo enlace */
+.camerino-escenario__ensayar {
+  all: unset;
+  display: block;
+  width: 100%;
+  text-align: right;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #ffd28a;
+  cursor: pointer;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  transition: opacity 0.15s;
+}
+
+.camerino-escenario__ensayar:hover {
+  opacity: 0.75;
+}
+
+.camerino-escenario__ensayar:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 /* Responsivo */
@@ -1768,13 +1899,26 @@ html, body {
 
   .camerino-ficha {
     top: 6%;
+    text-align: center;
   }
 
   .camerino-ficha h2 {
     font-size: 1.8rem;
+    line-height: 1.2;
   }
 
   .camerino-ficha h4 {
     font-size: 1rem;
+    opacity: 0.8;
+  }
+}
+
+@media (max-width: 480px) {
+  .camerino-ficha h2 {
+    font-size: 1.3rem;
+  }
+
+  .camerino-ficha h4 {
+    font-size: 0.9rem;
   }
 }

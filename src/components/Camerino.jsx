@@ -8,6 +8,7 @@ import useGameStore from "../store/useGameStore";
 import {
   fetchGatologias,
   fetchEleccionesPorPersonaje,
+  fetchNivelesPersonaje,
   toggleEleccionFavorita,
   deleteEleccion,
   insertGatologia,
@@ -15,6 +16,7 @@ import {
   publishGatologia,
   deleteGatologia,
   togglePinned,
+  publicarTransformacion,
 } from "../services/api";
 import "./Camerino.css";
 import BlogEntry from "./BlogEntry";
@@ -80,9 +82,26 @@ export default function Camerino() {
     font: "Georgia",
   });
 
+  const [niveles, setNiveles] = useState([]);
+  const [nivelExpandido, setNivelExpandido] = useState(null);
+
+  const transformacion = useGameStore((s) => s.transformacion);
+  const clearTransformacion = useGameStore((s) => s.clearTransformacion);
+  const [textoEditado, setTextoEditado] = useState("");
+  const [publicando, setPublicando] = useState(false);
+  const [publicadoOk, setPublicadoOk] = useState(false);
+
+  // Sincronizar textarea cuando llega la transformación
+  useEffect(() => {
+    if (transformacion?.texto_transformado) {
+      setTextoEditado(transformacion.texto_transformado);
+    }
+  }, [transformacion]);
+
   const setScreen = useGameStore((s) => s.setScreen);
   const setPersonajeActual = useGameStore((s) => s.setPersonajeActual);
   const setPersonajeSeleccionado = useGameStore((s) => s.setPersonajeSeleccionado);
+  const setNivelActual = useGameStore((s) => s.setNivelActual);
   const canPlayPersonaje = useGameStore((s) => s.canPlayPersonaje);
   const lockedPersonajeId = useGameStore((s) => s.lockedPersonajeId);
   const setLockedPersonajeId = useGameStore((s) => s.setLockedPersonajeId);
@@ -239,6 +258,12 @@ export default function Camerino() {
   }, [personaje]);
 
   useEffect(() => {
+    const id = personaje?.slug || personaje?.id;
+    if (!id) return;
+    fetchNivelesPersonaje(id).then(setNiveles);
+  }, [personaje]);
+
+  useEffect(() => {
     const mql = window.matchMedia("(hover: none), (pointer: coarse)");
     const update = () => setIsTouchDevice(mql.matches);
     update();
@@ -361,10 +386,11 @@ useEffect(() => {
     }
   };
 
-  const handleEntrarEscenario = () => {
+  const handleEntrarEscenario = (nivel = null) => {
     if (!personaje) return;
     const personajeId = personaje.id || personaje.slug;
     setPersonajeActual(personajeId);
+    if (nivel) setNivelActual(nivel, personajeId);
     setScreen("gameboard");
   };
 
@@ -658,57 +684,143 @@ useEffect(() => {
                 </button>
               </>
             )}
-            <div className="draft-image" style={{ backgroundImage: `url(${camerinoImage})` }}>
+            <div
+              className="draft-image"
+              style={{ backgroundImage: `url(${camerinoImage})`, cursor: nivelExpandido !== null ? "pointer" : "default" }}
+              onClick={() => nivelExpandido !== null && setNivelExpandido(null)}
+              role={nivelExpandido !== null ? "button" : undefined}
+              aria-label={nivelExpandido !== null ? "Ver descripción del personaje" : undefined}
+            >
               <div className="draft-image-overlay" />
-              <div className="camerino-ficha">
-                <h2>{personaje.nombre_visible}</h2>
-                <h4>{personaje.genero_literario}</h4>
-              </div>
+              {niveles.length > 0 && (
+                <div className="camerino-niveles" role="tablist">
+                  {niveles.map((n) => (
+                    <button
+                      key={n.nivel}
+                      type="button"
+                      role="tab"
+                      aria-selected={nivelExpandido === n.nivel}
+                      className={`camerino-nivel__chip${nivelExpandido === n.nivel ? " is-active" : ""}`}
+                      onClick={(e) => { e.stopPropagation(); setNivelExpandido(nivelExpandido === n.nivel ? null : n.nivel); }}
+                    >
+                      {n.nombre_nivel || `Nivel ${n.nivel}`}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="draft-content">
-              <div className="camerino-primary-actions">
-                <button
-                  ref={btnRef}
-                  type="button"
-                  className="btn-entrar"
-                  onClick={handleEntrarEscenario}
-                  disabled={isLocked}
-                  title={
-                    isLocked
-                      ? "Este personaje está bloqueado para tu rol actual"
-                      : undefined
-                  }
-                >
-                  <span>Bajar a ensayar</span>
-                </button>
-                <button
-                  type="button"
-                  className={`camerino-tab${activePanel === "textos" ? " is-active" : ""}`}
-                  onClick={() => setActivePanel("textos")}
-                >
-                  Textos
-                </button>
-                <button
-                  type="button"
-                  className={`camerino-tab${activePanel === "memes" ? " is-active" : ""}`}
-                  onClick={() => setActivePanel("memes")}
-                >
-                  Memes
-                </button>
+              {transformacion ? (
+                <div className="camerino-escenario is-open is-editor">
+                  <div className="camerino-escenario__burbuja">
+                    <div className="camerino-escenario__top">
+                      <div className="camerino-escenario__info">
+                        <p style={{ margin: 0, fontSize: "1.6rem", fontWeight: 800, color: "#fff", lineHeight: 1.1 }}>{personaje.nombre_visible}</p>
+                        <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", fontWeight: 700, color: "#ffd28a", letterSpacing: "0.08em" }}>{personaje.genero_literario}</p>
+                      </div>
+                      <div className="character-selector__host-avatar camerino-escenario__host" aria-hidden="true">
+                        <img src="/assets/gato_sticker.svg" alt="" className="character-selector__host-img" />
+                        <span className="character-selector__host-blink" />
+                      </div>
+                    </div>
+                    <textarea
+                      className="camerino-escenario__editor"
+                      value={textoEditado}
+                      onChange={(e) => setTextoEditado(e.target.value)}
+                      rows={4}
+                    />
+                    <button
+                      type="button"
+                      className="camerino-escenario__ensayar"
+                      disabled={publicando || publicadoOk}
+                      onClick={async () => {
+                        if (!transformacion.id) return;
+                        setPublicando(true);
+                        try {
+                          await publicarTransformacion(transformacion.id);
+                          setPublicadoOk(true);
+                          clearTransformacion();
+                        } catch (err) {
+                          console.error("publicar:", err);
+                        } finally {
+                          setPublicando(false);
+                        }
+                      }}
+                    >
+                      {publicadoOk ? "Publicado ✓" : publicando ? "Publicando…" : "Publicar en Gatologías →"}
+                    </button>
+                  </div>
+                </div>
+              ) : (
+              <div className={`camerino-escenario${nivelExpandido !== null ? " is-open" : ""}`}>
+                {nivelExpandido === null ? (
+                  <div className="camerino-escenario__burbuja">
+                    <div className="camerino-escenario__top">
+                      <div className="camerino-escenario__info">
+                        <p style={{ margin: 0, fontSize: "1.6rem", fontWeight: 800, color: "#fff", lineHeight: 1.1 }}>{personaje.nombre_visible}</p>
+                        <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", fontWeight: 700, color: "#ffd28a", letterSpacing: "0.08em" }}>{personaje.genero_literario}</p>
+                        {personaje.intro && (
+                          <p className="camerino-escenario__frase">{personaje.intro}</p>
+                        )}
+                      </div>
+                      <div className="character-selector__host-avatar camerino-escenario__host" aria-hidden="true">
+                        <img src="/assets/gato_sticker.svg" alt="" className="character-selector__host-img" />
+                        <span className="character-selector__host-blink" />
+                      </div>
+                    </div>
+                  </div>
+                ) : (() => {
+                  const n = niveles.find((nv) => nv.nivel === nivelExpandido);
+                  return (
+                    <div className="camerino-escenario__burbuja">
+                      <div className="camerino-escenario__top">
+                        <div className="camerino-escenario__info">
+                          <p style={{ margin: 0, fontSize: "1.6rem", fontWeight: 800, color: "#fff", lineHeight: 1.1 }}>{n?.nombre_nivel || `Nivel ${n?.nivel}`}</p>
+                          <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", fontWeight: 700, color: "#ffd28a", letterSpacing: "0.08em" }}>frase a improvisar</p>
+                          <p className="camerino-escenario__frase">
+                            {n?.frase_base
+                              ? `${n.frase_base} …`
+                              : "Mi mejor amiga es una gata muy ocurrente; fragmentada internamente y para colmo es terca como una tuerca oxidada."}
+                          </p>
+                        </div>
+                        <div className="character-selector__host-avatar camerino-escenario__host" aria-hidden="true">
+                          <img src="/assets/gato_sticker.svg" alt="" className="character-selector__host-img" />
+                          <span className="character-selector__host-blink" />
+                        </div>
+                      </div>
+                      <button
+                        ref={btnRef}
+                        type="button"
+                        className="camerino-escenario__ensayar"
+                        disabled={isLocked}
+                        onClick={() => handleEntrarEscenario(nivelExpandido)}
+                      >
+                        Bajar a ensayar &#8594;
+                      </button>
+                    </div>
+                  );
+                })()}
               </div>
-              <p>
-               Popularidad ⭐⭐⭐⭐☆
-              </p>
+              )}
             </div>
-            {isTouchDevice && (
-              <div className="camerino-swipe-hint" aria-hidden="true">
-                <span className="camerino-swipe-icon">⇆</span>
-                <span>Desliza para cambiar de personaje</span>
-              </div>
-            )}
+
           </div>
 
           <div className="camerino-quick-actions">
+            <button
+              type="button"
+              className={`camerino-cta camerino-cta--ghost${activePanel === "textos" ? " is-active" : ""}`}
+              onClick={() => setActivePanel("textos")}
+            >
+              Textos
+            </button>
+            <button
+              type="button"
+              className={`camerino-cta camerino-cta--ghost${activePanel === "memes" ? " is-active" : ""}`}
+              onClick={() => setActivePanel("memes")}
+            >
+              Memes
+            </button>
             <button
               type="button"
               className="camerino-cta camerino-cta--ghost"

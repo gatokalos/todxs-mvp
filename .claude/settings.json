@@ -8,7 +8,9 @@
       "Bash(grep -l \"payasito\" *.sql)",
       "Bash(python3)",
       "Bash(gh pr create --title 'feat: eslabones dinámicos por casilla + fix botón retorno' --body ':*)",
-      "Bash(gh pr:*)"
+      "Bash(gh pr:*)",
+      "Bash(cat /Users/gatoenigmatico/gatoencerrado-ai/apps/todxs-mvp/.github/workflows/*.yml)",
+      "Bash(grep -i \"nombre_nivel\" /Users/gatoenigmatico/gatoencerrado-ai/supabase/migrations/*.sql)"
     ],
     "additionalDirectories": [
       "/Users/gatoenigmatico/gatoencerrado-ai/supabase/migrations"
