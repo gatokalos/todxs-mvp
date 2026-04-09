@@ -10,7 +10,8 @@
       "Bash(gh pr create --title 'feat: eslabones dinámicos por casilla + fix botón retorno' --body ':*)",
       "Bash(gh pr:*)",
       "Bash(cat /Users/gatoenigmatico/gatoencerrado-ai/apps/todxs-mvp/.github/workflows/*.yml)",
-      "Bash(grep -i \"nombre_nivel\" /Users/gatoenigmatico/gatoencerrado-ai/supabase/migrations/*.sql)"
+      "Bash(grep -i \"nombre_nivel\" /Users/gatoenigmatico/gatoencerrado-ai/supabase/migrations/*.sql)",
+      "Bash(grep -n \"intro-split\" src/*.css src/**/*.css)"
     ],
     "additionalDirectories": [
       "/Users/gatoenigmatico/gatoencerrado-ai/supabase/migrations"

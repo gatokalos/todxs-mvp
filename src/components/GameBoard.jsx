@@ -26,6 +26,33 @@ const DEFAULT_RITMO_FRASE = {
   x_creativa: "\\n",
 };
 
+const IMPROV_POOL = [
+  "Acción.",
+  "Ya empezaste.",
+  "Menos cabeza, más instinto.",
+  "No expliques. Haz.",
+  "Responde, no pienses.",
+  "Algo cambió… sigue.",
+  "Sube el riesgo.",
+  "Hazlo simple.",
+  "Dale ahora.",
+  "Escucha y entra.",
+  "¿Qué haces con esto?",
+  "No te detengas.",
+  "Elige y avanza.",
+  "Hazlo tuyo.",
+  "Sigue ahí.",
+  "Es tu turno.",
+  "Te están llamando.",
+  "Vas… decide.",
+  "No recuerdas… actúa.",
+  "La escena ya está viva.",
+  "Algo te mira… responde.",
+  "Hay algo ahí… tócala.",
+];
+
+const pickImprov = () => IMPROV_POOL[Math.floor(Math.random() * IMPROV_POOL.length)];
+
 
 const normalizeConnector = (text) => {
   if (typeof text !== "string") return null;
@@ -159,6 +186,10 @@ export default function GameBoard() {
   const semanticaCacheRef = useRef(new Map());
 
   const [burbujaAbierta, setBurbujaAbierta] = useState(null);
+  const [improvPrompt, setImprovPrompt] = useState(pickImprov);
+  useEffect(() => {
+    if (burbujaAbierta !== null) setImprovPrompt(pickImprov());
+  }, [burbujaAbierta]);
   const [tailCoords, setTailCoords] = useState(null);
   const [mensajePersonaje, setMensajePersonaje] = useState(null);
   const [mensajeAnimado, setMensajeAnimado] = useState(""); // 👈 nuevo estado animado
@@ -2190,14 +2221,8 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
             creativeMode={victory?.winner === "X" && tresCasillasTodasX(jugadas)}
             titulo={
               burbujaAbierta === -1
-                ? (tituloModal?.default || "Yo escojo")
-                : (
-                    getTituloCasilla(
-                      tablero[burbujaAbierta],
-                      turno,
-                      tituloModal
-                    ) || "Yo escojo"
-                  )
+                ? (tituloModal?.default || improvPrompt)
+                : (getTituloCasilla(tablero[burbujaAbierta], turno, tituloModal) || improvPrompt)
             }
             prefijo={burbujaAbierta === -1 ? "" : (prefijos[turno] || "")}
             opciones={burbujaAbierta === -1 ? [] : (tablero[burbujaAbierta]?.[turno] || [])}

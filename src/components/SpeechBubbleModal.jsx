@@ -232,7 +232,7 @@ export default function SpeechBubbleModal({
               >
                 <span className="speech-letterbox-btn__text">{displayedOption}</span>
               </button>
-              <p className="speech-letterbox-hint">Toca para confirmar esta frase</p>
+              <p className="speech-letterbox-hint">Toca para confirmar o usa el dado</p>
             </div>
           )}
 

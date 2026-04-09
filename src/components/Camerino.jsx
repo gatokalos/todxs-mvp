@@ -20,6 +20,7 @@ import {
 } from "../services/api";
 import "./Camerino.css";
 import BlogEntry from "./BlogEntry";
+import LecternStage from "./LecternStage";
 import { supabase } from "../lib/supabaseClient";
 import { BASE_CHARACTER_LAYOUT } from "./CharacterSelector";
 
@@ -87,16 +88,7 @@ export default function Camerino() {
 
   const transformacion = useGameStore((s) => s.transformacion);
   const clearTransformacion = useGameStore((s) => s.clearTransformacion);
-  const [textoEditado, setTextoEditado] = useState("");
   const [publicando, setPublicando] = useState(false);
-  const [publicadoOk, setPublicadoOk] = useState(false);
-
-  // Sincronizar textarea cuando llega la transformación
-  useEffect(() => {
-    if (transformacion?.texto_transformado) {
-      setTextoEditado(transformacion.texto_transformado);
-    }
-  }, [transformacion]);
 
   const setScreen = useGameStore((s) => s.setScreen);
   const setPersonajeActual = useGameStore((s) => s.setPersonajeActual);
@@ -710,48 +702,6 @@ useEffect(() => {
               )}
             </div>
             <div className="draft-content">
-              {transformacion ? (
-                <div className="camerino-escenario is-open is-editor">
-                  <div className="camerino-escenario__burbuja">
-                    <div className="camerino-escenario__top">
-                      <div className="camerino-escenario__info">
-                        <p style={{ margin: 0, fontSize: "1.6rem", fontWeight: 800, color: "#fff", lineHeight: 1.1 }}>{personaje.nombre_visible}</p>
-                        <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", fontWeight: 700, color: "#ffd28a", letterSpacing: "0.08em" }}>{personaje.genero_literario}</p>
-                      </div>
-                      <div className="character-selector__host-avatar camerino-escenario__host" aria-hidden="true">
-                        <img src="/assets/gato_sticker.svg" alt="" className="character-selector__host-img" />
-                        <span className="character-selector__host-blink" />
-                      </div>
-                    </div>
-                    <textarea
-                      className="camerino-escenario__editor"
-                      value={textoEditado}
-                      onChange={(e) => setTextoEditado(e.target.value)}
-                      rows={4}
-                    />
-                    <button
-                      type="button"
-                      className="camerino-escenario__ensayar"
-                      disabled={publicando || publicadoOk}
-                      onClick={async () => {
-                        if (!transformacion.id) return;
-                        setPublicando(true);
-                        try {
-                          await publicarTransformacion(transformacion.id);
-                          setPublicadoOk(true);
-                          clearTransformacion();
-                        } catch (err) {
-                          console.error("publicar:", err);
-                        } finally {
-                          setPublicando(false);
-                        }
-                      }}
-                    >
-                      {publicadoOk ? "Publicado ✓" : publicando ? "Publicando…" : "Publicar en Gatologías →"}
-                    </button>
-                  </div>
-                </div>
-              ) : (
               <div className={`camerino-escenario${nivelExpandido !== null ? " is-open" : ""}`}>
                 {nivelExpandido === null ? (
                   <div className="camerino-escenario__burbuja">
@@ -801,10 +751,33 @@ useEffect(() => {
                   );
                 })()}
               </div>
-              )}
             </div>
 
           </div>
+
+          <LecternStage
+            active={!!transformacion}
+            genero={personaje?.genero_literario || ""}
+            titulo={personaje?.nombre_visible || ""}
+            lines={(transformacion?.texto_transformado || "")
+              .split(/\n+/)
+              .map((l) => l.trim())
+              .filter(Boolean)}
+            loading={false}
+            onSave={async () => {
+              if (!transformacion?.id) return;
+              setPublicando(true);
+              try {
+                await publicarTransformacion(transformacion.id);
+              } catch (err) {
+                console.error("publicar:", err);
+              } finally {
+                setPublicando(false);
+                clearTransformacion();
+              }
+            }}
+            ctaLabel={publicando ? "Publicando…" : "Publicar en Gatologías →"}
+          />
 
           <div className="camerino-quick-actions">
             <button

@@ -202,9 +202,12 @@ const normalizeInlineSentence = (text) =>
 export const getTituloCasilla = (casilla, jugador, fallbackTituloModal = null) => {
   const safeCasilla = sanitizeCasillaSemantica(casilla);
   const dynamicTitle = jugador === "X" ? safeCasilla.titulo_X : safeCasilla.titulo_O;
-  if (dynamicTitle) return dynamicTitle;
-  if (fallbackTituloModal && typeof fallbackTituloModal === "object") {
-    return fallbackTituloModal?.[jugador] || fallbackTituloModal?.default || "";
+  if (dynamicTitle) return pickFromValue(dynamicTitle);
+
+  if (!fallbackTituloModal) return "";
+  if (Array.isArray(fallbackTituloModal)) return pickFromValue(fallbackTituloModal);
+  if (typeof fallbackTituloModal === "object") {
+    return pickFromValue(fallbackTituloModal?.[jugador] ?? fallbackTituloModal?.default ?? "");
   }
   return "";
 };
