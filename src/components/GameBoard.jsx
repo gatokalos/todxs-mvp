@@ -15,7 +15,6 @@ import "./GameBoard.css";
 import useTypewriter from "../hooks/useTypewriter";
 import personajesData from "../data/personajes.json";
 import {
-  getTituloCasilla,
   normalizeTableroSemantico,
   resolverFraseSemantica,
 } from "../utils/resolverFraseSemantica";
@@ -158,6 +157,7 @@ export default function GameBoard() {
     setScreen,
     setDraft,
     setPersonajeSeleccionado,
+    frasesFinales,
   } = useGameStore();
 
   useEffect(() => {
@@ -187,9 +187,6 @@ export default function GameBoard() {
 
   const [burbujaAbierta, setBurbujaAbierta] = useState(null);
   const [improvPrompt, setImprovPrompt] = useState(pickImprov);
-  useEffect(() => {
-    if (burbujaAbierta !== null) setImprovPrompt(pickImprov());
-  }, [burbujaAbierta]);
   const [tailCoords, setTailCoords] = useState(null);
   const [mensajePersonaje, setMensajePersonaje] = useState(null);
   const [mensajeAnimado, setMensajeAnimado] = useState(""); // 👈 nuevo estado animado
@@ -215,6 +212,12 @@ export default function GameBoard() {
   const [prefijos, setPrefijos] = useState({ X: "", O: "" });
   const [sufijos, setSufijos] = useState({ X: "", O: "" });
   const [tituloModal, setTituloModal] = useState({ X: "", O: "" });
+  useEffect(() => {
+    if (burbujaAbierta !== null) {
+      const pool = Array.isArray(tituloModal) ? tituloModal : IMPROV_POOL;
+      setImprovPrompt(pool[Math.floor(Math.random() * pool.length)]);
+    }
+  }, [burbujaAbierta, tituloModal]);
   const [tablero, setTablero] = useState([]);
   const [msgsX, setMsgsX] = useState([]);
   const [msgsO, setMsgsO] = useState([]);
@@ -852,13 +855,11 @@ export default function GameBoard() {
       titulo,
       contenido,
       lines,
-      frasesSnapshot: [
-        snapshot?.fraseBase || fraseBase,
-        snapshot?.palabraX || palabraX,
-        snapshot?.palabraO || palabraO,
-      ].filter(Boolean),
+      frasesSnapshot: frasesFinales.length
+        ? frasesFinales.map((f) => f.fraseFinal).filter(Boolean)
+        : [snapshot?.fraseBase || fraseBase, snapshot?.palabraX || palabraX, snapshot?.palabraO || palabraO].filter(Boolean),
     };
-  }, [personajeActual, nombreVisible, icono, fraseCompuestaDisplay, fraseFinal, fraseBase, palabraX, palabraO]);
+  }, [personajeActual, nombreVisible, icono, fraseCompuestaDisplay, fraseFinal, fraseBase, palabraX, palabraO, frasesFinales]);
 
   const baseDisplayText = toDisplayText(baseRaw);
   const xSegmentText = fraseResuelta.meta.segmentX || lineaXRaw;
@@ -2219,11 +2220,7 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
         {burbujaAbierta !== null && (
           <SpeechBubbleModal
             creativeMode={victory?.winner === "X" && tresCasillasTodasX(jugadas)}
-            titulo={
-              burbujaAbierta === -1
-                ? (tituloModal?.default || improvPrompt)
-                : (getTituloCasilla(tablero[burbujaAbierta], turno, tituloModal) || improvPrompt)
-            }
+            titulo={improvPrompt}
             prefijo={burbujaAbierta === -1 ? "" : (prefijos[turno] || "")}
             opciones={burbujaAbierta === -1 ? [] : (tablero[burbujaAbierta]?.[turno] || [])}
             fraseBase={fraseBase}
