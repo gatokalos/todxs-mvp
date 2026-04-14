@@ -169,11 +169,18 @@ function App() {
     typeof window !== "undefined" &&
     window.location.hash.replace(/^#/, "") === EMBED_HASH;
 
-  if (!isEmbeddedRuntime) {
-    return <AppEmbedShell />;
+  const isRealMobile =
+    typeof window !== "undefined" && window.innerWidth <= 500;
+
+  const isStandalone =
+    typeof window !== "undefined" &&
+    window.matchMedia("(display-mode: standalone)").matches;
+
+  if (isEmbeddedRuntime || isRealMobile || isStandalone) {
+    return <AppRuntime />;
   }
 
-  return <AppRuntime />;
+  return <AppEmbedShell />;
 }
 
 export default App;
