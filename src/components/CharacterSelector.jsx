@@ -588,7 +588,7 @@ export default function CharacterSelector() {
                     handleSelect(bubbleCharacter);
                   }}
                 >
-                  Jugar con {bubbleCharacter.nombre_visible}
+                  Ir al camerino
                 </button>
               </>
             ) : (
