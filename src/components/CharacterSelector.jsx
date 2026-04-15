@@ -326,12 +326,9 @@ export default function CharacterSelector() {
   }, [clearBubbleTimeout]);
 
   const updateBubblePosition = useCallback(() => {
-    const isDesktop = window.matchMedia(
-      "(hover: hover) and (pointer: fine) and (min-width: 1200px)"
-    ).matches;
     const targetId = bubbleCharacter?.id;
 
-    if (isDesktop && targetId) {
+    if (targetId) {
       const root = buildingRef.current;
       const slot = root?.querySelector(`[data-character-id="${targetId}"]`);
       const sticker = slot?.querySelector(".character-selector__sticker");

@@ -378,7 +378,14 @@
     transform: none;
   }
 
-  .cs-speech-bubble--floating {
+  /* burbuja de personaje: debajo del sticker */
+  .cs-speech-bubble--floating:not(.is-welcome):not(.is-idle) {
+    transform: translate(-50%, 0) !important;
+  }
+
+  /* burbuja de bienvenida/idle: mantener comportamiento anterior */
+  .cs-speech-bubble--floating.is-welcome,
+  .cs-speech-bubble--floating.is-idle {
     transform: translate(-50%, -126%) !important;
   }
 
@@ -388,7 +395,12 @@
 }
 
 @media (orientation: portrait) and (min-width: 430px) and (max-width: 440px) {
-  .cs-speech-bubble--floating {
+  .cs-speech-bubble--floating:not(.is-welcome):not(.is-idle) {
+    transform: translate(-50%, 0) !important;
+  }
+
+  .cs-speech-bubble--floating.is-welcome,
+  .cs-speech-bubble--floating.is-idle {
     transform: translate(-50%, -140%) !important;
   }
 }
@@ -819,8 +831,14 @@
     white-space: nowrap;
   }
 
+  /* burbuja de personaje: aparece debajo del sticker */
   .cs-speech-bubble--floating:not(.is-welcome):not(.is-idle) {
-    --bubble-raise: -50px;
+    --bubble-raise: 0px;
+    animation: floating-bubble-in-below 0.25s ease both !important;
+  }
+
+  .cs-speech-bubble--floating:not(.is-welcome):not(.is-idle).is-closing {
+    animation: floating-bubble-out-below 0.45s ease forwards !important;
   }
 }
 
@@ -1530,4 +1548,15 @@
     margin-top: 8px;
     font-size: clamp(0.64rem, 2.2vh, 0.78rem);
   }
+}
+
+/* Animaciones para burbuja de personaje debajo del sticker (móvil portrait) */
+@keyframes floating-bubble-in-below {
+  0%   { opacity: 0; transform: translate(-50%, -8px); }
+  100% { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@keyframes floating-bubble-out-below {
+  0%   { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, 6px); }
 }
