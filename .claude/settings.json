@@ -6,7 +6,19 @@
       "Bash(grep -rn \"setPersonajeActual\\\\|setNivelActual\" /Users/gatoenigmatico/gatoencerrado-ai/apps/todxs-mvp/src/components/*.jsx)",
       "Bash(grep -l \"saturnina\" *.sql)",
       "Bash(grep -l \"payasito\" *.sql)",
-      "Bash(python3)"
+      "Bash(python3)",
+      "Bash(gh pr create --title 'feat: eslabones dinámicos por casilla + fix botón retorno' --body ':*)",
+      "Bash(gh pr:*)",
+      "Bash(cat /Users/gatoenigmatico/gatoencerrado-ai/apps/todxs-mvp/.github/workflows/*.yml)",
+      "Bash(grep -i \"nombre_nivel\" /Users/gatoenigmatico/gatoencerrado-ai/supabase/migrations/*.sql)",
+      "Bash(grep -n \"intro-split\" src/*.css src/**/*.css)",
+      "Bash(ls -lh /Users/gatoenigmatico/gatoencerrado-ai/apps/todxs-mvp/public/assets/*.png)",
+      "Bash(awk '{print $5, $9}')",
+      "Bash(pngquant --version)",
+      "Bash(optipng --version)",
+      "Bash(convert --version)",
+      "Bash(brew list:*)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/gatoenigmatico/gatoencerrado-ai/apps/todxs-mvp/public/assets/logoTRAZO.png)"
     ],
     "additionalDirectories": [
       "/Users/gatoenigmatico/gatoencerrado-ai/supabase/migrations"

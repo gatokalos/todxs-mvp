@@ -1,9 +1,44 @@
 {
+  "reina-de-espadas": {
+    "id": "reina-de-espadas",
+    "nombre": "La Reina de Espadas",
+    "generoLiterario": "Prosa barroca alegórica",
+    "icono": "/assets/reina_sticker.svg",
+    "cta": "Si juegas con filo, corta con verdad."
+  },
+  "don-polo": {
+    "id": "don-polo",
+    "nombre": "Don Polo",
+    "generoLiterario": "Ensayo dramático maquiavélico",
+    "icono": "/assets/polo_sticker.svg",
+    "cta": "Negocia tu papel… pero nunca tu alma."
+  },
+  "saturnina": {
+    "id": "saturnina",
+    "nombre": "Saturnina",
+    "generoLiterario": "Crónica poética popular surreal",
+    "icono": "/assets/saturnina_sticker.svg",
+    "cta": "Si entiendes el chiste, ya comenzaste."
+  },
+  "lucinda": {
+    "id": "lucinda",
+    "nombre": "Lucinda",
+    "generoLiterario": "Carta emocional performativa",
+    "icono": "/assets/lucinda_sticker.svg",
+    "cta": "Las cartas revelan más de lo que esconden."
+  },
+  "payasito-triste": {
+    "id": "payasito-triste",
+    "nombre": "Payasito Triste",
+    "generoLiterario": "Monólogo tragicómico escénico",
+    "icono": "/assets/payasito_sticker.svg",
+    "cta": "Ríe conmigo… si te atreves, claro."
+  },
   "la-maestra": {
     "id": "la-maestra",
     "nombre": "La Maestra",
     "estiloNarrativo": "Razonado, evocador y con pausas que invitan al pensamiento.",
-    "generoLiterario": "Ensayo corto pedagógico",
+    "generoLiterario": "Ensayo breve pedagógico-poético",
     "fraseBase": "Eres un gato que enseña con el ejemplo, incluso cuando todos están aprendiendo a desaprender.",
     "icono": "/assets/la-maestra.png",
     "x": "45%",
@@ -15,5 +50,26 @@
     "vozNarrativa": "Primera persona reflexiva",
     "arquetipo": "Mentora",
     "nivelNarrativo": "Disparadora de preguntas"
+  },
+  "la-doctora": {
+    "id": "la-doctora",
+    "nombre": "La Doctora",
+    "generoLiterario": "Informe clínico simbólico",
+    "icono": "/assets/doctora_sticker.svg",
+    "cta": "Cada herida tuya escribe una escena nueva."
+  },
+  "silvestre": {
+    "id": "silvestre",
+    "nombre": "Silvestre",
+    "generoLiterario": "Diario íntimo onírico",
+    "icono": "/assets/silvestre_sticker.svg",
+    "cta": "No hay guion. Solo verdad escénica."
+  },
+  "andy": {
+    "id": "andy",
+    "nombre": "Andy",
+    "generoLiterario": "Guion escénico invisible",
+    "icono": "/assets/andy_sticker.svg",
+    "cta": "Si explota, vas bien. Bienvenidx, jugadorx."
   }
 }

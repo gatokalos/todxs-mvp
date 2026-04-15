@@ -15,7 +15,6 @@ import "./GameBoard.css";
 import useTypewriter from "../hooks/useTypewriter";
 import personajesData from "../data/personajes.json";
 import {
-  getTituloCasilla,
   normalizeTableroSemantico,
   resolverFraseSemantica,
 } from "../utils/resolverFraseSemantica";
@@ -25,6 +24,33 @@ const DEFAULT_RITMO_FRASE = {
   x_o: "\\n",
   x_creativa: "\\n",
 };
+
+const IMPROV_POOL = [
+  "Acción.",
+  "Ya empezaste.",
+  "Menos cabeza, más instinto.",
+  "No expliques. Haz.",
+  "Responde, no pienses.",
+  "Algo cambió… sigue.",
+  "Sube el riesgo.",
+  "Hazlo simple.",
+  "Dale ahora.",
+  "Escucha y entra.",
+  "¿Qué haces con esto?",
+  "No te detengas.",
+  "Elige y avanza.",
+  "Hazlo tuyo.",
+  "Sigue ahí.",
+  "Es tu turno.",
+  "Te están llamando.",
+  "Vas… decide.",
+  "No recuerdas… actúa.",
+  "La escena ya está viva.",
+  "Algo te mira… responde.",
+  "Hay algo ahí… tócala.",
+];
+
+const pickImprov = () => IMPROV_POOL[Math.floor(Math.random() * IMPROV_POOL.length)];
 
 
 const normalizeConnector = (text) => {
@@ -131,6 +157,7 @@ export default function GameBoard() {
     setScreen,
     setDraft,
     setPersonajeSeleccionado,
+    frasesFinales,
   } = useGameStore();
 
   useEffect(() => {
@@ -159,6 +186,7 @@ export default function GameBoard() {
   const semanticaCacheRef = useRef(new Map());
 
   const [burbujaAbierta, setBurbujaAbierta] = useState(null);
+  const [improvPrompt, setImprovPrompt] = useState(pickImprov);
   const [tailCoords, setTailCoords] = useState(null);
   const [mensajePersonaje, setMensajePersonaje] = useState(null);
   const [mensajeAnimado, setMensajeAnimado] = useState(""); // 👈 nuevo estado animado
@@ -184,6 +212,12 @@ export default function GameBoard() {
   const [prefijos, setPrefijos] = useState({ X: "", O: "" });
   const [sufijos, setSufijos] = useState({ X: "", O: "" });
   const [tituloModal, setTituloModal] = useState({ X: "", O: "" });
+  useEffect(() => {
+    if (burbujaAbierta !== null) {
+      const pool = Array.isArray(tituloModal) ? tituloModal : IMPROV_POOL;
+      setImprovPrompt(pool[Math.floor(Math.random() * pool.length)]);
+    }
+  }, [burbujaAbierta, tituloModal]);
   const [tablero, setTablero] = useState([]);
   const [msgsX, setMsgsX] = useState([]);
   const [msgsO, setMsgsO] = useState([]);
@@ -582,13 +616,13 @@ export default function GameBoard() {
       .filter((idx) => idx !== null);
     if (!libres.length) return;
 
-    const randomIndex = libres[Math.floor(Math.random() * libres.length)];
-    const opcionesO = tablero[randomIndex]?.O || [];
+    const bestIndex = pickBestMove(jugadasState);
+    const opcionesO = tablero[bestIndex]?.O || [];
     const palabraIA = opcionesO.length
       ? opcionesO[Math.floor(Math.random() * opcionesO.length)]
       : "...";
 
-    registrarJugadaState(randomIndex, "O", palabraIA, { tablero, prefijos, sufijos, fraseBase, ritmoFrase });
+    registrarJugadaState(bestIndex, "O", palabraIA, { tablero, prefijos, sufijos, fraseBase, ritmoFrase });
   }, [tablero, prefijos, sufijos, fraseBase, ritmoFrase]);
 
   const resetContextState = useCallback(() => {
@@ -821,13 +855,11 @@ export default function GameBoard() {
       titulo,
       contenido,
       lines,
-      frasesSnapshot: [
-        snapshot?.fraseBase || fraseBase,
-        snapshot?.palabraX || palabraX,
-        snapshot?.palabraO || palabraO,
-      ].filter(Boolean),
+      frasesSnapshot: frasesFinales.length
+        ? frasesFinales.map((f) => f.fraseFinal).filter(Boolean)
+        : [snapshot?.fraseBase || fraseBase, snapshot?.palabraX || palabraX, snapshot?.palabraO || palabraO].filter(Boolean),
     };
-  }, [personajeActual, nombreVisible, icono, fraseCompuestaDisplay, fraseFinal, fraseBase, palabraX, palabraO]);
+  }, [personajeActual, nombreVisible, icono, fraseCompuestaDisplay, fraseFinal, fraseBase, palabraX, palabraO, frasesFinales]);
 
   const baseDisplayText = toDisplayText(baseRaw);
   const xSegmentText = fraseResuelta.meta.segmentX || lineaXRaw;
@@ -2188,17 +2220,7 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
         {burbujaAbierta !== null && (
           <SpeechBubbleModal
             creativeMode={victory?.winner === "X" && tresCasillasTodasX(jugadas)}
-            titulo={
-              burbujaAbierta === -1
-                ? (tituloModal?.default || "Yo escojo")
-                : (
-                    getTituloCasilla(
-                      tablero[burbujaAbierta],
-                      turno,
-                      tituloModal
-                    ) || "Yo escojo"
-                  )
-            }
+            titulo={improvPrompt}
             prefijo={burbujaAbierta === -1 ? "" : (prefijos[turno] || "")}
             opciones={burbujaAbierta === -1 ? [] : (tablero[burbujaAbierta]?.[turno] || [])}
             fraseBase={fraseBase}
@@ -2250,6 +2272,39 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
 }
 
 // ============ helpers ============
+function pickBestMove(jugadas) {
+  const combos = [
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6],
+  ];
+  const libres = jugadas.map((c, i) => (c ? null : i)).filter((i) => i !== null);
+
+  // 1. Ganar si es posible
+  for (const combo of combos) {
+    const oCount = combo.filter((i) => jugadas[i]?.jugador === "O").length;
+    const free = combo.filter((i) => !jugadas[i]);
+    if (oCount === 2 && free.length === 1) return free[0];
+  }
+
+  // 2. Bloquear victoria de X
+  for (const combo of combos) {
+    const xCount = combo.filter((i) => jugadas[i]?.jugador === "X").length;
+    const free = combo.filter((i) => !jugadas[i]);
+    if (xCount === 2 && free.length === 1) return free[0];
+  }
+
+  // 3. Centro
+  if (!jugadas[4]) return 4;
+
+  // 4. Esquina libre
+  const esquinas = [0, 2, 6, 8].filter((i) => !jugadas[i]);
+  if (esquinas.length) return esquinas[Math.floor(Math.random() * esquinas.length)];
+
+  // 5. Lo que quede
+  return libres[Math.floor(Math.random() * libres.length)];
+}
+
 function checkWinner(jugadas) {
   const combos = [
     [0,1,2],[3,4,5],[6,7,8],

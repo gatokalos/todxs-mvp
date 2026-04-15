@@ -9,6 +9,7 @@ export default function LecternStage({
   loading = false,
   error = null,
   onSave,
+  ctaLabel = "Guardar en el Camerino",
 }) {
   const [entered, setEntered] = useState(false);
 
@@ -48,7 +49,7 @@ export default function LecternStage({
             onClick={onSave}
             disabled={loading}
           >
-            Guardar en el Camerino
+            {ctaLabel}
           </button>
         </div>
       </div>

@@ -1218,7 +1218,7 @@
 .character-selector__host-avatar {
   position: relative;
   width: 250%;
-  height: auto;
+  height: 60px;
 }
 
 .character-selector__host-img {
