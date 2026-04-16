@@ -520,7 +520,18 @@
     z-index: 60;
   }
 
-  .cs-speech-bubble--floating {
+  .cs-speech-bubble--floating:not(.is-welcome):not(.is-idle) {
+    transform: translate(-50%, 0) !important;
+    --bubble-raise: 0px;
+    animation: floating-bubble-in-below 0.25s ease both !important;
+  }
+
+  .cs-speech-bubble--floating:not(.is-welcome):not(.is-idle).is-closing {
+    animation: floating-bubble-out-below 0.45s ease forwards !important;
+  }
+
+  .cs-speech-bubble--floating.is-welcome,
+  .cs-speech-bubble--floating.is-idle {
     transform: translate(-50%, -132%) !important;
     --bubble-raise: clamp(10px, 1.6vh, 20px);
   }
