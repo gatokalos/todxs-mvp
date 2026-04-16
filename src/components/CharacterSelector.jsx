@@ -52,7 +52,7 @@ export const BASE_CHARACTER_LAYOUT = {
     widthRatio: 0.18,
   },
   saturnina: {
-    top: "40%",
+    top: "37%",
     left: "20%",
     glowRow: "top",
     intro: "🎠 Convierte el absurdo en táctica impredecible.",
