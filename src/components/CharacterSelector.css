@@ -371,16 +371,20 @@
   transform: scale(2.32);
 }
 
+/* iPhone SE y pantallas ≤389px: sticker más compacto para no tapar el fondo */
+@media (orientation: portrait) and (max-width: 389px) {
+  .character-selector__slot.is-spotlight .character-selector__sticker {
+    width: min(88vw, 350px);
+    max-width: min(90vw, 360px);
+    transform: none;
+  }
+}
+
 @media (orientation: portrait) and (min-width: 390px) and (max-width: 430px) {
   .character-selector__slot.is-spotlight .character-selector__sticker {
     width: min(130vw, 600px);
     max-width: min(135vw, 600px);
     transform: none;
-  }
-
-  /* burbuja de personaje: debajo del sticker */
-  .cs-speech-bubble--floating:not(.is-welcome):not(.is-idle) {
-    transform: translate(-50%, 0) !important;
   }
 
   /* burbuja de bienvenida/idle: mantener comportamiento anterior */
@@ -395,13 +399,18 @@
 }
 
 @media (orientation: portrait) and (min-width: 430px) and (max-width: 440px) {
-  .cs-speech-bubble--floating:not(.is-welcome):not(.is-idle) {
-    transform: translate(-50%, 0) !important;
-  }
-
   .cs-speech-bubble--floating.is-welcome,
   .cs-speech-bubble--floating.is-idle {
     transform: translate(-50%, -140%) !important;
+  }
+}
+
+/* Phones 431–699px portrait: rango no cubierto antes → sticker proporcional */
+@media (orientation: portrait) and (min-width: 431px) and (max-width: 699px) {
+  .character-selector__slot.is-spotlight .character-selector__sticker {
+    width: min(100vw, 460px);
+    max-width: min(105vw, 490px);
+    transform: none;
   }
 }
 
@@ -501,6 +510,16 @@
   }
 }
 
+@media (orientation: portrait) and (min-width: 431px) and (max-width: 699px) {
+  .character-selector__slot.is-spotlight {
+    position: fixed;
+    left: 50% !important;
+    top: 40% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 60;
+  }
+}
+
 @media (orientation: portrait) and (min-width: 700px) {
   .character-selector__slot.is-spotlight {
     position: fixed;
@@ -520,16 +539,6 @@
     z-index: 60;
   }
 
-  .cs-speech-bubble--floating:not(.is-welcome):not(.is-idle) {
-    transform: translate(-50%, 0) !important;
-    --bubble-raise: 0px;
-    animation: floating-bubble-in-below 0.25s ease both !important;
-  }
-
-  .cs-speech-bubble--floating:not(.is-welcome):not(.is-idle).is-closing {
-    animation: floating-bubble-out-below 0.45s ease forwards !important;
-  }
-
   .cs-speech-bubble--floating.is-welcome,
   .cs-speech-bubble--floating.is-idle {
     transform: translate(-50%, -132%) !important;
@@ -544,6 +553,12 @@
     top: 32% !important;
     transform: translate(-50%, -50%) !important;
     z-index: 60;
+  }
+
+  .character-selector__slot.is-spotlight .character-selector__sticker {
+    width: min(42vh, 240px);
+    max-width: min(44vh, 260px);
+    transform: none;
   }
 }
 
@@ -842,15 +857,6 @@
     white-space: nowrap;
   }
 
-  /* burbuja de personaje: aparece debajo del sticker */
-  .cs-speech-bubble--floating:not(.is-welcome):not(.is-idle) {
-    --bubble-raise: 0px;
-    animation: floating-bubble-in-below 0.25s ease both !important;
-  }
-
-  .cs-speech-bubble--floating:not(.is-welcome):not(.is-idle).is-closing {
-    animation: floating-bubble-out-below 0.45s ease forwards !important;
-  }
 }
 
 .cs-bubble-header {
@@ -875,6 +881,33 @@
 @keyframes floating-bubble-out {
   0% { opacity: 1; transform: translate(-50%, -100%); }
   100% { opacity: 0; transform: translate(-50%, calc(-100% - 6px)); }
+}
+
+/* ── UNIFIED: burbuja de personaje siempre debajo del sticker en todos los dispositivos ── */
+@media (max-width: 1399px), (hover: none), (pointer: coarse) {
+  .cs-speech-bubble--floating:not(.is-welcome):not(.is-idle) {
+    transform: translate(-50%, 0) !important;
+    --bubble-raise: 0px;
+    animation: floating-bubble-in-below 0.25s ease both !important;
+  }
+
+  .cs-speech-bubble--floating:not(.is-welcome):not(.is-idle).is-closing {
+    animation: floating-bubble-out-below 0.45s ease forwards !important;
+  }
+}
+
+/* iPhone SE y similares: acercar la burbuja al sticker */
+@media (orientation: portrait) and (max-width: 389px) {
+  .cs-speech-bubble--floating:not(.is-welcome):not(.is-idle) {
+    --bubble-raise: 22px;
+  }
+}
+
+/* Phones 431–699px portrait */
+@media (orientation: portrait) and (min-width: 431px) and (max-width: 699px) {
+  .cs-speech-bubble--floating:not(.is-welcome):not(.is-idle) {
+    --bubble-raise: 18px;
+  }
 }
 
 .cs-bubble-name {

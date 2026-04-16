@@ -755,15 +755,14 @@
 .draft-image {
   position: relative;
   width: 100%;
-  height: 60vh;
+  height: min(82vh, 760px);
   overflow: hidden;
   z-index: 1;
   background-repeat: no-repeat;
   background-position: top;
   background-size: cover;
-  background-attachment: fixed; /* 👈 mantiene coherencia con fondo */
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
+  background-attachment: fixed;
+  border-radius: 18px;
   transition: background-position 0.2s ease-out;
 }
 
@@ -1619,15 +1618,16 @@ html, body {
   position: absolute;
   inset: 0;
   z-index: 2;
-  border-radius: 18px 18px 0 0;
+  border-radius: 18px;
   pointer-events: none;
 
+  /* Gradiente transparente → negro: se funde con draft-content */
   background: linear-gradient(
-    45deg, /* de superior izquierda a inferior derecha */
-    rgba(255, 255, 255, 0.55), /* claro 1 */
-    rgba(0, 0, 0, 0.25) 35%,   /* oscuro 1 */
-    rgba(255, 255, 255, 0.10) 65%, /* claro 2 */
-    rgba(0, 0, 0, 0.33) 100%   /* oscuro 2 */
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) 38%,
+    rgba(0, 0, 0, 0.65) 62%,
+    rgba(0, 0, 0, 1) 100%
   );
 
   overflow: hidden;
@@ -1701,18 +1701,51 @@ html, body {
 
 /* === Niveles del camerino === */
 .camerino-niveles {
-  position: absolute;
-  bottom: 0.75rem;
-  left: 0;
-  right: 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 0.5rem;
   justify-content: center;
-  padding: 0 1rem;
+  padding: 0 0 0.75rem;
   z-index: 10;
 }
+
+/* Hero copy — texto en la parte inferior de la imagen, sobre el gradiente oscuro */
+.camerino-hero-copy {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: 1rem 1.5rem 1.4rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+}
+
+.camerino-hero__nombre {
+  font-size: clamp(1.7rem, 5vw, 2.4rem);
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 0.25rem;
+  line-height: 1.1;
+}
+
+.camerino-hero__genero {
+  font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+  font-weight: 700;
+  color: #ffd28a;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0 0 0.55rem;
+}
+
+.camerino-hero__intro {
+  font-size: clamp(0.88rem, 2.2vw, 1rem);
+  color: rgba(255, 255, 255, 0.88);
+  font-style: italic;
+  margin: 0;
+  line-height: 1.45;
+}
+
 
 .camerino-nivel__chip {
   background: rgba(0, 0, 0, 0);
@@ -1745,7 +1778,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  border-radius: 14px;
+  border-radius: 35px;
   background: rgb(0, 0, 0);
   padding: 1.25rem 1rem;
   min-height: 160px;

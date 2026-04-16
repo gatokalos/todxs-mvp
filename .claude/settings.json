@@ -11,7 +11,8 @@
       "Bash(aws amplify:*)"
     ],
     "additionalDirectories": [
-      "/Users/gatoenigmatico/gatoencerrado-ai/supabase/migrations"
+      "/Users/gatoenigmatico/gatoencerrado-ai/supabase/migrations",
+      "/Users/gatoenigmatico/gatoencerrado-ai/apps/todxs-mvp/src/data"
     ]
   }
 }

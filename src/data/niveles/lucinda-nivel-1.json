@@ -1,0 +1,209 @@
+{
+  "personaje_id": "lucinda",
+  "nivel": 1,
+  "nombre_nivel": "El encabezado",
+  "nombre_visible": "Lucinda",
+  "icono": "/assets/lucinda_sticker.svg",
+  "frase_base": "Las nueve vidas del gato:",
+  "prefijos": { "X": "", "O": "" },
+  "sufijos": { "X": "", "O": "" },
+  "titulo_modal": null,
+  "temporizador_ms": 3400,
+  "ritmo_frase": {
+    "base_x": "\n",
+    "x_o": "\n",
+    "x_creativa": "\nY aun así: "
+  },
+  "mensajes_victoria_x": [
+    "No ganaste: te sostuviste sin fingir que no dolía.",
+    "Esta vez la escena no te tragó; habló contigo.",
+    "Lo rompiste en voz alta y aun así seguiste entera."
+  ],
+  "mensajes_victoria_o": [
+    "El aplauso llegó antes que el consuelo.",
+    "La sala entendió espectáculo donde había verdad."
+  ],
+  "tablero": [
+    {
+      "posicion": 1,
+      "titulo_X": "MITO EGIPCIO",
+      "titulo_O": "TIPO DE VÍNCULO",
+      "X": [
+        "la Enéada egipcia",
+        "los sacerdotes del Antiguo Egipto",
+        "la diosa Bastet",
+        "los templos de Bubastis"
+      ],
+      "O": [
+        "sincronías",
+        "conexiones",
+        "correlaciones",
+        "armonías",
+        "dependencias",
+        "asociaciones"
+      ],
+      "eslabones_X": ["se explican desde ", "derivan de ", ", según "],
+      "eslabones_O": ["y son puras ", "y remiten a ", ", que implican "]
+    },
+    {
+      "posicion": 2,
+      "titulo_X": "PSEUDOCIENCIA",
+      "titulo_O": "FENÓMENO CULTURAL",
+      "X": [
+        "el "Instituto Felino de Whiskerología"",
+        "el gen "nonalive-9"",
+        "la biología felina no convencional"
+      ],
+      "O": [
+        "civilización",
+        "tradiciones",
+        "identidad",
+        "cultura",
+        "adoctrinamiento",
+        "costumbres"
+      ],
+      "eslabones_X": ["se explican desde ", "derivan de ", ", según "],
+      "eslabones_O": ["y son puras ", "y remiten a ", ", que implican "]
+    },
+    {
+      "posicion": 3,
+      "titulo_X": "TEORÍA CONSPIRATIVA",
+      "titulo_O": "GÉNERO NARRATIVO",
+      "X": [
+        "la "Teoría de la conspiración felina"",
+        "los extraterrestres felinos",
+        "la tecnología de clonación gatuna"
+      ],
+      "O": [
+        "leyendas",
+        "fábulas",
+        "sabiduría ancestral",
+        "mitos",
+        "falsedades",
+        "relatos"
+      ],
+      "eslabones_X": ["derivan de ", ", según "],
+      "eslabones_O": ["y son puras ", "y remiten a ", ", que implican "]
+    },
+    {
+      "posicion": 4,
+      "titulo_X": "MITOLOGÍA NÓRDICA",
+      "titulo_O": "MARCO CONCEPTUAL",
+      "X": [
+        "los nueve mundos del cosmos nórdico",
+        "la mitología nórdica",
+        "la diosa Freya y sus nueve gatos"
+      ],
+      "O": [
+        "registro histórico",
+        "pensamiento analógico",
+        "el inconsciente colectivo",
+        "literatura",
+        "palabrería",
+        "pensamiento mágico"
+      ],
+      "eslabones_X": ["se explican desde ", "derivan de ", ", según "],
+      "eslabones_O": ["y son puras ", "y remiten a ", ", que implican "]
+    },
+    {
+      "posicion": 5,
+      "titulo_X": "FICCIÓN GALÁCTICA",
+      "titulo_O": "CUALIDAD TEMPORAL",
+      "X": [
+        "la "Meow-trix"",
+        "los guardianes interdimensionales",
+        "el escudo contra invasiones alienígenas"
+      ],
+      "O": [
+        "eternidad",
+        "durabilidad",
+        "constancia",
+        "permanencia",
+        "estancamiento",
+        "continuidad"
+      ],
+      "eslabones_X": ["derivan de ", ", según "],
+      "eslabones_O": ["y son puras ", "y remiten a ", ", que implican "]
+    },
+    {
+      "posicion": 6,
+      "titulo_X": "INTERPRETACIÓN MÍSTICA",
+      "titulo_O": "TIPO DE CREENCIA",
+      "X": [
+        "la "interpretación numerológica"",
+        "el nueve como número de perfección",
+        "la encarnación mística del nueve"
+      ],
+      "O": [
+        "fe",
+        "creencia",
+        "espiritualidad",
+        "cultos",
+        "sectas",
+        "doctrinas"
+      ],
+      "eslabones_X": ["se explican desde ", "derivan de ", ", según "],
+      "eslabones_O": ["y son puras ", "y remiten a ", ", que implican "]
+    },
+    {
+      "posicion": 7,
+      "titulo_X": "FÁBULA MEDIEVAL",
+      "titulo_O": "PRÁCTICA RITUAL",
+      "X": [
+        "una fábula medieval",
+        "el gato que engañó a la Muerte",
+        "el gato que escapó nueve veces"
+      ],
+      "O": [
+        "ceremonias",
+        "rituales",
+        "tradiciones sagradas",
+        "ritos",
+        "supersticiones",
+        "prácticas"
+      ],
+      "eslabones_X": ["se explican desde ", "derivan de ", ", según "],
+      "eslabones_O": ["y son puras ", "y remiten a ", ", que implican "]
+    },
+    {
+      "posicion": 8,
+      "titulo_X": "FÍSICA CUÁNTICA",
+      "titulo_O": "PROCESO DE VERDAD",
+      "X": [
+        "el "gato cuántico"",
+        "las nueve realidades paralelas",
+        "la migración de conciencia felina"
+      ],
+      "O": [
+        "validación",
+        "comprobación",
+        "revelación",
+        "verificación",
+        "escrutinio",
+        "revisión"
+      ],
+      "eslabones_X": ["derivan de ", ", según "],
+      "eslabones_O": ["y son puras ", "y remiten a ", ", que implican "]
+    },
+    {
+      "posicion": 9,
+      "titulo_X": "LEYENDA URBANA",
+      "titulo_O": "ACTO DE CLEMENCIA",
+      "X": [
+        "una leyenda urbana",
+        "el "Proyecto Filis-9"",
+        "los experimentos con ADN felino"
+      ],
+      "O": [
+        "absolución",
+        "liberación",
+        "perdón",
+        "exención",
+        "indulgencia",
+        "dispensa"
+      ],
+      "eslabones_X": ["derivan de ", ", según "],
+      "eslabones_O": ["y son puras ", "y remiten a ", ", que implican "]
+    }
+  ]
+}

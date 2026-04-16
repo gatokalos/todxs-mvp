@@ -684,72 +684,74 @@ useEffect(() => {
               aria-label={nivelExpandido !== null ? "Ver descripción del personaje" : undefined}
             >
               <div className="draft-image-overlay" />
-              {niveles.length > 0 && (
-                <div className="camerino-niveles" role="tablist">
-                  {niveles.map((n) => (
-                    <button
-                      key={n.nivel}
-                      type="button"
-                      role="tab"
-                      aria-selected={nivelExpandido === n.nivel}
-                      className={`camerino-nivel__chip${nivelExpandido === n.nivel ? " is-active" : ""}`}
-                      onClick={(e) => { e.stopPropagation(); setNivelExpandido(nivelExpandido === n.nivel ? null : n.nivel); }}
-                    >
-                      {n.nombre_nivel || `Nivel ${n.nivel}`}
-                    </button>
-                  ))}
-                </div>
-              )}
+
+              {/* Copies — parte inferior de la imagen: info del personaje o detalle del nivel */}
+              <div className="camerino-hero-copy">
+                {nivelExpandido === null ? (
+                  <>
+                    <p style={{ margin: 0, fontSize: "1.6rem", fontWeight: 800, color: "#fff", lineHeight: 1.1 }}>{personaje.nombre_visible}</p>
+                    <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", fontWeight: 700, color: "#ffd28a", letterSpacing: "0.08em" }}>{personaje.genero_literario}</p>
+                    {personaje.intro && (
+                      <p className="camerino-escenario__frase">{personaje.intro}</p>
+                    )}
+                  </>
+                ) : (() => {
+                  const n = niveles.find((nv) => nv.nivel === nivelExpandido);
+                  return (
+                    <>
+                      <p style={{ margin: 0, fontSize: "1.6rem", fontWeight: 800, color: "#fff", lineHeight: 1.1 }}>{n?.nombre_nivel || `Nivel ${n?.nivel}`}</p>
+                      <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", fontWeight: 700, color: "#ffd28a", letterSpacing: "0.08em" }}>frase a improvisar</p>
+                      <p className="camerino-escenario__frase">
+                        {n?.frase_base
+                          ? `${n.frase_base} …`
+                          : "Mi mejor amiga es una gata muy ocurrente; fragmentada internamente y para colmo es terca como una tuerca oxidada."}
+                      </p>
+                    </>
+                  );
+                })()}
+              </div>
+
             </div>
+
+            {/* draft-content: chips siempre visibles + ojos (default) o botón ensayar (nivel seleccionado) */}
             <div className="draft-content">
               <div className={`camerino-escenario${nivelExpandido !== null ? " is-open" : ""}`}>
-                {nivelExpandido === null ? (
-                  <div className="camerino-escenario__burbuja">
+                <div className="camerino-escenario__burbuja">
+                  {niveles.length > 0 && (
+                    <div className="camerino-niveles" role="tablist">
+                      {niveles.map((n) => (
+                        <button
+                          key={n.nivel}
+                          type="button"
+                          role="tab"
+                          aria-selected={nivelExpandido === n.nivel}
+                          className={`camerino-nivel__chip${nivelExpandido === n.nivel ? " is-active" : ""}`}
+                          onClick={(e) => { e.stopPropagation(); setNivelExpandido(nivelExpandido === n.nivel ? null : n.nivel); }}
+                        >
+                          {n.nombre_nivel || `Nivel ${n.nivel}`}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                  {nivelExpandido === null ? (
                     <div className="camerino-escenario__top">
-                      <div className="camerino-escenario__info">
-                        <p style={{ margin: 0, fontSize: "1.6rem", fontWeight: 800, color: "#fff", lineHeight: 1.1 }}>{personaje.nombre_visible}</p>
-                        <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", fontWeight: 700, color: "#ffd28a", letterSpacing: "0.08em" }}>{personaje.genero_literario}</p>
-                        {personaje.intro && (
-                          <p className="camerino-escenario__frase">{personaje.intro}</p>
-                        )}
-                      </div>
                       <div className="character-selector__host-avatar camerino-escenario__host" aria-hidden="true">
                         <img src="/assets/gato_sticker.svg" alt="" className="character-selector__host-img" />
                         <span className="character-selector__host-blink" />
                       </div>
                     </div>
-                  </div>
-                ) : (() => {
-                  const n = niveles.find((nv) => nv.nivel === nivelExpandido);
-                  return (
-                    <div className="camerino-escenario__burbuja">
-                      <div className="camerino-escenario__top">
-                        <div className="camerino-escenario__info">
-                          <p style={{ margin: 0, fontSize: "1.6rem", fontWeight: 800, color: "#fff", lineHeight: 1.1 }}>{n?.nombre_nivel || `Nivel ${n?.nivel}`}</p>
-                          <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", fontWeight: 700, color: "#ffd28a", letterSpacing: "0.08em" }}>frase a improvisar</p>
-                          <p className="camerino-escenario__frase">
-                            {n?.frase_base
-                              ? `${n.frase_base} …`
-                              : "Mi mejor amiga es una gata muy ocurrente; fragmentada internamente y para colmo es terca como una tuerca oxidada."}
-                          </p>
-                        </div>
-                        <div className="character-selector__host-avatar camerino-escenario__host" aria-hidden="true">
-                          <img src="/assets/gato_sticker.svg" alt="" className="character-selector__host-img" />
-                          <span className="character-selector__host-blink" />
-                        </div>
-                      </div>
-                      <button
-                        ref={btnRef}
-                        type="button"
-                        className="camerino-escenario__ensayar"
-                        disabled={isLocked}
-                        onClick={() => handleEntrarEscenario(nivelExpandido)}
-                      >
-                        Bajar a ensayar &#8594;
-                      </button>
-                    </div>
-                  );
-                })()}
+                  ) : (
+                    <button
+                      ref={btnRef}
+                      type="button"
+                      className="camerino-escenario__ensayar"
+                      disabled={isLocked}
+                      onClick={() => handleEntrarEscenario(nivelExpandido)}
+                    >
+                      Bajar a ensayar &#8594;
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
 
