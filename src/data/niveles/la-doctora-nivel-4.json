@@ -1,0 +1,260 @@
+{
+  "nombre_visible": "La Doctora",
+  "icono": "/assets/doctora_sticker.svg",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "La evidencia quedó ordenada con una claridad que casi incomoda.",
+    "El cuadro cerró con precisión clínica; incluso el símbolo obedeció.",
+    "Lo observé con distancia y, aun así, algo ardió en el margen."
+  ],
+  "mensajes_victoria_o": [
+    "El caso sigue abierto; la muestra no terminó de organizarse.",
+    "Hubo indicios, sí, pero no suficientes para sostener una hipótesis.",
+    "La escena produjo más síntoma que conclusión."
+  ],
+  "personaje_id": "la-doctora",
+  "nivel": 4,
+  "nombre_nivel": "Diagnóstico",
+  "frase_base": "El Payasito habla con su gata porque…",
+  "tablero": [
+    {
+      "O": [
+        "distinguir entre sueño y vigilia",
+        "sostener el silencio",
+        "dejar de pensar en voz alta"
+      ],
+      "X": [
+        "reconocerá que está soñando",
+        "mantendrá la conciencia en el sueño",
+        "es consciente de que está soñando"
+      ],
+      "posicion": 1,
+      "titulo_O": "Y ÉL NO PUEDE / PERO ÉL NO LOGRA / Y AUN ASÍ NO CONSIGUE",
+      "titulo_X": "LE RECETÉ / LE INDIQUÉ / LE SUGERÍ",
+      "eslabones_O": [
+        "y él no puede ",
+        "pero él no logra ",
+        "y aun así no consigue "
+      ],
+      "eslabones_X": [
+        "le receté ",
+        "le indiqué ",
+        "le sugerí "
+      ]
+    },
+    {
+      "O": [
+        "dejar de hablar con su gata",
+        "ignorar lo que imagina",
+        "interrumpir la conversación"
+      ],
+      "X": [
+        "visualización",
+        "establecer intención",
+        "adoptar una postura"
+      ],
+      "posicion": 2,
+      "titulo_O": "Y ÉL NO PUEDE / PERO ÉL NO LOGRA / Y AUN ASÍ NO CONSIGUE",
+      "titulo_X": "LE RECETÉ / LE INDIQUÉ / LE SUGERÍ",
+      "eslabones_O": [
+        "y él no puede ",
+        "pero él no logra ",
+        "y aun así no consigue "
+      ],
+      "eslabones_X": [
+        "le receté ",
+        "le indiqué ",
+        "le sugerí "
+      ]
+    },
+    {
+      "O": [
+        "despertar con lucidez",
+        "recordar los sueños",
+        "mantener los ojos cerrados"
+      ],
+      "X": [
+        "poner una intención",
+        "prepararse para la visualización",
+        "una meditación preliminar"
+      ],
+      "posicion": 3,
+      "titulo_O": "Y ÉL NO PUEDE / PERO ÉL NO LOGRA / Y AUN ASÍ NO CONSIGUE",
+      "titulo_X": "LE RECETÉ / LE INDIQUÉ / LE SUGERÍ",
+      "eslabones_O": [
+        "y él no puede ",
+        "pero él no logra ",
+        "y aun así no consigue "
+      ],
+      "eslabones_X": [
+        "le receté ",
+        "le indiqué ",
+        "le sugerí "
+      ]
+    },
+    {
+      "O": [
+        "permanecer quieto",
+        "alcanzar lucidez en los sueños",
+        "dejar de reaccionar al primer estímulo"
+      ],
+      "X": [
+        "calmar la mente",
+        "mantener los ojos cerrados",
+        "permanecer inmóvil"
+      ],
+      "posicion": 4,
+      "titulo_O": "Y ÉL NO PUEDE / PERO ÉL NO LOGRA / Y AUN ASÍ NO CONSIGUE",
+      "titulo_X": "LE RECETÉ / LE INDIQUÉ / LE SUGERÍ",
+      "eslabones_O": [
+        "y él no puede ",
+        "pero él no logra ",
+        "y aun así no consigue "
+      ],
+      "eslabones_X": [
+        "le receté ",
+        "le indiqué ",
+        "le sugerí "
+      ]
+    },
+    {
+      "O": [
+        "sostener la atención en el sueño",
+        "mantener la lucidez durante el día",
+        "retener la escena sin hablarla"
+      ],
+      "X": [
+        "ver la naturaleza ilusoria de la mente",
+        "despertar con lucidez",
+        "recordar los sueños"
+      ],
+      "posicion": 5,
+      "titulo_O": "Y ÉL NO PUEDE / PERO ÉL NO LOGRA / Y AUN ASÍ NO CONSIGUE",
+      "titulo_X": "LE RECETÉ / LE INDIQUÉ / LE SUGERÍ",
+      "eslabones_O": [
+        "y él no puede ",
+        "pero él no logra ",
+        "y aun así no consigue "
+      ],
+      "eslabones_X": [
+        "le receté ",
+        "le indiqué ",
+        "le sugerí "
+      ]
+    },
+    {
+      "O": [
+        "separar símbolo y recuerdo",
+        "detener la conversación interior",
+        "dejar de responderle a la gata"
+      ],
+      "X": [
+        "alcanzar lucidez en los sueños",
+        "mantener la lucidez durante el día",
+        "recordar los sueños"
+      ],
+      "posicion": 6,
+      "titulo_O": "Y ÉL NO PUEDE / PERO ÉL NO LOGRA / Y AUN ASÍ NO CONSIGUE",
+      "titulo_X": "LE RECETÉ / LE INDIQUÉ / LE SUGERÍ",
+      "eslabones_O": [
+        "y él no puede ",
+        "pero él no logra ",
+        "y aun así no consigue "
+      ],
+      "eslabones_X": [
+        "le receté ",
+        "le indiqué ",
+        "le sugerí "
+      ]
+    },
+    {
+      "O": [
+        "salir del bucle verbal",
+        "dejar de escucharse por dentro",
+        "traducir lo que imagina sin hablarlo"
+      ],
+      "X": [
+        "una herramienta de observación",
+        "la reflexión dirigida",
+        "la recursividad del sueño"
+      ],
+      "posicion": 7,
+      "titulo_O": "Y ÉL NO PUEDE / PERO ÉL NO LOGRA / Y AUN ASÍ NO CONSIGUE",
+      "titulo_X": "LE RECETÉ / LE INDIQUÉ / LE SUGERÍ",
+      "eslabones_O": [
+        "y él no puede ",
+        "pero él no logra ",
+        "y aun así no consigue "
+      ],
+      "eslabones_X": [
+        "le receté ",
+        "le indiqué ",
+        "le sugerí "
+      ]
+    },
+    {
+      "O": [
+        "bajar el volumen del pensamiento",
+        "atravesar la vigilia",
+        "callar el comentario mental"
+      ],
+      "X": [
+        "visualización consciente",
+        "intención sostenida",
+        "postura receptiva"
+      ],
+      "posicion": 8,
+      "titulo_O": "Y ÉL NO PUEDE / PERO ÉL NO LOGRA / Y AUN ASÍ NO CONSIGUE",
+      "titulo_X": "LE RECETÉ / LE INDIQUÉ / LE SUGERÍ",
+      "eslabones_O": [
+        "y él no puede ",
+        "pero él no logra ",
+        "y aun así no consigue "
+      ],
+      "eslabones_X": [
+        "le receté ",
+        "le indiqué ",
+        "le sugerí "
+      ]
+    },
+    {
+      "O": [
+        "dejar de hablar con su gata",
+        "distinguir entre voz y símbolo",
+        "interrumpir la escena"
+      ],
+      "X": [
+        "ejercicios de respiración",
+        "una meditación preliminar",
+        "prepararse para la visualización"
+      ],
+      "posicion": 9,
+      "titulo_O": "Y ÉL NO PUEDE / PERO ÉL NO LOGRA / Y AUN ASÍ NO CONSIGUE",
+      "titulo_X": "LE RECETÉ / LE INDIQUÉ / LE SUGERÍ",
+      "eslabones_O": [
+        "y él no puede ",
+        "pero él no logra ",
+        "y aun así no consigue "
+      ],
+      "eslabones_X": [
+        "le receté ",
+        "le indiqué ",
+        "le sugerí "
+      ]
+    }
+  ]
+}

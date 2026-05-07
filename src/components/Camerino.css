@@ -842,19 +842,29 @@
 
 .camerino-cta {
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.18);
-  color: #2d1a53;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(247, 239, 231, 0.8);
   font-weight: 700;
-  letter-spacing: 0.04em;
-  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  padding: 0.4rem 0.9rem;
   text-transform: uppercase;
   cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
 }
 
 .camerino-cta--ghost:hover,
 .camerino-cta--ghost:focus-visible {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.camerino-cta--ghost.is-active {
+  border-color: rgba(255, 200, 140, 0.8);
+  color: #2d1a53;
+  background: linear-gradient(135deg, #ffd89a 0%, #ffb469 45%, #ff7f4e 100%);
+  box-shadow: 0 10px 18px rgba(10, 6, 6, 0.25);
 }
 
 .camerino-filters {
@@ -1719,6 +1729,7 @@ html, body {
   z-index: 3;
   padding: 1rem 1.5rem 1.4rem;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+  background: radial-gradient(circle at 20% 8%, #554c7300 0%, #15122900 42%, #08070f08 100%), linear-gradient(180deg, #0b0a1400 0%, #06050cc7 100%);
 }
 
 .camerino-hero__nombre {
@@ -1747,15 +1758,33 @@ html, body {
 }
 
 
+.camerino-niveles-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.camerino-chips-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(247, 239, 231, 0.5);
+  margin: 0;
+}
+
 .camerino-nivel__chip {
-  background: rgba(0, 0, 0, 0);
-  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
-  color: #ede8e3;
-  padding: 0.35rem 1rem;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 0.4rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(247, 239, 231, 0.8);
+  background: rgba(255, 255, 255, 0.08);
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s, transform 0.15s;
 }
@@ -1766,9 +1795,42 @@ html, body {
 }
 
 .camerino-nivel__chip.is-active {
-  background: linear-gradient(135deg, rgba(255, 222, 158, 0.9), rgba(255, 186, 104, 0.9));
-  border-color: transparent;
-  color: #201512;
+  border-color: rgba(255, 200, 140, 0.8);
+  color: #2d1a53;
+  background: linear-gradient(135deg, #ffd89a 0%, #ffb469 45%, #ff7f4e 100%);
+  box-shadow: 0 10px 18px rgba(10, 6, 6, 0.25);
+}
+
+.camerino-nivel__pip {
+  display: inline-block;
+  margin-right: 0.35em;
+  font-size: 0.7rem;
+  line-height: 1;
+  vertical-align: middle;
+  position: relative;
+  top: -0.05em;
+}
+
+.pip--won {
+  color: #f5c94e;
+}
+
+.pip--lost {
+  color: #c87b7b;
+}
+
+.pip--tie {
+  color: #9ea5b0;
+}
+
+.camerino-nivel__chip.is-active .camerino-nivel__pip.pip--won {
+  color: #7a5200;
+}
+.camerino-nivel__chip.is-active .camerino-nivel__pip.pip--lost {
+  color: #7a2a2a;
+}
+.camerino-nivel__chip.is-active .camerino-nivel__pip.pip--tie {
+  color: #4a5060;
 }
 
 /* === Escenario (panel debajo de los chips) === */
@@ -1779,7 +1841,6 @@ html, body {
   align-items: center;
   justify-content: flex-end;
   border-radius: 35px;
-  background: rgb(0, 0, 0);
   padding: 1.25rem 1rem;
   min-height: 160px;
 }
@@ -1924,10 +1985,15 @@ html, body {
   cursor: not-allowed;
 }
 
+.camerino-escenario__ensayar.is-ghost {
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* Responsivo */
 @media (max-width: 768px) {
   .draft-image {
-    height: 50vh;
+    height: 55vh;
   }
 
   .camerino-ficha {

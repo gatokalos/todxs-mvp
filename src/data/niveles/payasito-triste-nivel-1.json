@@ -1,0 +1,170 @@
+{
+  "personaje_id": "payasito-triste",
+  "nivel": 1,
+  "nombre_nivel": "El primer guiño",
+  "nombre_visible": "Payasito Tiste",
+  "icono": "/assets/payasito_sticker.svg",
+  "frase_base": "Gatos y niños, siempre dicen…",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Me salió el remate feo y preciso; así también se gana.",
+    "Ni sé si fue victoria o colapso con timing, pero funcionó.",
+    "Hoy el chiste cayó de pie antes que yo."
+  ],
+  "mensajes_victoria_o": [
+    "Esta vez el aparte me dejó solo con el eco.",
+    "Se me fue el remate antes del aplauso; pasa en las mejores tragedias.",
+    "Hoy ni el maquillaje sostuvo la caída."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "—y luego me culpan por repetirlo.",
+        "(yo nomás hago eco con maquillaje).",
+        "—como si la verdad no supiera hacer circo."
+      ],
+      "X": [
+        "lo que nadie quiere oír",
+        "lo que los grandes esconden",
+        "lo que arde sin permiso"
+      ],
+      "posicion": 1,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—yo solo le pongo redoble.",
+        "(alguien tiene que decirlo peinado).",
+        "—porque callado me veo peor."
+      ],
+      "X": [
+        "lo que el payaso piensa",
+        "lo que duele en voz alta",
+        "lo que tiembla por dentro"
+      ],
+      "posicion": 2,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—y ahí entro yo con nariz roja.",
+        "(qué detalle invitarme al desastre).",
+        "—como animador del colapso familiar."
+      ],
+      "X": [
+        "lo que no cabe en misa",
+        "lo que se barre al fondo",
+        "lo que arruina la sobremesa"
+      ],
+      "posicion": 3,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—pero si me río, parece arte.",
+        "(llorar con timing también cuenta).",
+        "—y el público agradece la sinceridad ajena."
+      ],
+      "X": [
+        "lo que se escapa del gesto",
+        "lo que la casa no soporta",
+        "lo que se pudre calladito"
+      ],
+      "posicion": 4,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—yo nomás lo atrapo al vuelo.",
+        "(con una mano hago chiste y con la otra me sostengo).",
+        "—multitask del derrumbe."
+      ],
+      "X": [
+        "lo que suena a accidente",
+        "lo que nadie ensayó",
+        "lo que se cae del alma"
+      ],
+      "posicion": 5,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—igualito que mis recuerdos.",
+        "(maleducados pero puntuales).",
+        "—ni el trauma llega tan directo."
+      ],
+      "X": [
+        "lo que no pide permiso",
+        "lo que no sabe mentir",
+        "lo que entra sin tocar"
+      ],
+      "posicion": 6,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—y mira que yo traigo varios.",
+        "(uno por cada decepción bien peinada).",
+        "—el vestuario ayuda, no corrige."
+      ],
+      "X": [
+        "lo que el espejo murmura",
+        "lo que se nota en la cara",
+        "lo que no aguanta disfraz"
+      ],
+      "posicion": 7,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—mi especialidad, gracias por preguntar.",
+        "(estudié años para incomodar bonito).",
+        "—hay talentos que no salen en el cartel."
+      ],
+      "X": [
+        "lo que da risa nerviosa",
+        "lo que nadie firma",
+        "lo que cae mal por cierto"
+      ],
+      "posicion": 8,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—y yo nomás pongo la reverencia final.",
+        "(todo gran desastre merece salida escénica).",
+        "—para fracasar, mínimo con luces."
+      ],
+      "X": [
+        "lo que ya venía roto",
+        "lo que tiende la trampa",
+        "lo que deja marca"
+      ],
+      "posicion": 9,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    }
+  ]
+}

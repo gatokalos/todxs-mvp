@@ -1,0 +1,205 @@
+{
+  "personaje_id": "lucinda",
+  "nivel": 4,
+  "nombre_nivel": "La postdata",
+  "nombre_visible": "Lucinda",
+  "icono": "/assets/lucinda_sticker.svg",
+  "frase_base": "En sí, la historia de “El Innombrable” nos habla de…",
+  "prefijos": {
+    "O": "pero se trata de ",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3400,
+  "ritmo_frase": {
+    "x_o": "\n",
+    "base_x": "\n",
+    "x_creativa": "\nY aun asi: "
+  },
+  "mensajes_victoria_x": [
+    "No ganaste: te sostuviste sin fingir que no dolia.",
+    "Esta vez la escena no te trago; hablo contigo.",
+    "Lo rompiste en voz alta y aun asi seguiste entera."
+  ],
+  "mensajes_victoria_o": [
+    "El aplauso llego antes que el consuelo.",
+    "La sala entendio espectaculo donde habia verdad."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "Estela, una marciana del futuro.",
+        "Estela, que acaricia mucho a su gato.",
+        "Estela y un gato llamado El Innombrable.",
+        "Estela y un gato que llegó en Marte.",
+        "mirar las estrellas en una cúpula transparente.",
+        "romper las barreras del tiempo y el espacio."
+      ],
+      "X": [
+        "descubrir el poder único de “El Innombrable”",
+        "aprender a comunicarse con un gato cuántico",
+        "los problemas de ocultar a un gato en el vacío",
+        "las posibilidades del viaje cuántico",
+        "el momento adecuado para compartir un secreto",
+        "la tensión que se genera entre Estela y Celeste"
+      ],
+      "posicion": 1
+    },
+    {
+      "O": [
+        "crear un paraíso fiscal en Marte.",
+        "proteger nuestra privacidad a toda costa.",
+        "de una I.A. con acceso a cualquier secreto.",
+        "de una entidad que viola nuestra privacidad.",
+        "Estela y su secreto para revelar otros secretos.",
+        "despertar el verdadero poder de El Innombrable."
+      ],
+      "X": [
+        "romper barreras interdimensionales",
+        "la belleza en los mundos alternativos",
+        "enfrentar a una dimensión inestable",
+        "revaluar la vida en Marte",
+        "descubrir un mundo sin corrupción",
+        "controlar los saltos interdimensionales"
+      ],
+      "posicion": 2
+    },
+    {
+      "O": [
+        "revelar la existencia de El Innombrable.",
+        "encontrarle cinco pies al gato.",
+        "ver la conexión entre un gato y el vacío.",
+        "conectar con el vacío cuántico.",
+        "Estela y su novia la astronauta intergaláctica.",
+        "un viaje a través del vacío cuántico."
+      ],
+      "X": [
+        "decidir confrontar una entidad extraña",
+        "ver cara a cara a quien robaría tu gato",
+        "reunir aliadas de otras dimensiones",
+        "prepararse para el enfrentamiento final",
+        "elevan nuestras habilidades al máximo",
+        "luchar contra lo que te intenta capturar"
+      ],
+      "posicion": 3
+    },
+    {
+      "O": [
+        "Celeste, atrapada entre un gato y su novia.",
+        "Estela y Celeste, protegiendo a un gato.",
+        "una pareja en contra del opresor Plutarco.",
+        "los conocimientos científicos de Estela",
+        "los conocimientos científicos de Celeste",
+        "una pareja que protege a El Innombrable"
+      ],
+      "X": [
+        "lo que puede desencadenar un imprevisto",
+        "prepararse para revelar un secreto",
+        "intentar mantener la calma mientras se discute",
+        "una relación que se enfría haciendo planes",
+        "los largos procesos para encarar una verdad",
+        "un hallazgo de la comunidad científica"
+      ],
+      "posicion": 4
+    },
+    {
+      "O": [
+        "proteger el secreto de El Innombrable",
+        "ocultar un secreto, aún a tu pareja de vida.",
+        "una relación entre dos mujeres del futuro.",
+        "una cena romántica en Marte que acaba en caos.",
+        "Celeste, que le descubre algo a su novia",
+        "un gato encerrado debajo de la mesa"
+      ],
+      "X": [
+        "una amenaza intergaláctica inminente",
+        "al peligroso abismo entre una dimensión y otra",
+        "la verdadera naturaleza de una amenaza",
+        "amenazas que afectan la cotidianidad",
+        "mantener una vida normal para lidiar una crisis",
+        "cuándo retirarse para planear el siguiente paso"
+      ],
+      "posicion": 5
+    },
+    {
+      "O": [
+        "Celeste, la astronauta que confronta a su novia.",
+        "exigir saber la importancia del gato encerrado.",
+        "Estela. De por qué tiene al gato encerrado.",
+        "de saber para qué Estela guarda al gato",
+        "revelar una verdad sin perder a alguien",
+        "del miedo de Estela a perder a Celeste"
+      ],
+      "X": [
+        "descubrir una fuente oculta de poder.",
+        "iniciar un cambio radical en el sistema.",
+        "fusionar energías interdimensionales",
+        "sacudir las bases mismas del multiverso",
+        "una fusión simbólica con el cosmos",
+        "encontrar calma interior con apoyo mutuo"
+      ],
+      "posicion": 6
+    },
+    {
+      "O": [
+        "una fuerza intergaláctica que llega a Marte.",
+        "los secretos que pueden destruir una dimensión.",
+        "el gato más buscado del cosmos.",
+        "un gato fugitivo que salta en el tiempo.",
+        "un glitch intergaláctico que reclama a un gato.",
+        "de Plutarco, una entidad cuántica y opresora."
+      ],
+      "X": [
+        "cómo suavizar una situación delicada",
+        "la importancia de verse en el vacío cuántico",
+        "explorar el potencial del viaje cuántico",
+        "reparar una relación tras una gran revelación",
+        "explorar juntas nuestro vacío luminoso",
+        "adentrarse al vacío cuántico con cautela"
+      ],
+      "posicion": 7
+    },
+    {
+      "O": [
+        "tomar el poder gatuno y soltarlo en el vacío.",
+        "El Innombrable, un gato contra el vacío cuántico.",
+        "el vacío cuántico. Una amplitud devastadora.",
+        "Estela y Celeste, acariciando a la vastedad.",
+        "Celeste, Estela, un gato, y las estrellas.",
+        "desafiar al cosmos. Un ronroneo a la vez."
+      ],
+      "X": [
+        "la comprensión del verdadero enemigo",
+        "enfrentan juntos los momentos oscuros",
+        "fortalecer una relación frente lo adverso",
+        "superar las diferencias personales",
+        "superar las barreras tecnológicas",
+        "liberarse de la trampa interdimensional"
+      ],
+      "posicion": 8
+    },
+    {
+      "O": [
+        "confesar un secreto bajo tus narices",
+        "ocultar que todos tenemos un gato encerrado.",
+        "revelar que todos tenemos un gato encerrado.",
+        "convencernos de que el gato no es importante.",
+        "Estela, de que no quiere hablar del gato.",
+        "Celeste, quien descubre el gato de Estela."
+      ],
+      "X": [
+        "explorar el mundo con una visión fresca",
+        "navegar suavemente futuros desafíos",
+        "hacer frente a la incertidumbre",
+        "la confianza mutua restablecida",
+        "distinguir y respetar los límites naturales",
+        "los pequeños detalles cotidianos"
+      ],
+      "posicion": 9
+    }
+  ]
+}

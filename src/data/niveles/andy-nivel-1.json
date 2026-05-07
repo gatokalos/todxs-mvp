@@ -1,0 +1,332 @@
+{
+  "personaje_id": "andy",
+  "nivel": 1,
+  "nombre_nivel": "Experimento",
+  "nombre_visible": "Andy",
+  "icono": "/assets/andy_sticker.svg",
+  "frase_base": "Quizá seas una felina que puede…",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Sostuviste el eje. El resto se acomodó desde ahí.",
+    "No hizo falta forzar la escena; bastó con colocar el cuerpo.",
+    "La consigna entró limpia: menos explicación, más presencia."
+  ],
+  "mensajes_victoria_o": [
+    "Faltó respiración antes del gesto.",
+    "La escena pidió sostén y todavía no llegó completo.",
+    "No estaba mal la intención; faltó cuerpo para sostenerla."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "superarse",
+        "crecer",
+        "prosperar",
+        "desarrollarte en otros ámbitos.",
+        "ponerte otro tipo de retos.",
+        "entregarte a la transformación.",
+        "empezar de cero, otra vez."
+      ],
+      "X": [
+        "superarse,",
+        "crecer mucho más,",
+        "prosperar,",
+        "desarrollarse en otros ámbitos,",
+        "ponerse retos,",
+        "transformarse,",
+        "empezar de cero,"
+      ],
+      "posicion": 1,
+      "titulo_O": "NOMÁS NO OLVIDES / PERO RECUERDA / SOLO CUIDA",
+      "titulo_X": "QUE PUEDE / QUE LOGRA / QUE ALCANZA A",
+      "eslabones_O": [
+        "nomás no olvides ",
+        "pero recuerda ",
+        "solo cuida "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "sanarte primero tú.",
+        "encontrar tu medicina.",
+        "beneficiarte a nivel personal.",
+        "ir a terapia.",
+        "desempeñarte en lo que te gusta.",
+        "encontrar una cura en el día a día.",
+        "estar sin paliativos por un rato."
+      ],
+      "X": [
+        "sanar y sanarse,",
+        "ser medicinal,",
+        "beneficiarse a sí misma,",
+        "llegar a ser terapéutica",
+        "empeñarse un poco más",
+        "una cura",
+        "un paliativo"
+      ],
+      "posicion": 2,
+      "titulo_O": "NOMÁS NO OLVIDES / PERO RECUERDA / SOLO CUIDA",
+      "titulo_X": "QUE PUEDE / QUE LOGRA / QUE ALCANZA A",
+      "eslabones_O": [
+        "nomás no olvides ",
+        "pero recuerda ",
+        "solo cuida "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "la ecuanimidad.",
+        "ser imperturbable.",
+        "la resiliencia.",
+        "que puedes ser estoica.",
+        "desapegarte.",
+        "que puedes contenerte.",
+        "que puedes resignarte."
+      ],
+      "X": [
+        "ser ecuánime",
+        "llegar a ser imperturbable,",
+        "ser resiliente,",
+        "ser muy estoica de pronto,",
+        "ser muy desapegada de pronto,",
+        "y sabe contenerse,",
+        "resignarse muy rápido,"
+      ],
+      "posicion": 3,
+      "titulo_O": "NOMÁS NO OLVIDES / PERO RECUERDA / SOLO CUIDA",
+      "titulo_X": "QUE PUEDE / QUE LOGRA / QUE ALCANZA A",
+      "eslabones_O": [
+        "nomás no olvides ",
+        "pero recuerda ",
+        "solo cuida "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "enfocarte en la autodeterminación.",
+        "tu autonomía.",
+        "desahogarte con más frecuencia.",
+        "sentirte libre de hacerlo o no.",
+        "desinhibirte sin la presión de nadie.",
+        "darte permiso.",
+        "flexibilizar tus pensamientos."
+      ],
+      "X": [
+        "autodeterminarse;",
+        "lograr su autonomía;",
+        "desahogarse fácilmente;",
+        "sentir su libertad;",
+        "desinhibirse sin sentirse presionada;",
+        "darse el permiso;",
+        "ser flexible;"
+      ],
+      "posicion": 4,
+      "titulo_O": "NOMÁS NO OLVIDES / PERO RECUERDA / SOLO CUIDA",
+      "titulo_X": "QUE PUEDE / QUE LOGRA / QUE ALCANZA A",
+      "eslabones_O": [
+        "nomás no olvides ",
+        "pero recuerda ",
+        "solo cuida "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "tomar ciertas responsabilidades.",
+        "ocuparte de tus propias necesidades.",
+        "saber delegar funciones.",
+        "organizar tus quehaceres.",
+        "saber cuáles son tus obligaciones.",
+        "completar tus actividades.",
+        "llevar a cabo tus encargos."
+      ],
+      "X": [
+        "responsabilizarse;",
+        "mantenerse ocupada;",
+        "escoger una funcionalidad;",
+        "organizar sus quehaceres;",
+        "cumplir con sus obligaciones;",
+        "mantenerse activa;",
+        "solicitar encargos;"
+      ],
+      "posicion": 5,
+      "titulo_O": "NOMÁS NO OLVIDES / PERO RECUERDA / SOLO CUIDA",
+      "titulo_X": "QUE PUEDE / QUE LOGRA / QUE ALCANZA A",
+      "eslabones_O": [
+        "nomás no olvides ",
+        "pero recuerda ",
+        "solo cuida "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "la sensibilidad.",
+        "cuidarte de quedar expuesta.",
+        "abrirte a la transparencia.",
+        "tener en cuenta la vulnerabilidad.",
+        "tener en cuenta la fragilidad.",
+        "cuidar la susceptibilidad de otros.",
+        "correr ciertos riesgos."
+      ],
+      "X": [
+        "sensibilizarse;",
+        "exponer lo que piensa;",
+        "ser muy transparente;",
+        "mostrar su vulnerabilidad;",
+        "mostrarse frágil;",
+        "ser susceptible;",
+        "arriesgarse un poco más;"
+      ],
+      "posicion": 6,
+      "titulo_O": "NOMÁS NO OLVIDES / PERO RECUERDA / SOLO CUIDA",
+      "titulo_X": "QUE PUEDE / QUE LOGRA / QUE ALCANZA A",
+      "eslabones_O": [
+        "nomás no olvides ",
+        "pero recuerda ",
+        "solo cuida "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "poner atención.",
+        "afinar tu percepción.",
+        "ser considerada de los demás.",
+        "escucharte.",
+        "interesarte por los demás.",
+        "prestar tus oídos.",
+        "monitorear tu salud."
+      ],
+      "X": [
+        "lograr una atención plena;",
+        "afinar su percepción;",
+        "ser considerada;",
+        "escucharse a sí misma;",
+        "interesarse por los demás;",
+        "prestar sus oídos (u orejas);",
+        "monitorear su salud;"
+      ],
+      "posicion": 7,
+      "titulo_O": "NOMÁS NO OLVIDES / PERO RECUERDA / SOLO CUIDA",
+      "titulo_X": "QUE PUEDE / QUE LOGRA / QUE ALCANZA A",
+      "eslabones_O": [
+        "nomás no olvides ",
+        "pero recuerda ",
+        "solo cuida "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "tolerar la incomodidad.",
+        "dominar la templanza.",
+        "saber esperar.",
+        "paciencia.",
+        "recuperar tu paz mental.",
+        "saber hasta dónde puedes aguantar.",
+        "tomarte una pausa."
+      ],
+      "X": [
+        "tolerar la incomodidad;",
+        "tener templanza;",
+        "esperar;",
+        "ser paciente;",
+        "pacificar su mente;",
+        "aguantar el estrés;",
+        "tomarse una pausa;"
+      ],
+      "posicion": 8,
+      "titulo_O": "NOMÁS NO OLVIDES / PERO RECUERDA / SOLO CUIDA",
+      "titulo_X": "QUE PUEDE / QUE LOGRA / QUE ALCANZA A",
+      "eslabones_O": [
+        "nomás no olvides ",
+        "pero recuerda ",
+        "solo cuida "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "mirarte con armonía.",
+        "balancear tus anhelos.",
+        "entender mejor la equidad.",
+        "estar en equilibrio.",
+        "reconocer la rigidez.",
+        "esos momentos de plenitud.",
+        "abrazar la neutralidad."
+      ],
+      "X": [
+        "estar en armonía;",
+        "lograr un balance;",
+        "entender la equidad;",
+        "estar en equilibrio;",
+        "ser demasiado rígida;",
+        "estar en plenitud;",
+        "ser muy neutral de pronto;"
+      ],
+      "posicion": 9,
+      "titulo_O": "NOMÁS NO OLVIDES / PERO RECUERDA / SOLO CUIDA",
+      "titulo_X": "QUE PUEDE / QUE LOGRA / QUE ALCANZA A",
+      "eslabones_O": [
+        "nomás no olvides ",
+        "pero recuerda ",
+        "solo cuida "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    }
+  ]
+}

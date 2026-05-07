@@ -1,0 +1,170 @@
+{
+  "personaje_id": "payasito-triste",
+  "nivel": 9,
+  "nombre_nivel": "La verdad incómoda",
+  "nombre_visible": "Payasito Tiste",
+  "icono": "/assets/payasito_sticker.svg",
+  "frase_base": "De noche, todos los gatos son…",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Me salió el remate feo y preciso; así también se gana.",
+    "Ni sé si fue victoria o colapso con timing, pero funcionó.",
+    "Hoy el chiste cayó de pie antes que yo."
+  ],
+  "mensajes_victoria_o": [
+    "Esta vez el aparte me dejó solo con el eco.",
+    "Se me fue el remate antes del aplauso; pasa en las mejores tragedias.",
+    "Hoy ni el maquillaje sostuvo la caída."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "—y eso explica demasiadas cosas.",
+        "(la oscuridad hace casting generoso).",
+        "—de día disimulamos peor."
+      ],
+      "X": [
+        "filósofos",
+        "sospechosos",
+        "un poco yo"
+      ],
+      "posicion": 1,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—como cualquier criatura bien alumbrada por la desgracia.",
+        "(la noche pone mejor marco).",
+        "—todo abismo con sombra luce más profundo."
+      ],
+      "X": [
+        "más sinceros",
+        "más teatrales",
+        "más difíciles de querer"
+      ],
+      "posicion": 2,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—o sea, mi reparto estable.",
+        "(firmamos por temporada larga).",
+        "—ni el sueño quiso audicionar aquí."
+      ],
+      "X": [
+        "devotos del ruido",
+        "expertos en ausencia",
+        "primos del insomnio"
+      ],
+      "posicion": 3,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—y yo con libreta en mano.",
+        "(alguien tiene que tomar minuta del espanto).",
+        "—la noche también exige acta."
+      ],
+      "X": [
+        "carne de misterio",
+        "testigos de sí mismos",
+        "sombras con agenda"
+      ],
+      "posicion": 4,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—sobre todo de mentirse elegante.",
+        "(yo respeto mucho esa disciplina).",
+        "—la estética salva reputaciones dudosas."
+      ],
+      "X": [
+        "más guapos de pena",
+        "menos civiles",
+        "capaces de todo"
+      ],
+      "posicion": 5,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—mi club favorito y más barato.",
+        "(la cuota se paga en ojeras).",
+        "—afiliación automática por desvelo."
+      ],
+      "X": [
+        "adictos al borde",
+        "amigos del silencio",
+        "huérfanos del foco"
+      ],
+      "posicion": 6,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—la noche descompone el protocolo.",
+        "(bendita sea por eso).",
+        "—la normalidad cierra temprano."
+      ],
+      "X": [
+        "más tercos",
+        "más poéticos",
+        "menos domésticos"
+      ],
+      "posicion": 7,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—y yo, monaguillo del desastre.",
+        "(cada quien encuentra iglesia donde puede).",
+        "—mi fe tiene maullido y ojeras."
+      ],
+      "X": [
+        "animales litúrgicos",
+        "culpables hermosos",
+        "casi un presagio"
+      ],
+      "posicion": 8,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—ahí sí ya me sentí aludido.",
+        "(hasta por mí mismo, qué eficiencia).",
+        "—la noche siempre sabe a quién señalar."
+      ],
+      "X": [
+        "eco con patas",
+        "una coartada",
+        "versión nocturna del alma"
+      ],
+      "posicion": 9,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    }
+  ]
+}

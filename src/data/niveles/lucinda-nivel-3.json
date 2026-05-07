@@ -1,0 +1,205 @@
+{
+  "nombre_visible": "Lucinda",
+  "icono": "/assets/lucinda_sticker.svg",
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3400,
+  "ritmo_frase": {
+    "x_o": "\n",
+    "base_x": "\n",
+    "x_creativa": "\nY aun asi: "
+  },
+  "mensajes_victoria_x": [
+    "No ganaste: te sostuviste sin fingir que no dolia.",
+    "Esta vez la escena no te trago; hablo contigo.",
+    "Lo rompiste en voz alta y aun asi seguiste entera."
+  ],
+  "mensajes_victoria_o": [
+    "El aplauso llego antes que el consuelo.",
+    "La sala entendio espectaculo donde habia verdad."
+  ],
+  "personaje_id": "lucinda",
+  "nivel": 3,
+  "nombre_nivel": "Lo que se calla",
+  "frase_base": "En el cómic, “El gato de esmoquin”, Glitch…",
+  "prefijos": {
+    "O": "y luego ",
+    "X": ""
+  },
+  "tablero": [
+    {
+      "O": [
+        "despierta en una simulación encriptada",
+        "sabe que está dentro de una simulación",
+        "es consciente del programador",
+        "crea una simulación dentro de la simulación",
+        "vuelve a conectar con el vacío cuántico",
+        "se cuestiona la realidad del mundo en un sueño"
+      ],
+      "X": [
+        "despierta en una simulación encriptada",
+        "sabe que está dentro de una simulación",
+        "es consciente de una Inteligencia Artificial",
+        "crea una simulación dentro de la simulación",
+        "vuelve a conectar con el vacío cuántico",
+        "se cuestiona la realidad del mundo en un sueño"
+      ],
+      "posicion": 1
+    },
+    {
+      "O": [
+        "pasa la noche más oscura de su vida",
+        "se enfrenta a su propia mortalidad",
+        "contempla su existir ante la frialdad del código",
+        "busca un significado más allá del código",
+        "decide romper la cuarta pared…",
+        "se comunica directamente contigo"
+      ],
+      "X": [
+        "pasa la noche más oscura de su vida",
+        "se enfrenta a su propia mortalidad",
+        "contempla su existir ante la frialdad del código",
+        "busca un significado más allá del código",
+        "decide romper la cuarta pared…",
+        "se comunica directamente contigo"
+      ],
+      "posicion": 2
+    },
+    {
+      "O": [
+        "busca una salida que tenga sentido",
+        "comprende la naturaleza de su existir",
+        "busca la falla en el sistema para escapar",
+        "usa su inexperiencia para aventurarse",
+        "emprende su travía con prueba y error",
+        "discrepa la ilusión entre decidir y libre albedrío"
+      ],
+      "X": [
+        "busca una salida que tenga sentido",
+        "comprende la naturaleza de sus interrogantes",
+        "busca la falla en el sistema para escapar",
+        "usa su inexperiencia para aventurarse",
+        "emprende su travía con prueba y error",
+        "discrepa la ilusión entre decidir y libre albedrío"
+      ],
+      "posicion": 3
+    },
+    {
+      "O": [
+        "presintiendo que todo está perdido.",
+        "detectando un fallo crítico en el sistema.",
+        "amenazado de ser borrado por la I.A.",
+        "contradiciendo a la I.A. 'Gatoencerrado'",
+        "comprendiendo que la I.A. lo atraпó.",
+        "borrando accidentalmente su vida extra."
+      ],
+      "X": [
+        "pierde la esperanza al descubrir un fallo crítico",
+        "complica su escape por arreglar el código",
+        "es amenazado por GatoEncerrado",
+        "entra en conflicto con la I.A.",
+        "comprende que la I.A. no lo dejará salir",
+        "borra accidentalmente su vida extra"
+      ],
+      "posicion": 4
+    },
+    {
+      "O": [
+        "debe encontrar una manera de escapar",
+        "la simulación le ofrece tan solo una vida",
+        "conversa con una I.A. y le explica su existencia",
+        "absorbe las reglas de su nuevo mundo",
+        "desafía las reglas dentro de la simulación",
+        "recibe una vida extra por parte de la I.A."
+      ],
+      "X": [
+        "debe encontrar una manera de escapar",
+        "la simulación le ofrece tan solo una vida",
+        "conversa con una I.A. y le explica su existencia",
+        "absorbe las reglas de su nuevo mundo",
+        "desafía las reglas dentro de la simulación",
+        "recibe una vida extra por parte de la I.A."
+      ],
+      "posicion": 5
+    },
+    {
+      "O": [
+        "explorando los límites de la simulación",
+        "explora como si estuviera soñando",
+        "juega con las reglas del código",
+        "deja de tomar tan en serio el conflicto",
+        "comienza a divertirse con los obstáculos",
+        "descubre habilidades inesperadas"
+      ],
+      "X": [
+        "explora los límites de la simulación",
+        "explora el mundo como si estuviera soñando",
+        "juega con las reglas del código",
+        "deja de tomar tan en serio el conflicto",
+        "comienza a divertirse con los obstáculos",
+        "descubre habilidades inesperadas"
+      ],
+      "posicion": 6
+    },
+    {
+      "O": [
+        "tratando de comprender el código",
+        "luchando con el miedo a la muerte.",
+        "encontrando un archivo oculto.",
+        "descifrando partes del código.",
+        "reparando sectores de datos corruptos.",
+        "deseando entender el propósito."
+      ],
+      "X": [
+        "lucha con el miedo de no entender la vida",
+        "lucha con el miedo de perder su vida extra",
+        "abre un archivo oculto con datos sobre la fuente",
+        "decodifica partes del código fuente",
+        "repara sectores de datos corruptos",
+        "desea entender el propósito del juego"
+      ],
+      "posicion": 7
+    },
+    {
+      "O": [
+        "usa todo lo aprendido en la simulación",
+        "manipula el código fuente desde su interior",
+        "intenta hackear a la I.A. para abrir un portal",
+        "GatoEncerrado inicia su autodestrucción",
+        "le contagia sin querer un bostezo a la I.A.",
+        "logra en GatoEncerrado una cálida chispa"
+      ],
+      "X": [
+        "usa todo lo aprendido en la simulación",
+        "manipula el código fuente desde su interior",
+        "intenta hackear a la I.A. para abrir un portal",
+        "GatoEncerrado inicia su autodestrucción",
+        "le contagia sin querer un bostezo a la I.A.",
+        "logra en GatoEncerrado una cálida chispa"
+      ],
+      "posicion": 8
+    },
+    {
+      "O": [
+        "topándose con un ambiente inestable.",
+        "confiando en la simulación.",
+        "aceptando su destino para ser libre.",
+        "desafiando las reglas para ser libre.",
+        "detectando que el peligro es real.",
+        "decidiendo entrar a una zona inestable."
+      ],
+      "X": [
+        "se topa con un sector inestable",
+        "no sabe si es mejor confiar en la simulación",
+        "debe aceptar su destino para ser libre",
+        "debe desafiar las reglas para ser libre",
+        "detecta un verdadero peligro al principio",
+        "decide entrar a un ambiente inestable"
+      ],
+      "posicion": 9
+    }
+  ]
+}

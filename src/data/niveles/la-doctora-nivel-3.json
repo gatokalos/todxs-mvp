@@ -1,0 +1,260 @@
+{
+  "nombre_visible": "La Doctora",
+  "icono": "/assets/doctora_sticker.svg",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "La evidencia quedó ordenada con una claridad que casi incomoda.",
+    "El cuadro cerró con precisión clínica; incluso el símbolo obedeció.",
+    "Lo observé con distancia y, aun así, algo ardió en el margen."
+  ],
+  "mensajes_victoria_o": [
+    "El caso sigue abierto; la muestra no terminó de organizarse.",
+    "Hubo indicios, sí, pero no suficientes para sostener una hipótesis.",
+    "La escena produjo más síntoma que conclusión."
+  ],
+  "personaje_id": "la-doctora",
+  "nivel": 3,
+  "nombre_nivel": "Exploración",
+  "frase_base": "Quizá su gata le transmita lo que en mi campo llamamos…",
+  "tablero": [
+    {
+      "O": [
+        "reducir la ansiedad",
+        "reducir el estrés",
+        "equilibrar energías"
+      ],
+      "X": [
+        "estatuas de Buda",
+        "rituales",
+        "mantras"
+      ],
+      "posicion": 1,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    },
+    {
+      "O": [
+        "conciencia plena",
+        "concentración",
+        "limpieza corporal y mental"
+      ],
+      "X": [
+        "incienso",
+        "un tecito",
+        "estampillas de algún santo o santa"
+      ],
+      "posicion": 2,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    },
+    {
+      "O": [
+        "reducir el estrés",
+        "conciencia plena",
+        "equilibrar energías"
+      ],
+      "X": [
+        "preparar el sueño sagrado",
+        "respiración yóguica",
+        "ejercicios de respiración"
+      ],
+      "posicion": 3,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    },
+    {
+      "O": [
+        "reducir la ansiedad",
+        "limpieza corporal y mental",
+        "concentración"
+      ],
+      "X": [
+        "mantras",
+        "rituales breves",
+        "un tecito"
+      ],
+      "posicion": 4,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    },
+    {
+      "O": [
+        "equilibrar energías",
+        "conciencia plena",
+        "reducir el estrés"
+      ],
+      "X": [
+        "incienso",
+        "estampillas de algún santo o santa",
+        "preparar el sueño sagrado"
+      ],
+      "posicion": 5,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    },
+    {
+      "O": [
+        "reducir la ansiedad",
+        "concentración",
+        "limpieza corporal y mental"
+      ],
+      "X": [
+        "ejercicios de respiración",
+        "respiración yóguica",
+        "mantras"
+      ],
+      "posicion": 6,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    },
+    {
+      "O": [
+        "equilibrar energías",
+        "reducir el estrés",
+        "conciencia plena"
+      ],
+      "X": [
+        "rituales",
+        "incienso",
+        "un tecito"
+      ],
+      "posicion": 7,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    },
+    {
+      "O": [
+        "concentración",
+        "reducir la ansiedad",
+        "limpieza corporal y mental"
+      ],
+      "X": [
+        "estampillas de algún santo o santa",
+        "preparar el sueño sagrado",
+        "ejercicios de respiración"
+      ],
+      "posicion": 8,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    },
+    {
+      "O": [
+        "equilibrar energías",
+        "conciencia plena",
+        "reducir el estrés"
+      ],
+      "X": [
+        "respiración yóguica",
+        "mantras",
+        "incienso"
+      ],
+      "posicion": 9,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    }
+  ]
+}

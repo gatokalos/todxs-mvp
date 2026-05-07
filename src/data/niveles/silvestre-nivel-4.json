@@ -1,0 +1,332 @@
+{
+  "personaje_id": "silvestre",
+  "nivel": 4,
+  "nombre_nivel": "Epílogo",
+  "nombre_visible": "Silvestre",
+  "icono": "/assets/silvestre_sticker.svg",
+  "frase_base": "Los gatos siempre caemos de pie porque",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Cai, si, pero algo en mi ya sabia por donde volver a enderezarse.",
+    "Esta vez el golpe no gano; apenas dejo una sombra en el cuerpo.",
+    "Aterrice raro, como en los suenos, pero aterrice."
+  ],
+  "mensajes_victoria_o": [
+    "No alcance a caer de pie; me quede a medio aire, dudando.",
+    "El suelo no me recibio; solo me recordo que sigo aprendiendo.",
+    "Esta vez la caida peso mas de la cuenta."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "el suelo se vuelve casi amable",
+        "algo me acomoda en silencio",
+        "la caida se vuelve ligera",
+        "todo encuentra su sitio",
+        "mi cuerpo recuerda por mi",
+        "ni siquiera parece un golpe"
+      ],
+      "X": [
+        "el cuerpo se adelanta a mi cabeza",
+        "el instinto toma el primer paso",
+        "algo en mi decide antes",
+        "mi espalda recuerda el aire",
+        "el salto ocurre sin pensarlo",
+        "mis patas encuentran sitio"
+      ],
+      "posicion": 1,
+      "titulo_O": "ENTONCES / ASI",
+      "titulo_X": "CUANDO / SI",
+      "eslabones_O": [
+        "entonces ",
+        "así ",
+        "y de pronto ",
+        "de golpe "
+      ],
+      "eslabones_X": [
+        "cuando ",
+        "si ",
+        "cada vez que ",
+        "a veces cuando "
+      ]
+    },
+    {
+      "O": [
+        "el golpe pierde importancia",
+        "algo me sostiene apenas",
+        "la caida cambia de idea",
+        "el aire me corrige",
+        "el suelo me recibe despacio",
+        "todo vuelve a su lugar"
+      ],
+      "X": [
+        "dejo de discutir con el aire",
+        "suelto el peso un segundo",
+        "mi cuerpo gira solo",
+        "el miedo llega tarde",
+        "el impulso gana terreno",
+        "el salto ocurre sin permiso"
+      ],
+      "posicion": 2,
+      "titulo_O": "ENTONCES / ASI",
+      "titulo_X": "CUANDO / SI",
+      "eslabones_O": [
+        "entonces ",
+        "así ",
+        "y de pronto ",
+        "de golpe "
+      ],
+      "eslabones_X": [
+        "cuando ",
+        "si ",
+        "cada vez que ",
+        "a veces cuando "
+      ]
+    },
+    {
+      "O": [
+        "la torpeza se vuelve gracia",
+        "el golpe se vuelve silencio",
+        "la caida aprende modales",
+        "mi cuerpo se recompone",
+        "todo aterriza suave",
+        "el susto pierde peso"
+      ],
+      "X": [
+        "el equilibrio aparece solo",
+        "algo en la columna despierta",
+        "mis patas recuerdan la altura",
+        "el cuerpo calcula por mi",
+        "la caida se vuelve lenta",
+        "el aire me enseña a doblarme"
+      ],
+      "posicion": 3,
+      "titulo_O": "ENTONCES / ASI",
+      "titulo_X": "CUANDO / SI",
+      "eslabones_O": [
+        "entonces ",
+        "así ",
+        "y de pronto ",
+        "de golpe "
+      ],
+      "eslabones_X": [
+        "cuando ",
+        "si ",
+        "cada vez que ",
+        "a veces cuando "
+      ]
+    },
+    {
+      "O": [
+        "el suelo deja de ser enemigo",
+        "el golpe se vuelve breve",
+        "algo me endereza",
+        "el aire me devuelve sitio",
+        "la caida se vuelve elegante",
+        "el susto se disuelve"
+      ],
+      "X": [
+        "el cuerpo escucha al aire",
+        "el movimiento encuentra ritmo",
+        "mis patas tantean el vacio",
+        "algo se acomoda en mi espalda",
+        "el salto decide por mi",
+        "el instinto abre camino"
+      ],
+      "posicion": 4,
+      "titulo_O": "ENTONCES / ASI",
+      "titulo_X": "CUANDO / SI",
+      "eslabones_O": [
+        "entonces ",
+        "así ",
+        "y de pronto ",
+        "de golpe "
+      ],
+      "eslabones_X": [
+        "cuando ",
+        "si ",
+        "cada vez que ",
+        "a veces cuando "
+      ]
+    },
+    {
+      "O": [
+        "todo encuentra su centro",
+        "el suelo cambia de caracter",
+        "el golpe se vuelve leve",
+        "algo me acomoda",
+        "el cuerpo se reordena",
+        "el susto pierde forma"
+      ],
+      "X": [
+        "la caida me habla despacio",
+        "el aire me gira apenas",
+        "mi cuerpo cede un poco",
+        "el salto se vuelve recuerdo",
+        "algo se afloja en mi espalda",
+        "el equilibrio vuelve tarde"
+      ],
+      "posicion": 5,
+      "titulo_O": "ENTONCES / ASI",
+      "titulo_X": "CUANDO / SI",
+      "eslabones_O": [
+        "entonces ",
+        "así ",
+        "y de pronto ",
+        "de golpe "
+      ],
+      "eslabones_X": [
+        "cuando ",
+        "si ",
+        "cada vez que ",
+        "a veces cuando "
+      ]
+    },
+    {
+      "O": [
+        "el suelo pierde gravedad",
+        "la caida se vuelve lenta",
+        "algo me sostiene",
+        "todo vuelve a su sitio",
+        "el cuerpo se recompone",
+        "el golpe pasa de largo"
+      ],
+      "X": [
+        "el instinto despierta primero",
+        "el cuerpo no pide permiso",
+        "algo se adelanta al miedo",
+        "el aire me toma por sorpresa",
+        "mi columna decide sola",
+        "el salto nace sin aviso"
+      ],
+      "posicion": 6,
+      "titulo_O": "ENTONCES / ASI",
+      "titulo_X": "CUANDO / SI",
+      "eslabones_O": [
+        "entonces ",
+        "así ",
+        "y de pronto ",
+        "de golpe "
+      ],
+      "eslabones_X": [
+        "cuando ",
+        "si ",
+        "cada vez que ",
+        "a veces cuando "
+      ]
+    },
+    {
+      "O": [
+        "el suelo deja de doler",
+        "el golpe se vuelve breve",
+        "la caida pierde filo",
+        "algo me devuelve equilibrio",
+        "el susto se disuelve",
+        "todo aterriza suave"
+      ],
+      "X": [
+        "el vacio se vuelve familiar",
+        "el salto ocurre otra vez",
+        "el cuerpo encuentra camino",
+        "algo se acomoda en mis patas",
+        "la caida se vuelve curva",
+        "el aire me reconoce"
+      ],
+      "posicion": 7,
+      "titulo_O": "ENTONCES / ASI",
+      "titulo_X": "CUANDO / SI",
+      "eslabones_O": [
+        "entonces ",
+        "así ",
+        "y de pronto ",
+        "de golpe "
+      ],
+      "eslabones_X": [
+        "cuando ",
+        "si ",
+        "cada vez que ",
+        "a veces cuando "
+      ]
+    },
+    {
+      "O": [
+        "la caida se vuelve historia",
+        "el suelo aprende paciencia",
+        "algo me endereza",
+        "el golpe se vuelve leve",
+        "todo vuelve a su sitio",
+        "el susto se queda atras"
+      ],
+      "X": [
+        "el cuerpo recuerda antes que yo",
+        "algo se mueve en la espalda",
+        "el salto aparece solo",
+        "el aire se vuelve aliado",
+        "el instinto toma la palabra",
+        "mis patas encuentran tierra"
+      ],
+      "posicion": 8,
+      "titulo_O": "ENTONCES / ASI",
+      "titulo_X": "CUANDO / SI",
+      "eslabones_O": [
+        "entonces ",
+        "así ",
+        "y de pronto ",
+        "de golpe "
+      ],
+      "eslabones_X": [
+        "cuando ",
+        "si ",
+        "cada vez que ",
+        "a veces cuando "
+      ]
+    },
+    {
+      "O": [
+        "la caida pierde importancia",
+        "el suelo se vuelve amable",
+        "el golpe se vuelve leve",
+        "algo me acomoda",
+        "todo vuelve a su sitio",
+        "el cuerpo respira otra vez"
+      ],
+      "X": [
+        "el cuerpo no discute con el aire",
+        "el salto ocurre otra vez",
+        "el instinto no pregunta",
+        "algo se adelanta al miedo",
+        "el equilibrio vuelve solo",
+        "el aire me reconoce"
+      ],
+      "posicion": 9,
+      "titulo_O": "ENTONCES / ASI",
+      "titulo_X": "CUANDO / SI",
+      "eslabones_O": [
+        "entonces ",
+        "así ",
+        "y de pronto ",
+        "de golpe "
+      ],
+      "eslabones_X": [
+        "cuando ",
+        "si ",
+        "cada vez que ",
+        "a veces cuando "
+      ]
+    }
+  ]
+}

@@ -1,0 +1,368 @@
+{
+  "personaje_id": "reina-de-espadas",
+  "nivel": 1,
+  "nombre_nivel": "Primer filo",
+  "nombre_visible": "La Reina de Espadas",
+  "icono": "/assets/reina_sticker.svg",
+  "frase_base": "Escúchame bien, gato: te voy a encerrar si…",
+  "prefijos": {
+    "O": "no me ",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Te vi venir desde la primera casilla, gatito.",
+    "Ni cómo negarlo: esta vez la jaula cerró perfecto.",
+    "Ay, mi cielo, te encerraste con tus propias señales."
+  ],
+  "mensajes_victoria_o": [
+    "Se me escapó el gato entre las rendijas.",
+    "Ni modo, hoy la trampa no apretó lo suficiente.",
+    "Esta vez el maullido encontró salida."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "transmite paz",
+        "despierta la intriga",
+        "muestra que estoy en lo cierto",
+        "brinda resultados",
+        "cumple los deseos",
+        "resulta familiar",
+        "resuelve un misterio"
+      ],
+      "X": [
+        "cada paso que das,",
+        "tu suerte,",
+        "tus aciertos,",
+        "tus resultados,",
+        "tus deseos cumplidos,",
+        "tu familiaridad,",
+        "tu misticismo,"
+      ],
+      "posicion": 1,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    },
+    {
+      "O": [
+        "personas",
+        "lugares",
+        "dinero",
+        "cosas",
+        "florecimiento",
+        "despacio",
+        "aventura"
+      ],
+      "X": [
+        "personas,",
+        "lugares,",
+        "dinero,",
+        "cosas,",
+        "florecimiento,",
+        "despacio,",
+        "aventura,"
+      ],
+      "posicion": 2,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    },
+    {
+      "O": [
+        "demuestra valor",
+        "deja espacio a la soledad",
+        "provoca un cambio",
+        "hace visible el avance",
+        "abre una nueva visión",
+        "provoca transformación",
+        "permite integración"
+      ],
+      "X": [
+        "valor,",
+        "soledad,",
+        "cambio,",
+        "avance,",
+        "nueva visión,",
+        "transformación,",
+        "integración,"
+      ],
+      "posicion": 3,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    },
+    {
+      "O": [
+        "es emocionante",
+        "despierta la imaginación",
+        "mueve los sentimientos",
+        "cura alguna dolencia",
+        "abre la receptividad",
+        "transmite confianza",
+        "resulta comprensible"
+      ],
+      "X": [
+        "lo que te emociona,",
+        "tu imaginación,",
+        "tu sentimiento,",
+        "tu curación,",
+        "tu receptividad,",
+        "tu confianza,",
+        "tu comprensión,"
+      ],
+      "posicion": 4,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    },
+    {
+      "O": [
+        "nuevas ideas",
+        "encuentro con otro",
+        "expansión",
+        "fundamentos",
+        "contratiempos",
+        "apertura",
+        "claridad"
+      ],
+      "X": [
+        "empezar de nuevo,",
+        "dualidad,",
+        "nacimiento,",
+        "estructura,",
+        "retos,",
+        "apertura,",
+        "claridad,"
+      ],
+      "posicion": 5,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    },
+    {
+      "O": [
+        "pasión",
+        "deseo",
+        "carrera",
+        "creador",
+        "compartir",
+        "intensidad",
+        "juego"
+      ],
+      "X": [
+        "pasión,",
+        "deseo,",
+        "carrera,",
+        "creador,",
+        "compartir,",
+        "intensidad,",
+        "juego,"
+      ],
+      "posicion": 6,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    },
+    {
+      "O": [
+        "demuestra una habilidad",
+        "comunica algo",
+        "despierta la creatividad",
+        "inspira valentía",
+        "deja ver el vacío",
+        "inspira devoción",
+        "te hace darte cuenta"
+      ],
+      "X": [
+        "tu habilidad,",
+        "tu voz interior,",
+        "tu creatividad,",
+        "tu rebeldía,",
+        "tu vacío,",
+        "tu devoción,",
+        "darte cuenta,"
+      ],
+      "posicion": 7,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    },
+    {
+      "O": [
+        "ideas",
+        "calculaciones",
+        "pensamientos",
+        "control",
+        "moralidad",
+        "lucha",
+        "mente"
+      ],
+      "X": [
+        "ideas,",
+        "calculaciones,",
+        "pensamientos,",
+        "control,",
+        "moralidad,",
+        "lucha,",
+        "mente,"
+      ],
+      "posicion": 8,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    },
+    {
+      "O": [
+        "rompe condicionamientos",
+        "cae como un rayo",
+        "guarda silencio",
+        "recuerda vidas pasadas",
+        "conserva la inocencia",
+        "mira más allá de la ilusión",
+        "saca una conclusión"
+      ],
+      "X": [
+        "condicionamientos,",
+        "el rayo,",
+        "silencio,",
+        "vidas pasadas,",
+        "inocencia,",
+        "más allá de la ilusión,",
+        "conclusión,"
+      ],
+      "posicion": 9,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    }
+  ]
+}

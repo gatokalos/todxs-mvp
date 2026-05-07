@@ -1,0 +1,170 @@
+{
+  "personaje_id": "payasito-triste",
+  "nivel": 7,
+  "nombre_nivel": "La caída",
+  "nombre_visible": "Payasito Tiste",
+  "icono": "/assets/payasito_sticker.svg",
+  "frase_base": "Hablo con gatos…",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Me salió el remate feo y preciso; así también se gana.",
+    "Ni sé si fue victoria o colapso con timing, pero funcionó.",
+    "Hoy el chiste cayó de pie antes que yo."
+  ],
+  "mensajes_victoria_o": [
+    "Esta vez el aparte me dejó solo con el eco.",
+    "Se me fue el remate antes del aplauso; pasa en las mejores tragedias.",
+    "Hoy ni el maquillaje sostuvo la caída."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "—y eso ya es intimidad adulta.",
+        "(los humanos aplauden, pero tarde).",
+        "—con uno que no juzgue, me peino."
+      ],
+      "X": [
+        "porque nadie más escucha",
+        "porque entienden el silencio",
+        "porque no se ríen mal"
+      ],
+      "posicion": 1,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—qué educación tan elegante.",
+        "(yo también quisiera mirar así).",
+        "—sin pedagogía, solo presencia: un lujo."
+      ],
+      "X": [
+        "porque saben del borde",
+        "porque miran sin pena",
+        "porque no corrigen el temblor"
+      ],
+      "posicion": 2,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—o sea, mi gremio espiritual.",
+        "(afiliación automática por insomnio).",
+        "—me aceptaron sin papeles ni dignidad."
+      ],
+      "X": [
+        "porque viven de noche",
+        "porque sospechan bonito",
+        "porque conocen el hambre"
+      ],
+      "posicion": 3,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—y yo vengo perfumado de chiste.",
+        "(menos mal que también les gusta el drama).",
+        "—la sinceridad siempre encuentra nariz."
+      ],
+      "X": [
+        "porque respetan la pausa",
+        "porque no piden moraleja",
+        "porque huelen la mentira"
+      ],
+      "posicion": 4,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—ese detalle me enternece.",
+        "(qué alivio no ser el raro oficial).",
+        "—la rareza compartida ronronea mejor."
+      ],
+      "X": [
+        "porque entienden la caída",
+        "porque caminan con misterio",
+        "porque no fingen normalidad"
+      ],
+      "posicion": 5,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—profesionales del vínculo exacto.",
+        "(ni mi terapeuta tiene ese timing).",
+        "—amor con límites: ciencia ficción."
+      ],
+      "X": [
+        "porque se van cuando basta",
+        "porque no regalan consuelo",
+        "porque cobran con mirada"
+      ],
+      "posicion": 6,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—ahí sí me asusto un poco.",
+        "(yo prefería pasar por ambiguo).",
+        "—ser entendido es una forma de intemperie."
+      ],
+      "X": [
+        "porque sostienen el gesto",
+        "porque leen el cuarto",
+        "porque oyen lo que no digo"
+      ],
+      "posicion": 7,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—yo solo domino dos de tres.",
+        "(adivina cuál me queda lejos).",
+        "—spoiler: no es el fracaso."
+      ],
+      "X": [
+        "porque no exigen chiste",
+        "porque saben del fracaso",
+        "porque duermen sin culpa"
+      ],
+      "posicion": 8,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—una ética que me humilla.",
+        "(yo miento con escenografía).",
+        "—la honestidad felina no trae telón."
+      ],
+      "X": [
+        "porque vuelven si quieren",
+        "porque no prometen nada",
+        "porque nunca mienten bonito"
+      ],
+      "posicion": 9,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    }
+  ]
+}

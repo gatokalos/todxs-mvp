@@ -1,0 +1,170 @@
+{
+  "personaje_id": "payasito-triste",
+  "nivel": 2,
+  "nombre_nivel": "La pirueta fallida",
+  "nombre_visible": "Payasito Tiste",
+  "icono": "/assets/payasito_sticker.svg",
+  "frase_base": "Gato que maúlla, no…",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Me salió el remate feo y preciso; así también se gana.",
+    "Ni sé si fue victoria o colapso con timing, pero funcionó.",
+    "Hoy el chiste cayó de pie antes que yo."
+  ],
+  "mensajes_victoria_o": [
+    "Esta vez el aparte me dejó solo con el eco.",
+    "Se me fue el remate antes del aplauso; pasa en las mejores tragedias.",
+    "Hoy ni el maquillaje sostuvo la caída."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "—pero hace buen escándalo.",
+        "(yo tampoco vine a ser discreto).",
+        "—la pena no, pero el eco sí."
+      ],
+      "X": [
+        "aprendió a callar",
+        "muerde a escondidas",
+        "se traga el susto"
+      ],
+      "posicion": 1,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—y yo menos.",
+        "(para sobreactuar nací puntual).",
+        "—ser digno también cansa."
+      ],
+      "X": [
+        "ensaya silencio",
+        "finge compostura",
+        "aguanta la función"
+      ],
+      "posicion": 2,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—qué poco profesional.",
+        "(el dolor se proyecta mejor en vivo).",
+        "—para esconderse, eligió mal especie."
+      ],
+      "X": [
+        "se guarda el drama",
+        "disimula el hambre",
+        "negocia con la sombra"
+      ],
+      "posicion": 3,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—yo nunca he tenido esa suerte.",
+        "(mi ridículo viene con agenda propia).",
+        "—y además saluda al público."
+      ],
+      "X": [
+        "pierde el turno",
+        "sostiene la pose",
+        "se salva del ridículo"
+      ],
+      "posicion": 4,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—yo lo maquillo y ya.",
+        "(milagros no hago; efectos, sí).",
+        "—cada quien gestiona su ruina como puede."
+      ],
+      "X": [
+        "domestica el impulso",
+        "se hace chiquito",
+        "corrige el temblor"
+      ],
+      "posicion": 5,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—ni yo me escondo tan bien.",
+        "(a veces sí, pero cobro boleto).",
+        "—todo escondite termina en camerino."
+      ],
+      "X": [
+        "apura la herida",
+        "le gana al eco",
+        "se esconde del espejo"
+      ],
+      "posicion": 6,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—qué precioso privilegio.",
+        "(yo tiemblo con dicción).",
+        "—hay elegancias que me quedan grandes."
+      ],
+      "X": [
+        "hace las paces",
+        "aprende modales",
+        "deja de temblar"
+      ],
+      "posicion": 7,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—como actor secundario del desastre.",
+        "(mi papel favorito, tristemente).",
+        "—la sombra también tiene aplausos pendientes."
+      ],
+      "X": [
+        "guarda distancia",
+        "espera su señal",
+        "entra por la sombra"
+      ],
+      "posicion": 8,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—yo con trabajos me aprendo el nombre.",
+        "(y eso en días buenos).",
+        "—prudente sí, pero por accidente."
+      ],
+      "X": [
+        "se aprende de memoria",
+        "olvida el abismo",
+        "se vuelve prudente"
+      ],
+      "posicion": 9,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    }
+  ]
+}

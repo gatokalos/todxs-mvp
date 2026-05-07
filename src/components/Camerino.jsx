@@ -59,6 +59,7 @@ export default function Camerino() {
   const canvasRef = useRef(null);
 
   const personaje = useGameStore((s) => s.personajeSeleccionado);
+  const [resultadosNivel, setResultadosNivel] = useState({});
   const [entries, setEntries] = useState([]);
   const [camerinoImage, setCamerinoImage] = useState(null);
   const [stats, setStats] = useState(null);
@@ -253,6 +254,14 @@ export default function Camerino() {
     const id = personaje?.slug || personaje?.id;
     if (!id) return;
     fetchNivelesPersonaje(id).then(setNiveles);
+
+    // Leer resultados por nivel desde localStorage
+    try {
+      const stored = JSON.parse(localStorage.getItem("resultados_niveles") || "{}");
+      setResultadosNivel(stored[id] || {});
+    } catch (_) {
+      setResultadosNivel({});
+    }
   }, [personaje]);
 
   useEffect(() => {
@@ -700,7 +709,7 @@ useEffect(() => {
                   return (
                     <>
                       <p style={{ margin: 0, fontSize: "1.6rem", fontWeight: 800, color: "#fff", lineHeight: 1.1 }}>{n?.nombre_nivel || `Nivel ${n?.nivel}`}</p>
-                      <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", fontWeight: 700, color: "#ffd28a", letterSpacing: "0.08em" }}>frase a improvisar</p>
+                      <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", fontWeight: 700, color: "#ffd28a", letterSpacing: "0.08em" }}>Frase base</p>
                       <p className="camerino-escenario__frase">
                         {n?.frase_base
                           ? `${n.frase_base} …`
@@ -718,39 +727,40 @@ useEffect(() => {
               <div className={`camerino-escenario${nivelExpandido !== null ? " is-open" : ""}`}>
                 <div className="camerino-escenario__burbuja">
                   {niveles.length > 0 && (
-                    <div className="camerino-niveles" role="tablist">
-                      {niveles.map((n) => (
-                        <button
-                          key={n.nivel}
-                          type="button"
-                          role="tab"
-                          aria-selected={nivelExpandido === n.nivel}
-                          className={`camerino-nivel__chip${nivelExpandido === n.nivel ? " is-active" : ""}`}
-                          onClick={(e) => { e.stopPropagation(); setNivelExpandido(nivelExpandido === n.nivel ? null : n.nivel); }}
-                        >
-                          {n.nombre_nivel || `Nivel ${n.nivel}`}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                  {nivelExpandido === null ? (
-                    <div className="camerino-escenario__top">
-                      <div className="character-selector__host-avatar camerino-escenario__host" aria-hidden="true">
-                        <img src="/assets/gato_sticker.svg" alt="" className="character-selector__host-img" />
-                        <span className="character-selector__host-blink" />
+                    <div className="camerino-niveles-group">
+                      <p className="camerino-chips-eyebrow">Temas a improvisar:</p>
+                      <div className="camerino-niveles" role="tablist">
+                        {niveles.map((n) => {
+                          const res = resultadosNivel[n.nivel];
+                          const pip = res === "X" ? "✦" : res === "O" ? "×" : res === "empate" ? "∼" : null;
+                          const pipClass = res === "X" ? "pip--won" : res === "O" ? "pip--lost" : res === "empate" ? "pip--tie" : "";
+                          return (
+                            <button
+                              key={n.nivel}
+                              type="button"
+                              role="tab"
+                              aria-selected={nivelExpandido === n.nivel}
+                              className={`camerino-nivel__chip${nivelExpandido === n.nivel ? " is-active" : ""}`}
+                              onClick={(e) => { e.stopPropagation(); setNivelExpandido(nivelExpandido === n.nivel ? null : n.nivel); }}
+                            >
+                              {pip && <span className={`camerino-nivel__pip ${pipClass}`}>{pip}</span>}
+                              {n.nombre_nivel || `Nivel ${n.nivel}`}
+                            </button>
+                          );
+                        })}
                       </div>
                     </div>
-                  ) : (
-                    <button
-                      ref={btnRef}
-                      type="button"
-                      className="camerino-escenario__ensayar"
-                      disabled={isLocked}
-                      onClick={() => handleEntrarEscenario(nivelExpandido)}
-                    >
-                      Bajar a ensayar &#8594;
-                    </button>
                   )}
+                  <button
+                    ref={btnRef}
+                    type="button"
+                    className={`camerino-escenario__ensayar${nivelExpandido === null ? " is-ghost" : ""}`}
+                    disabled={isLocked || nivelExpandido === null}
+                    onClick={() => handleEntrarEscenario(nivelExpandido)}
+                    aria-hidden={nivelExpandido === null}
+                  >
+                    Bajar a ensayar &#8594;
+                  </button>
                 </div>
               </div>
             </div>

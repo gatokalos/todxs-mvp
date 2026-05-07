@@ -1,0 +1,260 @@
+{
+  "nombre_visible": "La Doctora",
+  "icono": "/assets/doctora_sticker.svg",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "La evidencia quedó ordenada con una claridad que casi incomoda.",
+    "El cuadro cerró con precisión clínica; incluso el símbolo obedeció.",
+    "Lo observé con distancia y, aun así, algo ardió en el margen."
+  ],
+  "mensajes_victoria_o": [
+    "El caso sigue abierto; la muestra no terminó de organizarse.",
+    "Hubo indicios, sí, pero no suficientes para sostener una hipótesis.",
+    "La escena produjo más síntoma que conclusión."
+  ],
+  "personaje_id": "la-doctora",
+  "nivel": 1,
+  "nombre_nivel": "Síntomas",
+  "frase_base": "En mi bitácora se demuestra que los gatos sueñan",
+  "tablero": [
+    {
+      "O": [
+        "renacimiento y renovación",
+        "cambio y transformación",
+        "una premonición"
+      ],
+      "X": [
+        "rascar el espacio-tiempo",
+        "volar como pájaro",
+        "una era sin perros"
+      ],
+      "posicion": 1,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    },
+    {
+      "O": [
+        "el Yo del gatito",
+        "deseos y aspiraciones",
+        "un presagio"
+      ],
+      "X": [
+        "realidades alternas",
+        "tener un trono de almohadas",
+        "universos paralelos"
+      ],
+      "posicion": 2,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    },
+    {
+      "O": [
+        "la dimensión transpersonal",
+        "que todo está interconectado",
+        "clarividencia"
+      ],
+      "X": [
+        "una mariposa aleteando",
+        "su comida favorita 24/7",
+        "un ojo que le observa"
+      ],
+      "posicion": 3,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    },
+    {
+      "O": [
+        "equilibrio y compensación",
+        "proceso de duelo o pérdida",
+        "una visión del porvenir"
+      ],
+      "X": [
+        "su sombra yendo tras él",
+        "su juguete cobra vida",
+        "un laberinto de espejos"
+      ],
+      "posicion": 4,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    },
+    {
+      "O": [
+        "la Sombra de la gatita",
+        "miedos e inseguridades",
+        "una advertencia o señal de peligro"
+      ],
+      "X": [
+        "una caja cerrada",
+        "correr por túneles",
+        "cruzar la cuarta dimensión"
+      ],
+      "posicion": 5,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    },
+    {
+      "O": [
+        "iniciación y una nueva etapa",
+        "ansiedad y estrés",
+        "precognición"
+      ],
+      "X": [
+        "andar solo en calzoncillos",
+        "caer en un pozo de agua",
+        "tener un examen sorpresa"
+      ],
+      "posicion": 6,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    },
+    {
+      "O": [
+        "eventos futuros o posibles",
+        "necesidad de control o equilibrio",
+        "profecías"
+      ],
+      "X": [
+        "no poder saltar alto",
+        "no poder maullar",
+        "no caer en cuatro patas"
+      ],
+      "posicion": 7,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    },
+    {
+      "O": [
+        "experiencias y emociones",
+        "autoconocimiento y reflexión",
+        "presentimiento de lo inminente"
+      ],
+      "X": [
+        "un hilo invisible e infinito",
+        "láseres de colores",
+        "una gemela copycat"
+      ],
+      "posicion": 8,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    },
+    {
+      "O": [
+        "arquetipos y símbolos universales",
+        "conexión con lo inconsciente",
+        "intuición por lo que se avecina"
+      ],
+      "X": [
+        "no encontrar el arenero",
+        "ruidos ensordecedores",
+        "el ojo de un huracán"
+      ],
+      "posicion": 9,
+      "titulo_O": "QUE SIGNIFICAN / LO QUE INDICA / LO QUE SUGIERE",
+      "titulo_X": "COSAS COMO / SIGNOS DE / IMÁGENES DE",
+      "eslabones_O": [
+        "que significan ",
+        "lo que indica ",
+        "lo que sugiere "
+      ],
+      "eslabones_X": [
+        "cosas como ",
+        "signos de ",
+        "imágenes de "
+      ]
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "personaje_id": "lucinda",
+  "nivel": 5,
+  "nombre_nivel": "El sello",
+  "nombre_visible": "Lucinda",
+  "icono": "/assets/lucinda_sticker.svg",
+  "frase_base": "¡Oye, Gato! Crea una protagonista que diga…",
+  "prefijos": {
+    "O": "justo cuando ",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3400,
+  "ritmo_frase": {
+    "x_o": "\n",
+    "base_x": "\n",
+    "x_creativa": "\nY aun asi: "
+  },
+  "mensajes_victoria_x": [
+    "No ganaste: te sostuviste sin fingir que no dolia.",
+    "Esta vez la escena no te trago; hablo contigo.",
+    "Lo rompiste en voz alta y aun asi seguiste entera."
+  ],
+  "mensajes_victoria_o": [
+    "El aplauso llego antes que el consuelo.",
+    "La sala entendio espectaculo donde habia verdad."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "entra una señora de cabello gris corto.",
+        "se sienta en el escritorio.",
+        "la reina sostiene la espada",
+        "todo el Reino empieza a tambalear.",
+        "Sofía empuña su pluma.",
+        "Una periodista implacable."
+      ],
+      "X": [
+        "\"filo afilado… mente más afilada aún\"",
+        "\"la verdad corta; la mentira, desangra\"",
+        "\"verdad revelada\"",
+        "\"la corona pesa; la espada, decide.\"",
+        "“la verdad es una arma de doble filo”",
+        "\"pluma afilada… verdad implacable\""
+      ],
+      "posicion": 1
+    },
+    {
+      "O": [
+        "se encuentra sin salida aparente.",
+        "la acción debe ser rápida y decisiva.",
+        "su carrera es destrozada.",
+        "triunfa, pero a un costo personal alto."
+      ],
+      "X": [
+        "\"la paciencia es un lujo\"",
+        "\"morirás si dudas\"",
+        "“investigar es necesario\"",
+        "“¡victoria amarga!”",
+        "“la duda es veneno”",
+        "“la traición es un antídoto”"
+      ],
+      "posicion": 2
+    },
+    {
+      "O": [
+        "la reina interroga a los diez testigos.",
+        "descubre que todo es una conspiración.",
+        "duda de su propio juicio.",
+        "su enemigo más poderoso la amenaza.",
+        "pone en riesgo su vida y posición."
+      ],
+      "X": [
+        "“¡el anonimato no es un derecho!”",
+        "“Aquí todos sabemos algo”",
+        "es actuar o esperar, el reloj no perdona'",
+        "“que la verdad sea mi última arma”",
+        "“el honor que sea tu última armadura”"
+      ],
+      "posicion": 3
+    },
+    {
+      "O": [
+        "es traicionada por su propia fuente.",
+        "la empiezan a vigilar.",
+        "le pasan el mensajes cifrado.",
+        "enfrenta un intento de asesinato.",
+        "Sofía contraataca con la verdad."
+      ],
+      "X": [
+        "\"la madeja se desenreda…”",
+        "“el monstruo se ha revelado”",
+        "“usted es un asesino frustrado”",
+        "“mentira susurrada, verdad a gritos”",
+        "“verdad o silencio, es una u otra”"
+      ],
+      "posicion": 4
+    },
+    {
+      "O": [
+        "la Reina busca justicia.",
+        "revienta la corrupción gubernamental.",
+        "el joven mensajero entrega el sobre.",
+        "la jefa recibe la información crucial.",
+        "se le avecinan las decisiones difíciles."
+      ],
+      "X": [
+        "“¡justicia!, cueste lo que cueste”",
+        "\"señora, información urgente\"",
+        "\"sin rostro, pero con voz poderosa\"",
+        "\"pluma inocente, ahora espada afilada\"",
+        "“la espada descansa; la Reina, ¡nunca!”"
+      ],
+      "posicion": 5
+    },
+    {
+      "O": [
+        "Sofía roba la información clasificada.",
+        "la astucia y el engaño son necesarios.",
+        "la verdad le es revelada.",
+        "inicia la nueva era de transparencia."
+      ],
+      "X": [
+        "“tomó espadas y razones para rendirse”",
+        "“buscaba historias, encontré mi misión”",
+        "\"la verdad será mi espada\"",
+        "\"confrontar es meramente humano\"",
+        "“aliados leales; enemigos expuestos”",
+        "“sangre derramada… verdad triunfante”"
+      ],
+      "posicion": 6
+    },
+    {
+      "O": [
+        "es traicionada por un aliado cercano.",
+        "está por rendirse en su habitación.",
+        "se atora en su propia investigación.",
+        "la culpa y el miedo la consumen.",
+        "empieza a tener pesadillas y ansiedad."
+      ],
+      "X": [
+        "“antes temía la verdad, ahora la persigo”",
+        "“¡dime la verdad!”",
+        "“confrontarte es algo tentador”",
+        "“veo corrupción pululando en las sombras”",
+        "“el anonimato es un privilegio, no un derecho”"
+      ],
+      "posicion": 7
+    },
+    {
+      "O": [
+        "Sofía se alza implacable y justamente.",
+        "les corta quirúrgicamente la mentira.",
+        "se le desgarra el corazón por la traición.",
+        "entra el informante anónimo."
+      ],
+      "X": [
+        "“¿y si me equivoco?”",
+        "\"lo siento, mi Reina\"",
+        "\"evidencia presentada\"",
+        "“Un sobre. Un secreto.”",
+        "“el reino está en juego”"
+      ],
+      "posicion": 8
+    },
+    {
+      "O": [
+        "la Reina debe actuar con rapidez.",
+        "la Reina debe esperar más pruebas.",
+        "tiene que descansar para reflexionar.",
+        "huye de la verdad, por seguridad.",
+        "se asoma una victoria pírrica.",
+        "navega en aguas turbias y trae secuelas."
+      ],
+      "X": [
+        "\"déjala en la mesa\"",
+        "“¿actuar ahora o esperar un segundo?”",
+        "\"aliados reunidos, por fin\"",
+        "“Y el rompecabezas crece”",
+        "\"fuentes ocultas, verdades reveladas\"",
+        "\"sin nombres, pero con hechos\""
+      ],
+      "posicion": 9
+    }
+  ]
+}

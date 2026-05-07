@@ -1,0 +1,170 @@
+{
+  "personaje_id": "payasito-triste",
+  "nivel": 8,
+  "nombre_nivel": "El remate",
+  "nombre_visible": "Payasito Tiste",
+  "icono": "/assets/payasito_sticker.svg",
+  "frase_base": "Cuando el gato no está, el ratón…",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Me salió el remate feo y preciso; así también se gana.",
+    "Ni sé si fue victoria o colapso con timing, pero funcionó.",
+    "Hoy el chiste cayó de pie antes que yo."
+  ],
+  "mensajes_victoria_o": [
+    "Esta vez el aparte me dejó solo con el eco.",
+    "Se me fue el remate antes del aplauso; pasa en las mejores tragedias.",
+    "Hoy ni el maquillaje sostuvo la caída."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "—y yo soy el telón cansado.",
+        "(nadie mira al utilero del abismo).",
+        "—la ausencia también produce divas."
+      ],
+      "X": [
+        "se roba el escenario",
+        "ensaya su tragedia",
+        "se cree protagonista"
+      ],
+      "posicion": 1,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—como todo suplente emocionado.",
+        "(yo también debuté por accidente).",
+        "—la soberbia cabe en cuerpos pequeños."
+      ],
+      "X": [
+        "se aprende el foco",
+        "improvisa valentía",
+        "habla de más"
+      ],
+      "posicion": 2,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—franquicia del desastre ajeno.",
+        "(a ver si así recupero inversión emocional).",
+        "—hay imitadores con más hambre que talento."
+      ],
+      "X": [
+        "se pone mi traje",
+        "cobra la entrada",
+        "vende su temblor"
+      ],
+      "posicion": 3,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—clásico ascenso por vacío de poder.",
+        "(el circo también tiene política interna).",
+        "—ningún reino resiste una silla libre."
+      ],
+      "X": [
+        "se sube a la mesa",
+        "invita al ruido",
+        "se inventa jerarquía"
+      ],
+      "posicion": 4,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—como si eso pagara renta.",
+        "(yo al menos cobro en vergüenza).",
+        "—cada quien su moneda de cambio."
+      ],
+      "X": [
+        "practica su monólogo",
+        "se da importancia",
+        "desordena la escena"
+      ],
+      "posicion": 5,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—y en eso sí somos familia.",
+        "(la solemnidad siempre acaba en tropiezo).",
+        "—tomarse en serio es pedir resbalón."
+      ],
+      "X": [
+        "se toma muy en serio",
+        "rompe la pauta",
+        "hereda el susto"
+      ],
+      "posicion": 6,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—yo nunca he logrado las tres.",
+        "(tal vez por eso sigo aquí, ensayando).",
+        "—la valentía me queda prestada."
+      ],
+      "X": [
+        "aplaude solo",
+        "se deja ver",
+        "pierde el miedo"
+      ],
+      "posicion": 7,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—pequeño tirano con timing.",
+        "(hasta ternura da, si no fuera tan mío).",
+        "—el poder miniatura también intoxica."
+      ],
+      "X": [
+        "se queda con el queso",
+        "pide encore",
+        "alarga la función"
+      ],
+      "posicion": 8,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—qué linda la ignorancia escénica.",
+        "(yo la perdí en la tercera ovación triste).",
+        "—hay inocencias que duran un foco."
+      ],
+      "X": [
+        "descubre el micrófono",
+        "organiza su caída",
+        "se cree inmortal"
+      ],
+      "posicion": 9,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    }
+  ]
+}

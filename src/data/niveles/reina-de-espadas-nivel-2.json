@@ -1,0 +1,332 @@
+{
+  "personaje_id": "reina-de-espadas",
+  "nivel": 2,
+  "nombre_nivel": "La jugada",
+  "nombre_visible": "La Reina de Espadas",
+  "icono": "/assets/reina_sticker.svg",
+  "frase_base": "Tengo una jaula para gatos a tu medida:",
+  "prefijos": {
+    "O": "en otras palabras, ",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Ay, gatito: entraste tú solo y todavía te acomodaste.",
+    "Te quedó perfecta la jaula, payasito.",
+    "Ni tuve que empujarte: solito cerraste la puertita."
+  ],
+  "mensajes_victoria_o": [
+    "Qué raro: hoy el gato sí encontró por dónde salirse.",
+    "Se me fue un maullido entre los barrotes.",
+    "Ni modo: esta vez el encierro no amarró."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "te queda al centímetro.",
+        "te cierra justo donde más presumes.",
+        "no te aprieta: te exhibe.",
+        "se ajusta a tu soberbia sin fallar.",
+        "te recoge entero, con pose y todo."
+      ],
+      "X": [
+        "tu orgullo,",
+        "tu soberbia,",
+        "tu capricho,",
+        "tu ego,",
+        "tu vanidad,"
+      ],
+      "posicion": 1,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    },
+    {
+      "O": [
+        "te delata antes de que hables.",
+        "te traiciona con el puro gesto.",
+        "te deja en evidencia muy rápido.",
+        "te hace tropezar solito.",
+        "te descubre sin que yo te toque."
+      ],
+      "X": [
+        "tu prisa,",
+        "tu impulso,",
+        "tu desesperación,",
+        "tu ansiedad,",
+        "tu manía de reaccionar,"
+      ],
+      "posicion": 2,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    },
+    {
+      "O": [
+        "ya me dice por dónde romperte.",
+        "me muestra exactamente dónde doblarte.",
+        "me señala tu punto más débil.",
+        "me confirma que ibas a caer.",
+        "me entrega la llave de tu encierro."
+      ],
+      "X": [
+        "tu mirada,",
+        "tu silencio,",
+        "tu temblor,",
+        "tu respiración,",
+        "tu inseguridad,"
+      ],
+      "posicion": 3,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    },
+    {
+      "O": [
+        "la dejé lista para cuando corras.",
+        "la puse justo en la salida falsa.",
+        "la escondí en lo que más deseas.",
+        "la armé con lo que tú mismo repites.",
+        "la tendí donde finges sentirte libre."
+      ],
+      "X": [
+        "tu escape,",
+        "tu coartada,",
+        "tu excusa,",
+        "tu ruta de salida,",
+        "tu intento de huida,"
+      ],
+      "posicion": 4,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    },
+    {
+      "O": [
+        "te gobierna más de lo que aceptas.",
+        "te arrastra aunque lo niegues.",
+        "te pone de rodillas sin hacer ruido.",
+        "te deja obedeciendo por dentro.",
+        "te encierra desde antes del primer movimiento."
+      ],
+      "X": [
+        "tu deseo,",
+        "tu necesidad de aprobación,",
+        "tu hambre de atención,",
+        "tu dependencia,",
+        "tu miedo al abandono,"
+      ],
+      "posicion": 5,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    },
+    {
+      "O": [
+        "no te salva: te regresa conmigo.",
+        "te hace dar vueltas en la misma vuelta.",
+        "te devuelve al punto donde mando yo.",
+        "te repite el patrón sin misericordia.",
+        "te amarra otra vez al mismo error."
+      ],
+      "X": [
+        "tu argumento,",
+        "tu lógica,",
+        "tu versión de los hechos,",
+        "tu defensa,",
+        "tu discurso,"
+      ],
+      "posicion": 6,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    },
+    {
+      "O": [
+        "se cae en cuanto te contradicen.",
+        "no aguanta un segundo de verdad.",
+        "se rompe nomás con mirarlo bien.",
+        "te cubre mal y por ratitos.",
+        "te deja más expuesto que antes."
+      ],
+      "X": [
+        "tu máscara,",
+        "tu personaje,",
+        "tu papel de inocente,",
+        "tu teatro,",
+        "tu pose,"
+      ],
+      "posicion": 7,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    },
+    {
+      "O": [
+        "te convence de abrirme la puerta tú mismo.",
+        "te hace creer que todavía eliges.",
+        "te vende la idea de que sigues libre.",
+        "te adormece justo antes del cierre.",
+        "te endulza el encierro para que entres solo."
+      ],
+      "X": [
+        "tu ilusión de control,",
+        "tu falsa libertad,",
+        "tu autoengaño,",
+        "tu fantasía de escapar,",
+        "tu confianza de más,"
+      ],
+      "posicion": 8,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    },
+    {
+      "O": [
+        "y ya nomás te queda maullar.",
+        "y luego no digas que no te avisé.",
+        "y por eso caes redondito.",
+        "y ahí es donde se te acaba el jueguito.",
+        "y con eso basta para encerrarte."
+      ],
+      "X": [
+        "tu final,",
+        "tu derrota,",
+        "tu lección,",
+        "tu caída,",
+        "tu escarmiento,"
+      ],
+      "posicion": 9,
+      "titulo_O": "ENTONCES / POR ESO / Y ASI",
+      "titulo_X": "SI / CUANDO / MIENTRAS",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "y asi ",
+        "no me ",
+        "ya veo que "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "mientras ",
+        "cada vez que ",
+        "nomas con "
+      ]
+    }
+  ]
+}

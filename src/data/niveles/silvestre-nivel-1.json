@@ -1,0 +1,332 @@
+{
+  "personaje_id": "silvestre",
+  "nivel": 1,
+  "nombre_nivel": "Escena uno",
+  "nombre_visible": "Silvestre",
+  "icono": "/assets/silvestre_sticker.svg",
+  "frase_base": "De chiquito, sentía que",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Gane, pero se siente raro... como si el tablero ya lo hubiera sonado antes que yo.",
+    "Esta vez la grieta se abrio del lado correcto. No se por que, pero entre.",
+    "Cayo en su sitio. O eso quiero creer, antes de que despierte."
+  ],
+  "mensajes_victoria_o": [
+    "Se me fue la jugada como se me van los suenos: justo cuando iba a tocar algo.",
+    "No alcanzo. Se quedo vibrando, como una puerta entreabierta.",
+    "Esta vez el tablero no me sostuvo. Igual sigo oyendo el eco."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "tuve absoluta discreción.",
+        "entendí la malicia.",
+        "dejé de solapar a mi pandilla.",
+        "entrené para actuar con sigilo.",
+        "lo clandestino me llamó.",
+        "perdí mi privacidad",
+        "me hice underground"
+      ],
+      "X": [
+        "discreto",
+        "sin malicia",
+        "solapador",
+        "sigiloso",
+        "clandestino",
+        "privado",
+        "del underground"
+      ],
+      "posicion": 1,
+      "titulo_O": "A PENAS CRECÍ / PERO LUEGO CAMBIÉ / Y CON EL TIEMPO",
+      "titulo_X": "MI CORAZÓN ERA / TENÍA UN CARÁCTER / YO ERA",
+      "eslabones_O": [
+        ", a penas crecí, ",
+        ", pero luego cambié, ",
+        ", y con el tiempo, "
+      ],
+      "eslabones_X": [
+        "mi corazón era ",
+        "tenía un carácter ",
+        "yo era "
+      ]
+    },
+    {
+      "O": [
+        "supe que no toda la gente es gentil.",
+        "aprendí a detectar gente auténtica.",
+        "volaré lo sencillo y ordinario.",
+        "empecé a campechanear a gusto.",
+        "perdí la ingenuidad.",
+        "gané el sentido común.",
+        "me ocupé en regresar a la normalidad."
+      ],
+      "X": [
+        "gentil",
+        "auténtico",
+        "sencillo",
+        "campechano",
+        "ingenuo",
+        "común",
+        "normal"
+      ],
+      "posicion": 2,
+      "titulo_O": "A PENAS CRECÍ / PERO LUEGO CAMBIÉ / Y CON EL TIEMPO",
+      "titulo_X": "MI CORAZÓN ERA / TENÍA UN CARÁCTER / YO ERA",
+      "eslabones_O": [
+        ", a penas crecí, ",
+        ", pero luego cambié, ",
+        ", y con el tiempo, "
+      ],
+      "eslabones_X": [
+        "mi corazón era ",
+        "tenía un carácter ",
+        "yo era "
+      ]
+    },
+    {
+      "O": [
+        "me dejaron de gustar las cosas tiernas.",
+        "dejé de ser un mimoso.",
+        "dejé de buscar afecto.",
+        "dejé de recibir caricias.",
+        "detesté lo empalagoso.",
+        "perdí las suavidad de mis palabras.",
+        "huí del contacto."
+      ],
+      "X": [
+        "tierno",
+        "mimoso",
+        "afectuoso",
+        "cariñoso",
+        "empalagoso",
+        "suave",
+        "muy táctil"
+      ],
+      "posicion": 3,
+      "titulo_O": "A PENAS CRECÍ / PERO LUEGO CAMBIÉ / Y CON EL TIEMPO",
+      "titulo_X": "MI CORAZÓN ERA / TENÍA UN CARÁCTER / YO ERA",
+      "eslabones_O": [
+        ", a penas crecí, ",
+        ", pero luego cambié, ",
+        ", y con el tiempo, "
+      ],
+      "eslabones_X": [
+        "mi corazón era ",
+        "tenía un carácter ",
+        "yo era "
+      ]
+    },
+    {
+      "O": [
+        "me hice abstraído.",
+        "me volví un despistado.",
+        "empecé a soñar todo el día.",
+        "me perdí en distracciones.",
+        "quedé aturdido.",
+        "logré desentenderme.",
+        "empezó mi impetuosidad."
+      ],
+      "X": [
+        "abstraído",
+        "despistado",
+        "soñador",
+        "distraído",
+        "atolondrado",
+        "con déficit de atención",
+        "impetuoso"
+      ],
+      "posicion": 4,
+      "titulo_O": "A PENAS CRECÍ / PERO LUEGO CAMBIÉ / Y CON EL TIEMPO",
+      "titulo_X": "MI CORAZÓN ERA / TENÍA UN CARÁCTER / YO ERA",
+      "eslabones_O": [
+        ", a penas crecí, ",
+        ", pero luego cambié, ",
+        ", y con el tiempo, "
+      ],
+      "eslabones_X": [
+        "mi corazón era ",
+        "tenía un carácter ",
+        "yo era "
+      ]
+    },
+    {
+      "O": [
+        "jamás volví a ser imprudente.",
+        "tomé mayores precauciones.",
+        "jamás dejé de juntar previsiones.",
+        "empecé a ser más cauteloso.",
+        "dejé de levantar sospechas.",
+        "descuidé mi higiene mental.",
+        "dejé de llamar la atención."
+      ],
+      "X": [
+        "imprudente",
+        "preocupón",
+        "previsor",
+        "incauto",
+        "receloso",
+        "cuidadoso",
+        "atento"
+      ],
+      "posicion": 5,
+      "titulo_O": "A PENAS CRECÍ / PERO LUEGO CAMBIÉ / Y CON EL TIEMPO",
+      "titulo_X": "MI CORAZÓN ERA / TENÍA UN CARÁCTER / YO ERA",
+      "eslabones_O": [
+        ", a penas crecí, ",
+        ", pero luego cambié, ",
+        ", y con el tiempo, "
+      ],
+      "eslabones_X": [
+        "mi corazón era ",
+        "tenía un carácter ",
+        "yo era "
+      ]
+    },
+    {
+      "O": [
+        "escuché la voz de mi gato interior.",
+        "me rodeé de gatos pensadores.",
+        "busqué consejos de gatos eruditas.",
+        "me entregué totalmente a la filosofía.",
+        "puse en práctica una teoría.",
+        "me hice gato intelectual.",
+        "empecé a tener la razón."
+      ],
+      "X": [
+        "sabio",
+        "pensador",
+        "erudita",
+        "filósofo",
+        "teórico",
+        "intelectual",
+        "razonador"
+      ],
+      "posicion": 6,
+      "titulo_O": "A PENAS CRECÍ / PERO LUEGO CAMBIÉ / Y CON EL TIEMPO",
+      "titulo_X": "MI CORAZÓN ERA / TENÍA UN CARÁCTER / YO ERA",
+      "eslabones_O": [
+        ", a penas crecí, ",
+        ", pero luego cambié, ",
+        ", y con el tiempo, "
+      ],
+      "eslabones_X": [
+        "mi corazón era ",
+        "tenía un carácter ",
+        "yo era "
+      ]
+    },
+    {
+      "O": [
+        "perdí la clarividencia de mi mamá",
+        "me volví muy perceptivo de mi entorno.",
+        "entendí la perspicacia de los humanos.",
+        "empecé a escuchar mi intuición.",
+        "me volví impulsivo.",
+        "le hice más caso a mis corazonadas.",
+        "perdí mi sensibilidad a la naturaleza."
+      ],
+      "X": [
+        "visionario",
+        "perceptivo",
+        "perspicaz",
+        "intuitivo",
+        "impulsivo",
+        "instintivo",
+        "sensible"
+      ],
+      "posicion": 7,
+      "titulo_O": "A PENAS CRECÍ / PERO LUEGO CAMBIÉ / Y CON EL TIEMPO",
+      "titulo_X": "MI CORAZÓN ERA / TENÍA UN CARÁCTER / YO ERA",
+      "eslabones_O": [
+        ", a penas crecí, ",
+        ", pero luego cambié, ",
+        ", y con el tiempo, "
+      ],
+      "eslabones_X": [
+        "mi corazón era ",
+        "tenía un carácter ",
+        "yo era "
+      ]
+    },
+    {
+      "O": [
+        "dejé de ser tan ocurrente.",
+        "comprendí la ironía más extraña.",
+        "aprecié el infinito ingenio humano.",
+        "aprendí el sarcasmo más sutil.",
+        "empece a hacer bromas pesadas.",
+        "me llené de mordacidad.",
+        "me gustó el humor negro."
+      ],
+      "X": [
+        "ocurrente",
+        "irónico",
+        "ingenioso",
+        "sarcástico",
+        "bromista",
+        "sin mordacidad",
+        "burlón"
+      ],
+      "posicion": 8,
+      "titulo_O": "A PENAS CRECÍ / PERO LUEGO CAMBIÉ / Y CON EL TIEMPO",
+      "titulo_X": "MI CORAZÓN ERA / TENÍA UN CARÁCTER / YO ERA",
+      "eslabones_O": [
+        ", a penas crecí, ",
+        ", pero luego cambié, ",
+        ", y con el tiempo, "
+      ],
+      "eslabones_X": [
+        "mi corazón era ",
+        "tenía un carácter ",
+        "yo era "
+      ]
+    },
+    {
+      "O": [
+        "me identifiqué con este cuerpo.",
+        "me hice materialista.",
+        "me sentí \"atrapado en la realidad\".",
+        "entendí la cerrazón de los adultos",
+        "vi la forma física de mi alma.",
+        "estudié la transmigración de las almas.",
+        "empecé a creer en la reencarnación."
+      ],
+      "X": [
+        "feliz en su cuerpo",
+        "materialista",
+        "que se cuestionaba la realidad",
+        "encerrado en su mundo",
+        "encarnado en su cuerpo",
+        "bien pirata",
+        "como el Dalai Lama"
+      ],
+      "posicion": 9,
+      "titulo_O": "A PENAS CRECÍ / PERO LUEGO CAMBIÉ / Y CON EL TIEMPO",
+      "titulo_X": "MI CORAZÓN ERA / TENÍA UN CARÁCTER / YO ERA",
+      "eslabones_O": [
+        ", a penas crecí, ",
+        ", pero luego cambié, ",
+        ", y con el tiempo, "
+      ],
+      "eslabones_X": [
+        "mi corazón era ",
+        "tenía un carácter ",
+        "yo era "
+      ]
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "personaje_id": "saturnina",
+  "nivel": 3,
+  "nombre_nivel": "El eco",
+  "nombre_visible": "Saturnina",
+  "icono": "/assets/saturnina_sticker.svg",
+  "frase_base": "¿Usted se siente gato porque",
+  "prefijos": {
+    "O": "pero no por ",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Eso quedó como pregunta de tarot bien barajada: pica, pero ilumina.",
+    "Mira qué bonito: te salió gata la duda y maulló con argumentos.",
+    "La pregunta cayó parada, como gato curioso que sí trae destino."
+  ],
+  "mensajes_victoria_o": [
+    "La pregunta venía con cola, pero se te enredó en la lámpara.",
+    "Quiso sentirse gata y acabó nomás haciéndole ojitos al misterio.",
+    "Se asomó la intuición, pero hoy andaba en chanclas y no alcanzó a llegar."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "regocijarse?",
+        "deleitarse?",
+        "sus sentidos?",
+        "gozar?",
+        "desenfrenado?",
+        "experimentado?",
+        "animoso?"
+      ],
+      "X": [
+        "se regocija con la manada",
+        "deleita sus sentidos",
+        "sus sentidos superan los del humano",
+        "goza cada segundo",
+        "desata la anarquía",
+        "nos presume su experiencia",
+        "anima los desconsolados"
+      ],
+      "posicion": 1,
+      "titulo_O": "PERO NO POR",
+      "titulo_X": "Un placer que revela."
+    },
+    {
+      "O": [
+        "contemplativo?",
+        "hastiado?",
+        "sereno?",
+        "aburrido?",
+        "insípido?",
+        "desinteresado?",
+        "desganado?"
+      ],
+      "X": [
+        "contempla los rincones de la casa",
+        "está hastiado con lo que tiene",
+        "la serenidad es su emblema",
+        "se aburre rápidamente",
+        "de pronto algo le parece insípido",
+        "su desinterés es claro y evidente",
+        "parece triste y desganado"
+      ],
+      "posicion": 2,
+      "titulo_O": "PERO NO POR",
+      "titulo_X": "Una distancia con nombre."
+    },
+    {
+      "O": [
+        "apasionado?",
+        "atractivo?",
+        "cautivador?",
+        "sensual?",
+        "libidinoso?",
+        "carnal?",
+        "voluptuoso?"
+      ],
+      "X": [
+        "ronronea apasionadamente",
+        "es lustroso y atractivo",
+        "nos cautiva con su ojos",
+        "sus chirridos y trinos son sensuales",
+        "hace una gesto libidinoso",
+        "son carnales sus alaridos",
+        "su figura es voluptuosa"
+      ],
+      "posicion": 3,
+      "titulo_O": "PERO NO POR",
+      "titulo_X": "Una presencia que irradia."
+    },
+    {
+      "O": [
+        "lunático?",
+        "misterioso?",
+        "romántico?",
+        "nocturno?",
+        "tenebroso?",
+        "tardarse?",
+        "sombrío?"
+      ],
+      "X": [
+        "brilla bajo la luz de Luna",
+        "camina de manera misteriosa",
+        "la Luna le parece romántica",
+        "solo sale de noche",
+        "su mirarda es tenebrosa",
+        "le gusta llegar tarde",
+        "se esconde en las sombras"
+      ],
+      "posicion": 4,
+      "titulo_O": "PERO NO POR",
+      "titulo_X": "Un movimiento en penumbra."
+    },
+    {
+      "O": [
+        "sensible?",
+        "consternado?",
+        "empático?",
+        "dolido?",
+        "llorón?",
+        "adolecente?",
+        "quejumbroso?"
+      ],
+      "X": [
+        "tiene una piel sensible",
+        "facilmente se espanta",
+        "de pronto nos muestra su empatía",
+        "son dolorosos sus lamentos",
+        "no llora aunque le duela",
+        "adolece en secreto",
+        "nadie sabe si se está quejando"
+      ],
+      "posicion": 5,
+      "titulo_O": "PERO NO POR",
+      "titulo_X": "Una herida que se esconde."
+    },
+    {
+      "O": [
+        "sistemático?",
+        "sus hábitos?",
+        "constante?",
+        "rutinario?",
+        "tedioso?",
+        "regular?",
+        "repetitivo?"
+      ],
+      "X": [
+        "actúa calculadora y sistemáticamente",
+        "antes que nada prioriza sus hábitos",
+        "su maullido es constante",
+        "se cicla en la misma rutina",
+        "le parce tedioso ir a sus chequeos",
+        "espera lo mejor en un día regular",
+        "su pensamiento es repetitivo"
+      ],
+      "posicion": 6,
+      "titulo_O": "PERO NO POR",
+      "titulo_X": "Un ritual que insiste."
+    },
+    {
+      "O": [
+        "ocurrente?",
+        "parlanchín?",
+        "gracioso?",
+        "dicharachero?",
+        "charlatán?",
+        "comunicativo?",
+        "chistoso?"
+      ],
+      "X": [
+        "sus ocurrencias son impredecibles",
+        "vuelve a casa contento y parlanchín",
+        "de pronto es muy gracioso",
+        "guarda un dicho para todo",
+        "chilla como charlatán",
+        "su cacareo es comunicativo",
+        "maulla chistoso"
+      ],
+      "posicion": 7,
+      "titulo_O": "PERO NO POR",
+      "titulo_X": "Una risa que protege."
+    },
+    {
+      "O": [
+        "singular?",
+        "extraño?",
+        "único?",
+        "raro?",
+        "extravagante?",
+        "poco común?",
+        "diferente?"
+      ],
+      "X": [
+        "destaca con su singularidad",
+        "su mundo nos parece extraño",
+        "su lugar en la historia es único",
+        "su comportamiento es raro",
+        "su estiramiento es extravagante",
+        "contar con su presencia es poco común",
+        "su miau es delicado y diferente"
+      ],
+      "posicion": 8,
+      "titulo_O": "PERO NO POR",
+      "titulo_X": "Una diferencia asumida."
+    },
+    {
+      "O": [
+        "respirar.",
+        "prospera",
+        "florece",
+        "vive la vida",
+        "sobrevive",
+        "entrar en homeostasis?",
+        "simplemente existir?"
+      ],
+      "X": [
+        "respira con la nariz mojada",
+        "lo único que aspira es prosperidad",
+        "sus hallazgos le parecen florecientes",
+        "que vive la vida",
+        "sobrevive en las calles",
+        "entra en su estado de homeostasis",
+        "que simplemente existe"
+      ],
+      "posicion": 9,
+      "titulo_O": "PERO NO POR",
+      "titulo_X": "Un estar suficiente."
+    }
+  ]
+}

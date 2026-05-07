@@ -8,7 +8,8 @@
       "Bash(grep -l \"payasito\" *.sql)",
       "Bash(python3)",
       "Bash(git merge:*)",
-      "Bash(aws amplify:*)"
+      "Bash(aws amplify:*)",
+      "Bash(python3 -c \" import sys, json for line in sys.stdin: line = line.strip\\(\\) if not line: continue try: obj = json.loads\\(line\\) role = obj.get\\('role',''\\) content = obj.get\\('content',''\\) if isinstance\\(content, list\\): for block in content: if isinstance\\(block, dict\\) and block.get\\('type'\\) == 'text': text = block.get\\('text',''\\) if len\\(text\\) > 100: print\\(f'[{role}] {text[:500]}'\\) print\\('---'\\) elif isinstance\\(content, str\\) and len\\(content\\) > 100: print\\(f'[{role}] {content[:500]}'\\) print\\('---'\\) except: pass \")"
     ],
     "additionalDirectories": [
       "/Users/gatoenigmatico/gatoencerrado-ai/supabase/migrations",

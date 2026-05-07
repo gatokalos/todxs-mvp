@@ -1,0 +1,238 @@
+{
+  "personaje_id": "saturnina",
+  "nivel": 4,
+  "nombre_nivel": "El silencio",
+  "nombre_visible": "Saturnina",
+  "icono": "/assets/saturnina_sticker.svg",
+  "frase_base": "Don Polo me dijo que sino fuera por mi",
+  "prefijos": {
+    "O": "hoy sería una gata ",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Hasta Don Polo se quedó sin corbata con esa jugada, fíjate.",
+    "Eso salió con perfume de decreto y tacón de barrio: una delicia.",
+    "Le diste vuelta al sermón y te quedó como sentencia con anís."
+  ],
+  "mensajes_victoria_o": [
+    "Don Polo quiso dar cátedra, pero se le cayó el monóculo en la sopa.",
+    "La frase venía emperifollada y acabó tropezando con su propia solemnidad.",
+    "Hoy la sentencia salió chueca, como reina cansada bajando del camión."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "sin una profesión.",
+        "sin un buen salario.",
+        "que no colaboradora.",
+        "sin otro empleo.",
+        "subordinada.",
+        "que no pide ayuda.",
+        "sin labores importantes."
+      ],
+      "X": [
+        "profesionalismo,",
+        "salario,",
+        "colaboración,",
+        "empleo,",
+        "subordinación,",
+        "ayuda,",
+        "labor,"
+      ],
+      "posicion": 1,
+      "titulo_O": "HOY SERÍA UNA GATA",
+      "titulo_X": "Un aporte no siempre visto."
+    },
+    {
+      "O": [
+        "sin aprecio.",
+        "sin valores.",
+        "que no es valiosa.",
+        "mal cotizada.",
+        "que no se estima.",
+        "despreciada."
+      ],
+      "X": [
+        "aprecio,",
+        "gran valor,",
+        "valentía,",
+        "cotización,",
+        "estima,",
+        "aprecio,"
+      ],
+      "posicion": 2,
+      "titulo_O": "HOY SERÍA UNA GATA",
+      "titulo_X": "Un valor sin testigos."
+    },
+    {
+      "O": [
+        "descarada.",
+        "insolente.",
+        "intrépida.",
+        "irreverente.",
+        "blasfema.",
+        "impertinente.",
+        "irrespetuosa."
+      ],
+      "X": [
+        "descaro,",
+        "insolencia,",
+        "intrepidez,",
+        "irreverencia,",
+        "blasfemia,",
+        "impertinencia,",
+        "irrespetuosidad,"
+      ],
+      "posicion": 3,
+      "titulo_O": "HOY SERÍA UNA GATA",
+      "titulo_X": "Una insolencia verdadera."
+    },
+    {
+      "O": [
+        "que pasa desapercibida.",
+        "sin control.",
+        "que no revisa.",
+        "supervisada.",
+        "procesada.",
+        "mal atendida.",
+        "vigilada."
+      ],
+      "X": [
+        "escudriñamiento,",
+        "control,",
+        "revisión,",
+        "supervisión,",
+        "procesamiento,",
+        "atención,",
+        "vigilancia,"
+      ],
+      "posicion": 4,
+      "titulo_O": "HOY SERÍA UNA GATA",
+      "titulo_X": "Una mirada que no aparta."
+    },
+    {
+      "O": [
+        "sin grandiosidad.",
+        "deshororable.",
+        "sin respeto.",
+        "sin dignidad.",
+        "sin solemnidad.",
+        "orgullo.",
+        "integridad."
+      ],
+      "X": [
+        "grandiosidad,",
+        "honorabilidad,",
+        "respetabilidad,",
+        "dignidad,",
+        "solemnidad,",
+        "orgullo,",
+        "integridad,"
+      ],
+      "posicion": 5,
+      "titulo_O": "HOY SERÍA UNA GATA",
+      "titulo_X": "Un límite que no cede."
+    },
+    {
+      "O": [
+        "que claudica.",
+        "que dimite.",
+        "abnegada.",
+        "que renuncia.",
+        "desertora.",
+        "que desiste.",
+        "dejada."
+      ],
+      "X": [
+        "falta de convicción,",
+        "tendencia a demitir,",
+        "abnegación,",
+        "resignación,",
+        "deserción,",
+        "determinación,",
+        "afán a no dejarme,"
+      ],
+      "posicion": 6,
+      "titulo_O": "HOY SERÍA UNA GATA",
+      "titulo_X": "Un límite elegido."
+    },
+    {
+      "O": [
+        "sin vivacidad.",
+        "inquieta.",
+        "sin chispa.",
+        "sin jiribilla.",
+        "sin malicia.",
+        "sin energía.",
+        "no graciosa."
+      ],
+      "X": [
+        "vivacidad,",
+        "inquietud,",
+        "chispa,",
+        "jiribilla,",
+        "malicia,",
+        "energía,",
+        "gracia,"
+      ],
+      "posicion": 7,
+      "titulo_O": "HOY SERÍA UNA GATA",
+      "titulo_X": "Una energía que se trae."
+    },
+    {
+      "O": [
+        "incomprendida.",
+        "subestimada.",
+        "modesta.",
+        "infravalorada.",
+        "ninguneada.",
+        "minimizada.",
+        "ignorada."
+      ],
+      "X": [
+        "comprensión,",
+        "subestima,",
+        "modestia,",
+        "autovaloración,",
+        "afán por nunca ningunear,",
+        "afán de nunca minimizar,",
+        "afán a no ignorar,"
+      ],
+      "posicion": 8,
+      "titulo_O": "HOY SERÍA UNA GATA",
+      "titulo_X": "Una mirada que incluye."
+    },
+    {
+      "O": [
+        "uniformada.",
+        "realizada.",
+        "establecida.",
+        "afianzada.",
+        "con la correa corta.",
+        "sin sustento para subsistir."
+      ],
+      "X": [
+        "uniforme,",
+        "realización,",
+        "establecimiento,",
+        "apalancamiento,",
+        "disciplina,",
+        "sustentación,"
+      ],
+      "posicion": 9,
+      "titulo_O": "HOY SERÍA UNA GATA",
+      "titulo_X": "Un sostén silencioso."
+    }
+  ]
+}

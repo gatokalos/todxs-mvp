@@ -1,0 +1,320 @@
+{
+  "personaje_id": "don-polo",
+  "nivel": 3,
+  "nombre_nivel": "Lo que se comenta",
+  "nombre_visible": "Don Polo",
+  "icono": "/assets/polo_sticker.svg",
+  "frase_base": "Te pareces a Saturnina, ella también anda…",
+  "prefijos": {
+    "O": "y sabe ",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Previsible. Apostaste por la versión más eficiente del problema.",
+    "La jugada fue correcta; la sentimentalidad, innecesaria.",
+    "Conviene admitirlo: esta vez tu cálculo sí merecía imponerse."
+  ],
+  "mensajes_victoria_o": [
+    "Interesante. Esta vez el orden no me obedeció del todo.",
+    "El tablero eligió una excepción; no suele pasar.",
+    "Concedo el punto. No la interpretación."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "evolucionar",
+        "desarrollarse",
+        "transformarse",
+        "proceder",
+        "tramitar",
+        "de etapas"
+      ],
+      "X": [
+        "evolucionando",
+        "en desarrollo",
+        "en transformación",
+        "en proceso",
+        "entre trámites",
+        "en una etapa"
+      ],
+      "posicion": 1,
+      "titulo_O": "Y SABE / Y ENTIENDE / Y CONOCE",
+      "titulo_X": "TAMBIÉN ANDA / SE LA PASA / VIENE",
+      "eslabones_O": [
+        "y sabe ",
+        "y entiende ",
+        "y conoce "
+      ],
+      "eslabones_X": [
+        "",
+        "se la pasa ",
+        "viene "
+      ]
+    },
+    {
+      "O": [
+        "de incertidumbre",
+        "de incidentes",
+        "de circunstancias",
+        "de accidentes",
+        "de desgracias",
+        "los giros de la vida"
+      ],
+      "X": [
+        "en la incertidumbre",
+        "un incidente",
+        "en circunstancia",
+        "accidentada",
+        "en desgracia",
+        "dando giros"
+      ],
+      "posicion": 2,
+      "titulo_O": "Y SABE / Y ENTIENDE / Y CONOCE",
+      "titulo_X": "TAMBIÉN ANDA / SE LA PASA / VIENE",
+      "eslabones_O": [
+        "y sabe ",
+        "y entiende ",
+        "y conoce "
+      ],
+      "eslabones_X": [
+        "",
+        "se la pasa ",
+        "viene "
+      ]
+    },
+    {
+      "O": [
+        "su potencial",
+        "su talento",
+        "innovar",
+        "protagonizar",
+        "ser enérgica",
+        "futurizar",
+        "seguir ideales"
+      ],
+      "X": [
+        "en su potencial",
+        "llena de talentos",
+        "innovando",
+        "protagonizando",
+        "cargada de energía",
+        "creando el futuro",
+        "siguiendo ideales"
+      ],
+      "posicion": 3,
+      "titulo_O": "Y SABE / Y ENTIENDE / Y CONOCE",
+      "titulo_X": "TAMBIÉN ANDA / SE LA PASA / VIENE",
+      "eslabones_O": [
+        "y sabe ",
+        "y entiende ",
+        "y conoce "
+      ],
+      "eslabones_X": [
+        "",
+        "se la pasa ",
+        "viene "
+      ]
+    },
+    {
+      "O": [
+        "fundamentarse",
+        "lo esencial",
+        "qué es lo primordial",
+        "sus bases",
+        "proveer lo mínimo",
+        "lo más elemental"
+      ],
+      "X": [
+        "sin fundamentos",
+        "ante lo esencial",
+        "en fase primordial",
+        "sin lo básico",
+        "con lo mínimo",
+        "tras lo elemental"
+      ],
+      "posicion": 4,
+      "titulo_O": "Y SABE / Y ENTIENDE / Y CONOCE",
+      "titulo_X": "TAMBIÉN ANDA / SE LA PASA / VIENE",
+      "eslabones_O": [
+        "y sabe ",
+        "y entiende ",
+        "y conoce "
+      ],
+      "eslabones_X": [
+        "",
+        "se la pasa ",
+        "viene "
+      ]
+    },
+    {
+      "O": [
+        "sus fronteras",
+        "bajar barreras",
+        "alcanzar metas",
+        "poner límites",
+        "restringir",
+        "confinar",
+        "de marginación"
+      ],
+      "X": [
+        "entre fronteras",
+        "contra barreras",
+        "fuera de alcance",
+        "limitada",
+        "restringida",
+        "confinada",
+        "marginada"
+      ],
+      "posicion": 5,
+      "titulo_O": "Y SABE / Y ENTIENDE / Y CONOCE",
+      "titulo_X": "TAMBIÉN ANDA / SE LA PASA / VIENE",
+      "eslabones_O": [
+        "y sabe ",
+        "y entiende ",
+        "y conoce "
+      ],
+      "eslabones_X": [
+        "",
+        "se la pasa ",
+        "viene "
+      ]
+    },
+    {
+      "O": [
+        "tener previsiones",
+        "tener reservas",
+        "invertir su tiempo",
+        "ahorrar",
+        "de economía",
+        "crear fondos"
+      ],
+      "X": [
+        "viendo previsiones",
+        "reservando",
+        "invirtiendo",
+        "ahorrando",
+        "economizando",
+        "buscando fondos"
+      ],
+      "posicion": 6,
+      "titulo_O": "Y SABE / Y ENTIENDE / Y CONOCE",
+      "titulo_X": "TAMBIÉN ANDA / SE LA PASA / VIENE",
+      "eslabones_O": [
+        "y sabe ",
+        "y entiende ",
+        "y conoce "
+      ],
+      "eslabones_X": [
+        "",
+        "se la pasa ",
+        "viene "
+      ]
+    },
+    {
+      "O": [
+        "enriquecer",
+        "hacer recursos",
+        "prosperar",
+        "capitalizarse",
+        "lucrar",
+        "hacerse de activos"
+      ],
+      "X": [
+        "sin riquezas",
+        "sin recursos",
+        "sin prosperar",
+        "sin capital",
+        "sin lucrar",
+        "sin activos"
+      ],
+      "posicion": 7,
+      "titulo_O": "Y SABE / Y ENTIENDE / Y CONOCE",
+      "titulo_X": "TAMBIÉN ANDA / SE LA PASA / VIENE",
+      "eslabones_O": [
+        "y sabe ",
+        "y entiende ",
+        "y conoce "
+      ],
+      "eslabones_X": [
+        "",
+        "se la pasa ",
+        "viene "
+      ]
+    },
+    {
+      "O": [
+        "su legado",
+        "su herencia",
+        "sus tesoros",
+        "de mi patrimonio",
+        "sus bienes",
+        "sus posesiones"
+      ],
+      "X": [
+        "sin legado",
+        "sin herencia",
+        "sin tesoros",
+        "sin patrimonios",
+        "sin bienes",
+        "sin posesiones"
+      ],
+      "posicion": 8,
+      "titulo_O": "Y SABE / Y ENTIENDE / Y CONOCE",
+      "titulo_X": "TAMBIÉN ANDA / SE LA PASA / VIENE",
+      "eslabones_O": [
+        "y sabe ",
+        "y entiende ",
+        "y conoce "
+      ],
+      "eslabones_X": [
+        "",
+        "se la pasa ",
+        "viene "
+      ]
+    },
+    {
+      "O": [
+        "mandar",
+        "liderar",
+        "dirigir",
+        "dar órdenes",
+        "controlar",
+        "coordinar",
+        "de autoridad"
+      ],
+      "X": [
+        "al mando",
+        "de líder",
+        "en la dirección",
+        "dando órdenes",
+        "con el control",
+        "coordinando",
+        "en la autoridad"
+      ],
+      "posicion": 9,
+      "titulo_O": "Y SABE / Y ENTIENDE / Y CONOCE",
+      "titulo_X": "TAMBIÉN ANDA / SE LA PASA / VIENE",
+      "eslabones_O": [
+        "y sabe ",
+        "y entiende ",
+        "y conoce "
+      ],
+      "eslabones_X": [
+        "",
+        "se la pasa ",
+        "viene "
+      ]
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "personaje_id": "payasito-triste",
+  "nivel": 4,
+  "nombre_nivel": "Tramoya",
+  "nombre_visible": "Payasito Tiste",
+  "icono": "/assets/payasito_sticker.svg",
+  "frase_base": "Gato con nueve vidas…",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Me salió el remate feo y preciso; así también se gana.",
+    "Ni sé si fue victoria o colapso con timing, pero funcionó.",
+    "Hoy el chiste cayó de pie antes que yo."
+  ],
+  "mensajes_victoria_o": [
+    "Esta vez el aparte me dejó solo con el eco.",
+    "Se me fue el remate antes del aplauso; pasa en las mejores tragedias.",
+    "Hoy ni el maquillaje sostuvo la caída."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "—yo voy por la misma y ya me duele.",
+        "(repetir tragedias también desgasta).",
+        "—nueve suena mucho hasta que las usas mal."
+      ],
+      "X": [
+        "ya gastó dos en aplausos",
+        "también se cansa de caer",
+        "pierde la cuenta"
+      ],
+      "posicion": 1,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—banquero del tropiezo.",
+        "(yo nomás pido meses sin derrumbe).",
+        "—administrar ruinas también es talento."
+      ],
+      "X": [
+        "aprende tarde a aterrizar",
+        "colecciona regresos",
+        "cobra intereses al destino"
+      ],
+      "posicion": 2,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—mi currículo entero.",
+        "(he sobrevivido con pésimo marketing).",
+        "—resistir no siempre luce, pero insiste."
+      ],
+      "X": [
+        "se repite bonito",
+        "vuelve por costumbre",
+        "finge que resiste"
+      ],
+      "posicion": 3,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—cliente frecuente del borde.",
+        "(me dan puntos por recaída).",
+        "—ojalá hubiera programa de recompensas."
+      ],
+      "X": [
+        "se sabe el truco",
+        "negocia con la suerte",
+        "hace fila en el abismo"
+      ],
+      "posicion": 4,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—como toda leyenda barata.",
+        "(yo también regreso, pero con ojeras).",
+        "—hay resurrecciones que parecen ensayo."
+      ],
+      "X": [
+        "llega tarde al susto",
+        "se burla del golpe",
+        "vuelve maquillado"
+      ],
+      "posicion": 5,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—romántico del precipicio.",
+        "(yo era más de balcones emocionales).",
+        "—cada quien su altura de confianza."
+      ],
+      "X": [
+        "guarda una de repuesto",
+        "malgasta las mejores",
+        "se enamora del riesgo"
+      ],
+      "posicion": 6,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—eso sí es oficio.",
+        "(yo caigo bonito, que es distinto).",
+        "—la utilidad nunca fue mi fuerte."
+      ],
+      "X": [
+        "se vuelve costumbre",
+        "se ríe del final",
+        "aprende a caer útil"
+      ],
+      "posicion": 7,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—ambición que admiro y temo.",
+        "(yo con una crisis tengo para la semana).",
+        "—hay quien sí trae estómago para el encore."
+      ],
+      "X": [
+        "todavía pide otra",
+        "hace fila para el caos",
+        "se toma en serio el rebote"
+      ],
+      "posicion": 8,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—mi sueño húmedo escénico.",
+        "(si voy a colapsar, mínimo con luz cenital).",
+        "—la dignidad no, pero el timing sí."
+      ],
+      "X": [
+        "no aprende modales",
+        "vuelve a la escena",
+        "se muere con timing"
+      ],
+      "posicion": 9,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    }
+  ]
+}

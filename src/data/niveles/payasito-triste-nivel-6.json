@@ -1,0 +1,170 @@
+{
+  "personaje_id": "payasito-triste",
+  "nivel": 6,
+  "nombre_nivel": "Entreacto",
+  "nombre_visible": "Payasito Tiste",
+  "icono": "/assets/payasito_sticker.svg",
+  "frase_base": "Si no es gata, es gato, y si no…",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Me salió el remate feo y preciso; así también se gana.",
+    "Ni sé si fue victoria o colapso con timing, pero funcionó.",
+    "Hoy el chiste cayó de pie antes que yo."
+  ],
+  "mensajes_victoria_o": [
+    "Esta vez el aparte me dejó solo con el eco.",
+    "Se me fue el remate antes del aplauso; pasa en las mejores tragedias.",
+    "Hoy ni el maquillaje sostuvo la caída."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "—porque alguien tiene que aparecer.",
+        "(el silencio no llena butacas).",
+        "—y yo ya pagué vestuario."
+      ],
+      "X": [
+        "soy yo haciendo ruido",
+        "es el espejo burlándose",
+        "es el público mirando"
+      ],
+      "posicion": 1,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—más barata, pero igual de intensa.",
+        "(franquicia emocional no autorizada).",
+        "—hay copias que superan el original herido."
+      ],
+      "X": [
+        "es mi sombra cobrando",
+        "es la noche opinando",
+        "es otra versión mía"
+      ],
+      "posicion": 2,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—mi familia escénica directa.",
+        "(con ellos sí comparto camerino).",
+        "—lo hereditario también hace fila."
+      ],
+      "X": [
+        "es el desastre entrando",
+        "es un chiste mal puesto",
+        "es la culpa maquillada"
+      ],
+      "posicion": 3,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—nada glamoroso, la verdad.",
+        "(pero muy taquillero en mi cabeza).",
+        "—todo fracaso repite temporada."
+      ],
+      "X": [
+        "es el miedo vestido",
+        "es mi nombre sin luces",
+        "es el eco de ayer"
+      ],
+      "posicion": 4,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—ahí sí nadie aplaude.",
+        "(ni yo me daría encore).",
+        "—la desnudez emocional no vende refrescos."
+      ],
+      "X": [
+        "es la risa temblando",
+        "es otro ensayo roto",
+        "es mi cara sin pacto"
+      ],
+      "posicion": 5,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—o sea, material mío.",
+        "(si sangra y entra con luz, lo reconozco).",
+        "—uno desarrolla ojo clínico para eso."
+      ],
+      "X": [
+        "es la escena vacía",
+        "es alguien pidiendo pista",
+        "es una herida con timing"
+      ],
+      "posicion": 6,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—peor cuando improvisa.",
+        "(yo por lo menos ensayo el derrumbe).",
+        "—hay ausencias muy participativas."
+      ],
+      "X": [
+        "es el telón riéndose",
+        "es mi memoria fallando",
+        "es el hueco con voz"
+      ],
+      "posicion": 7,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—y ninguno cobra barato.",
+        "(hasta mi sombra pide camerino).",
+        "—qué sindicato tan triste armamos."
+      ],
+      "X": [
+        "es un aplauso ajeno",
+        "es la pena de turno",
+        "es mi doble cansado"
+      ],
+      "posicion": 8,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—como siempre, puntual al desastre.",
+        "(la costumbre también se maquilla).",
+        "—si no soy yo, me parezco mucho."
+      ],
+      "X": [
+        "soy yo de regreso",
+        "es el circo insistiendo",
+        "es la función sin cura"
+      ],
+      "posicion": 9,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    }
+  ]
+}

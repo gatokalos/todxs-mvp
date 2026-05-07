@@ -1,0 +1,287 @@
+{
+  "personaje_id": "silvestre",
+  "nivel": 3,
+  "nombre_nivel": "El clímax",
+  "nombre_visible": "Silvestre",
+  "icono": "/assets/silvestre_sticker.svg",
+  "frase_base": "Mi mejor amiga es una gata muy ocurrente",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": "; ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Gane, pero se siente raro... como si el tablero ya lo hubiera sonado antes que yo.",
+    "Esta vez la grieta se abrio del lado correcto. No se por que, pero entre.",
+    "Cayo en su sitio. O eso quiero creer, antes de que despierte."
+  ],
+  "mensajes_victoria_o": [
+    "Se me fue la jugada como se me van los suenos: justo cuando iba a tocar algo.",
+    "No alcanzo. Se quedo vibrando, como una puerta entreabierta.",
+    "Esta vez el tablero no me sostuvo. Igual sigo oyendo el eco."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "reza todo el día.",
+        "va con el cura a pedir penitencia.",
+        "en extremo devota.",
+        "para todo suplica.",
+        "cumple con sus mandas.",
+        "rogona y exigente.",
+        "tiene la fe de una gallinita ciega."
+      ],
+      "X": [
+        "reza todo el día",
+        "muy penitente",
+        "en extremo devota",
+        "suplica cuando algo quiere",
+        "cumple con sus mandas",
+        "rogona",
+        "tiene fe ciega en los milagros."
+      ],
+      "posicion": 1,
+      "titulo_O": "Y PARA COLMO / Y ENCIMA / Y DE PILÓN",
+      "titulo_X": "UNA GATA MUY OCURRENTE",
+      "eslabones_O": [
+        "y para colmo ",
+        "y encima ",
+        "y de pilón "
+      ]
+    },
+    {
+      "O": [
+        "susceptible a todo tipo de alergias.",
+        "estresada pero sonriente.",
+        "con los nervios de punta.",
+        "con el alma hecha pedazos.",
+        "supera una crisis emocional tras otra.",
+        "con esperanza desesperada.",
+        "en constante conflicto interno."
+      ],
+      "X": [
+        "vulnerable",
+        "siempre estresada",
+        "norteada",
+        "fragmentada internamente",
+        "supera una crisis emocional tras otra",
+        "desesperanzada",
+        "en conflicto interno"
+      ],
+      "posicion": 2,
+      "titulo_O": "Y PARA COLMO / Y ENCIMA / Y DE PILÓN",
+      "titulo_X": "UNA GATA MUY OCURRENTE",
+      "eslabones_O": [
+        "y para colmo ",
+        "y encima ",
+        "y de pilón "
+      ]
+    },
+    {
+      "O": [
+        "padece de ataques de ansiedad.",
+        "está emocionalmente vacía.",
+        "es escurridiza como el agua.",
+        "se aísla como avestruz",
+        "es yonqui.",
+        "sufre una desconexión social.",
+        "padece de síndrome de abandono."
+      ],
+      "X": [
+        "ansiosa",
+        "emocionalmente vacía",
+        "escurridiza",
+        "aislada",
+        "medio yonqui",
+        "desconectada",
+        "abandonada"
+      ],
+      "posicion": 3,
+      "titulo_O": "Y PARA COLMO / Y ENCIMA / Y DE PILÓN",
+      "titulo_X": "UNA GATA MUY OCURRENTE",
+      "eslabones_O": [
+        "y para colmo ",
+        "y encima ",
+        "y de pilón "
+      ]
+    },
+    {
+      "O": [
+        "solo sigue lo que está de tendencia.",
+        "hace compras de pánico.",
+        "vive al filo de la moda.",
+        "es una capitalista empedernida.",
+        "es una derrochadora de recursos.",
+        "es compradora compulsiva.",
+        "despilfarra con estilo."
+      ],
+      "X": [
+        "solo sigue tendencias",
+        "hace compras de pánico",
+        "vive al filo de la moda",
+        "una capitalista empedernida",
+        "derrochadora",
+        "compradora compulsiva",
+        "despilfarradora"
+      ],
+      "posicion": 4,
+      "titulo_O": "Y PARA COLMO / Y ENCIMA / Y DE PILÓN",
+      "titulo_X": "UNA GATA MUY OCURRENTE",
+      "eslabones_O": [
+        "y para colmo ",
+        "y encima ",
+        "y de pilón "
+      ]
+    },
+    {
+      "O": [
+        "es extraña como la ficción.",
+        "atrapada en la fantasía.",
+        "fanática de la mitología medieval.",
+        "se cree los cuentos que se cuenta.",
+        "me contagia sus delirios surrealistas.",
+        "ama su vida ficticia.",
+        "su vida es muy entretenida"
+      ],
+      "X": [
+        "extraña como la ficción",
+        "atrapada en la fantasía",
+        "fanática de la mitología medieval",
+        "vive de los cuentos",
+        "susceptible al drama",
+        "todo le parece un show",
+        "solo quiere entretenerse"
+      ],
+      "posicion": 5,
+      "titulo_O": "Y PARA COLMO / Y ENCIMA / Y DE PILÓN",
+      "titulo_X": "UNA GATA MUY OCURRENTE",
+      "eslabones_O": [
+        "y para colmo ",
+        "y encima ",
+        "y de pilón "
+      ]
+    },
+    {
+      "O": [
+        "parece un ser iluminado.",
+        "no deja de crecer internamente.",
+        "se sana con colita de rana.",
+        "renace como ajolote.",
+        "se transmuta como las orugas.",
+        "es libre de tirar la primera piedra.",
+        "es vasto su autodescubrimeinto."
+      ],
+      "X": [
+        "parece iluminada",
+        "con mucho crecimiento personal",
+        "siempre está sanando",
+        "renace constantemente",
+        "en transformación",
+        "libre de miedos",
+        "con vasto autodescubrimeinto"
+      ],
+      "posicion": 6,
+      "titulo_O": "Y PARA COLMO / Y ENCIMA / Y DE PILÓN",
+      "titulo_X": "UNA GATA MUY OCURRENTE",
+      "eslabones_O": [
+        "y para colmo ",
+        "y encima ",
+        "y de pilón "
+      ]
+    },
+    {
+      "O": [
+        "deja todo pendiente.",
+        "haga sus sacrificios",
+        "terca como una tuerca oxidada",
+        "es más insegura que una ciudad.",
+        "enganchada a las trabas.",
+        "carga preocupaciones ajenas.",
+        "es melosa como la miel de membrillo."
+      ],
+      "X": [
+        "deja todo pendiente",
+        "se sacrifica por todo",
+        "solidaria con todo mundo",
+        "insegura de sus relaciones",
+        "enganchada a las trabas",
+        "preocupona",
+        "empalagosa"
+      ],
+      "posicion": 7,
+      "titulo_O": "Y PARA COLMO / Y ENCIMA / Y DE PILÓN",
+      "titulo_X": "UNA GATA MUY OCURRENTE",
+      "eslabones_O": [
+        "y para colmo ",
+        "y encima ",
+        "y de pilón "
+      ]
+    },
+    {
+      "O": [
+        "diario tiene pesadillas.",
+        "sueña puras tragedias.",
+        "vive en un sueño.",
+        "padece de ensoñación excesiva.",
+        "víctima de la nostalgia.",
+        "pegada al pasado como calcomanía.",
+        "sus augurios son de calamidades."
+      ],
+      "X": [
+        "diario tiene pesadillas",
+        "sueña con presagios",
+        "vive en un sueño",
+        "sueña todo el día",
+        "nostálgica",
+        "vive en el pasado",
+        "con fantasías románticas"
+      ],
+      "posicion": 8,
+      "titulo_O": "Y PARA COLMO / Y ENCIMA / Y DE PILÓN",
+      "titulo_X": "UNA GATA MUY OCURRENTE",
+      "eslabones_O": [
+        "y para colmo ",
+        "y encima ",
+        "y de pilón "
+      ]
+    },
+    {
+      "O": [
+        "confía en un confidente invisible.",
+        "habla con un aliado divino.",
+        "tiene un amigo imaginario.",
+        "padece de alucines.",
+        "cree en sus entes imaginarios.",
+        "concibe conceptos rebuscados.",
+        "recrea escenarios mentales."
+      ],
+      "X": [
+        "es mi confidente invisible",
+        "de mi autoría",
+        "producto de mi imaginación",
+        "ilusoria completamente",
+        "fuera de este mundo",
+        "la concebí como un concepto",
+        "recrea escenarios mentales"
+      ],
+      "posicion": 9,
+      "titulo_O": "Y PARA COLMO / Y ENCIMA / Y DE PILÓN",
+      "titulo_X": "UNA GATA MUY OCURRENTE",
+      "eslabones_O": [
+        "y para colmo ",
+        "y encima ",
+        "y de pilón "
+      ]
+    }
+  ]
+}

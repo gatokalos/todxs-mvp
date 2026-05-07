@@ -1,0 +1,170 @@
+{
+  "personaje_id": "payasito-triste",
+  "nivel": 5,
+  "nombre_nivel": "El chiste serio",
+  "nombre_visible": "Payasito Tiste",
+  "icono": "/assets/payasito_sticker.svg",
+  "frase_base": "Gato maullador, nunca buen…",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Me salió el remate feo y preciso; así también se gana.",
+    "Ni sé si fue victoria o colapso con timing, pero funcionó.",
+    "Hoy el chiste cayó de pie antes que yo."
+  ],
+  "mensajes_victoria_o": [
+    "Esta vez el aparte me dejó solo con el eco.",
+    "Se me fue el remate antes del aplauso; pasa en las mejores tragedias.",
+    "Hoy ni el maquillaje sostuvo la caída."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "—pero sí buen escándalo.",
+        "(algo tenía que salirle bien).",
+        "—yo también elegí mal vocación."
+      ],
+      "X": [
+        "actor trágico",
+        "guardián del silencio",
+        "mentiroso discreto"
+      ],
+      "posicion": 1,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—ya con ese volumen, imposible.",
+        "(la intimidad no sobrevive al megáfono).",
+        "—hay talentos que nacen contradichos."
+      ],
+      "X": [
+        "cómplice del misterio",
+        "administrador del secreto",
+        "profeta del sigilo"
+      ],
+      "posicion": 2,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—qué ternura aspiracional.",
+        "(yo también quise serenidad; no combinó con el traje).",
+        "—la calma me queda de utilería."
+      ],
+      "X": [
+        "custodio del pudor",
+        "monje del gesto",
+        "jardinero de la calma"
+      ],
+      "posicion": 3,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—demasiado ruido en el currículum.",
+        "(igual le doy casting).",
+        "—algo me dice que fracasa precioso."
+      ],
+      "X": [
+        "vendedor de sombras",
+        "domador del eco",
+        "catador del silencio"
+      ],
+      "posicion": 4,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—yo reprobé esas materias.",
+        "(con honores en desborde escénico).",
+        "—cada quien su especialidad inútil."
+      ],
+      "X": [
+        "burócrata del orden",
+        "sacerdote del recato",
+        "técnico del disimulo"
+      ],
+      "posicion": 5,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—lo perdimos desde maullador.",
+        "(el título ya venía echando a perder todo).",
+        "—hay premisas condenadas."
+      ],
+      "X": [
+        "amigo de lo sobrio",
+        "amante del secreto",
+        "héroe del susurro"
+      ],
+      "posicion": 6,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—muy bonito, muy tarde.",
+        "(a esas alturas ya se oyó hasta el trauma).",
+        "—el sonido arruina muchas reputaciones."
+      ],
+      "X": [
+        "médico del decoro",
+        "testigo del pudor",
+        "contador del vacío"
+      ],
+      "posicion": 7,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—no le creo ni la túnica.",
+        "(yo tampoco, pero tengo encanto lateral).",
+        "—la fe me dura menos que el delineador."
+      ],
+      "X": [
+        "guía espiritual",
+        "conservador del temple",
+        "decorador del mutismo"
+      ],
+      "posicion": 8,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—qué manera tan rara de empezar.",
+        "(gritando, como toda paz mal criada).",
+        "—la contradicción también ronronea."
+      ],
+      "X": [
+        "tutor del reposo",
+        "experto en prudencia",
+        "arquitecto de la paz"
+      ],
+      "posicion": 9,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    }
+  ]
+}

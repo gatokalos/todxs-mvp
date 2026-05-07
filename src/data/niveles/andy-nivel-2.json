@@ -1,0 +1,332 @@
+{
+  "personaje_id": "andy",
+  "nivel": 2,
+  "nombre_nivel": "Variable",
+  "nombre_visible": "Andy",
+  "icono": "/assets/andy_sticker.svg",
+  "frase_base": "Noto que eres un gato que soporta la falta…",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Sostuviste el eje. El resto se acomodó desde ahí.",
+    "No hizo falta forzar la escena; bastó con colocar el cuerpo.",
+    "La consigna entró limpia: menos explicación, más presencia."
+  ],
+  "mensajes_victoria_o": [
+    "Faltó respiración antes del gesto.",
+    "La escena pidió sostén y todavía no llegó completo.",
+    "No estaba mal la intención; faltó cuerpo para sostenerla."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "la receptividad del colectivo.",
+        "la accesibilidad solidaria.",
+        "la franqueza de otro.",
+        "la apertura del grupo.",
+        "la vulnerabilidad del grupo.",
+        "nuevos inicios colaborativos.",
+        "coyunturas sociales."
+      ],
+      "X": [
+        "de receptividad",
+        "de accesibilidad",
+        "de franqueza",
+        "de apertura",
+        "de vulnerabilidad",
+        "de nuevos inicios",
+        "de nuevas coyunturas"
+      ],
+      "posicion": 1,
+      "titulo_O": "DESDE QUE ACEPTASTE / CUANDO ASUMISTE / UNA VEZ QUE NOMBRASTE",
+      "titulo_X": "QUE SOPORTA LA FALTA / QUE RESIENTE LA AUSENCIA / QUE CARGA LA CARENCIA",
+      "eslabones_O": [
+        "desde que aceptaste ",
+        "cuando asumiste ",
+        "una vez que nombraste "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "la colaboración grupal.",
+        "el compañerismo familiar.",
+        "las alianzas colectivas.",
+        "a los colegas de tu generación.",
+        "la competitividad de tu vecino.",
+        "la sociedad en la que vives.",
+        "la solidaridad de la gente nueva."
+      ],
+      "X": [
+        "de colaboración",
+        "de compañerismo",
+        "de alianzas",
+        "de colegas",
+        "de competitividad",
+        "de sociedad",
+        "de gente nueva"
+      ],
+      "posicion": 2,
+      "titulo_O": "DESDE QUE ACEPTASTE / CUANDO ASUMISTE / UNA VEZ QUE NOMBRASTE",
+      "titulo_X": "QUE SOPORTA LA FALTA / QUE RESIENTE LA AUSENCIA / QUE CARGA LA CARENCIA",
+      "eslabones_O": [
+        "desde que aceptaste ",
+        "cuando asumiste ",
+        "una vez que nombraste "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "la adaptabilidad social.",
+        "la suavidad familiar.",
+        "la flexibilidad grupal.",
+        "la docilidad de tus semejantes.",
+        "la sumisión generacional.",
+        "la desobediencia colectiva.",
+        "la complacencia del vecino."
+      ],
+      "X": [
+        "de adaptabilidad",
+        "de suavidad",
+        "de flexibilidad",
+        "de docilidad",
+        "de sumisión",
+        "de desobediencia",
+        "de complacencia"
+      ],
+      "posicion": 3,
+      "titulo_O": "DESDE QUE ACEPTASTE / CUANDO ASUMISTE / UNA VEZ QUE NOMBRASTE",
+      "titulo_X": "QUE SOPORTA LA FALTA / QUE RESIENTE LA AUSENCIA / QUE CARGA LA CARENCIA",
+      "eslabones_O": [
+        "desde que aceptaste ",
+        "cuando asumiste ",
+        "una vez que nombraste "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "el misterio del otro",
+        "los enigmas de tu generación",
+        "los desafíos familiares.",
+        "las incógnitas colectivas.",
+        "la desestabilización social.",
+        "las interrogantes colectivas.",
+        "la duda del vecino."
+      ],
+      "X": [
+        "de misterio",
+        "de enigmas",
+        "de desafíos",
+        "de incógnitas",
+        "de estabilidad",
+        "de interrogantes",
+        "de duda"
+      ],
+      "posicion": 4,
+      "titulo_O": "DESDE QUE ACEPTASTE / CUANDO ASUMISTE / UNA VEZ QUE NOMBRASTE",
+      "titulo_X": "QUE SOPORTA LA FALTA / QUE RESIENTE LA AUSENCIA / QUE CARGA LA CARENCIA",
+      "eslabones_O": [
+        "desde que aceptaste ",
+        "cuando asumiste ",
+        "una vez que nombraste "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "los retos del vecino.",
+        "las sorpresas generacionales.",
+        "las oportunidades colaborativas.",
+        "los imprevistos grupales.",
+        "los contratiempos solidarios.",
+        "las eventualidades comunitarias.",
+        "los cambios sociales."
+      ],
+      "X": [
+        "de retos",
+        "de sorpresas",
+        "de oportunidades",
+        "de imprevistos",
+        "de contratiempos",
+        "de eventualidades",
+        "de cambio"
+      ],
+      "posicion": 5,
+      "titulo_O": "DESDE QUE ACEPTASTE / CUANDO ASUMISTE / UNA VEZ QUE NOMBRASTE",
+      "titulo_X": "QUE SOPORTA LA FALTA / QUE RESIENTE LA AUSENCIA / QUE CARGA LA CARENCIA",
+      "eslabones_O": [
+        "desde que aceptaste ",
+        "cuando asumiste ",
+        "una vez que nombraste "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "la iluminación colectiva.",
+        "la erudición ancestral.",
+        "el discernimiento del vecino.",
+        "la sabiduría comunitaria.",
+        "los dogmas sociales.",
+        "el conocimiento colaborativo.",
+        "la experiencia grupal."
+      ],
+      "X": [
+        "de iluminación",
+        "de erudición",
+        "de discernimiento",
+        "de sabiduría",
+        "de dogmas",
+        "de conocimiento",
+        "de experiencia"
+      ],
+      "posicion": 6,
+      "titulo_O": "DESDE QUE ACEPTASTE / CUANDO ASUMISTE / UNA VEZ QUE NOMBRASTE",
+      "titulo_X": "QUE SOPORTA LA FALTA / QUE RESIENTE LA AUSENCIA / QUE CARGA LA CARENCIA",
+      "eslabones_O": [
+        "desde que aceptaste ",
+        "cuando asumiste ",
+        "una vez que nombraste "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "el fervor de tus semejantes.",
+        "la efervescencia de tu generación.",
+        "el júbilo comunitario.",
+        "el entusiasmo familiar.",
+        "la obsesión individual.",
+        "el ánimo grupal.",
+        "la disposición de tu vecino."
+      ],
+      "X": [
+        "de fervor",
+        "de efervescencia",
+        "de júbilo",
+        "de entusiasmo",
+        "de una obsesión",
+        "de ánimo",
+        "de disposición"
+      ],
+      "posicion": 7,
+      "titulo_O": "DESDE QUE ACEPTASTE / CUANDO ASUMISTE / UNA VEZ QUE NOMBRASTE",
+      "titulo_X": "QUE SOPORTA LA FALTA / QUE RESIENTE LA AUSENCIA / QUE CARGA LA CARENCIA",
+      "eslabones_O": [
+        "desde que aceptaste ",
+        "cuando asumiste ",
+        "una vez que nombraste "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "el espacio colectivo.",
+        "el vacío solidario.",
+        "una posibilidad colaborativa.",
+        "el hueco comunitario.",
+        "la carencia grupal.",
+        "la sociedad fragmentada.",
+        "la intermitencia familiar."
+      ],
+      "X": [
+        "de espacio",
+        "que deja un vacío",
+        "de posibilidades",
+        "que recalca los huecos",
+        "que se agudiza con las carencias",
+        "que te hace sentir fragmentado",
+        "que se remarca con la intermitencia"
+      ],
+      "posicion": 8,
+      "titulo_O": "DESDE QUE ACEPTASTE / CUANDO ASUMISTE / UNA VEZ QUE NOMBRASTE",
+      "titulo_X": "QUE SOPORTA LA FALTA / QUE RESIENTE LA AUSENCIA / QUE CARGA LA CARENCIA",
+      "eslabones_O": [
+        "desde que aceptaste ",
+        "cuando asumiste ",
+        "una vez que nombraste "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "las cicatrices de tu generación.",
+        "la lesión solidaria.",
+        "el aprendizaje comunitario.",
+        "la herida grupal.",
+        "el trauma colectivo.",
+        "los daños del vecino.",
+        "las marcas familiares."
+      ],
+      "X": [
+        "que resalta las cicatrices",
+        "que abre lesiones",
+        "de aprendizajes",
+        "de atención a las heridas",
+        "a raíz de un trauma",
+        "que agrava los daños",
+        "de marcas positivas"
+      ],
+      "posicion": 9,
+      "titulo_O": "DESDE QUE ACEPTASTE / CUANDO ASUMISTE / UNA VEZ QUE NOMBRASTE",
+      "titulo_X": "QUE SOPORTA LA FALTA / QUE RESIENTE LA AUSENCIA / QUE CARGA LA CARENCIA",
+      "eslabones_O": [
+        "desde que aceptaste ",
+        "cuando asumiste ",
+        "una vez que nombraste "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    }
+  ]
+}

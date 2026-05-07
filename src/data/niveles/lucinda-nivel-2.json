@@ -1,0 +1,135 @@
+{
+  "nombre_visible": "Lucinda",
+  "icono": "/assets/lucinda_sticker.svg",
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3400,
+  "ritmo_frase": {
+    "x_o": "\n",
+    "base_x": "\n",
+    "x_creativa": "\nY aun asi: "
+  },
+  "mensajes_victoria_x": [
+    "No ganaste: te sostuviste sin fingir que no dolia.",
+    "Esta vez la escena no te trago; hablo contigo.",
+    "Lo rompiste en voz alta y aun asi seguiste entera."
+  ],
+  "mensajes_victoria_o": [
+    "El aplauso llego antes que el consuelo.",
+    "La sala entendio espectaculo donde habia verdad."
+  ],
+  "personaje_id": "lucinda",
+  "nivel": 2,
+  "nombre_nivel": "Lo que se dice",
+  "frase_base": "En el teatro hay gatos que…",
+  "prefijos": {
+    "O": "pero malos en ",
+    "X": "son buenos para "
+  },
+  "tablero": [
+    {
+      "O": [
+        "testimonio"
+      ],
+      "X": [
+        "testimonio"
+      ],
+      "posicion": 1
+    },
+    {
+      "O": [
+        "compromiso"
+      ],
+      "X": [
+        "compromiso"
+      ],
+      "posicion": 2
+    },
+    {
+      "O": [
+        "verosimilitud"
+      ],
+      "X": [
+        "verosimilitud"
+      ],
+      "posicion": 3
+    },
+    {
+      "O": [
+        "equivocarse"
+      ],
+      "X": [
+        "equivocarse"
+      ],
+      "posicion": 4
+    },
+    {
+      "O": [
+        "la representación",
+        "la dramatización",
+        "la ilusión",
+        "la convención",
+        "el diálogo",
+        "el personaje"
+      ],
+      "X": [
+        "la representación",
+        "dramatización",
+        "ilusión",
+        "convención",
+        "diálogo",
+        "personaje"
+      ],
+      "posicion": 5
+    },
+    {
+      "O": [
+        "el absurdo",
+        "la yuxtaposición",
+        "la paradoja",
+        "la incongruencia",
+        "la ironía",
+        "la disonancia"
+      ],
+      "X": [
+        "el absurdo",
+        "la yuxtaposición",
+        "la paradoja",
+        "la incongruencia",
+        "la ironía",
+        "la disonancia"
+      ],
+      "posicion": 6
+    },
+    {
+      "O": [
+        "honestidad"
+      ],
+      "X": [
+        "honestidad"
+      ],
+      "posicion": 7
+    },
+    {
+      "O": [
+        "provocación"
+      ],
+      "X": [
+        "provocación"
+      ],
+      "posicion": 8
+    },
+    {
+      "O": [
+        "teatro"
+      ],
+      "X": [
+        "teatro"
+      ],
+      "posicion": 9
+    }
+  ]
+}

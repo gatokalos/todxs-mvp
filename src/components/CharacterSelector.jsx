@@ -118,7 +118,7 @@ export const BASE_CHARACTER_LAYOUT = {
     widthRatio: 0.2,
   },
   andy: {
-    top: "75%",
+    top: "72%",
     left: "82%",
     glowRow: "bottom",
     intro: "💥 Juega a romper las reglas… científicamente.",

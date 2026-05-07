@@ -1,0 +1,287 @@
+{
+  "personaje_id": "silvestre",
+  "nivel": 2,
+  "nombre_nivel": "El giro",
+  "nombre_visible": "Silvestre",
+  "icono": "/assets/silvestre_sticker.svg",
+  "frase_base": "Según mi Doctora, uno de cada tres gatos",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " —",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Gane, pero se siente raro... como si el tablero ya lo hubiera sonado antes que yo.",
+    "Esta vez la grieta se abrio del lado correcto. No se por que, pero entre.",
+    "Cayo en su sitio. O eso quiero creer, antes de que despierte."
+  ],
+  "mensajes_victoria_o": [
+    "Se me fue la jugada como se me van los suenos: justo cuando iba a tocar algo.",
+    "No alcanzo. Se quedo vibrando, como una puerta entreabierta.",
+    "Esta vez el tablero no me sostuvo. Igual sigo oyendo el eco."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "captan lo que sucede en la esquina.",
+        "saben cómo inicia una narrativa.",
+        "aprovechan un momento de lucidez.",
+        "entienden qué es real.",
+        "interpretan lo que perciben.",
+        "procesan la realidad.",
+        "comprenden la realidad."
+      ],
+      "X": [
+        "analiza los estímulos de su entorno",
+        "construye sus narrativas",
+        "tiene momentos de lucidez",
+        "te habla de la realidad",
+        "interpreta lo que percibe",
+        "procesa la realidad",
+        "comprende la realidad"
+      ],
+      "posicion": 1,
+      "titulo_O": "LOS MÍOS NI SIQUIERA / Y QUE LOS MÍOS NO / LOS MÍOS POR LO MENOS",
+      "titulo_X": "UNO DE CADA TRES GATOS",
+      "eslabones_O": [
+        "los míos ni siquiera ",
+        "y que los míos no ",
+        "los míos por lo menos "
+      ]
+    },
+    {
+      "O": [
+        "temen al juicio final.",
+        "respetan tu autonomía.",
+        "fomentan confianza.",
+        "saben qué es verdadero.",
+        "conocen su discurso interno.",
+        "confían en la humanidad.",
+        "garantizan confidencialidad."
+      ],
+      "X": [
+        "teme a ser enjuiciado",
+        "respeta tu autonomía",
+        "fomenta la confianza",
+        "te habla con verdad",
+        "tiene discurso interno",
+        "confía en su veterinario",
+        "garantiza confidencialidad"
+      ],
+      "posicion": 2,
+      "titulo_O": "LOS MÍOS NI SIQUIERA / Y QUE LOS MÍOS NO / LOS MÍOS POR LO MENOS",
+      "titulo_X": "UNO DE CADA TRES GATOS",
+      "eslabones_O": [
+        "los míos ni siquiera ",
+        "y que los míos no ",
+        "los míos por lo menos "
+      ]
+    },
+    {
+      "O": [
+        "piden tu atención.",
+        "tienen su vacunas",
+        "han sido esterilizados.",
+        "eran tan felices como aparentaban.",
+        "fingen que algo les duele.",
+        "soportan su timbre tenebroso.",
+        "se autolesionan el rabo"
+      ],
+      "X": [
+        "quiere toda la atención",
+        "falsifica su pase médico",
+        "soporta ir al veterinario",
+        "solo aparenta su indiferencia",
+        "finge que algo le duele",
+        "tiene un timbre melodioso",
+        "se autolesiona el rabo"
+      ],
+      "posicion": 3,
+      "titulo_O": "LOS MÍOS NI SIQUIERA / Y QUE LOS MÍOS NO / LOS MÍOS POR LO MENOS",
+      "titulo_X": "UNO DE CADA TRES GATOS",
+      "eslabones_O": [
+        "los míos ni siquiera ",
+        "y que los míos no ",
+        "los míos por lo menos "
+      ]
+    },
+    {
+      "O": [
+        "esconden su dolor cual másters",
+        "son apartados sociales",
+        "tienen doble vida",
+        "viven en secreto",
+        "embotellan sus emociones",
+        "internalizan la culpa",
+        "evitan la intimidad"
+      ],
+      "X": [
+        "no esconde su dolor",
+        "es un apartado social",
+        "tiene doble vida",
+        "vive en secreto",
+        "embotella sus emociones",
+        "internaliza la culpa",
+        "evita la intimidad"
+      ],
+      "posicion": 4,
+      "titulo_O": "LOS MÍOS NI SIQUIERA / Y QUE LOS MÍOS NO / LOS MÍOS POR LO MENOS",
+      "titulo_X": "UNO DE CADA TRES GATOS",
+      "eslabones_O": [
+        "los míos ni siquiera ",
+        "y que los míos no ",
+        "los míos por lo menos "
+      ]
+    },
+    {
+      "O": [
+        "son tuyos.",
+        "entre ellos son honestos.",
+        "me muestran vulnerabilidad.",
+        "se muestran tal cual.",
+        "confían en el veterinario.",
+        "están dispuestos a cambiar.",
+        "se comprometen a volver."
+      ],
+      "X": [
+        "es genuinamente feliz",
+        "es honesto con los humanos",
+        "te muestra su vulnerabilidad",
+        "se muestra tal cual",
+        "confía en su veterinario",
+        "está dispuesto a cambiar",
+        "se compromete a un proceso"
+      ],
+      "posicion": 5,
+      "titulo_O": "LOS MÍOS NI SIQUIERA / Y QUE LOS MÍOS NO / LOS MÍOS POR LO MENOS",
+      "titulo_X": "UNO DE CADA TRES GATOS",
+      "eslabones_O": [
+        "los míos ni siquiera ",
+        "y que los míos no ",
+        "los míos por lo menos "
+      ]
+    },
+    {
+      "O": [
+        "acechan ratones.",
+        "le hacen ¡fuchi! a todo",
+        "se salen con la suya",
+        "dicen mentiras",
+        "incriminan perros",
+        "me engatusan",
+        "parece que están meditando"
+      ],
+      "X": [
+        "acechan a las visitas",
+        "le hacen ¡fuchi! al atún",
+        "no se sale con la suya",
+        "dice mentiras",
+        "incriminan perros",
+        "engatusa a los ratones",
+        "en realidad medita"
+      ],
+      "posicion": 6,
+      "titulo_O": "LOS MÍOS NI SIQUIERA / Y QUE LOS MÍOS NO / LOS MÍOS POR LO MENOS",
+      "titulo_X": "UNO DE CADA TRES GATOS",
+      "eslabones_O": [
+        "los míos ni siquiera ",
+        "y que los míos no ",
+        "los míos por lo menos "
+      ]
+    },
+    {
+      "O": [
+        "tienen lustroso el pelaje.",
+        "tienen brillo en sus ojos.",
+        "me ronronean.",
+        "me aman auténticamente.",
+        "me llevan regalos.",
+        "me ayudan a relajar.",
+        "dilatan sus pupilas al recibirme."
+      ],
+      "X": [
+        "tiene lustre en su pelaje",
+        "tiene ojos brillantes",
+        "ronronea de corazón",
+        "ama auténticamente",
+        "lleva regalos a la puerta",
+        "relaja a su cuidador",
+        "no manipula con sus pupilas"
+      ],
+      "posicion": 7,
+      "titulo_O": "LOS MÍOS NI SIQUIERA / Y QUE LOS MÍOS NO / LOS MÍOS POR LO MENOS",
+      "titulo_X": "UNO DE CADA TRES GATOS",
+      "eslabones_O": [
+        "los míos ni siquiera ",
+        "y que los míos no ",
+        "los míos por lo menos "
+      ]
+    },
+    {
+      "O": [
+        "tienen ojos de jade.",
+        "reconocen su propia sombra.",
+        "ronronean de felicidad.",
+        "disimulan tener otra familia.",
+        "se molestan con el aburrimiento.",
+        "te dejan dormir.",
+        "saben cómo regresar a casa."
+      ],
+      "X": [
+        "tiene ojos de jade",
+        "teme a su propia sombra",
+        "finge su ronroneo",
+        "tiene una vida doble",
+        "nunca se aburre",
+        "finge estar dormido para no molestar",
+        "nunca escaparía de casa"
+      ],
+      "posicion": 8,
+      "titulo_O": "LOS MÍOS NI SIQUIERA / Y QUE LOS MÍOS NO / LOS MÍOS POR LO MENOS",
+      "titulo_X": "UNO DE CADA TRES GATOS",
+      "eslabones_O": [
+        "los míos ni siquiera ",
+        "y que los míos no ",
+        "los míos por lo menos "
+      ]
+    },
+    {
+      "O": [
+        "saben lo que es fantasmas.",
+        "notan su discurso interno.",
+        "hablan inglés.",
+        "se comunican entre sí.",
+        "saben negociar.",
+        "maúllan bonito.",
+        "avisan y te agarran a sopapos."
+      ],
+      "X": [
+        "habla con espíritus",
+        "nota que tiene discurso interno",
+        "habla con sus humanos",
+        "realmente se comunica contigo",
+        "es un experto negociador",
+        "maúlla largo solo si es urgente",
+        "bufa a modo de advertencia"
+      ],
+      "posicion": 9,
+      "titulo_O": "LOS MÍOS NI SIQUIERA / Y QUE LOS MÍOS NO / LOS MÍOS POR LO MENOS",
+      "titulo_X": "UNO DE CADA TRES GATOS",
+      "eslabones_O": [
+        "los míos ni siquiera ",
+        "y que los míos no ",
+        "los míos por lo menos "
+      ]
+    }
+  ]
+}

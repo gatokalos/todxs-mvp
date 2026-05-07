@@ -1,0 +1,314 @@
+{
+  "personaje_id": "saturnina",
+  "nivel": 2,
+  "nombre_nivel": "La pausa",
+  "nombre_visible": "Saturnina",
+  "icono": "/assets/saturnina_sticker.svg",
+  "frase_base": "",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Ay, mira nada más: salió gata fina, pero de las que sí saben ensuciarse las patas.",
+    "Te quedó el retrato como foto de estudio con un chisme escondido detrás.",
+    "Eso ya no fue jugada, fue presentación en sociedad con campanita y todo."
+  ],
+  "mensajes_victoria_o": [
+    "Se veía gata de abolengo y acabó haciendo ruido con la cola.",
+    "Esta vez la pose se te fue por un lado y el matiz te mordió el tobillo.",
+    "Quiso salir impecable, pero se le asomó lo confianzudo en plena pasarela."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "confianzudo",
+        "participativo",
+        "camarada",
+        "cómplice",
+        "encubridor",
+        "asociado",
+        "implicado"
+      ],
+      "X": [
+        "de confianza",
+        "que participa",
+        "camarada",
+        "cómplice",
+        "encubridor",
+        "asociado",
+        "implicado"
+      ],
+      "posicion": 1,
+      "titulo_O": "AUNQUE MUY",
+      "titulo_X": "Un lado que ya conoces.",
+      "prefijo_O": "aunque muy ",
+      "prefijo_X": "Usted parece un gato ",
+      "eslabones_O": [
+        "aunque muy "
+      ],
+      "eslabones_X": [
+        "Usted parece un gato "
+      ]
+    },
+    {
+      "O": [
+        "cariñoso",
+        "afable",
+        "simpátco",
+        "cordial",
+        "empalagoso",
+        "cortés",
+        "amable"
+      ],
+      "X": [
+        "cariñoso",
+        "afable",
+        "simpátco",
+        "cordial",
+        "empalagoso",
+        "cortés",
+        "amable"
+      ],
+      "posicion": 2,
+      "titulo_O": "AUNQUE MUY",
+      "titulo_X": "Un calor no siempre gratis.",
+      "prefijo_O": "aunque muy ",
+      "prefijo_X": "Usted parece un gato ",
+      "eslabones_O": [
+        "aunque muy "
+      ],
+      "eslabones_X": [
+        "Usted parece un gato "
+      ]
+    },
+    {
+      "O": [
+        "eminente",
+        "reconocido",
+        "respetado",
+        "prestigiado",
+        "endiosado",
+        "conocido",
+        "reputado"
+      ],
+      "X": [
+        "eminente",
+        "reconocido",
+        "respetado",
+        "prestigiado",
+        "endiosado",
+        "conocido",
+        "con buena reputación"
+      ],
+      "posicion": 3,
+      "titulo_O": "AUNQUE MUY",
+      "titulo_X": "Una mirada que también pesa.",
+      "prefijo_O": "aunque muy ",
+      "prefijo_X": "Usted parece un gato ",
+      "eslabones_O": [
+        "aunque muy "
+      ],
+      "eslabones_X": [
+        "Usted parece un gato "
+      ]
+    },
+    {
+      "O": [
+        "clásico",
+        "obsoleto",
+        "tradicional",
+        "anticuado",
+        "caduco",
+        "pasado de moda",
+        "desactualizado"
+      ],
+      "X": [
+        "clásico",
+        "obsoleto",
+        "tradicional",
+        "anticuado",
+        "caduco",
+        "pasado de moda",
+        "desactualizado"
+      ],
+      "posicion": 4,
+      "titulo_O": "AUNQUE MUY",
+      "titulo_X": "Un tiempo que también opina.",
+      "prefijo_O": "aunque muy ",
+      "prefijo_X": "Es un gato ",
+      "eslabones_O": [
+        "aunque muy "
+      ],
+      "eslabones_X": [
+        "Es un gato "
+      ]
+    },
+    {
+      "O": [
+        "equitativo",
+        "atrevido",
+        "nivelado",
+        "igualado",
+        "altanero",
+        "insolente",
+        "confianzudo"
+      ],
+      "X": [
+        "equitativo",
+        "atrevido",
+        "nivelado",
+        "igualado",
+        "altanero",
+        "insolente",
+        "confianzudo"
+      ],
+      "posicion": 5,
+      "titulo_O": "AUNQUE MUY",
+      "titulo_X": "Un lugar bien medido.",
+      "prefijo_O": "aunque muy ",
+      "prefijo_X": "Es un gato ",
+      "eslabones_O": [
+        "aunque muy "
+      ],
+      "eslabones_X": [
+        "Es un gato "
+      ]
+    },
+    {
+      "O": [
+        "esplendoroso",
+        "aparatoso",
+        "impresionante",
+        "pomposo",
+        "rimbombante",
+        "lujoso",
+        "adornado"
+      ],
+      "X": [
+        "esplendoroso",
+        "aparatoso",
+        "impresionante",
+        "pomposo",
+        "rimbombante",
+        "con lujos",
+        "con adornos"
+      ],
+      "posicion": 6,
+      "titulo_O": "AUNQUE MUY",
+      "titulo_X": "Un impulso por ser visto.",
+      "prefijo_O": "aunque muy ",
+      "prefijo_X": "Parece un gato ",
+      "eslabones_O": [
+        "aunque muy "
+      ],
+      "eslabones_X": [
+        "Parece un gato "
+      ]
+    },
+    {
+      "O": [
+        "afectuoso",
+        "expresivo",
+        "entusiasta",
+        "efusivo",
+        "exagerado",
+        "abierto",
+        "vehemente"
+      ],
+      "X": [
+        "afectuoso",
+        "expresivo",
+        "entusiasta",
+        "efusivo",
+        "exagerado",
+        "abierto",
+        "vehemente"
+      ],
+      "posicion": 7,
+      "titulo_O": "AUNQUE MUY",
+      "titulo_X": "Una emoción sin filtro.",
+      "prefijo_O": "aunque muy ",
+      "prefijo_X": "Usted es un gato ",
+      "eslabones_O": [
+        "aunque muy "
+      ],
+      "eslabones_X": [
+        "Usted es un gato "
+      ]
+    },
+    {
+      "O": [
+        "discreto",
+        "distante",
+        "reservado",
+        "apartado",
+        "aislado",
+        "alejado",
+        "desplazado"
+      ],
+      "X": [
+        "discreto",
+        "distante",
+        "reservado",
+        "apartado",
+        "aislado",
+        "alejado",
+        "desplazado"
+      ],
+      "posicion": 8,
+      "titulo_O": "AUNQUE MUY",
+      "titulo_X": "Una distancia cuando importa.",
+      "prefijo_O": "aunque muy ",
+      "prefijo_X": "Es un gato ",
+      "eslabones_O": [
+        "aunque muy "
+      ],
+      "eslabones_X": [
+        "Es un gato "
+      ]
+    },
+    {
+      "O": [
+        "infatigable",
+        "persistente",
+        "empeñoso",
+        "perseverante",
+        "obstinado",
+        "asiduo",
+        "insistente"
+      ],
+      "X": [
+        "infatigable",
+        "persistente",
+        "empeñoso",
+        "perseverante",
+        "obstinado",
+        "asiduo",
+        "insistente"
+      ],
+      "posicion": 9,
+      "titulo_O": "AUNQUE MUY",
+      "titulo_X": "Una caída que no detiene.",
+      "prefijo_O": "aunque muy ",
+      "prefijo_X": "Usted es un gato ",
+      "eslabones_O": [
+        "aunque muy "
+      ],
+      "eslabones_X": [
+        "Usted es un gato "
+      ]
+    }
+  ]
+}

@@ -1,0 +1,364 @@
+{
+  "personaje_id": "don-polo",
+  "nivel": 4,
+  "nombre_nivel": "El remate",
+  "nombre_visible": "Don Polo",
+  "icono": "/assets/polo_sticker.svg",
+  "frase_base": "Te propongo un trato, gato:",
+  "prefijos": {
+    "O": "y ",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Previsible. Apostaste por la versión más eficiente del problema.",
+    "La jugada fue correcta; la sentimentalidad, innecesaria.",
+    "Conviene admitirlo: esta vez tu cálculo sí merecía imponerse."
+  ],
+  "mensajes_victoria_o": [
+    "Interesante. Esta vez el orden no me obedeció del todo.",
+    "El tablero eligió una excepción; no suele pasar.",
+    "Concedo el punto. No la interpretación."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "después diseña",
+        "serás ingeniero",
+        "sabrás mecánica",
+        "harás un robot",
+        "programa algo",
+        "luego revoluciona",
+        "tendrás un invento"
+      ],
+      "X": [
+        "primero diseña",
+        "estudia ingeniería",
+        "estudia mecánica",
+        "estudia robótica",
+        "estudia programación",
+        "revoluciónate",
+        "piensa como inventor"
+      ],
+      "posicion": 1,
+      "titulo_O": "ENTONCES / POR ESO / DE MODO QUE",
+      "titulo_X": "SI / CUANDO / AUNQUE",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "de modo que ",
+        "en consecuencia, ",
+        "y asi "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "aunque ",
+        "toda vez que ",
+        "cada vez que "
+      ]
+    },
+    {
+      "O": [
+        "después investiga",
+        "después experimenta",
+        "harás descubrimientos",
+        "te harás científico",
+        "luego innova",
+        "serás analista",
+        "acabarás tu research"
+      ],
+      "X": [
+        "investiga",
+        "experimenta",
+        "descubre",
+        "sigue la ciencia",
+        "innova",
+        "analiza",
+        "empieza tu research"
+      ],
+      "posicion": 2,
+      "titulo_O": "ENTONCES / POR ESO / DE MODO QUE",
+      "titulo_X": "SI / CUANDO / AUNQUE",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "de modo que ",
+        "en consecuencia, ",
+        "y asi "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "aunque ",
+        "toda vez que ",
+        "cada vez que "
+      ]
+    },
+    {
+      "O": [
+        "luego llega la calma",
+        "podrás interiorizar",
+        "respira",
+        "medita",
+        "relájate",
+        "ampliarás tu conciencia",
+        "después contempla"
+      ],
+      "X": [
+        "ten calma",
+        "primero interioriza",
+        "respira",
+        "medita",
+        "relájate",
+        "haz conciencia",
+        "contempla la vida"
+      ],
+      "posicion": 3,
+      "titulo_O": "ENTONCES / POR ESO / DE MODO QUE",
+      "titulo_X": "SI / CUANDO / AUNQUE",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "de modo que ",
+        "en consecuencia, ",
+        "y asi "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "aunque ",
+        "toda vez que ",
+        "cada vez que "
+      ]
+    },
+    {
+      "O": [
+        "luego los problemas",
+        "luego afronta el conflicto",
+        "después das batalla",
+        "serás un guerrero",
+        "después lucha",
+        "te harás resistente",
+        "podrás desafiar"
+      ],
+      "X": [
+        "toma tus problemas",
+        "no crees conflicto",
+        "detén la batalla",
+        "olvida la guerra",
+        "deja de luchar",
+        "primero resiste",
+        "desafíate"
+      ],
+      "posicion": 4,
+      "titulo_O": "ENTONCES / POR ESO / DE MODO QUE",
+      "titulo_X": "SI / CUANDO / AUNQUE",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "de modo que ",
+        "en consecuencia, ",
+        "y asi "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "aunque ",
+        "toda vez que ",
+        "cada vez que "
+      ]
+    },
+    {
+      "O": [
+        "serás más optimista",
+        "ampliarás tu visión",
+        "se ambicioso",
+        "logra tus sueños",
+        "procura el éxito",
+        "confía en ti"
+      ],
+      "X": [
+        "primero se optimista",
+        "ten una visión",
+        "ten una ambición",
+        "sueña",
+        "procura el éxito",
+        "confía en ti"
+      ],
+      "posicion": 5,
+      "titulo_O": "ENTONCES / POR ESO / DE MODO QUE",
+      "titulo_X": "SI / CUANDO / AUNQUE",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "de modo que ",
+        "en consecuencia, ",
+        "y asi "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "aunque ",
+        "toda vez que ",
+        "cada vez que "
+      ]
+    },
+    {
+      "O": [
+        "serás más humano",
+        "ponte a ayudar",
+        "dona tu tiempo",
+        "encuentra tu carisma",
+        "se altruista",
+        "humanízate"
+      ],
+      "X": [
+        "humanízate",
+        "ayuda a otros",
+        "ponte a donar",
+        "se caritativo",
+        "se altruista",
+        "se más humano"
+      ],
+      "posicion": 6,
+      "titulo_O": "ENTONCES / POR ESO / DE MODO QUE",
+      "titulo_X": "SI / CUANDO / AUNQUE",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "de modo que ",
+        "en consecuencia, ",
+        "y asi "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "aunque ",
+        "toda vez que ",
+        "cada vez que "
+      ]
+    },
+    {
+      "O": [
+        "luego crea algo",
+        "lograrás inspirar",
+        "podrás expresarte",
+        "serás un artista",
+        "lograrás originalidad",
+        "después interpreta",
+        "luego re-imagina"
+      ],
+      "X": [
+        "busca creatividad",
+        "halla tu inspiración",
+        "primero exprésate",
+        "dedícate al arte",
+        "se original",
+        "interpreta el mundo",
+        "imagina otros mundos"
+      ],
+      "posicion": 7,
+      "titulo_O": "ENTONCES / POR ESO / DE MODO QUE",
+      "titulo_X": "SI / CUANDO / AUNQUE",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "de modo que ",
+        "en consecuencia, ",
+        "y asi "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "aunque ",
+        "toda vez que ",
+        "cada vez que "
+      ]
+    },
+    {
+      "O": [
+        "arma una cooperativa",
+        "arregla tu colonia",
+        "únete al colectivo",
+        "haz comunidad",
+        "vuélvete socialista",
+        "vete a una aldea",
+        "ve a un asentamiento"
+      ],
+      "X": [
+        "arma una cooperativa",
+        "arregla tu colonia",
+        "ingresa a un colectivo",
+        "haz comunidad",
+        "vuélvete socialista",
+        "vete a una aldea",
+        "ve a un asentamiento"
+      ],
+      "posicion": 8,
+      "titulo_O": "ENTONCES / POR ESO / DE MODO QUE",
+      "titulo_X": "SI / CUANDO / AUNQUE",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "de modo que ",
+        "en consecuencia, ",
+        "y asi "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "aunque ",
+        "toda vez que ",
+        "cada vez que "
+      ]
+    },
+    {
+      "O": [
+        "adquiere conocimiento",
+        "mejórate",
+        "capacítate",
+        "actualízate",
+        "evoluciona",
+        "avanza",
+        "sigue las noticias"
+      ],
+      "X": [
+        "adquiere conocimiento",
+        "mejora",
+        "capacítate",
+        "actualízate",
+        "evoluciona",
+        "avanza",
+        "sigue las noticias"
+      ],
+      "posicion": 9,
+      "titulo_O": "ENTONCES / POR ESO / DE MODO QUE",
+      "titulo_X": "SI / CUANDO / AUNQUE",
+      "eslabones_O": [
+        "entonces ",
+        "por eso ",
+        "de modo que ",
+        "en consecuencia, ",
+        "y asi "
+      ],
+      "eslabones_X": [
+        "si ",
+        "cuando ",
+        "aunque ",
+        "toda vez que ",
+        "cada vez que "
+      ]
+    }
+  ]
+}

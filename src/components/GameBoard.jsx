@@ -25,32 +25,31 @@ const DEFAULT_RITMO_FRASE = {
   x_creativa: "\\n",
 };
 
-const IMPROV_POOL = [
-  "Acción.",
-  "Ya empezaste.",
-  "Menos cabeza, más instinto.",
-  "No expliques. Haz.",
-  "Responde, no pienses.",
-  "Algo cambió… sigue.",
-  "Sube el riesgo.",
-  "Hazlo simple.",
-  "Dale ahora.",
-  "Escucha y entra.",
-  "¿Qué haces con esto?",
-  "No te detengas.",
-  "Elige y avanza.",
-  "Hazlo tuyo.",
-  "Sigue ahí.",
-  "Es tu turno.",
-  "Te están llamando.",
-  "Vas… decide.",
-  "No recuerdas… actúa.",
-  "La escena ya está viva.",
-  "Algo te mira… responde.",
-  "Hay algo ahí… tócala.",
-];
-
-const pickImprov = () => IMPROV_POOL[Math.floor(Math.random() * IMPROV_POOL.length)];
+// const IMPROV_POOL = [
+//   "Acción.",
+//   "Ya empezaste.",
+//   "Menos cabeza, más instinto.",
+//   "No expliques. Haz.",
+//   "Responde, no pienses.",
+//   "Algo cambió… sigue.",
+//   "Sube el riesgo.",
+//   "Hazlo simple.",
+//   "Dale ahora.",
+//   "Escucha y entra.",
+//   "¿Qué haces con esto?",
+//   "No te detengas.",
+//   "Elige y avanza.",
+//   "Hazlo tuyo.",
+//   "Sigue ahí.",
+//   "Es tu turno.",
+//   "Te están llamando.",
+//   "Vas… decide.",
+//   "No recuerdas… actúa.",
+//   "La escena ya está viva.",
+//   "Algo te mira… responde.",
+//   "Hay algo ahí… tócala.",
+// ];
+// const pickImprov = () => IMPROV_POOL[Math.floor(Math.random() * IMPROV_POOL.length)];
 
 
 const normalizeConnector = (text) => {
@@ -186,7 +185,7 @@ export default function GameBoard() {
   const semanticaCacheRef = useRef(new Map());
 
   const [burbujaAbierta, setBurbujaAbierta] = useState(null);
-  const [improvPrompt, setImprovPrompt] = useState(pickImprov);
+  // const [improvPrompt, setImprovPrompt] = useState(pickImprov);
   const [tailCoords, setTailCoords] = useState(null);
   const [mensajePersonaje, setMensajePersonaje] = useState(null);
   const [mensajeAnimado, setMensajeAnimado] = useState(""); // 👈 nuevo estado animado
@@ -212,12 +211,12 @@ export default function GameBoard() {
   const [prefijos, setPrefijos] = useState({ X: "", O: "" });
   const [sufijos, setSufijos] = useState({ X: "", O: "" });
   const [tituloModal, setTituloModal] = useState({ X: "", O: "" });
-  useEffect(() => {
-    if (burbujaAbierta !== null) {
-      const pool = Array.isArray(tituloModal) ? tituloModal : IMPROV_POOL;
-      setImprovPrompt(pool[Math.floor(Math.random() * pool.length)]);
-    }
-  }, [burbujaAbierta, tituloModal]);
+  // useEffect(() => {
+  //   if (burbujaAbierta !== null) {
+  //     const pool = Array.isArray(tituloModal) ? tituloModal : IMPROV_POOL;
+  //     setImprovPrompt(pool[Math.floor(Math.random() * pool.length)]);
+  //   }
+  // }, [burbujaAbierta, tituloModal]);
   const [tablero, setTablero] = useState([]);
   const [msgsX, setMsgsX] = useState([]);
   const [msgsO, setMsgsO] = useState([]);
@@ -1171,6 +1170,17 @@ useEffect(() => {
 
   if (result) {
     setVictory({ winner: result.winner, cells: result.combo });
+
+    // Persistir resultado por personaje + nivel en localStorage
+    try {
+      const slug = personajeActivoRef.current || "desconocido";
+      const nivel = nivelActual || 1;
+      const stored = JSON.parse(localStorage.getItem("resultados_niveles") || "{}");
+      if (!stored[slug]) stored[slug] = {};
+      stored[slug][nivel] = result.winner; // "X" o "O"
+      localStorage.setItem("resultados_niveles", JSON.stringify(stored));
+    } catch (_) {}
+
     if (result.winner === "X") {
       pendingAutoORef.current = false;
       clearThinkTimeout();
@@ -1197,6 +1207,16 @@ useEffect(() => {
   } 
   else if (tableroLleno && !result) {
     setMensajePersonaje(null);
+
+    // Empate — persistir también
+    try {
+      const slug = personajeActivoRef.current || "desconocido";
+      const nivel = nivelActual || 1;
+      const stored = JSON.parse(localStorage.getItem("resultados_niveles") || "{}");
+      if (!stored[slug]) stored[slug] = {};
+      stored[slug][nivel] = "empate";
+      localStorage.setItem("resultados_niveles", JSON.stringify(stored));
+    } catch (_) {}
   }
 }, [jugadas, msgsX, msgsO, clearThinkTimeout, stopGhostCursor, stopThinkHum]);
 
@@ -2220,7 +2240,7 @@ async function handleGenerarGatologiaFinal(personajeSlug) {
         {burbujaAbierta !== null && (
           <SpeechBubbleModal
             creativeMode={victory?.winner === "X" && tresCasillasTodasX(jugadas)}
-            titulo={improvPrompt}
+            titulo={burbujaAbierta >= 0 ? (tablero[burbujaAbierta]?.[turno === "X" ? "titulo_X" : "titulo_O"] || "") : ""}
             prefijo={burbujaAbierta === -1 ? "" : (prefijos[turno] || "")}
             opciones={burbujaAbierta === -1 ? [] : (tablero[burbujaAbierta]?.[turno] || [])}
             fraseBase={fraseBase}

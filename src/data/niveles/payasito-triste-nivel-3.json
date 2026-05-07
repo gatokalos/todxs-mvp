@@ -1,0 +1,170 @@
+{
+  "personaje_id": "payasito-triste",
+  "nivel": 3,
+  "nombre_nivel": "El maquillaje",
+  "nombre_visible": "Payasito Tiste",
+  "icono": "/assets/payasito_sticker.svg",
+  "frase_base": "Gato que come gato…",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Me salió el remate feo y preciso; así también se gana.",
+    "Ni sé si fue victoria o colapso con timing, pero funcionó.",
+    "Hoy el chiste cayó de pie antes que yo."
+  ],
+  "mensajes_victoria_o": [
+    "Esta vez el aparte me dejó solo con el eco.",
+    "Se me fue el remate antes del aplauso; pasa en las mejores tragedias.",
+    "Hoy ni el maquillaje sostuvo la caída."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "—y eso que apenas abrió la cortina.",
+        "(la cadena alimenticia también hace casting).",
+        "—yo le veo futuro, qué miedo."
+      ],
+      "X": [
+        "perdió la inocencia",
+        "ya no vuelve a dormir",
+        "aprendió del circo"
+      ],
+      "posicion": 1,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—mi tipo de monstruo favorito.",
+        "(al menos es honesto con el hambre).",
+        "—peor el que sonríe antes."
+      ],
+      "X": [
+        "se sirve solo",
+        "mastica su espejo",
+        "cobra por adelantado"
+      ],
+      "posicion": 2,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—como todo adulto funcional.",
+        "(yo rompí otras cosas, pero con gracia).",
+        "—la educación fracasa con estilo."
+      ],
+      "X": [
+        "rompe la cuna",
+        "cambia de especie",
+        "aprende malos modales"
+      ],
+      "posicion": 3,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—artista nato del espanto.",
+        "(yo soy más de tragedia con lentejuela).",
+        "—cada quien su rama escénica."
+      ],
+      "X": [
+        "se desayuna el miedo",
+        "hace oficio del filo",
+        "deja huella rara"
+      ],
+      "posicion": 4,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—y sin cuento me parezco más.",
+        "(el argumento siempre fue maquillaje).",
+        "—cuando se cae la historia, quedo yo."
+      ],
+      "X": [
+        "ensaya la culpa",
+        "descubre el gusto",
+        "se queda sin cuento"
+      ],
+      "posicion": 5,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—como productor de mis recuerdos.",
+        "(todo lo lindo termina mal administrado).",
+        "—qué eficiente la ferocidad."
+      ],
+      "X": [
+        "se traga la ternura",
+        "renuncia al arrullo",
+        "ya no juega limpio"
+      ],
+      "posicion": 6,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—el contrato básico de estar vivo.",
+        "(yo también acepté términos y condiciones).",
+        "—nadie leyó la letra chiquita del dolor."
+      ],
+      "X": [
+        "conoce el hambre",
+        "elige el abismo",
+        "firma sin leer"
+      ],
+      "posicion": 7,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—y ahí sí somos parientes.",
+        "(familia escogida por el desastre).",
+        "—me cae bien: da mala espina."
+      ],
+      "X": [
+        "se vuelve rumor",
+        "se queda sin arrullo",
+        "aprende a reír feo"
+      ],
+      "posicion": 8,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—como quien probó aplausos turbios.",
+        "(la ovación también envicia).",
+        "—yo por menos ya traigo secuelas."
+      ],
+      "X": [
+        "le pierde el miedo",
+        "se queda con el gesto",
+        "ya no baja del escenario"
+      ],
+      "posicion": 9,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    }
+  ]
+}

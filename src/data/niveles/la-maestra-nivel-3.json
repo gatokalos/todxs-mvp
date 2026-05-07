@@ -1,0 +1,223 @@
+{
+  "personaje_id": "la-maestra",
+  "nivel": 3,
+  "nombre_nivel": "Conclusión",
+  "nombre_visible": "La Maestra",
+  "icono": "/assets/maestra_sticker.svg",
+  "frase_base": "¡Basta de copiar, gatos! Se cancelan pruebas y tareas.",
+  "prefijos": {
+    "O": "Payasito: ",
+    "X": "Silvestre: es copiar si "
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": "\n",
+    "base_x": "\n",
+    "x_creativa": "\nEn sintesis: "
+  },
+  "mensajes_victoria_x": [
+    "Bien: no cerraste la idea demasiado pronto.",
+    "Eso sirve: una hipotesis viva ensena mas que una consigna rigida.",
+    "La jugada fue clara, pero dejo aire para seguir pensando."
+  ],
+  "mensajes_victoria_o": [
+    "La objecion llego primero que la sintesis.",
+    "La clase se lleno de ruido antes de volverse pregunta."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "Goals",
+        "¡El mejor día de mi vida!",
+        "¡No puedo incluso!",
+        "¡Muero!",
+        "¿Va en serio?",
+        "¡Estoy con usted!",
+        "¡Vale, suena bien!"
+      ],
+      "X": [
+        "me sirvió para innovar?",
+        "ambos somos genios?",
+        "nos hizo más creativa?",
+        "si me enseñó a ser original?",
+        "me gusta ser excéntrica?",
+        "a fin y al cabo somos singulares?",
+        "me hizo sentir algo peculiar?"
+      ],
+      "posicion": 1
+    },
+    {
+      "O": [
+        "¡Genial!",
+        "¡Excelente!",
+        "¡Fantástico!",
+        "¡Siuuuuu!",
+        "¡Sensacional!",
+        "¡Emocionante!",
+        "¡Qué pasada!"
+      ],
+      "X": [
+        "el inventor lo patentó?",
+        "la creadora no se molesta?",
+        "despierta mi ingenio?",
+        "el artefacto está descontinuado?",
+        "nadie usa el cachivache?",
+        "hago una replica del objeto?",
+        "me dedico a sacar copias?"
+      ],
+      "posicion": 2
+    },
+    {
+      "O": [
+        "¡Me deja sin palabras!",
+        "¡Estoy en shock!",
+        "A ver, no entiendo.",
+        "A ver, ¿cómo?",
+        "¿Lo puede repetir?",
+        "¡Qué loco!",
+        "¿A caso estoy soñando?"
+      ],
+      "X": [
+        "mi instinto es imitar?",
+        "le digo que tratable de igualar?",
+        "estoy tomando inspiración?",
+        "le digo que estaba emulado?",
+        "le digo que no copié tal cual?",
+        "hago buenas reproducciones?",
+        "si solo comparo semejanzas?"
+      ],
+      "posicion": 3
+    },
+    {
+      "O": [
+        "Urra…",
+        "Qué suerte la mía.",
+        "Uy, qué emoción.",
+        "Solo esto me faltaba.",
+        "Órale…",
+        "Me muero de risa…",
+        "Justo lo que necesitaba."
+      ],
+      "X": [
+        "nomás estaba probando?",
+        "mejoró mi investigación?",
+        "nos estamos descubriendo?",
+        "solo estaba experimentando?",
+        "se me lo dijo al tanteo?",
+        "estábamos ensayando?",
+        "si me cacharon antes de copiar?"
+      ],
+      "posicion": 4
+    },
+    {
+      "O": [
+        "¡Adiós estrés!",
+        "¡No way!",
+        "¡Mejor, imposible!",
+        "¡No puede ser…!",
+        "¿Es una broma?",
+        "¡Está jugando!",
+        "¡Qué perrón!"
+      ],
+      "X": [
+        "nadie se decepciona?",
+        "si le digo que era un desafío?",
+        "solo es una motivación?",
+        "lo hice para no frustrarme?",
+        "si me cacharon antes de copiar?",
+        "eso me satisface?",
+        "evité un contratiempo?"
+      ],
+      "posicion": 5
+    },
+    {
+      "O": [
+        "Amo ser un copycat.",
+        "¡Ser copycat rifa!",
+        "Eso duele, maestra.",
+        "Me rompe el cora.",
+        "Usted se lo pierde.",
+        "Copycat forever.",
+        "¡Órale! Qué loco."
+      ],
+      "X": [
+        "si para sobrevivir hay que copiar?",
+        "lo hago sofisticadamente?",
+        "si estás dentro de una simulación?",
+        "usé inteligencia artificial?",
+        "todo mundo copia?",
+        "tengo un cerebro sintético?",
+        "eso lo que permite elaborar?"
+      ],
+      "posicion": 6
+    },
+    {
+      "O": [
+        "Mil gracias, maestra.",
+        "Le agradezco mucho.",
+        "Gracias por tanto.",
+        "¡Uff! Le debo una.",
+        "Agradezco su valor.",
+        "Es muy generosa.",
+        "Hoy es un gran día."
+      ],
+      "X": [
+        "se me queda grabado después?",
+        "yo les compartí un concepto?",
+        "se trata de una novedad?",
+        "lo hago para crear otra cosa?",
+        "solo tomo prestado un sueño?",
+        "era lo mismo que iba a poner yo?",
+        "lo hago para acabar rápido?"
+      ],
+      "posicion": 7
+    },
+    {
+      "O": [
+        "¡Pero por qué!",
+        "¡Ni al caso!",
+        "¡Me indigna!",
+        "¡Esto es el fin!",
+        "¡Ya no aguanto más!",
+        "¡Ash, qué lata!",
+        "¡Help, me estresa!"
+      ],
+      "X": [
+        "todos somos copycats?",
+        "nos copiamos entre todos?",
+        "así soy y nunca cambiaré?",
+        "a fin de cuentas todos copian?",
+        "no le hago daño a nadie?",
+        "es estoy copiando de otra copia?",
+        "si no altero el status quo?"
+      ],
+      "posicion": 8
+    },
+    {
+      "O": [
+        "¡Eso, maestra!",
+        "La admiro, maestra.",
+        "¡Es usted muy valiosa!",
+        "¡Usted es la mejor!",
+        "¡Me inspira, maestra!",
+        "¡Usted es una crack!",
+        "¡Gracias, la amamos!"
+      ],
+      "X": [
+        "me ayuda a la introspección?",
+        "me abre al autoconocimiento?",
+        "me ayuda a ser autodidactas?",
+        "en sí era una autoevaluanción?",
+        "en todo lo demás fui original?",
+        "es parte de un autoanálisis?",
+        "al mismo tiempo reflexiono?"
+      ],
+      "posicion": 9
+    }
+  ]
+}

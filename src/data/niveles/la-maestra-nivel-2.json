@@ -1,0 +1,171 @@
+{
+  "personaje_id": "la-maestra",
+  "nivel": 2,
+  "nombre_nivel": "Desarrollo",
+  "nombre_visible": "La Maestra",
+  "icono": "/assets/maestra_sticker.svg",
+  "frase_base": "El Payasito no vino a la escuela porque…",
+  "prefijos": {
+    "O": "y, por si fuera poco ",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": "\n",
+    "base_x": "\n",
+    "x_creativa": "\nEn sintesis: "
+  },
+  "mensajes_victoria_x": [
+    "Bien: no cerraste la idea demasiado pronto.",
+    "Eso sirve: una hipotesis viva ensena mas que una consigna rigida.",
+    "La jugada fue clara, pero dejo aire para seguir pensando."
+  ],
+  "mensajes_victoria_o": [
+    "La objecion llego primero que la sintesis.",
+    "La clase se lleno de ruido antes de volverse pregunta."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "tuvo que regresar al orfanato.",
+        "se quedó cuidando a mamá",
+        "no sonó su despertador.",
+        "no pasó a tempo el autobús."
+      ],
+      "X": [
+        "tuvo que regresar al orfanato",
+        "se quedó cuidando a su mamá",
+        "no sonó su despertador",
+        "no pasó a tiempo el autobús"
+      ],
+      "posicion": 1
+    },
+    {
+      "O": [
+        "usted es muy estricta",
+        "machetearle",
+        "sea indisciplinado",
+        "persever"
+      ],
+      "X": [
+        "usted es muy estricta con él",
+        "se desveló estudiando",
+        "no aguanta la disciplina",
+        "le desespera poner atención"
+      ],
+      "posicion": 2
+    },
+    {
+      "O": [
+        "su crush se mudó de país.",
+        "perdió en suéter del uniforme.",
+        "El perro se comió la tarea.",
+        "le dijo a la maestra que la amaba.",
+        "tuvo un serio problema en casa."
+      ],
+      "X": [
+        "su crush se mudó de país",
+        "no lavó su uniforme",
+        "no sonó su despertador",
+        "le dijo a la maestra que la amaba",
+        "tuvo un serio problema en casa"
+      ],
+      "posicion": 3
+    },
+    {
+      "O": [
+        "se sentía mal.",
+        "algo le cayó mal.",
+        "se desveló jugando videojuegos.",
+        "su gato no lo dejó dormir."
+      ],
+      "X": [
+        "se sentía mal,",
+        "le dolía la pancita",
+        "se desveló jugando videojuegos",
+        "su gato no lo dejó dormir"
+      ],
+      "posicion": 4
+    },
+    {
+      "O": [
+        "empezó a tomar cursos por internet.",
+        "supo de la educación en el hogar.",
+        "dice que ya lo sabe todo.",
+        "dice que es autodidacta."
+      ],
+      "X": [
+        "empezó a tomar cursos por internet",
+        "supo de la educación en el hogar",
+        "dice que ya lo sabe todo",
+        "dice que es autodidacta"
+      ],
+      "posicion": 5
+    },
+    {
+      "O": [
+        "había examen de mate.",
+        "no estudió para el examen.",
+        "Tom le dijo que estaba exentado.",
+        "perdió la motivación."
+      ],
+      "X": [
+        "hoy había examen de mate",
+        "No estudió para el examen",
+        "Tom le dijo que estaba exentado",
+        "perdió su motivación"
+      ],
+      "posicion": 6
+    },
+    {
+      "O": [
+        "inventó que se cambió de escuela.",
+        "inventó que lo pasaron a la pública.",
+        "dejó de creer en el sistema educativo.",
+        "van a subir la colegiatura."
+      ],
+      "X": [
+        "disque lo cambiaron de escuela",
+        "disque lo pasaron a la pública",
+        "ya no cree en el sistema educativo",
+        "van a subir la colegiatura."
+      ],
+      "posicion": 7
+    },
+    {
+      "O": [
+        "odia la clase de español.",
+        "lo asusta el maestro de educación física.",
+        "ayer dijo algo que le dio vergüenza.",
+        "Tom lo bulea."
+      ],
+      "X": [
+        "hoy había clase de español",
+        "le da miedo maestro de educación física",
+        "ayer dijo algo que le dio vergüenza",
+        "tenemos un gatito bully entre nosotros"
+      ],
+      "posicion": 8
+    },
+    {
+      "O": [
+        "el perro se comió su tarea.",
+        "se lo llevó el circo.",
+        "tiene otros planes para el futuro.",
+        "se le murió su abuelita."
+      ],
+      "X": [
+        "el perro se comió su tarea",
+        "se lo llevó el circo.",
+        "tiene otros planes para el futuro",
+        "su abuelita se murió."
+      ],
+      "posicion": 9
+    }
+  ]
+}

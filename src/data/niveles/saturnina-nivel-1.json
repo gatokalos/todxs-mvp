@@ -1,0 +1,258 @@
+{
+  "personaje_id": "saturnina",
+  "nivel": 1,
+  "nombre_nivel": "El instante",
+  "nombre_visible": "Saturnina",
+  "icono": "/assets/saturnina_sticker.svg",
+  "frase_base": "Yo soy la gata que se encontró a sí misma",
+  "prefijos": {
+    "O": "y todo por la vez que ",
+    "X": "gracias a "
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Ándale, mija: te salió la jugada como tamal bien amarrado.",
+    "Eso quedó sabroso, como presentimiento que sí traía instrucciones.",
+    "Mira nomás: moviste una ficha y se acomodó hasta la luna."
+  ],
+  "mensajes_victoria_o": [
+    "Uy, se te volteó el comal antes de la última vuelta.",
+    "Ni modo: hoy la suerte salió bizca y con chanclas.",
+    "Esta vez el barrio le guiñó el ojo al tropiezo, no al milagrito."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "dejar de buscarme.",
+        "un giro inesperado.",
+        "que llegó el momentos decisivo.",
+        "se repetían las coincidencias.",
+        "un terrible accidente.",
+        "la frescura de volver a empezar.",
+        "la incertidumbre del mañana."
+      ],
+      "X": [
+        "dejar de buscarme,",
+        "un giro inesperado,",
+        "al momento preciso,",
+        "las coincidencias,",
+        "un terrible accidente,",
+        "volver a empezar,",
+        "la incertidumbre,"
+      ],
+      "posicion": 1,
+      "titulo_O": "Y TODO POR LA VEZ QUE",
+      "titulo_X": "Algo en ti guarda ese instante.",
+      "eslabones_X": ["gracias a "],
+      "eslabones_O": ["y todo por la vez que "]
+    },
+    {
+      "O": [
+        "descubrí los efectos de la música.",
+        "empezó a llover cuando salí a caminar.",
+        "aprendí la receta secreta de mamá.",
+        "me puse a danzar sola.",
+        "me celebré un cumpleaños.",
+        "busqué un deporte favorito."
+      ],
+      "X": [
+        "la música,",
+        "una caminata,",
+        "a una vieja receta de cocina,",
+        "a la danza,",
+        "una celebración,",
+        "al deporte,"
+      ],
+      "posicion": 2,
+      "titulo_O": "Y TODO POR LA VEZ QUE",
+      "titulo_X": "Tu cuerpo ya lo está diciendo.",
+      "eslabones_X": ["gracias a ", "por "],
+      "eslabones_O": ["y todo por la vez que ", "y fue cuando ", "y eso porque "]
+    },
+    {
+      "O": [
+        "tuve un viaje alucinante.",
+        "empecé a usar la Inteligencia Artificial.",
+        "me inspiraron los superhéroes.",
+        "tuve un avistamiento ovni.",
+        "atravesé por un martirio.",
+        "conocí a mis ídolos.",
+        "se me cumplió una profecía."
+      ],
+      "X": [
+        "la psicodelia,",
+        "la inteligencia artificial,",
+        "los cómics,",
+        "un fenómeno aéreo no identificado,",
+        "una mártir,",
+        "la idolatría,",
+        "una auto-profecía,"
+      ],
+      "posicion": 3,
+      "titulo_O": "Y TODO POR LA VEZ QUE",
+      "titulo_X": "Algo en ti quiere ir más allá.",
+      "eslabones_X": ["gracias a "],
+      "eslabones_O": ["y todo por la vez que "]
+    },
+    {
+      "O": [
+        "me puse a escribir un poema.",
+        "fui sola al cine.",
+        "agarré un gusto por las novelas.",
+        "me adentré al mundo de la literatura,",
+        "escuché la leyenda de mi abuela.",
+        "estuve toda la noche en el internet.",
+        "fue a ver una obra de teatro."
+      ],
+      "X": [
+        "a un poema,",
+        "una película,",
+        "una novela,",
+        "la literatura digital,",
+        "una leyenda,",
+        "al internet,",
+        "una obra de teatro,"
+      ],
+      "posicion": 4,
+      "titulo_O": "Y TODO POR LA VEZ QUE",
+      "titulo_X": "Te reconoces en esa historia.",
+      "eslabones_X": ["gracias a "],
+      "eslabones_O": ["y todo por la vez que "]
+    },
+    {
+      "O": [
+        "tomé conciencia de mi cuerpo.",
+        "me expresé en un grupo de apoyo.",
+        "prioricé el bienestar mental.",
+        "aprendí a autorregularme.",
+        "me prescribieron un medicamento.",
+        "tuve un atisbo de iluminación.",
+        "pedí ayuda de un terapeuta."
+      ],
+      "X": [
+        "un taller somático,",
+        "un grupo de apoyo,",
+        "la salud mental,",
+        "la autorregulación,",
+        "un medicamento,",
+        "la meditación,",
+        "la terapia,"
+      ],
+      "posicion": 5,
+      "titulo_O": "Y TODO POR LA VEZ QUE",
+      "titulo_X": "Algo en ti pide cuidado.",
+      "eslabones_X": ["gracias a ", "por ", "a través de "],
+      "eslabones_O": ["y todo por la vez que ", "y fue cuando ", "y eso porque "]
+    },
+    {
+      "O": [
+        "rompí los dogmas que seguía.",
+        "leí sobre el imaginario colectivo.",
+        "estuve recitando mantras todo el día.",
+        "solté el idealismo lógico.",
+        "dejé de seguir teorías de conspiración.",
+        "me abrí a otra mentalidad.",
+        "le perdí el miedo a la costumbre."
+      ],
+      "X": [
+        "un dogma,",
+        "al imaginario de la gente,",
+        "un mantra,",
+        "un ideal,",
+        "una conspiración.",
+        "otra mentalidad,",
+        "la costumbre,"
+      ],
+      "posicion": 6,
+      "titulo_O": "Y TODO POR LA VEZ QUE",
+      "titulo_X": "Esas reglas ya no te quedan.",
+      "eslabones_X": ["gracias a "],
+      "eslabones_O": ["y todo por la vez que "]
+    },
+    {
+      "O": [
+        "tuve una epifanía en el baño.",
+        "me sentí a leer sobre budismo.",
+        "vi el rostro de Dios.",
+        "me entregué a lo mundano.",
+        "me quedé en el ojo del huracán.",
+        "me hice vegetariana.",
+        "comí una sopa de letras."
+      ],
+      "X": [
+        "una epifanía.",
+        "un retiro de yoga.",
+        "Dios.",
+        "lo mundano.",
+        "al caos.",
+        "la espiritualidad.",
+        "a una caldo de pollo."
+      ],
+      "posicion": 7,
+      "titulo_O": "Y TODO POR LA VEZ QUE",
+      "titulo_X": "No todo se explica.",
+      "eslabones_X": ["gracias a "],
+      "eslabones_O": ["y todo por la vez que "]
+    },
+    {
+      "O": [
+        "me puse a estudiar astrología.",
+        "un gato me leyó el café.",
+        "me senté a leer el tarot.",
+        "escogí un método de adivinación.",
+        "dejé de ser tan supersticios.",
+        "me obsesioné con la numerología.",
+        "fui con un gato a leerme la mano."
+      ],
+      "X": [
+        "las estrellas,",
+        "el café,",
+        "las cartas del tarot.",
+        "una adivinación,",
+        "una superstición,",
+        "una secuencia de números,",
+        "la quiromancia,"
+      ],
+      "posicion": 8,
+      "titulo_O": "Y TODO POR LA VEZ QUE",
+      "titulo_X": "Quieres que el mundo te hable.",
+      "eslabones_X": ["gracias a ", "por ", "a través de "],
+      "eslabones_O": ["y todo por la vez que ", "y fue cuando ", "y eso porque "]
+    },
+    {
+      "O": [
+        "me sensibilicé ante otras culturas.",
+        "supe apreciar otras tradiciones.",
+        "empece a respetar la diversidad.",
+        "me inicié en los estudios culturales.",
+        "descubrí mis raíces.",
+        "me sentí representada.",
+        "me reivindiqué con mi historia personal."
+      ],
+      "X": [
+        "otras culturas,",
+        "una tradición,",
+        "la diversidad,",
+        "mi bagaje cultural,",
+        "al arraigo,",
+        "la identidad de género,",
+        "la historia personal,"
+      ],
+      "posicion": 9,
+      "titulo_O": "Y TODO POR LA VEZ QUE",
+      "titulo_X": "Quieres saber de dónde vienes.",
+      "eslabones_X": ["gracias a "],
+      "eslabones_O": ["y todo por la vez que "]
+    }
+  ]
+}

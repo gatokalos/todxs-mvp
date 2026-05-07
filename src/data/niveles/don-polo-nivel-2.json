@@ -1,0 +1,328 @@
+{
+  "personaje_id": "don-polo",
+  "nivel": 2,
+  "nombre_nivel": "Lo que se sabe",
+  "nombre_visible": "Don Polo",
+  "icono": "/assets/polo_sticker.svg",
+  "frase_base": "Podrás decir que soy un gato…",
+  "prefijos": {
+    "O": "pero para nada ",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Previsible. Apostaste por la versión más eficiente del problema.",
+    "La jugada fue correcta; la sentimentalidad, innecesaria.",
+    "Conviene admitirlo: esta vez tu cálculo sí merecía imponerse."
+  ],
+  "mensajes_victoria_o": [
+    "Interesante. Esta vez el orden no me obedeció del todo.",
+    "El tablero eligió una excepción; no suele pasar.",
+    "Concedo el punto. No la interpretación."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "con remordimientos",
+        "el responsable",
+        "un implicado",
+        "culpable",
+        "pecador",
+        "tengo fallas",
+        "cometo faltas"
+      ],
+      "X": [
+        "sin remordimiento",
+        "busca responsables",
+        "implica a cualquiera",
+        "apunta culpables",
+        "apunta pecadores",
+        "que solo busca la falla",
+        "que mira lo que falta"
+      ],
+      "posicion": 1,
+      "titulo_O": "PERO PARA NADA / PERO NO EXACTAMENTE / AUNQUE DISTO DE SER",
+      "titulo_X": "MÁS BIEN / SI QUIERES / DIGAMOS",
+      "eslabones_O": [
+        "pero para nada ",
+        "pero no exactamente ",
+        "aunque disto de ser "
+      ],
+      "eslabones_X": [
+        "más bien ",
+        "si quieres, ",
+        "digamos "
+      ]
+    },
+    {
+      "O": [
+        "un justiciero",
+        "el disciplinador",
+        "el corrector",
+        "el castigador",
+        "el verdugo",
+        "el sancionador",
+        "el amonestador"
+      ],
+      "X": [
+        "justiciero",
+        "disciplinador",
+        "corrector",
+        "castigador",
+        "verdugo",
+        "sancionador",
+        "amonestador"
+      ],
+      "posicion": 2,
+      "titulo_O": "PERO PARA NADA / PERO NO EXACTAMENTE / AUNQUE DISTO DE SER",
+      "titulo_X": "MÁS BIEN / SI QUIERES / DIGAMOS",
+      "eslabones_O": [
+        "pero para nada ",
+        "pero no exactamente ",
+        "aunque disto de ser "
+      ],
+      "eslabones_X": [
+        "más bien ",
+        "si quieres, ",
+        "digamos "
+      ]
+    },
+    {
+      "O": [
+        "soy altivo",
+        "soy arrogante",
+        "un inseguro",
+        "un engreído",
+        "soy petulante",
+        "soy jactancioso",
+        "soy soberbio"
+      ],
+      "X": [
+        "más altivo",
+        "más arrogante",
+        "más seguro de sí",
+        "más engreído",
+        "más petulante",
+        "más jactancioso",
+        "más soberbio"
+      ],
+      "posicion": 3,
+      "titulo_O": "PERO PARA NADA / PERO NO EXACTAMENTE / AUNQUE DISTO DE SER",
+      "titulo_X": "MÁS BIEN / SI QUIERES / DIGAMOS",
+      "eslabones_O": [
+        "pero para nada ",
+        "pero no exactamente ",
+        "aunque disto de ser "
+      ],
+      "eslabones_X": [
+        "más bien ",
+        "si quieres, ",
+        "digamos "
+      ]
+    },
+    {
+      "O": [
+        "me impongo",
+        "intimido",
+        "desafiante",
+        "amenazador",
+        "aterrador",
+        "instigador"
+      ],
+      "X": [
+        "imponente",
+        "intimidante",
+        "desafiante",
+        "amenazante",
+        "aterrador",
+        "instigador"
+      ],
+      "posicion": 4,
+      "titulo_O": "PERO PARA NADA / PERO NO EXACTAMENTE / AUNQUE DISTO DE SER",
+      "titulo_X": "MÁS BIEN / SI QUIERES / DIGAMOS",
+      "eslabones_O": [
+        "pero para nada ",
+        "pero no exactamente ",
+        "aunque disto de ser "
+      ],
+      "eslabones_X": [
+        "más bien ",
+        "si quieres, ",
+        "digamos "
+      ]
+    },
+    {
+      "O": [
+        "el despiadado",
+        "el implacable",
+        "el deshonesto",
+        "sin escrúpulos",
+        "el cínico",
+        "el sinvergüenza",
+        "sin moral"
+      ],
+      "X": [
+        "despiadado",
+        "implacable",
+        "deshonesto",
+        "sin escrúpulos",
+        "cínico",
+        "sinvergüenza",
+        "amoral"
+      ],
+      "posicion": 5,
+      "titulo_O": "PERO PARA NADA / PERO NO EXACTAMENTE / AUNQUE DISTO DE SER",
+      "titulo_X": "MÁS BIEN / SI QUIERES / DIGAMOS",
+      "eslabones_O": [
+        "pero para nada ",
+        "pero no exactamente ",
+        "aunque disto de ser "
+      ],
+      "eslabones_X": [
+        "más bien ",
+        "si quieres, ",
+        "digamos "
+      ]
+    },
+    {
+      "O": [
+        "el menos entregado",
+        "el no comprometido",
+        "el menos altruista",
+        "soy sacrificado",
+        "un sufrido",
+        "el menos generoso"
+      ],
+      "X": [
+        "menos entregado",
+        "no comprometido",
+        "menos altruista",
+        "menos sacrificado",
+        "menos sufrido",
+        "menos generoso"
+      ],
+      "posicion": 6,
+      "titulo_O": "PERO PARA NADA / PERO NO EXACTAMENTE / AUNQUE DISTO DE SER",
+      "titulo_X": "MÁS BIEN / SI QUIERES / DIGAMOS",
+      "eslabones_O": [
+        "pero para nada ",
+        "pero no exactamente ",
+        "aunque disto de ser "
+      ],
+      "eslabones_X": [
+        "más bien ",
+        "si quieres, ",
+        "digamos "
+      ]
+    },
+    {
+      "O": [
+        "magnánimo",
+        "paternalista",
+        "complaciente",
+        "condescendiente",
+        "despectivo",
+        "transigente",
+        "acomodaticio"
+      ],
+      "X": [
+        "magnánimo",
+        "paternalista",
+        "complaciente",
+        "condescendiente",
+        "despectivo",
+        "transigente",
+        "acomodaticio"
+      ],
+      "posicion": 7,
+      "titulo_O": "PERO PARA NADA / PERO NO EXACTAMENTE / AUNQUE DISTO DE SER",
+      "titulo_X": "MÁS BIEN / SI QUIERES / DIGAMOS",
+      "eslabones_O": [
+        "pero para nada ",
+        "pero no exactamente ",
+        "aunque disto de ser "
+      ],
+      "eslabones_X": [
+        "más bien ",
+        "si quieres, ",
+        "digamos "
+      ]
+    },
+    {
+      "O": [
+        "el impasible",
+        "el desapegado",
+        "el frío",
+        "el indiferente",
+        "el apático",
+        "el neutral",
+        "el desinteresado"
+      ],
+      "X": [
+        "impasible",
+        "desapegado",
+        "frío",
+        "indiferente",
+        "apático",
+        "neutral",
+        "desinteresado"
+      ],
+      "posicion": 8,
+      "titulo_O": "PERO PARA NADA / PERO NO EXACTAMENTE / AUNQUE DISTO DE SER",
+      "titulo_X": "MÁS BIEN / SI QUIERES / DIGAMOS",
+      "eslabones_O": [
+        "pero para nada ",
+        "pero no exactamente ",
+        "aunque disto de ser "
+      ],
+      "eslabones_X": [
+        "más bien ",
+        "si quieres, ",
+        "digamos "
+      ]
+    },
+    {
+      "O": [
+        "un consentido",
+        "soy intolerante",
+        "auto-compasivo",
+        "auto-indulgente",
+        "un insoportable",
+        "un chiqueado",
+        "soy mimado"
+      ],
+      "X": [
+        "consentido",
+        "que se tolera",
+        "auto-compasivo",
+        "auto-indulgente",
+        "que soporta",
+        "que se chiquea",
+        "mimado"
+      ],
+      "posicion": 9,
+      "titulo_O": "PERO PARA NADA / PERO NO EXACTAMENTE / AUNQUE DISTO DE SER",
+      "titulo_X": "MÁS BIEN / SI QUIERES / DIGAMOS",
+      "eslabones_O": [
+        "pero para nada ",
+        "pero no exactamente ",
+        "aunque disto de ser "
+      ],
+      "eslabones_X": [
+        "más bien ",
+        "si quieres, ",
+        "digamos "
+      ]
+    }
+  ]
+}

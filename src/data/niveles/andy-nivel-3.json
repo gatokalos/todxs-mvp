@@ -1,0 +1,332 @@
+{
+  "personaje_id": "andy",
+  "nivel": 3,
+  "nombre_nivel": "Resultado",
+  "nombre_visible": "Andy",
+  "icono": "/assets/andy_sticker.svg",
+  "frase_base": "Buscarle tres pies al gato, también es la curiosidad por…",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Sostuviste el eje. El resto se acomodó desde ahí.",
+    "No hizo falta forzar la escena; bastó con colocar el cuerpo.",
+    "La consigna entró limpia: menos explicación, más presencia."
+  ],
+  "mensajes_victoria_o": [
+    "Faltó respiración antes del gesto.",
+    "La escena pidió sostén y todavía no llegó completo.",
+    "No estaba mal la intención; faltó cuerpo para sostenerla."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "reflexionas sobre qué reflexionas.",
+        "persigues una idea.",
+        "perdemos nuestra inspiración inicial.",
+        "persigues los propios pensamientos.",
+        "somos el gato que se obsesiona.",
+        "conceptualizas el presente.",
+        "te dejas impresionar fácilmente."
+      ],
+      "X": [
+        "seguir reflexionando",
+        "seguir un ideal",
+        "volver a inspirarse",
+        "seguir nuestro pensamiento",
+        "entregarse a una obsesión",
+        "concebir otros conceptos",
+        "volver a impresionarnos"
+      ],
+      "posicion": 1,
+      "titulo_O": "MIENTRAS / AL TIEMPO QUE / CUANDO",
+      "titulo_X": "CURIOSIDAD POR / GANAS DE / IMPULSO POR",
+      "eslabones_O": [
+        "mientras ",
+        "al tiempo que ",
+        "cuando "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "piensas en un misterio sin resolver.",
+        "dejas de engañarte.",
+        "nos volvemos a maravillar.",
+        "recuerdas algo que te desilusionó.",
+        "te frustras con lo mismo de siempre.",
+        "te dejas de decepcionar.",
+        "te dejas desencantar."
+      ],
+      "X": [
+        "un misterio irresuelto,",
+        "irnos desengañando,",
+        "maravillarlos otra vez,",
+        "repetir una desilusión,",
+        "tolerar nuestra frustración,",
+        "evitar una decepción,",
+        "el desencanto,"
+      ],
+      "posicion": 2,
+      "titulo_O": "MIENTRAS / AL TIEMPO QUE / CUANDO",
+      "titulo_X": "CURIOSIDAD POR / GANAS DE / IMPULSO POR",
+      "eslabones_O": [
+        "mientras ",
+        "al tiempo que ",
+        "cuando "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "te escondes en un rincón",
+        "persigues una bolsa de papel.",
+        "te mete en una caja de cartón.",
+        "volteas a ver la mosca que pasó.",
+        "muerdes la mano que te da croquetas.",
+        "miras fijamente lo invisible.",
+        "le quitas la cabeza a un ratón."
+      ],
+      "X": [
+        "el espacio más recóndito",
+        "la levedad del ser",
+        "la covacha",
+        "la mosca parada en la pared",
+        "el cuarto de los secretos",
+        "lo invisible",
+        "el agujero de un ratón"
+      ],
+      "posicion": 3,
+      "titulo_O": "MIENTRAS / AL TIEMPO QUE / CUANDO",
+      "titulo_X": "CURIOSIDAD PARA / DESEO DE / IMPULSO HACIA",
+      "eslabones_O": [
+        "mientras ",
+        "al tiempo que ",
+        "cuando "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "te sientas libre de hacerlo.",
+        "surge el deseo de escapar.",
+        "te desahogas con otro gato.",
+        "tratas de evadir a otro gato.",
+        "somos ese gato que desea huir.",
+        "quieres distraerte un rato.",
+        "quieres cambiar de camino."
+      ],
+      "X": [
+        "sentir mayor libertad",
+        "seguir escapando",
+        "desahogarnos",
+        "evadir una circunstancia",
+        "huir muy lejos",
+        "seguir las distracciones",
+        "seguir un camino distinto"
+      ],
+      "posicion": 4,
+      "titulo_O": "MIENTRAS / AL TIEMPO QUE / CUANDO",
+      "titulo_X": "CURIOSIDAD POR / GANAS DE / IMPULSO POR",
+      "eslabones_O": [
+        "mientras ",
+        "al tiempo que ",
+        "cuando "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "trasciendes tus límites.",
+        "sientes nuestra impermanencia.",
+        "te regresas del \"más allá\".",
+        "estás pensando en la muerte.",
+        "contemplas que todo caduca.",
+        "descubres todo lo que expira.",
+        "te planteas nuestra extinción."
+      ],
+      "X": [
+        "hacer que algo trascienda",
+        "meditar sobre la impermanencia",
+        "dudar sobre \"el más allá\"",
+        "pensar en la muerte",
+        "descubrir si las joyas caducan",
+        "afrontar un plazo que expira",
+        "vislumbrar la extinción humana"
+      ],
+      "posicion": 5,
+      "titulo_O": "MIENTRAS / AL TIEMPO QUE / CUANDO",
+      "titulo_X": "CURIOSIDAD POR / GANAS DE / IMPULSO POR",
+      "eslabones_O": [
+        "mientras ",
+        "al tiempo que ",
+        "cuando "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "piensas en el absurdo.",
+        "te quedas inmerso en incoherencias.",
+        "te liberas de la mente dual.",
+        "buscas la falta de sentido.",
+        "te quedas a sentir el vacío.",
+        "nos sentimos irracionales.",
+        "piensas en nada y nada más."
+      ],
+      "X": [
+        "vivir en el absurdo",
+        "entender lo incoherente",
+        "escribir algo que nos libera",
+        "detenerse en el sin sentido",
+        "estudiar el vacío existencial",
+        "pensar de manera ilógica",
+        "quedarse en la nada"
+      ],
+      "posicion": 6,
+      "titulo_O": "MIENTRAS / AL TIEMPO QUE / CUANDO",
+      "titulo_X": "CURIOSIDAD PARA / DESEO DE / IMPULSO HACIA",
+      "eslabones_O": [
+        "mientras ",
+        "al tiempo que ",
+        "cuando "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "quieres sentir nuevas emociones.",
+        "queremos salir de la rutina.",
+        "pausamos nuestra comunicación.",
+        "tienes ganas de jugar.",
+        "vemos las fallas de la humanidad.",
+        "encuentras un solo sabor único.",
+        "tienes las ganas de explorar."
+      ],
+      "X": [
+        "ceder a las emociones",
+        "salir de la rutina",
+        "seguir en comunicación",
+        "seguir en el juego",
+        "ver cómo nos falla la humanidad",
+        "probar sabores nuevos",
+        "seguir explorando"
+      ],
+      "posicion": 7,
+      "titulo_O": "MIENTRAS / AL TIEMPO QUE / CUANDO",
+      "titulo_X": "CURIOSIDAD POR / GANAS DE / IMPULSO POR",
+      "eslabones_O": [
+        "mientras ",
+        "al tiempo que ",
+        "cuando "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "piensas en lo que hizo falta.",
+        "nos despedimos.",
+        "ofreces una disculpa.",
+        "revivimos el pasado.",
+        "abandonas la comodidad.",
+        "uno omite lo que ha pensado.",
+        "te vuelves a descuidar sin querer."
+      ],
+      "X": [
+        "volver a sentir lo que hizo falta",
+        "revivir una despedida",
+        "poder perdonar",
+        "volver al pasado",
+        "perder el miedo al abandono",
+        "quedarse en que no se dijo",
+        "volver a sentir lo que se descuidó"
+      ],
+      "posicion": 8,
+      "titulo_O": "MIENTRAS / AL TIEMPO QUE / CUANDO",
+      "titulo_X": "CURIOSIDAD POR / GANAS DE / IMPULSO POR",
+      "eslabones_O": [
+        "mientras ",
+        "al tiempo que ",
+        "cuando "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "O": [
+        "interiorizamos.",
+        "una se aísla por un rato.",
+        "una se hace independiente.",
+        "uno aprende a estar solo.",
+        "una se separa del resto.",
+        "una disfruta su individualidad.",
+        "nos distanciamos un poco."
+      ],
+      "X": [
+        "interiorizar",
+        "aislarse",
+        "ser independiente",
+        "estar solo",
+        "separarse del resto",
+        "entender la individualidad del otro",
+        "distanciarse un poco"
+      ],
+      "posicion": 9,
+      "titulo_O": "A MEDIDA QUE / MIENTRAS / CUANDO",
+      "titulo_X": "LA CURIOSIDAD POR / EL IMPULSO DE / LAS GANAS DE",
+      "eslabones_O": [
+        "a medida que ",
+        "mientras ",
+        "cuando "
+      ],
+      "eslabones_X": [
+        "",
+        "",
+        ""
+      ]
+    }
+  ]
+}

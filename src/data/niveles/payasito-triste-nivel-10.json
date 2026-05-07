@@ -1,0 +1,170 @@
+{
+  "personaje_id": "payasito-triste",
+  "nivel": 10,
+  "nombre_nivel": "Sin red",
+  "nombre_visible": "Payasito Tiste",
+  "icono": "/assets/payasito_sticker.svg",
+  "frase_base": "Al ratón le gusta el queso, y al gato…",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Me salió el remate feo y preciso; así también se gana.",
+    "Ni sé si fue victoria o colapso con timing, pero funcionó.",
+    "Hoy el chiste cayó de pie antes que yo."
+  ],
+  "mensajes_victoria_o": [
+    "Esta vez el aparte me dejó solo con el eco.",
+    "Se me fue el remate antes del aplauso; pasa en las mejores tragedias.",
+    "Hoy ni el maquillaje sostuvo la caída."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "—cada quien su lácteo emocional.",
+        "(yo me alimento de espera mal batida).",
+        "—la dieta del artista no es seria."
+      ],
+      "X": [
+        "el drama",
+        "el silencio",
+        "el aplauso que no llega"
+      ],
+      "posicion": 1,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—snack gourmet del desastre.",
+        "(maridaje perfecto con insomnio).",
+        "—alta cocina del vacío."
+      ],
+      "X": [
+        "la caída con luces",
+        "el borde con estilo",
+        "la culpa bien servida"
+      ],
+      "posicion": 2,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—yo también tengo gustos sencillos.",
+        "(baratos no, sencillos).",
+        "—ser visto sale más caro de lo que parece."
+      ],
+      "X": [
+        "la mirada ajena",
+        "el foco tibio",
+        "la entrada dramática"
+      ],
+      "posicion": 3,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—modelo de negocio cuestionable.",
+        "(pero con temporadas exitosas).",
+        "—todo sufrimiento bien puesto genera marca."
+      ],
+      "X": [
+        "el eco del nombre",
+        "la herida con timing",
+        "la penita rentable"
+      ],
+      "posicion": 4,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—delicias de camerino.",
+        "(hay vicios que no manchan el traje).",
+        "—nomás el alma, pero se lava menos."
+      ],
+      "X": [
+        "la escena vacía",
+        "el ruido preciso",
+        "la risa torcida"
+      ],
+      "posicion": 5,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—buffet libre del payaso.",
+        "(yo repito del gesto, gracias).",
+        "—siempre se puede exagerar un poco más."
+      ],
+      "X": [
+        "la promesa rota",
+        "el gesto exagerado",
+        "la noche gratis"
+      ],
+      "posicion": 6,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—manjares del oficio triste.",
+        "(uno aprende a distinguir notas de ansiedad).",
+        "—paladar fino para ruinas."
+      ],
+      "X": [
+        "la voz que tiembla",
+        "el final aplazado",
+        "la atención prestada"
+      ],
+      "posicion": 7,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—dieta balanceada entre vértigo y ridículo.",
+        "(recomendada por ningún especialista).",
+        "—solo por experiencia de campo."
+      ],
+      "X": [
+        "el hueco con eco",
+        "el chiste tardío",
+        "la cuerda floja"
+      ],
+      "posicion": 8,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—mi menú degustación completo.",
+        "(hoy no incluye postre ni perdón).",
+        "—pero sí servicio al borde."
+      ],
+      "X": [
+        "el susto elegante",
+        "la ovación dudosa",
+        "la pena con lentejuela"
+      ],
+      "posicion": 9,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    }
+  ]
+}

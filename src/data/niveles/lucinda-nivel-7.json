@@ -1,0 +1,205 @@
+{
+  "personaje_id": "lucinda",
+  "nivel": 7,
+  "nombre_nivel": "Sin remitente",
+  "nombre_visible": "Lucinda",
+  "icono": "/assets/lucinda_sticker.svg",
+  "frase_base": "“Lucky” es el cuento de una gata hogareña que al final…",
+  "prefijos": {
+    "O": "tras ",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3400,
+  "ritmo_frase": {
+    "x_o": "\n",
+    "base_x": "\n",
+    "x_creativa": "\nY aun asi: "
+  },
+  "mensajes_victoria_x": [
+    "No ganaste: te sostuviste sin fingir que no dolia.",
+    "Esta vez la escena no te trago; hablo contigo.",
+    "Lo rompiste en voz alta y aun asi seguiste entera."
+  ],
+  "mensajes_victoria_o": [
+    "El aplauso llego antes que el consuelo.",
+    "La sala entendio espectaculo donde habia verdad."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "despertar en el bosque encantado.",
+        "absorber la esencia mágica del micelio.",
+        "enfrentar los primeros desafíos del bosque.",
+        "explorar su nuevo entorno con curiosidad.",
+        "observar un patrón de crecimiento en el micelio.",
+        "encontrar resistencia de las criaturas del bosque."
+      ],
+      "X": [
+        "despierta desorientada en un bosque encantado",
+        "absorbe la esencia mágica del micelio",
+        "enfrenta los primeros desafíos del bosque",
+        "explora con curiosidad infantil su nuevo entorno",
+        "observa patrones en el crecimiento del micelio",
+        "encuentra resistencia de algunas criaturas"
+      ],
+      "posicion": 1
+    },
+    {
+      "O": [
+        "mezclar los flujos medicinales del bosque.",
+        "conmover a los espíritus protectores del bosque.",
+        "llegar al ojo del caos mágico.",
+        "avanzar gradualmente hacia la salida del bosque.",
+        "conectarse con el espíritu del bosque.",
+        "desbordarse su magia al colisionarse los reinos."
+      ],
+      "X": [
+        "mezcla los flujos medicinales del bosque",
+        "conmueve a los espíritus protectores del bosque",
+        "llega al ojo del caos mágico",
+        "avanza gradualmente hacia la salida del bosque",
+        "se conecta con el espíritu del bosque",
+        "se desborda su magia al colisionarse los reinos"
+      ],
+      "posicion": 2
+    },
+    {
+      "O": [
+        "jugar con las esporas bajo la luz de Luna.",
+        "sentir que el bosque la había transformado.",
+        "“renacer” tras quedar atrapada en el capullo.",
+        "ver el bosque con nuevos ojos tras renacer.",
+        "aprender a influir en el crecimiento del micelio.",
+        "alimentarse de hongos; haciéndose vegetariana."
+      ],
+      "X": [
+        "juega con las esporas bajo la luz de Luna",
+        "siente que el bosque comienza a transformarla",
+        "“renace” tras quedar atrapada en un capullo",
+        "ve el bosque con nuevos ojos tras renacer",
+        "aprende a influir en el crecimiento del micelio",
+        "se alimenta de hongos y se hace vegetariana"
+      ],
+      "posicion": 3
+    },
+    {
+      "O": [
+        "romper el hechizo que los mantenía cautivos.",
+        "encontrarse al espíritu guardián del bosque.",
+        "reunirse con todos los seres del bosque.",
+        "cruzar diferentes niveles de realidad del bosque.",
+        "ser oprimida por un antiguo mal del bosque.",
+        "descubrir la fuente de la magia del bosque."
+      ],
+      "X": [
+        "rompe un hechizo que los mantenía cautivos",
+        "se encuentra con el espíritu guardián del bosque",
+        "se reúne con todos los seres del bosque",
+        "cruza diferentes niveles de realidad del bosque",
+        "es oprimida por un antiguo mal del bosque",
+        "descubre la fuente de la magia del bosque"
+      ],
+      "posicion": 4
+    },
+    {
+      "O": [
+        "formar vínculos con los seres del bosque.",
+        "aprender a comunicarse a través del micelio.",
+        "caminar cautelosamente sobre en el micelio.",
+        "encontrar el claro tranquilo en el bosque.",
+        "enfrentarse a una zona pútrida del bosque.",
+        "unirse a la colonia de hongos luminiscentes."
+      ],
+      "X": [
+        "forma vínculos con seres del bosque",
+        "aprende a comunicarse a través del micelio",
+        "camina con cautela sobre en el delicado micelio",
+        "encuentra un claro tranquilo en el bosque",
+        "se enfrenta a una zona pútrida del bosque",
+        "se une a una colonia de hongos luminiscentes"
+      ],
+      "posicion": 5
+    },
+    {
+      "O": [
+        "enfrentar los aspectos sombríos del bosque.",
+        "encontrar su nueva familia en el bosque.",
+        "oponerse al mal que amenazaba al bosque.",
+        "atravesar los diferentes reinos del bosque.",
+        "liberar de influencia negativa a reinos del bosque.",
+        "perder parte de su energía para sanar el bosque."
+      ],
+      "X": [
+        "enfrenta los aspectos sombríos del bosque",
+        "encuentra una nueva familia en el bosque",
+        "se opone al mal que amenaza al bosque",
+        "atraviesa los diferentes reinos del bosque",
+        "libera de influencia negativa a los reinos",
+        "pierde parte de su energía para sanar el bosque"
+      ],
+      "posicion": 6
+    },
+    {
+      "O": [
+        "sumergirse en el reino subterráneo del bosque.",
+        "iluminarse al ver que el todo está interconectado.",
+        "comenzar a afectar el ecosistema del bosque.",
+        "sostener por un momento el equilibrio del bosque.",
+        "retirarse astutamente de la zona de peligro.",
+        "alcanzar el pico de influencia en el bosque."
+      ],
+      "X": [
+        "se sumerge en el reino subterráneo del bosque",
+        "se ilumina al ver que el todo está interconectado",
+        "comienza a afectar el ecosistema del bosque",
+        "sostiene por un momento el equilibrio del bosque",
+        "se retira astutamente de la zona de peligro",
+        "alcanza el pico de influencia en el bosque"
+      ],
+      "posicion": 7
+    },
+    {
+      "O": [
+        "suave y mágicamente abrirse un camino a casa.",
+        "usar sus recuerdos para abrir el camino a casa.",
+        "sentir alegría de regresar a su hogar.",
+        "comprender su verdadera naturaleza.",
+        "lograr un gran cambio con pequeñas acciones.",
+        "completar su viaje a través del bosque."
+      ],
+      "X": [
+        "suave y mágicamente abre un camino a casa",
+        "usa sus recuerdos para abrir el camino a casa",
+        "siente alegría de regresar a su hogar",
+        "comprende su verdadera naturaleza",
+        "logra un gran cambio con pequeñas acciones",
+        "completa su viaje a través del bosque encantado"
+      ],
+      "posicion": 8
+    },
+    {
+      "O": [
+        "aprender a moverse sin perturbar el ecosistema.",
+        "maravillarse con las setas gigantes.",
+        "seguir los hilos del micelio y encontrar las pistas.",
+        "ayudar a sanar la parte dañada del bosque.",
+        "presentir la inminente tormenta de esporas.",
+        "detectar un patrón de las esporas en el aire."
+      ],
+      "X": [
+        "aprende a moverse sin perturbar el ecosistema,",
+        "se maravilla con las setas gigantes,",
+        "sigue los hilos del micelio en busca pistas,",
+        "ayuda a sanar una parte dañada del bosque,",
+        "presiente la inminente tormenta de esporas,",
+        "detecta un patrón de las esporas en el aire,"
+      ],
+      "posicion": 9
+    }
+  ]
+}

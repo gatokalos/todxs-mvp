@@ -1,0 +1,330 @@
+{
+  "personaje_id": "don-polo",
+  "nivel": 1,
+  "nombre_nivel": "El preámbulo",
+  "nombre_visible": "Don Polo",
+  "icono": "/assets/polo_sticker.svg",
+  "frase_base": "Me recuerdas a un gato colmilludo…, era…",
+  "prefijos": {
+    "O": "con un pelillo ",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Previsible. Apostaste por la versión más eficiente del problema.",
+    "La jugada fue correcta; la sentimentalidad, innecesaria.",
+    "Conviene admitirlo: esta vez tu cálculo sí merecía imponerse."
+  ],
+  "mensajes_victoria_o": [
+    "Interesante. Esta vez el orden no me obedeció del todo.",
+    "El tablero eligió una excepción; no suele pasar.",
+    "Concedo el punto. No la interpretación."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "de persuasión",
+        "de maquiavelismo",
+        "de negociación",
+        "de manipulación",
+        "de demagogia",
+        "de estrategia",
+        "de control"
+      ],
+      "X": [
+        "persuasivo",
+        "maquiavélico",
+        "negociador",
+        "manipulador",
+        "demagogo",
+        "estratega",
+        "controlador"
+      ],
+      "posicion": 1,
+      "titulo_O": "CON UN PELILLO / CON UN AIRE DE / CON TRAZAS DE",
+      "titulo_X": "ERA / RESULTABA / SE VEÍA",
+      "eslabones_O": [
+        "con un pelillo ",
+        "con un aire de ",
+        "con trazas de "
+      ],
+      "eslabones_X": [
+        "",
+        "resultaba ",
+        "se veía "
+      ]
+    },
+    {
+      "O": [
+        "de pusilanimidad",
+        "de indecisión",
+        "de cobardía",
+        "de gallina",
+        "de temerosidad",
+        "de inseguridad"
+      ],
+      "X": [
+        "pusilánime",
+        "indeciso",
+        "cobarde",
+        "gallina",
+        "temeroso",
+        "inseguro"
+      ],
+      "posicion": 2,
+      "titulo_O": "CON UN PELILLO / CON UN AIRE DE / CON TRAZAS DE",
+      "titulo_X": "ERA / RESULTABA / SE VEÍA",
+      "eslabones_O": [
+        "con un pelillo ",
+        "con un aire de ",
+        "con trazas de "
+      ],
+      "eslabones_X": [
+        "",
+        "resultaba ",
+        "se veía "
+      ]
+    },
+    {
+      "O": [
+        "de alcurnia",
+        "de linaje",
+        "de nobleza",
+        "de abolengo",
+        "de aristocracia",
+        "de procedencia",
+        "de raíces"
+      ],
+      "X": [
+        "de alcurnia",
+        "de linaje",
+        "de la nobleza",
+        "de abolengo",
+        "aristócrata",
+        "de procedencia",
+        "arraigado"
+      ],
+      "posicion": 3,
+      "titulo_O": "CON UN PELILLO / CON UN AIRE DE / CON TRAZAS DE",
+      "titulo_X": "ERA / RESULTABA / SE VEÍA",
+      "eslabones_O": [
+        "con un pelillo ",
+        "con un aire de ",
+        "con trazas de "
+      ],
+      "eslabones_X": [
+        "",
+        "resultaba ",
+        "se veía "
+      ]
+    },
+    {
+      "O": [
+        "de soberanía",
+        "de vigor",
+        "de influencia",
+        "de poder",
+        "de tiranía",
+        "de dominación",
+        "de competencia"
+      ],
+      "X": [
+        "soberano",
+        "vigoroso",
+        "influyente",
+        "poderoso",
+        "tiránico",
+        "dominante",
+        "competente"
+      ],
+      "posicion": 4,
+      "titulo_O": "CON UN PELILLO / CON UN AIRE DE / CON TRAZAS DE",
+      "titulo_X": "ERA / RESULTABA / SE VEÍA",
+      "eslabones_O": [
+        "con un pelillo ",
+        "con un aire de ",
+        "con trazas de "
+      ],
+      "eslabones_X": [
+        "",
+        "resultaba ",
+        "se veía "
+      ]
+    },
+    {
+      "O": [
+        "de acumulación",
+        "de tacañería",
+        "de austeridad",
+        "de avaricia",
+        "de avaricia",
+        "de “cuenta chiles",
+        "de calculador"
+      ],
+      "X": [
+        "acumulador",
+        "tacaño",
+        "austero",
+        "avaricioso",
+        "avaro",
+        "cuenta chiles",
+        "calculador"
+      ],
+      "posicion": 5,
+      "titulo_O": "CON UN PELILLO / CON UN AIRE DE / CON TRAZAS DE",
+      "titulo_X": "ERA / RESULTABA / SE VEÍA",
+      "eslabones_O": [
+        "con un pelillo ",
+        "con un aire de ",
+        "con trazas de "
+      ],
+      "eslabones_X": [
+        "",
+        "resultaba ",
+        "se veía "
+      ]
+    },
+    {
+      "O": [
+        "indomable",
+        "de rebeldía",
+        "irrefrenable",
+        "de ingobernabilidad",
+        "incorregible",
+        "incontrolable",
+        "de desobediencia"
+      ],
+      "X": [
+        "indomable",
+        "rebelde",
+        "irrefrenable",
+        "ingobernable",
+        "incorregible",
+        "incontrolable",
+        "desobediente"
+      ],
+      "posicion": 6,
+      "titulo_O": "CON UN PELILLO / CON UN AIRE DE / CON TRAZAS DE",
+      "titulo_X": "ERA / RESULTABA / SE VEÍA",
+      "eslabones_O": [
+        "con un pelillo ",
+        "con un aire de ",
+        "con trazas de "
+      ],
+      "eslabones_X": [
+        "",
+        "resultaba ",
+        "se veía "
+      ]
+    },
+    {
+      "O": [
+        "de astucia",
+        "de abusividad",
+        "de viveza",
+        "de gandallismo",
+        "de sinvergüencería",
+        "de ventajismo",
+        "de conveniencia"
+      ],
+      "X": [
+        "astuto",
+        "abusivo",
+        "pasado de listo",
+        "gandalla",
+        "sinvergüenza",
+        "ventajoso",
+        "convenenciero"
+      ],
+      "posicion": 7,
+      "titulo_O": "CON UN PELILLO / CON UN AIRE DE / CON TRAZAS DE",
+      "titulo_X": "ERA / RESULTABA / SE VEÍA",
+      "eslabones_O": [
+        "con un pelillo ",
+        "con un aire de ",
+        "con trazas de "
+      ],
+      "eslabones_X": [
+        "",
+        "resultaba ",
+        "se veía "
+      ]
+    },
+    {
+      "O": [
+        "de meditabundo",
+        "de desocupación",
+        "de holgazanería",
+        "de ociosidad",
+        "de vagancia",
+        "de pereza",
+        "de despreocupación"
+      ],
+      "X": [
+        "meditabundo",
+        "de desocupación",
+        "holgazán",
+        "ocioso",
+        "vago",
+        "perezoso",
+        "despreocupado"
+      ],
+      "posicion": 8,
+      "titulo_O": "CON UN PELILLO / CON UN AIRE DE / CON TRAZAS DE",
+      "titulo_X": "ERA / RESULTABA / SE VEÍA",
+      "eslabones_O": [
+        "con un pelillo ",
+        "con un aire de ",
+        "con trazas de "
+      ],
+      "eslabones_X": [
+        "",
+        "resultaba ",
+        "se veía "
+      ]
+    },
+    {
+      "O": [
+        "de sagacidad",
+        "de deshonestidad",
+        "de inmoralidad",
+        "de corrupción",
+        "de podredumbre",
+        "de sanguijuela",
+        "de gorroneo"
+      ],
+      "X": [
+        "sagaz",
+        "deshonesto",
+        "inmoral",
+        "corrupto",
+        "podrido",
+        "sanguijuela",
+        "gorrón"
+      ],
+      "posicion": 9,
+      "titulo_O": "CON UN PELILLO / CON UN AIRE DE / CON TRAZAS DE",
+      "titulo_X": "ERA / RESULTABA / SE VEÍA",
+      "eslabones_O": [
+        "con un pelillo ",
+        "con un aire de ",
+        "con trazas de "
+      ],
+      "eslabones_X": [
+        "",
+        "resultaba ",
+        "se veía "
+      ]
+    }
+  ]
+}

@@ -1,0 +1,260 @@
+{
+  "nombre_visible": "La Doctora",
+  "icono": "/assets/doctora_sticker.svg",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "La evidencia quedó ordenada con una claridad que casi incomoda.",
+    "El cuadro cerró con precisión clínica; incluso el símbolo obedeció.",
+    "Lo observé con distancia y, aun así, algo ardió en el margen."
+  ],
+  "mensajes_victoria_o": [
+    "El caso sigue abierto; la muestra no terminó de organizarse.",
+    "Hubo indicios, sí, pero no suficientes para sostener una hipótesis.",
+    "La escena produjo más síntoma que conclusión."
+  ],
+  "personaje_id": "la-doctora",
+  "nivel": 2,
+  "nombre_nivel": "Anamnesis",
+  "frase_base": "Tengo sus análisis, señor Payasito; definitivamente usted…",
+  "tablero": [
+    {
+      "O": [
+        "vivir y dejar vivir",
+        "aflojar su agarre",
+        "reírse de sus propios chistes"
+      ],
+      "X": [
+        "endocarditis",
+        "bronquitis",
+        "bursitis"
+      ],
+      "posicion": 1,
+      "titulo_O": "SOLO NECESITA / SOLO REQUIERE / MÁS BIEN NECESITA",
+      "titulo_X": "NO TIENE / NO PRESENTA / NO PADECE",
+      "eslabones_O": [
+        "solo necesita ",
+        "solo requiere ",
+        "más bien necesita "
+      ],
+      "eslabones_X": [
+        "no tiene ",
+        "no presenta ",
+        "no padece "
+      ]
+    },
+    {
+      "O": [
+        "ponerse en paz con el pasado",
+        "dedicarse a sus asuntos",
+        "aceptar sus límites físicos"
+      ],
+      "X": [
+        "bocio",
+        "braquialgia",
+        "fibromialgia"
+      ],
+      "posicion": 2,
+      "titulo_O": "SOLO NECESITA / SOLO REQUIERE / MÁS BIEN NECESITA",
+      "titulo_X": "NO TIENE / NO PRESENTA / NO PADECE",
+      "eslabones_O": [
+        "solo necesita ",
+        "solo requiere ",
+        "más bien necesita "
+      ],
+      "eslabones_X": [
+        "no tiene ",
+        "no presenta ",
+        "no padece "
+      ]
+    },
+    {
+      "O": [
+        "dar nuevos pasos en la vida",
+        "ver la vida como un reto",
+        "tener el tiempo suficiente"
+      ],
+      "X": [
+        "enfermedades crónicas",
+        "encanecimiento",
+        "enfermedad maniacodepresiva"
+      ],
+      "posicion": 3,
+      "titulo_O": "SOLO NECESITA / SOLO REQUIERE / MÁS BIEN NECESITA",
+      "titulo_X": "NO TIENE / NO PRESENTA / NO PADECE",
+      "eslabones_O": [
+        "solo necesita ",
+        "solo requiere ",
+        "más bien necesita "
+      ],
+      "eslabones_X": [
+        "no tiene ",
+        "no presenta ",
+        "no padece "
+      ]
+    },
+    {
+      "O": [
+        "exteriorizar el enojo",
+        "dedicarse a sus asuntos",
+        "aprender a respetar a otros"
+      ],
+      "X": [
+        "farmacomanía",
+        "hernia",
+        "fiebre"
+      ],
+      "posicion": 4,
+      "titulo_O": "SOLO NECESITA / SOLO REQUIERE / MÁS BIEN NECESITA",
+      "titulo_X": "NO TIENE / NO PRESENTA / NO PADECE",
+      "eslabones_O": [
+        "solo necesita ",
+        "solo requiere ",
+        "más bien necesita "
+      ],
+      "eslabones_X": [
+        "no tiene ",
+        "no presenta ",
+        "no padece "
+      ]
+    },
+    {
+      "O": [
+        "dejarse ayudar",
+        "respetar la propia delicadeza",
+        "tomar decisiones"
+      ],
+      "X": [
+        "gastritis",
+        "hemorroides",
+        "joroba"
+      ],
+      "posicion": 5,
+      "titulo_O": "SOLO NECESITA / SOLO REQUIERE / MÁS BIEN NECESITA",
+      "titulo_X": "NO TIENE / NO PRESENTA / NO PADECE",
+      "eslabones_O": [
+        "solo necesita ",
+        "solo requiere ",
+        "más bien necesita "
+      ],
+      "eslabones_X": [
+        "no tiene ",
+        "no presenta ",
+        "no padece "
+      ]
+    },
+    {
+      "O": [
+        "cautela en el mundo exterior",
+        "abrirse a los retos",
+        "vivir un ritmo pausado"
+      ],
+      "X": [
+        "insomnio",
+        "lesión de menisco",
+        "intoxicación por plomo"
+      ],
+      "posicion": 6,
+      "titulo_O": "SOLO NECESITA / SOLO REQUIERE / MÁS BIEN NECESITA",
+      "titulo_X": "NO TIENE / NO PRESENTA / NO PADECE",
+      "eslabones_O": [
+        "solo necesita ",
+        "solo requiere ",
+        "más bien necesita "
+      ],
+      "eslabones_X": [
+        "no tiene ",
+        "no presenta ",
+        "no padece "
+      ]
+    },
+    {
+      "O": [
+        "procurar más luz",
+        "reconocer su estado silvestre",
+        "ver como todo es efímero"
+      ],
+      "X": [
+        "alopecia",
+        "alergia",
+        "amnesia"
+      ],
+      "posicion": 7,
+      "titulo_O": "SOLO NECESITA / SOLO REQUIERE / MÁS BIEN NECESITA",
+      "titulo_X": "NO TIENE / NO PRESENTA / NO PADECE",
+      "eslabones_O": [
+        "solo necesita ",
+        "solo requiere ",
+        "más bien necesita "
+      ],
+      "eslabones_X": [
+        "no tiene ",
+        "no presenta ",
+        "no padece "
+      ]
+    },
+    {
+      "O": [
+        "considerarse a sí mismo",
+        "aceptar valerosamente los retos",
+        "rendirse y ver el equilibrio"
+      ],
+      "X": [
+        "retinitis",
+        "reumatismo",
+        "rabia"
+      ],
+      "posicion": 8,
+      "titulo_O": "SOLO NECESITA / SOLO REQUIERE / MÁS BIEN NECESITA",
+      "titulo_X": "NO TIENE / NO PRESENTA / NO PADECE",
+      "eslabones_O": [
+        "solo necesita ",
+        "solo requiere ",
+        "más bien necesita "
+      ],
+      "eslabones_X": [
+        "no tiene ",
+        "no presenta ",
+        "no padece "
+      ]
+    },
+    {
+      "O": [
+        "desprenderse de lo superfluo",
+        "prestar atención al corazón",
+        "liberar cargas opresivas"
+      ],
+      "X": [
+        "absceso",
+        "síndrome del túnel carpiano",
+        "rotura del tendón"
+      ],
+      "posicion": 9,
+      "titulo_O": "SOLO NECESITA / SOLO REQUIERE / MÁS BIEN NECESITA",
+      "titulo_X": "NO TIENE / NO PRESENTA / NO PADECE",
+      "eslabones_O": [
+        "solo necesita ",
+        "solo requiere ",
+        "más bien necesita "
+      ],
+      "eslabones_X": [
+        "no tiene ",
+        "no presenta ",
+        "no padece "
+      ]
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+{
+  "personaje_id": "la-maestra",
+  "nivel": 1,
+  "nombre_nivel": "Introducción",
+  "nombre_visible": "La Maestra",
+  "icono": "/assets/maestra_sticker.svg",
+  "frase_base": "Colegatos, aquí los temas para su Ensayo Final…",
+  "prefijos": {
+    "O": "Payasito: yo ",
+    "X": "Silvestre: yo escojo "
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": "\n",
+    "base_x": "\n",
+    "x_creativa": "\nEn sintesis: "
+  },
+  "mensajes_victoria_x": [
+    "Bien: no cerraste la idea demasiado pronto.",
+    "Eso sirve: una hipotesis viva ensena mas que una consigna rigida.",
+    "La jugada fue clara, pero dejo aire para seguir pensando."
+  ],
+  "mensajes_victoria_o": [
+    "La objecion llego primero que la sintesis.",
+    "La clase se lleno de ruido antes de volverse pregunta."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "Fortnite",
+        "The Legend of Zelda",
+        "Tetris",
+        "video juegos",
+        "Mortal Kombat",
+        "Minecraft",
+        "CandyCrush"
+      ],
+      "X": [
+        "hacer presupuestos",
+        "bases para el ahorro",
+        "inversión",
+        "educación financiera",
+        "gestión de deuda",
+        "administración de riesgos",
+        "independencia financiera"
+      ],
+      "posicion": 1
+    },
+    {
+      "O": [
+        "GIFFs",
+        "ghosting",
+        "stickers",
+        "texting",
+        "DMs",
+        "sexting",
+        "chatrooms"
+      ],
+      "X": [
+        "Integración e inclusión",
+        "tolerancia y respeto",
+        "equidad y multiculturalidad",
+        "igualdad y diversidad",
+        "empoderamiento grupal",
+        "accesibilidad",
+        "discriminación histórica y actual"
+      ],
+      "posicion": 2
+    },
+    {
+      "O": [
+        "Boomers",
+        "Millenials",
+        "Zellenials",
+        "spam mail",
+        "memética",
+        "un día sin Wi-Fi",
+        "phishing scams"
+      ],
+      "X": [
+        "dignidad y libertad",
+        "justicia e igualdad",
+        "pueblos y autodeterminación",
+        "derechos humanos",
+        "protección e integridad",
+        "derechos universales"
+      ],
+      "posicion": 3
+    },
+    {
+      "O": [
+        "Android",
+        "iOS",
+        "Pixel",
+        "teléfonía móvil",
+        "drones",
+        "Starlink",
+        "selfiemanía"
+      ],
+      "X": [
+        "reciclaje",
+        "futuro saludable",
+        "agricultura sostenible",
+        "sostenibilidad",
+        "productos sostenibles",
+        "responsabilidad social",
+        "biodiversidad"
+      ],
+      "posicion": 4
+    },
+    {
+      "O": [
+        "Instagram",
+        "Tik-Tok",
+        "Bitcoins",
+        "compras en línea",
+        "UI y UX",
+        "audiolibros",
+        "Pinterest"
+      ],
+      "X": [
+        "energías renovables",
+        "ecosistemas naturales",
+        "recursos no-renovables",
+        "cambio climático",
+        "trasporte eléctrico",
+        "energía nuclear",
+        "ambientalismo"
+      ],
+      "posicion": 5
+    },
+    {
+      "O": [
+        "influencers",
+        "Streamers",
+        "Gamers",
+        "social media",
+        "memes",
+        "contenido viral",
+        "el Metaverso"
+      ],
+      "X": [
+        "democracia y A.I.",
+        "participación ciudadana",
+        "justicia y libertad",
+        "identidad y ciudadanía",
+        "comunidad y gobernanza",
+        "libertad y civismo",
+        "responsabilidad social"
+      ],
+      "posicion": 6
+    },
+    {
+      "O": [
+        "ChatGPT",
+        "crypto monedas",
+        "hackers",
+        "perfiles falsos",
+        "robo de identidad",
+        "bullying",
+        "deepfakes"
+      ],
+      "X": [
+        "inteligencia artificial",
+        "regulación de la I.A.",
+        "AGI",
+        "tecnología y ética",
+        "ciberseguridad",
+        "biometria y datos sensibles",
+        "mujeres programadoras"
+      ],
+      "posicion": 7
+    },
+    {
+      "O": [
+        "Pixar",
+        "Netflix",
+        "Telemundo",
+        "infomerciales",
+        "reality shows",
+        "telenovelas",
+        "Chespirito"
+      ],
+      "X": [
+        "libros de filosofía",
+        "artículos de opinión",
+        "documentales educativos",
+        "pensamiento crítico",
+        "revistas científicas",
+        "blogs de literatura",
+        "cursos en línea"
+      ],
+      "posicion": 8
+    },
+    {
+      "O": [
+        "Tomorrowland",
+        "Coachela",
+        "Billie Elish",
+        "música",
+        "iTunes",
+        "Spotify",
+        "música trap"
+      ],
+      "X": [
+        "salud y bienestar",
+        "ansiedad y depresión",
+        "equilibro emocional",
+        "salud mental",
+        "estrés y resiliencia",
+        "mindfulness",
+        "cuidarse a sí mismos"
+      ],
+      "posicion": 9
+    }
+  ]
+}

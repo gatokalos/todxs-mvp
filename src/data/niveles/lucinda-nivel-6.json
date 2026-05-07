@@ -1,0 +1,197 @@
+{
+  "personaje_id": "lucinda",
+  "nivel": 6,
+  "nombre_nivel": "El remitente",
+  "nombre_visible": "Lucinda",
+  "icono": "/assets/lucinda_sticker.svg",
+  "frase_base": "Si mi gata hablara, diría que…",
+  "prefijos": {
+    "O": "y que ",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3400,
+  "ritmo_frase": {
+    "x_o": "\n",
+    "base_x": "\n",
+    "x_creativa": "\nY aun asi: "
+  },
+  "mensajes_victoria_x": [
+    "No ganaste: te sostuviste sin fingir que no dolia.",
+    "Esta vez la escena no te trago; hablo contigo.",
+    "Lo rompiste en voz alta y aun asi seguiste entera."
+  ],
+  "mensajes_victoria_o": [
+    "El aplauso llego antes que el consuelo.",
+    "La sala entendio espectaculo donde habia verdad."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "soy imponente y autoritaria",
+        "estoy a la merced de sus caprichos",
+        "intenta controlar a las personas",
+        "juntas combatimos la soledad",
+        "me desquicio cuando araña mis plantas"
+      ],
+      "X": [
+        "soy imponente y autoritaria",
+        "estoy a la merced de sus caprichos",
+        "intento controlar a las personas",
+        "sola no puedo combatir la soledad",
+        "me desquicia cuando araña mis plantas"
+      ],
+      "posicion": 1
+    },
+    {
+      "O": [
+        "me volví un ermitaña curiosa",
+        "siempre estoy rodeada de libros y notas",
+        "absorbo datos como una esponja seca",
+        "en el silencio de casa suena mi teclado",
+        "en casa, la soledad es productiva,",
+        "salir de casa también es reconfortante"
+      ],
+      "X": [
+        "me volví un ermitaña curiosa",
+        "siempre estoy rodeada de libros y notas",
+        "absorbo datos como una esponja seca",
+        "en el silencio de casa suena mi teclado",
+        "en casa, la soledad es productiva,",
+        "salir de casa también es reconfortante"
+      ],
+      "posicion": 2
+    },
+    {
+      "O": [
+        "disecciono cada aspecto de mi vida",
+        "mi departamento es caótico",
+        "en mi desorden tengo un santuario",
+        "juzgo implacablemente cada rutina",
+        "mi trampa es la búsqueda de perfección",
+        "la soledad es mi más fiel compañera"
+      ],
+      "X": [
+        "disecciono cada aspecto de mi vida",
+        "mi departamento es caótico",
+        "en mi desorden tengo un santuario",
+        "juzgo implacablemente cada rutina",
+        "mi trampa es la búsqueda de perfección",
+        "la soledad es mi más fiel compañera"
+      ],
+      "posicion": 3
+    },
+    {
+      "O": [
+        "nos gusta escuchar las tormentas",
+        "el mundo está lleno de conexiones",
+        "sus ojos me reflejan una paz interior",
+        "hay espacios que no se llenan ni vacían",
+        "cada palabra que escribo es un puente",
+        "aún en silencio, el mundo sigue girando"
+      ],
+      "X": [
+        "nos gusta escuchar las tormentas",
+        "el mundo está lleno de conexiones",
+        "sus ojos me reflejan una paz interior",
+        "tengo huecos que no se llenan ni vacían",
+        "cada palabra que escribo es un puente",
+        "aún en silencio, el mundo sigue girando"
+      ],
+      "posicion": 4
+    },
+    {
+      "O": [
+        "mis ojos antes eran fríos",
+        "mis ojos ahora brillan con una calidez",
+        "mi voz es suave",
+        "cada interacción es un hilo invisible",
+        "me tejo una red de efímeras conexiones"
+      ],
+      "X": [
+        "mis ojos antes eran fríos",
+        "mis ojos ahora brillan con una calidez",
+        "mi voz es suave",
+        "toda interacción es un hilo invisible",
+        "me tejo una red de efímeras conexiones"
+      ],
+      "posicion": 5
+    },
+    {
+      "O": [
+        "la oscuridad nos produce escalofrío",
+        "hablo sola y uso distintas voces",
+        "hablo con ella y le hago distintas voces",
+        "en mi habitación abro mi corazón",
+        "me pregunto el alcance de su mirada"
+      ],
+      "X": [
+        "la oscuridad nos produce escalofrío",
+        "hablo sola y uso distintas voces",
+        "hablo con ella y le hago distintas voces",
+        "en mi habitación abro mi corazón",
+        "me pregunto el alcance de su mirada"
+      ],
+      "posicion": 6
+    },
+    {
+      "O": [
+        "de la nada, florezco",
+        "mis ojos chispean con ideas brillantes",
+        "mi boca no para de sonreír",
+        "el mundo es un respiro incesante",
+        "hago muchos planes y sueño en grande",
+        "mi soledad parece una elección"
+      ],
+      "X": [
+        "de la nada, florezco",
+        "mis ojos chispean con ideas brillantes",
+        "mi boca no para de sonreír",
+        "la vida es un respirar incesante",
+        "hago muchos planes y sueño en grande",
+        "mi soledad parece una elección"
+      ],
+      "posicion": 7
+    },
+    {
+      "O": [
+        "mi arrogancia alcanza niveles peligrosos",
+        "desafío a la mismísima realidad",
+        "descuido los límites de mi cuerpo",
+        "empujo los límites de mi corazón",
+        "me siento más sola cuando me enfermo",
+        "echo la flojera tanto como ella"
+      ],
+      "X": [
+        "mi arrogancia alcanza niveles peligrosos",
+        "desafío a la mismísima realidad",
+        "descuido los límites de mi cuerpo",
+        "empujo los límites de mi mente",
+        "me siento más sola cuando me enfermo",
+        "los lunes duermo tanto como ella"
+      ],
+      "posicion": 8
+    },
+    {
+      "O": [
+        "a veces me desmorono frente al espejo",
+        "su reflejo me devuelve la mirada",
+        "mi alma atormentada es como ninguna",
+        "mis mejillas se salpican de lágrimas",
+        "en mi mente escribo poesía sin palabras"
+      ],
+      "X": [
+        "a veces me desmorono frente al espejo",
+        "su reflejo me devuelve la mirada",
+        "mi alma atormentada es como ninguna",
+        "mis mejillas se salpican de lágrimas",
+        "en mi mente escribo poesía sin palabras"
+      ],
+      "posicion": 9
+    }
+  ]
+}

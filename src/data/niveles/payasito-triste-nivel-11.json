@@ -1,0 +1,170 @@
+{
+  "personaje_id": "payasito-triste",
+  "nivel": 11,
+  "nombre_nivel": "El último número",
+  "nombre_visible": "Payasito Tiste",
+  "icono": "/assets/payasito_sticker.svg",
+  "frase_base": "Ya no veo gatos conocidos…",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "Me salió el remate feo y preciso; así también se gana.",
+    "Ni sé si fue victoria o colapso con timing, pero funcionó.",
+    "Hoy el chiste cayó de pie antes que yo."
+  ],
+  "mensajes_victoria_o": [
+    "Esta vez el aparte me dejó solo con el eco.",
+    "Se me fue el remate antes del aplauso; pasa en las mejores tragedias.",
+    "Hoy ni el maquillaje sostuvo la caída."
+  ],
+  "tablero": [
+    {
+      "O": [
+        "—ninguna opción me tranquiliza.",
+        "(madurar era esto, al parecer).",
+        "—qué pésimo giro de personaje."
+      ],
+      "X": [
+        "todos cambiaron de máscara",
+        "todos aprendieron a callar",
+        "o yo aprendí a mirar"
+      ],
+      "posicion": 1,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—apuesto por la tercera.",
+        "(por costumbre y por evidencia).",
+        "—ser raro también da continuidad."
+      ],
+      "X": [
+        "todos mudaron de sombra",
+        "todos se hicieron correctos",
+        "o yo me quedé raro"
+      ],
+      "posicion": 2,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—la paz ajena me da alergia.",
+        "(seguro trae letra chiquita).",
+        "—demasiada serenidad para no desconfiar."
+      ],
+      "X": [
+        "todos se volvieron eco",
+        "todos venden calma",
+        "o yo ya no compro"
+      ],
+      "posicion": 3,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—en el mismo teatro, tristemente.",
+        "(la permanencia también fracasa).",
+        "—hay carreras que solo cambian de foco."
+      ],
+      "X": [
+        "todos cerraron la puerta",
+        "todos domesticaron el gesto",
+        "o yo sigo de gira"
+      ],
+      "posicion": 4,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—nunca fui bueno para pertenecer.",
+        "(ni sin maquillaje doy grupo).",
+        "—la manada me queda ceremonial."
+      ],
+      "X": [
+        "todos se peinaron el miedo",
+        "todos aprendieron protocolo",
+        "o yo olvidé la consigna"
+      ],
+      "posicion": 5,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—del sueño, del cuarto y del argumento.",
+        "(muy completa mi ruina, gracias).",
+        "—al menos no me falta inventario."
+      ],
+      "X": [
+        "todos afinan su mentira",
+        "todos ya duermen bonito",
+        "o yo perdí la llave"
+      ],
+      "posicion": 6,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—modales no me faltan; criterio, quizá.",
+        "(uno también puede ser educado en la caída).",
+        "—el borde merece cortesía."
+      ],
+      "X": [
+        "todos se volvieron prudentes",
+        "todos aprendieron distancia",
+        "o yo sigo saludando al abismo"
+      ],
+      "posicion": 7,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—sin aplauso de por medio.",
+        "(qué miserable forma de debutar en el tiempo).",
+        "—la edad entra sin anunciarse."
+      ],
+      "X": [
+        "todos huelen a nostalgia",
+        "todos repiten su personaje",
+        "o yo envejecí primero"
+      ],
+      "posicion": 8,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    },
+    {
+      "O": [
+        "—mi verdadera tradición escénica.",
+        "(puntual solo al remate, nunca a la vida).",
+        "—hay hábitos que sí sostengo con disciplina."
+      ],
+      "X": [
+        "todos ya tienen refugio",
+        "todos pactaron con algo",
+        "o yo llegué tarde otra vez"
+      ],
+      "posicion": 9,
+      "titulo_O": "APARTE",
+      "titulo_X": "REMATE"
+    }
+  ]
+}

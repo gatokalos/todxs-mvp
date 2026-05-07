@@ -1,0 +1,116 @@
+{
+  "personaje_id": "la-doctora",
+  "nivel": 5,
+  "nombre_nivel": "Pronóstico",
+  "nombre_visible": "La Doctora",
+  "icono": "/assets/doctora_sticker.svg",
+  "frase_base": "¿En dónde te encuentras con el «gato encerrado»?",
+  "prefijos": {
+    "O": "",
+    "X": ""
+  },
+  "sufijos": {
+    "O": "",
+    "X": ""
+  },
+  "titulo_modal": null,
+  "temporizador_ms": 3000,
+  "ritmo_frase": {
+    "x_o": " ",
+    "base_x": " ",
+    "x_creativa": "\n"
+  },
+  "mensajes_victoria_x": [
+    "La evidencia quedó ordenada con una claridad que casi incomoda.",
+    "El cuadro cerró con precisión clínica; incluso el símbolo obedeció.",
+    "Lo observé con distancia y, aun así, algo ardió en el margen."
+  ],
+  "mensajes_victoria_o": [
+    "El caso sigue abierto; la muestra no terminó de organizarse.",
+    "Hubo indicios, sí, pero no suficientes para sostener una hipótesis.",
+    "La escena produjo más síntoma que conclusión."
+  ],
+  "tablero": [
+    {
+      "O": ["la conmoción","lo estupefacto","el asombro","la consternación","el desconcierto","la perplejidad","la inquietud"],
+      "X": ["conmocionada","estupefacta","asombrada","consternada","desconcertada","perpleja","inquieta"],
+      "posicion": 1,
+      "titulo_O": "DÓNDE / EN QUÉ PLANO / EN QUÉ REGISTRO",
+      "titulo_X": "CÓMO / BAJO QUÉ ESTADO / EN QUÉ DISPOSICIÓN",
+      "eslabones_O": ["en ","dentro de ","sobre "],
+      "eslabones_X": ["cómo ","bajo ","desde "]
+    },
+    {
+      "O": ["la reiteración","la recurrencia","el refuerzo","la repetición","la monotonía","la frecuencia"],
+      "X": ["reiteración","recurrencia","refuerzo","repetición","monotonía","frecuencia"],
+      "posicion": 2,
+      "titulo_O": "DÓNDE / EN QUÉ PLANO / EN QUÉ REGISTRO",
+      "titulo_X": "CÓMO / BAJO QUÉ ESTADO / EN QUÉ DISPOSICIÓN",
+      "eslabones_O": ["en ","dentro de ","sobre "],
+      "eslabones_X": ["cómo ","bajo ","desde "]
+    },
+    {
+      "O": ["la secuencia temporal","el ordenamiento histórico","el registro evolutivo","la cronología","la datación rígida","la sucesión de eventos","el orden"],
+      "X": ["una secuencia temporal","el ordenamiento histórico","el registro evolutivo","la cronología","la datación rígida","la sucesión de eventos","el orden"],
+      "posicion": 3,
+      "titulo_O": "DÓNDE / EN QUÉ PLANO / EN QUÉ REGISTRO",
+      "titulo_X": "CÓMO / BAJO QUÉ ESTADO / EN QUÉ DISPOSICIÓN",
+      "eslabones_O": ["en ","dentro de ","sobre "],
+      "eslabones_X": ["cómo ","bajo ","desde "]
+    },
+    {
+      "O": ["la continuidad","lo perenne","la estabilidad","la permanencia","el estancamiento","la duración","la presencia"],
+      "X": ["continuidad","lo perenne","estabilidad","permanencia","estancamiento","duración","presencia"],
+      "posicion": 4,
+      "titulo_O": "DÓNDE / EN QUÉ PLANO / EN QUÉ REGISTRO",
+      "titulo_X": "CÓMO / BAJO QUÉ ESTADO / EN QUÉ DISPOSICIÓN",
+      "eslabones_O": ["en ","dentro de ","sobre "],
+      "eslabones_X": ["cómo ","bajo ","desde "]
+    },
+    {
+      "O": ["la reflexión","el discernimiento","la intelección","el razonamiento","la especulación","el análisis","el pensamiento"],
+      "X": ["reflexión","discernimiento","intelección","razonamiento","especulación","análisis","pensamiento"],
+      "posicion": 5,
+      "titulo_O": "DÓNDE / EN QUÉ PLANO / EN QUÉ REGISTRO",
+      "titulo_X": "CÓMO / BAJO QUÉ ESTADO / EN QUÉ DISPOSICIÓN",
+      "eslabones_O": ["en ","dentro de ","sobre "],
+      "eslabones_X": ["cómo ","bajo ","desde "]
+    },
+    {
+      "O": ["una crónica","mi legado","la memoria colectiva","mi historia","mi registro","mi relato"],
+      "X": ["la crónica","el legado","la memoria colectiva","la historia","el registro","el relato"],
+      "posicion": 6,
+      "titulo_O": "DÓNDE / EN QUÉ PLANO / EN QUÉ REGISTRO",
+      "titulo_X": "CÓMO / BAJO QUÉ ESTADO / EN QUÉ DISPOSICIÓN",
+      "eslabones_O": ["en ","dentro de ","sobre "],
+      "eslabones_X": ["cómo ","bajo ","desde "]
+    },
+    {
+      "O": ["la contradicción","el enigma","el desafío intelectual","la paradoja","la incongruencia","la antinomia","el contraste"],
+      "X": ["contradicción","enigma","desafío intelectual","paradoja","incongruencia","antinomia","contraste"],
+      "posicion": 7,
+      "titulo_O": "DÓNDE / EN QUÉ PLANO / EN QUÉ REGISTRO",
+      "titulo_X": "CÓMO / BAJO QUÉ ESTADO / EN QUÉ DISPOSICIÓN",
+      "eslabones_O": ["en ","dentro de ","sobre "],
+      "eslabones_X": ["cómo ","bajo ","desde "]
+    },
+    {
+      "O": ["la extensión","el cosmos","la amplitud","el espacio","el vacío","la dimensión","el lugar"],
+      "X": ["extensión","cosmos","amplitud","el espacio","vacío","dimensión","lugar"],
+      "posicion": 8,
+      "titulo_O": "DÓNDE / EN QUÉ PLANO / EN QUÉ REGISTRO",
+      "titulo_X": "CÓMO / BAJO QUÉ ESTADO / EN QUÉ DISPOSICIÓN",
+      "eslabones_O": ["en ","dentro de ","sobre "],
+      "eslabones_X": ["cómo ","bajo ","desde "]
+    },
+    {
+      "O": ["la secuencialidad","la progresión","la claridad","la linealidad","la rigidez","la continuidad","la dirección"],
+      "X": ["secuencialidad","progresión","claridad","la linealidad","rigidez","continuidad","dirección"],
+      "posicion": 9,
+      "titulo_O": "DÓNDE / EN QUÉ PLANO / EN QUÉ REGISTRO",
+      "titulo_X": "CÓMO / BAJO QUÉ ESTADO / EN QUÉ DISPOSICIÓN",
+      "eslabones_O": ["en ","dentro de ","sobre "],
+      "eslabones_X": ["cómo ","bajo ","desde "]
+    }
+  ]
+}
